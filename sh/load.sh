@@ -1,5 +1,6 @@
 #==load all files
 #-@http://stackoverflow.com/a/246128
+#-@http://stackoverflow.com/a/14728194
 ## sh_path=`dirname $0`
 #--determine path sh folder
 if [[ -z ${BASH_SOURCE[0]} ]]; then
