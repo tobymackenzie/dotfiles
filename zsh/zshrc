@@ -1,0 +1,34 @@
+echo 'Welcome, '`whoami`', to zsh'
+
+#==bash stuff
+source $HOME/.bash_profile
+
+#==options
+setopt AUTO_CD #-# automatically change directory
+
+#===completions
+autoload -U compinit; compinit #-# completions
+autoload predict-on; predict-on #-# inline completions
+setopt correctall #-# auto correction of commands
+unsetopt LIST_BEEP #-# disable awful errors when autocompleting
+
+#===history
+if [ -z $HISTFILE ]; then
+	HISTFILE=$HOME/.zsh_history
+fi
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt APPEND_HISTORY #-# enable history?
+setopt hist_expire_dups_first
+setopt hist_ignore_space
+setopt INC_APPEND_HISTORY #-# append history incrementally
+setopt SHARE_HISTORY #-# share history across sessions
+setopt HIST_IGNORE_ALL_DUPS
+
+#==paths
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+#==prompt
+autoload -U colors && colors
+export PS1="%{$fg[green]%}[<%n:%d>]%{$reset_color%}"

@@ -1,0 +1,12 @@
+{
+	"symlinks": [
+		{
+			"source": "gvimrc"
+			,"target": ".gvimrc"
+		}
+		,{
+			"source": "vimrc"
+			,"target": ".vimrc"
+		}
+	]
+}

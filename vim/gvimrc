@@ -1,0 +1,7 @@
+set go-=T		" hide toolbar
+set bg=dark
+if &background == "dark"
+	hi normal guibg=black guifg=white
+	set transp=8
+endif
+

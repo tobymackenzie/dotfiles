@@ -1,0 +1,3 @@
+function cleardns
+	dscacheutil -flushcache $argv
+end

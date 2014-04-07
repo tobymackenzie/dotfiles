@@ -1,0 +1,39 @@
+shell -${SHELL}
+defscrollback 1024
+startup_message off
+autodetach on #--automatically detach screen if interupted
+altscreen on #--use alternative "screen" for things like less, so they disappear when exited
+attrcolor b ".I" #--allow bold colors
+##termcapinfo xterm ti@:te@ #--allow scrollback with gui
+
+#==title bar
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+##defhstatus "[^E--^Et]: $USER@^EH"
+hardstatus off
+##hardstatus string "screen %n (%t)%? [%h]%?"
+##backtick 1 5 5 $PROMPT_COMMAND
+##hardstatus string "%1`"
+hardstatus string "[%n-%t] @%H: %h"
+#==bottom bar
+##caption always "[%n-%t]@%H: %h"
+##caption always "%{= Gk}%-Lw%{= rk}%50> %n%f* %t %{-}%+Lw%< %= %{= Gk} %H %{= Gk}" #--selectable list of all screens, green and red
+caption always "%{= kG}%-Lw%{= Wk}%50> %n%f* %t %{-}%+Lw%{= kG}%< %= %{= WG} %H" #--selectable list of all screens, gray and black and green
+
+#==keys
+##bindkey "^[[1;5D" prev  #--change window with ctrl-left
+##bindkey "^[[1;5C" next  #--change window with ctrl-right
+##bind . eval 'source ~/.screenrc' #'echo "~/.screenrc has been reloaded."' #--reload screenrc
+
+#--rebind kill to avoid accidents
+bind k
+bind ^k
+bind K kill
+
+#==window numbering starts at 1, not 0
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+
+#==initial screens
+screen -t two 2
+screen -t one 1
