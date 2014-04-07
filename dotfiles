@@ -126,9 +126,9 @@ class DotfilePlacer{
 	*/
 	public function placeSymlink($source, $target){
 		if(file_exists($source)){
-			$fullTarget = preg_replace("/^~/", $this->homeDir, $target);
+			$fullTarget = $this->replaceTildeWithHomePath($target);
 			$oldFileTarget = $target . ".pre-{$this->dateStamp}";
-			$fullOldFileTarget = preg_replace("/^~/", $this->homeDir, $oldFileTarget, 1);
+			$fullOldFileTarget = $this->replaceTildeWithHomePath($oldFileTarget);
 			if(is_link($fullTarget) && readlink($fullTarget) === $source){
 				$placeFile = false;
 			}elseif(!file_exists($fullTarget)){
@@ -203,7 +203,20 @@ class DotfilePlacer{
 		if($dir === null){
 			$dir = $this->realDir;
 		}
-		return explode("\n", shell_exec("find {$dir} -name 'dotfiles.json'"));
+		if(substr($dir, 0, 1) === '~'){
+			$dir = $this->replaceTildeWithHomePath($dir);
+		}
+		$dir = realpath($dir);
+		$findCommand = "find {$dir} -name 'dotfiles.json'";
+		return explode("\n", shell_exec($findCommand));
+	}
+
+	/*
+	Method: replaceTildeWithHomePath
+	PHP seems unable to resolve the tilde in paths.  This utility method replaces the tilde with what should be the full home path.
+	*/
+	public function replaceTildeWithHomePath($path){
+		return preg_replace("/^~/", $this->homeDir, $path);
 	}
 }
 
