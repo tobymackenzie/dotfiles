@@ -146,7 +146,7 @@ class DotfilePlacer{
 				if($this->verbose){
 					echo "writing symlink for '{$target}'\n";
 				}
-				passthru("ln -s {$source} {$target}");
+				passthru("mkdir --parents {$target} && ln -s {$source} {$target}");
 				// symlink($source, $target); //-# doesn't seem to work with ~
 			}
 		}
