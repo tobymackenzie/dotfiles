@@ -33,7 +33,8 @@ alias ttime='top -otime -s 5'
 
 #---source control
 #----git
-alias gitcommit="git add .; and git commit -aF .updates; and echo '' > .updates"
+alias gitcommit="git diff --cached | less; and git commit"
+alias gitcommitall="git add .; and gitcommit"
 #----svn
 alias svnstatus="svn status --ignore-externals"
 alias svnstatusa="svn status"
