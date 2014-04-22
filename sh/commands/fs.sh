@@ -17,11 +17,14 @@ alias ll="l -lh"
 alias la="l -A"
 alias lla="ll -A"
 
-lll(){
-	ll $@ | less
-}
 cl(){
 	cd $@ && l
+}
+cll(){
+	cd $@ && ll
+}
+lll(){
+	ll $@ | less
 }
 
 #==operations
