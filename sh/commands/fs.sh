@@ -2,10 +2,11 @@
 if [[ "${TJM_OS}" == 'darwin' ]]; then
 	alias console="open -a console"
 	alias o="open"
+	alias oa="open -a"
 	alias ogit="open -a 'GitX'"
-	alias sublime="open -a 'Sublime Text 2'"
 	alias ot="open -t"
-	alias macvim="open -a MacVim"
+	alias sublime="oa 'Sublime Text 2'"
+	alias macvim="oa MacVim"
 fi
 
 #==list
