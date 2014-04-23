@@ -1,3 +1,4 @@
-if [ -f ~/.bash_profile ]; then
+#-# source bash profile if it exists and this is an interactive shell
+if [ -f ~/.bash_profile ] && [ -n "$PS1" ]; then
 	source ~/.bash_profile
 fi
