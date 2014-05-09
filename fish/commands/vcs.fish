@@ -7,12 +7,12 @@ alias gitcommitall="git add .; and gitcommit"
 #-@ https://coderwall.com/p/euwpig
 #---short
 function gitl
-	git log $argv --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
+	git log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges $argv
 end
 #---base for others
 set gitlogbase_format '%s %C(green)(%cd) %C(bold blue)<%an> %C(yellow)%h %C(red)%d%C(reset)'
 function gitlogbase
-	git log $argv --date=iso
+	git log --date=iso $argv
 end
 #---default
 function gitlog
@@ -20,15 +20,15 @@ function gitlog
 end
 #---with graph
 function gitlogg
-	gitlogbase $argv --graph --pretty=format:' '{$gitlogbase_format}
+	gitlogbase --graph --pretty=format:' '{$gitlogbase_format} $argv
 end
 #---with names
 function gitlogn
-	gitlogbase $argv --name-only --pretty=format:'%C(green)--%C(reset) '{$gitlogbase_format}
+	gitlogbase --name-only --pretty=format:'%C(green)--%C(reset) '{$gitlogbase_format} $argv
 end
 #---with diff
 function gitlogp
-	gitlogbase $argv -p --pretty=format:'%C(red)--------------------------------------------------------%C(reset)%n'{$gitlogbase_format}'%n%C(red)--------------------------------------------------------%C(reset)%n'
+	gitlogbase -p --pretty=format:'%C(red)--------------------------------------------------------%C(reset)%n'{$gitlogbase_format}'%n%C(red)--------------------------------------------------------%C(reset)%n' $argv
 end
 
 #==svn
