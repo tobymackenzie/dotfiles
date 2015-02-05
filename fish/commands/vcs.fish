@@ -2,6 +2,11 @@
 alias gitcommit="git diff --cached | less; and git commit"
 alias gitcommitall="git add .; and gitcommit"
 
+#--count
+function gitcount
+	git rev-list HEAD --count $argv
+end
+
 #--logging
 #-@ https://github.com/addyosmani/dotfiles/blob/master/.functions#L115
 #-@ https://coderwall.com/p/euwpig
