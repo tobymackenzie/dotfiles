@@ -35,7 +35,6 @@ class DotfilePlacer{
 			? $opts['realDir']
 			: __DIR__
 		;
-
 		if(isset($opts['dateStamp'])){
 			$this->dateStamp = $opts['dateStamp'];
 		}else{
@@ -132,6 +131,12 @@ class DotfilePlacer{
 			if(is_link($fullTarget) && readlink($fullTarget) === $source){
 				$placeFile = false;
 			}elseif(!file_exists($fullTarget)){
+				if(is_link($fullTarget)){
+					if($this->verbose){
+						echo "removing invalid symlink at {$fullTarget}\n";
+					}
+					unlink($fullTarget);
+				}
 				$placeFile = true;
 			}elseif($this->doesUserWantsToReplaceFile($target, $oldFileTarget)){
 				$placeFile = true;
@@ -144,10 +149,9 @@ class DotfilePlacer{
 			}
 			if($placeFile){
 				if($this->verbose){
-					echo "writing symlink for '{$target}'\n";
+					echo "writing symlink for '{$fullTarget}'\n";
 				}
-				passthru("mkdir --parents {$target} && ln -s {$source} {$target}");
-				// symlink($source, $target); //-# doesn't seem to work with ~
+				symlink($source, $fullTarget);
 			}
 		}
 	}
