@@ -1,0 +1,13 @@
+# [docs](https://atom.io/docs/latest/using-atom-basic-customization#customizing-key-bindings)
+# [docs](https://atom.io/docs/latest/behind-atom-keymaps-in-depth)
+
+'atom-text-editor':
+	'ctrl-left': 'editor:move-to-previous-subword-boundary'
+	'ctrl-right': 'editor:move-to-next-subword-boundary'
+	'ctrl-shift-left': 'editor:select-to-previous-subword-boundary'
+	'ctrl-shift-right': 'editor:select-to-next-subword-boundary'
+	'alt-cmd-shift-left': 'pane:move-item-left'
+	'alt-cmd-shift-right': 'pane:move-item-right'
+'atom-workspace':
+	'alt-cmd-space': 'command-palette:toggle'
+	'alt-ctrl-space': 'fuzzy-finder:toggle-file-finder'

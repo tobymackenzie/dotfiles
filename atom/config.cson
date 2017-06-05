@@ -1,0 +1,84 @@
+"*":
+	"activate-power-mode":
+		autoToggle: false
+		comboMode:
+			enabled: false
+	"autocomplete-plus":
+		confirmCompletion: "tab"
+	"block-cursor":
+		global:
+			blinkOff:
+				backgroundColor:
+					alpha: 1
+					blue: 117
+					green: 157
+					red: 104
+			blinkOn:
+				backgroundColor:
+					alpha: 1
+					blue: 147
+					green: 202
+					red: 121
+	core:
+		disabledPackages: [
+			"block-cursor"
+			"linter-csslint"
+			"linter-jshint"
+			"linter-jscs"
+			"open-file-in"
+			"linter-tidy"
+		]
+		ignoredNames: [
+			".DS_Store"
+			".git"
+			".sass-cache"
+			"app/cache"
+			"node_modules"
+			"vendor"
+		]
+		openEmptyEditorOnStart: false
+		telemetryConsent: "limited"
+		themes: [
+			"contrast-ui"
+			"monokai-blackboard"
+		]
+	"dark-flat-ui":
+		accentColor: "green"
+	editor:
+		fontSize: 16
+		invisibles: {}
+		showIndentGuide: true
+		showInvisibles: true
+		softTabs: false
+		softWrap: true
+		softWrapHangingIndent: 1
+	linter:
+		statusIconScope: "File"
+	"linter-jscs":
+		preset: "jquery"
+	"linter-jshint":
+		disableWhenNoJshintrcFileInPath: true
+	"linter-php": {}
+	minimap: {}
+	"one-dark-ui": {}
+	"open-file-in":
+		applications: "Finder,FireFox,Google Chrome,TextEdit"
+	"seti-syntax":
+		themeColor: "Green"
+	tabs: {}
+	"vim-mode":
+		useClipboardAsDefaultRegister: false
+		wrapLeftRightMotion: true
+	welcome:
+		showOnStartup: false
+	whitespace:
+		ignoreWhitespaceOnCurrentLine: false
+".editorconfig.source":
+	editor:
+		autoIndentOnPaste: true
+		softWrapHangingIndent: 2
+		tabLength: 4
+".html.php.text":
+	editor:
+		softWrapHangingIndent: 2
+		tabLength: 4
