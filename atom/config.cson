@@ -52,8 +52,7 @@
 		softTabs: false
 		softWrap: true
 		softWrapHangingIndent: 1
-	linter:
-		statusIconScope: "File"
+	linter: {}
 	"linter-jscs":
 		preset: "jquery"
 	"linter-jshint":
