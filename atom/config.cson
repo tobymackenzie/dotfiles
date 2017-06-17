@@ -59,6 +59,8 @@
 	"linter-jshint":
 		disableWhenNoJshintrcFileInPath: true
 	"linter-php": {}
+	"linter-ui-default":
+		showPanel: false
 	minimap: {}
 	"one-dark-ui": {}
 	"open-file-in":
