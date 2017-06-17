@@ -40,11 +40,12 @@
 		telemetryConsent: "limited"
 		themes: [
 			"contrast-ui"
-			"monokai-blackboard"
+			"monokai-dark"
 		]
 	"dark-flat-ui":
 		accentColor: "green"
 	editor:
+		atomicSoftTabs: false
 		fontSize: 16
 		invisibles: {}
 		showIndentGuide: true
