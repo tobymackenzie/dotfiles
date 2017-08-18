@@ -61,7 +61,8 @@
 	"linter-php": {}
 	"linter-ui-default":
 		showPanel: false
-	minimap: {}
+	minimap:
+		moveCursorOnMinimapClick: true
 	"one-dark-ui": {}
 	"open-file-in":
 		applications: "Finder,FireFox,Google Chrome,TextEdit"
