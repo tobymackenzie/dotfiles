@@ -1,9 +1,11 @@
 atom-text-editor::shadow{
+	//--emphasize bracket matcher
 	.bracket-matcher{
 		background-color: rgba(255,100,100,0.7);
 		border: 0;
 		opacity: 1;
 	}
+	//--block vim mode cursor
 	&.vim-mode.normal-mode
 	,&.vim-mode.operator-pending-mode
 	,&.vim-mode.visual-mode
@@ -13,6 +15,24 @@ atom-text-editor::shadow{
 			background-color: rgba(150, 255, 150, 0.6);
 			opacity: 1;
 			visibility: visible !important;
+		}
+	}
+	//--emphasize comments
+	//-@ https://stackoverflow.com/questions/37028403/changing-comment-colour-in-atom-editor?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+	.syntax--comment{
+		background: rgba(125,125,125,0.3);
+	}
+	.syntax--punctuation{
+		background: none;
+	}
+	//--emphasize embedded languages
+	//-@ https://discuss.atom.io/t/advanced-syntax-highlighting/13742/31
+	.embedded{
+		&.css, &.js{
+			background: rgba(255,0,0,0.1);
+		}
+		&.php{
+			background: rgba(0,255,0,0.1);
 		}
 	}
 }
