@@ -2,7 +2,9 @@ source ~/.dotfiles/fish/load.fish
 
 #--aliases
 #---directories
-alias __="cd {$HOME}/__"
+function __
+	cd {$HOME}/__/{$argv}
+end
 #alias ~="cd {$HOME}"
 	#alias /="cd /"
 alias cdbin="cd ~/bin"
