@@ -26,6 +26,8 @@ filetype indent off "--generic auto indent only
 "=====
 "==colors
 "=====
+colorscheme koehler
+
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	ctermbg=darkgray	guibg=#002200
 au InsertLeave * hi Normal term=NONE	ctermbg=black	guibg=black
