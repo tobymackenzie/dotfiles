@@ -5,6 +5,10 @@
 			,"target": ".gvimrc"
 		}
 		,{
+			"source": "vim"
+			,"target": ".vim"
+		}
+		,{
 			"source": "vimrc"
 			,"target": ".vimrc"
 		}

@@ -9,3 +9,5 @@
 /atom/packages
 /atom/projects.cson
 /atom/storage
+/vim/vim/autoload/
+/vim/vim/plugged/
