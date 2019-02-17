@@ -12,6 +12,19 @@ if (has('gui_macvim') || has('linux')) && executable('cmake')
 	Plug 'valloric/youcompleteme', {'do': './install.py'}
 endif
 
+"--comments
+"> https://vimawesome.com/plugin/the-nerd-commenter
+" commands for toggling comments on selected lines
+"-@ sublime keymap help via <https://stackoverflow.com/questions/11553382/vim-map-d-to-comment-code>
+Plug 'scrooloose/nerdcommenter'
+if has('mac')
+	map <D-/> \c<space><CR>
+	imap <D-/> <esc>\c<space><CR>i
+else
+	map <C-/> \c<space><CR>
+	imap <C-/> <esc>\c<space><CR>i
+endif
+
 "--text
 "---editorconfig
 "> https://vimawesome.com/plugin/editorconfig-vim
