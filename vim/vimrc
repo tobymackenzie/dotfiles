@@ -33,6 +33,12 @@ colorscheme koehler
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	ctermbg=darkgray	guibg=#002200
 au InsertLeave * hi Normal term=NONE	ctermbg=black	guibg=black
+
+"--vcs
+highlight GitGutterAdd ctermfg=green guifg=green
+highlight GitGutterChange ctermfg=yellow guifg=yellow
+highlight GitGutterDelete ctermfg=red guifg=red
+
 "==languagues
 "--less
 au BufNewFile,BufRead *.less set filetype=less

@@ -11,4 +11,11 @@ call plug#begin('~/.vim/plugged')
 if (has('gui_macvim') || has('linux')) && executable('cmake')
 	Plug 'valloric/youcompleteme', {'do': './install.py'}
 endif
+
+"--vcs
+"> https://vimawesome.com/plugin/vim-gitgutter
+" shows git line status in gutter
+if v:version > 703
+	Plug 'airblade/vim-gitgutter'
+endif
 call plug#end()
