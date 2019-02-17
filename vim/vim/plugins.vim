@@ -12,6 +12,11 @@ if (has('gui_macvim') || has('linux')) && executable('cmake')
 	Plug 'valloric/youcompleteme', {'do': './install.py'}
 endif
 
+"--text
+"---editorconfig
+"> https://vimawesome.com/plugin/editorconfig-vim
+Plug 'editorconfig/editorconfig-vim'
+
 "--vcs
 "> https://vimawesome.com/plugin/vim-gitgutter
 " shows git line status in gutter
