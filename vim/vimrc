@@ -26,9 +26,14 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "
 filetype indent off "--generic auto indent only
 
 "=====
-"==colors
+"==styles
 "=====
 colorscheme koehler
+
+"--font
+if has('gui_running')
+	set guifont=Menlo\ Regular:h14
+endif
 
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	ctermbg=darkgray	guibg=#002200
