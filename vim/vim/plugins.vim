@@ -19,10 +19,10 @@ endif
 Plug 'scrooloose/nerdcommenter'
 if has('mac')
 	map <D-/> \c<space><CR>
-	imap <D-/> <esc>\c<space><CR>i
+	imap <D-/> <esc>\c<space><CR>gi
 else
 	map <C-/> \c<space><CR>
-	imap <C-/> <esc>\c<space><CR>i
+	imap <C-/> <esc>\c<space><CR>gi
 endif
 
 "--text
