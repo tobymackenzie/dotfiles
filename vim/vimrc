@@ -26,6 +26,32 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "
 filetype indent off "--generic auto indent only
 
 "=====
+"==keyboard
+"=====
+"--move tabs
+"-@ https://stackoverflow.com/a/40919415/1139122
+if has('gui_macvim')
+	noremap <A-D-S-Left> :-tabmove<CR>
+	inoremap <A-D-S-Left> <esc>:-tabmove<CR>i
+	noremap <A-D-S-Right> :+tabmove<CR>
+	inoremap <A-D-S-Right> <esc>:+tabmove<CR>i
+endif
+
+"--switch tabs via index
+"-@ https://superuser.com/questions/382060/shortcut-to-switch-tabs-in-macvim
+if has('gui_macvim')
+	let i = 1
+	while i <= 8
+		exe 'noremap <D-' . i . '> :tabn ' . i . '<CR>'
+		exe 'inoremap <D-' . i . '> <esc>:tabn ' . i . '<CR>i'
+		let i += 1
+	endwhile
+	unlet i
+	noremap <D-9> :tablast<CR>
+	inoremap <D-9> <esc>:tablast<CR>i
+endif
+
+"=====
 "==styles
 "=====
 colorscheme koehler
