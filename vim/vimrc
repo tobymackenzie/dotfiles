@@ -87,8 +87,8 @@ if has('gui_running')
 endif
 
 "--make it noticeable which mode I'm in
-au InsertEnter * hi Normal term=reverse	ctermbg=darkgray	guibg=#002200
-au InsertLeave * hi Normal term=NONE	ctermbg=black	guibg=black
+au InsertEnter * hi Normal term=reverse	guibg=#002200
+au InsertLeave * hi Normal term=NONE	guibg=black
 
 "--vcs
 highlight GitGutterAdd ctermfg=green guifg=green
