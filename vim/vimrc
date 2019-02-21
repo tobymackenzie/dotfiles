@@ -25,6 +25,8 @@ filetype plugin indent on	"--detects filetype, loads appropriate options and ind
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "--disable auto comment
 filetype indent off "--generic auto indent only
 
+colorscheme koehler
+
 "=====
 "==keyboard
 "=====
@@ -53,6 +55,17 @@ if has('gui_macvim')
 endif
 
 "==text
+"--show whitespace
+if has('patch-7.4.710')
+	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,space:·,tab:»\ ,trail:•
+else
+	"-# older vim doesn't support `space`
+	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,tab:»\ ,trail:•
+endif
+set list
+highlight NonText ctermfg=darkGray guifg=gray43
+highlight SpecialKey ctermfg=darkGray guifg=gray43
+
 "--move lines
 "-@ http://vim.wikia.com/wiki/Moving_lines_up_or_down
 if has('gui_macvim')
@@ -67,7 +80,6 @@ endif
 "=====
 "==styles
 "=====
-colorscheme koehler
 
 "--font
 if has('gui_running')
