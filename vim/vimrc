@@ -74,7 +74,7 @@ if has('gui_macvim')
 	vnoremap <A-C-Down> :m '>+1<CR>gv=gv
 	nnoremap <A-C-Up> :m .-2<CR>==
 	inoremap <A-C-Up> <esc>:m .-2<CR>==gi
-	vnoremap <A-C-Up> :m '>-2<CR>gv=gv
+	vnoremap <A-C-Up> :m '<-2<CR>gv=gv
 endif
 
 "=====
