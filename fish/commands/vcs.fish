@@ -1,4 +1,5 @@
 #==git
+alias g='git'
 alias gitcommit="git diff --cached | less; and git commit"
 alias gitcommitall="git add .; and gitcommit"
 
