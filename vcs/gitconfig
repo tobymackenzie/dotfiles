@@ -1,0 +1,19 @@
+[alias]
+	ba = !git branchl
+	bl = !git branchl
+	branchl = branch -a
+	contrib = shortlog --numbered --summary
+	d = diff
+	lop = log -p
+	mirror = clone --mirror
+	ph = push
+	pl = pull
+	pll = pull
+	ps = push
+	psh = push
+	s = status
+[user]
+	email = public@tobymackenzie.com
+	name = Toby Mackenzie
+[merge]
+	tool = opendiff
