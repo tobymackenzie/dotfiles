@@ -24,3 +24,7 @@
 	name = Toby Mackenzie
 [merge]
 	tool = opendiff
+
+#-# ideas taken from
+#-@ https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig
+#-@ https://github.com/voku/dotfiles/blob/master/.gitconfig
