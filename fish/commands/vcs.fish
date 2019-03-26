@@ -1,41 +1,22 @@
 #==git
 alias g='git'
-alias gitcommit="git diff --cached | less; and git commit"
-alias gitcommitall="git add .; and gitcommit"
+alias gitcommit='git c'
+alias gitcommitall='git call'
 
 #--count
-function gitcount
-	git rev-list HEAD --count $argv
-end
+alias gitcount='git count'
 
 #--logging
-#-@ https://github.com/addyosmani/dotfiles/blob/master/.functions#L115
-#-@ https://coderwall.com/p/euwpig
 #---short
-function gitl
-	git log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges $argv
-end
-#---base for others
-set gitlogbase_format '%s %C(green)(%cd) %C(bold blue)<%an> %C(yellow)%h %C(red)%d%C(reset)'
-function gitlogbase
-	git log --date=iso $argv
-end
+alias gitl='git l'
 #---default
-function gitlog
-	gitlogg $argv
-end
+alias gitlog='git lg'
 #---with graph
-function gitlogg
-	gitlogbase --graph --pretty=format:' '{$gitlogbase_format} $argv
-end
+alias gitlogg='git lg'
 #---with names
-function gitlogn
-	gitlogbase --name-only --pretty=format:'%C(green)--%C(reset) '{$gitlogbase_format} $argv
-end
+alias gitlogn='git logn'
 #---with diff
-function gitlogp
-	gitlogbase -p --pretty=format:'%C(red)--------------------------------------------------------%C(reset)%n'{$gitlogbase_format}'%n%C(red)--------------------------------------------------------%C(reset)%n' $argv
-end
+alias gitlogp='git lop'
 
 #==svn
 alias svnstatus="svn status --ignore-externals"

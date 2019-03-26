@@ -4,12 +4,20 @@
 	ba = !git branchl
 	bl = !git branchl
 	branchl = branch -a
+	c = !git diff --cached | less && git commit
+	call = !git add . && git c
 	cho = checkout
 	clo = clone
 	contrib = shortlog --numbered --summary
+	count = rev-list HEAD --count
 	d = diff
 	df = diff
-	lop = log -p
+	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
+	lg = !git logg
+	logg = !gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
+	logn = !gitformat=`git config --get log.baseColors` && git log --date=iso --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
+	logp = !gitformat=`git config --get log.baseColors` && git log --date=iso -p --pretty=format:\"%C(red)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(red)--------------------------------------------------------%C(reset)%n\"
+	lop = !git logp
 	mirror = clone --mirror
 	ph = push
 	pl = pull
@@ -19,12 +27,17 @@
 	s = status
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
+[log]
+	#-# colors for aliases above
+	baseColors = %s %C(green)(%cd) %C(bold blue)<%an> %C(yellow)%h %C(red)%d%C(reset)
 [user]
 	email = public@tobymackenzie.com
 	name = Toby Mackenzie
 [merge]
 	tool = opendiff
 
-#-# ideas taken from
+#-# ideas taken from:
+#-@ https://coderwall.com/p/euwpig
+#-@ https://github.com/addyosmani/dotfiles/blob/master/.functions
 #-@ https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig
 #-@ https://github.com/voku/dotfiles/blob/master/.gitconfig
