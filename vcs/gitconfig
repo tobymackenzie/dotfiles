@@ -1,9 +1,14 @@
 [alias]
+	aliases = !git config --get-regexp ^alias\\. | sed -E 's/^alias\\.([[:alnum:]-]+)/\\1:/g'
+	amend = commit --amend
 	ba = !git branchl
 	bl = !git branchl
 	branchl = branch -a
+	cho = checkout
+	clo = clone
 	contrib = shortlog --numbered --summary
 	d = diff
+	df = diff
 	lop = log -p
 	mirror = clone --mirror
 	ph = push
@@ -12,6 +17,8 @@
 	ps = push
 	psh = push
 	s = status
+	uncommit = reset --soft HEAD^
+	unstage = reset HEAD
 [user]
 	email = public@tobymackenzie.com
 	name = Toby Mackenzie
