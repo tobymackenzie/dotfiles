@@ -14,12 +14,15 @@
 	count = rev-list HEAD --count
 	d = diff
 	df = diff
+	dw = diff --color-words
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
 	lg = !git logg
 	logg = !gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
 	logn = !gitformat=`git config --get log.baseColors` && git log --date=iso --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
 	logp = !gitformat=`git config --get log.baseColors` && git log --date=iso -p --pretty=format:\"%C(red)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(red)--------------------------------------------------------%C(reset)%n\"
+	logpw = !git logp --color-words
 	lop = !git logp
+	lopw = !git logpw
 	mirror = clone --mirror
 	ph = push
 	pl = pull
