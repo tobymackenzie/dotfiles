@@ -1,4 +1,4 @@
-atom-text-editor::shadow{
+atom-text-editor.editor{
 	//--emphasize bracket matcher
 	.bracket-matcher{
 		background-color: rgba(255,100,100,0.7);
@@ -28,10 +28,10 @@ atom-text-editor::shadow{
 	//--emphasize embedded languages
 	//-@ https://discuss.atom.io/t/advanced-syntax-highlighting/13742/31
 	.embedded{
-		&.css, &.js{
+		&.syntax--css, &.syntax--js{
 			background: rgba(255,0,0,0.1);
 		}
-		&.php{
+		&.syntax--php{
 			background: rgba(0,255,0,0.1);
 		}
 	}
