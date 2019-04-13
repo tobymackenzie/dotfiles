@@ -6,10 +6,12 @@
 	ba = !git branchl
 	bl = !git branchl
 	branchl = branch -a
-	c = !git diff --cached | less && git commit
-	call = !git add . && git c
 	cho = checkout
 	clo = clone
+	cm = !git com
+	co = checkout
+	comadd = !git add . && git com
+	com = !git diff --cached | less && git commit
 	contrib = shortlog --numbered --summary
 	count = rev-list HEAD --count
 	d = diff
@@ -30,6 +32,7 @@
 	ps = push
 	psh = push
 	s = status
+	stat = status
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 [log]
