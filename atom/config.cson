@@ -53,6 +53,8 @@
 		softTabs: false
 		softWrap: true
 		softWrapHangingIndent: 1
+	"git-diff":
+		showIconsInEditorGutter: true
 	linter: {}
 	"linter-jscs":
 		preset: "jquery"
@@ -68,7 +70,8 @@
 		applications: "Finder,FireFox,Google Chrome,TextEdit"
 	"seti-syntax":
 		themeColor: "Green"
-	tabs: {}
+	tabs:
+		enableVcsColoring: true
 	"vim-mode":
 		useClipboardAsDefaultRegister: false
 		wrapLeftRightMotion: true
