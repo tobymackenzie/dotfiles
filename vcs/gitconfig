@@ -32,7 +32,10 @@
 	ps = push
 	psh = push
 	s = status
+	stapupo = !git stashpullpop
+	stashpullpop = !git stash && git pull && git stash pop
 	stat = status
+	stpupo = !git stashpullpop
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 [log]
