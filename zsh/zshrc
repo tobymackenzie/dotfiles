@@ -28,6 +28,14 @@ setopt HIST_IGNORE_ALL_DUPS
 
 #===keys
 #-@ based on https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/key-bindings.zsh
+#--fix delete key (forward delete)
+if [[ "${terminfo[kdch1]}" != "" ]]; then
+	bindkey "${terminfo[kdch1]}" delete-char
+else
+	bindkey "^[[3~" delete-char
+	bindkey "^[3;5~" delete-char
+	bindkey "\e[3~" delete-char
+fi
 #--word movements
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
