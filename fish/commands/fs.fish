@@ -20,15 +20,18 @@ end
 alias ll="l -lh"
 alias la="l -A"
 alias lla="ll -A"
+function lll
+	ll $argv | less
+end
 
+#==path movement
+#-! fish can't handle function names beginning with dash, via <https://github.com/oh-my-fish/oh-my-fish/issues/487>.  So…
+#alias -- -="cd -"
 function cl
 	cd $argv; and l
 end
 function cll
 	cd $argv; and ll
-end
-function lll
-	ll $argv | less
 end
 
 #==operations
