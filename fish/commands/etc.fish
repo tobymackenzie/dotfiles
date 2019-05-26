@@ -1,5 +1,9 @@
 alias b="bin/console"
 function c
-	echo $argv | bc -l
+	set result (echo $argv | bc -l)
+	if test -n "$result"
+		set -gx C (echo $argv | bc -l)
+		echo $C
+	end
 end
 alias x="exit"
