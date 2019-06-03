@@ -33,6 +33,23 @@ end
 function cll
 	cd $argv; and ll
 end
+#--specific
+#-@ https://stackoverflow.com/a/47902450/1139122
+function __
+	cd "$TJM_MAIN_PATH/$argv"
+end
+#-! illegal function name
+#function /
+#	cd "/$argv"
+#end
+function cdbin
+	cd "$TJM_BIN_PATH/$argv"
+end
+alias bin="cdbin"
+function checkouts
+	cd "$TJM_CHECKOUTS_PATH/$argv"
+end
+
 
 #==operations
 alias cp="cp -pri"

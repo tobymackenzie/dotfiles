@@ -8,3 +8,14 @@ switch $TJM_OS
 	case 'sunos'
 		set -x TJM_OS 'solaris'
 end
+
+#--paths
+if test -z "$TJM_MAIN_PATH"
+	set -x TJM_MAIN_PATH ~/__
+end
+if test -z "$TJM_BIN_PATH"
+	set -x TJM_BIN_PATH ~/bin
+end
+if test -z "$TJM_CHECKOUTS_PATH"
+	set -x TJM_CHECKOUTS_PATH $TJM_MAIN_PATH/checkouts
+end

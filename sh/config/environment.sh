@@ -6,3 +6,14 @@ case $TJM_OS in
 	'windowsnt') TJM_OS='windows' ;;
 	'sunos') TJM_OS='solaris' ;;
 esac
+
+#--paths
+if test -z "${TJM_MAIN_PATH}"; then
+	export TJM_MAIN_PATH="${HOME}/__"
+fi
+if test -z "${TJM_BIN_PATH}"; then
+	export TJM_BIN_PATH="${HOME}/bin"
+fi
+if test -z "${TJM_CHECKOUTS_PATH}"; then
+	export TJM_CHECKOUTS_PATH="${TJM_MAIN_PATH}/checkouts"
+fi

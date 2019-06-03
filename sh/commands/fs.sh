@@ -24,13 +24,28 @@ lll(){
 
 #==path movement
 alias -- -="cd -"
-alias ~="cd ~"
 cl(){
 	cd $@ && l
 }
 cll(){
 	cd $@ && ll
 }
+#--specific
+alias ~="cd ~"
+function /(){
+	cd /$*
+}
+function __(){
+	cd "$TJM_MAIN_PATH/$*"
+}
+function cdbin(){
+	cd "$TJM_BIN_PATH/$*"
+}
+alias bin='cdbin'
+function checkouts(){
+	cd "$TJM_CHECKOUTS_PATH/$*"
+}
+
 
 #==operations
 alias cp="cp -pri"
