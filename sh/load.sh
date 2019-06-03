@@ -16,6 +16,11 @@ for file in ${sh_path}/config/*.sh; do
 	source $file
 done
 
+#--load `.env`, if it exists
+if test -r ${HOME}/.env; then
+	source ${HOME}/.env
+fi
+
 #--load all files other than the config and this script next
 for file in $(find ${sh_path} -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
 	source $file
