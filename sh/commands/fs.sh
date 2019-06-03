@@ -23,6 +23,7 @@ lll(){
 }
 
 #==path movement
+alias ..="cd .."
 alias -- -="cd -"
 cl(){
 	cd $@ && l
