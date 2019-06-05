@@ -49,7 +49,7 @@ alias bin="cdbin"
 function checkouts
 	cd "$TJM_CHECKOUTS_PATH/$argv"
 end
-
+alias co="checkouts"
 
 #==operations
 alias cp="cp -pri"

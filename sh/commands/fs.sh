@@ -46,7 +46,7 @@ alias bin='cdbin'
 function checkouts(){
 	cd "$TJM_CHECKOUTS_PATH/$*"
 }
-
+alias co="checkouts"
 
 #==operations
 alias cp="cp -pri"
