@@ -36,6 +36,8 @@
 	stashpullpop = !git stash && git pull && git stash pop
 	stat = status
 	stpupo = !git stashpullpop
+	t = tag
+	tl = tag -l
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 [log]
