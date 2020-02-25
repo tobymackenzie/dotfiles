@@ -40,6 +40,10 @@
 	tl = tag -l
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
+[core]
+	#--git log, etc should properly use alt screen of less, not mess up terminal history
+	#-@ https://superuser.com/a/367160
+	pager = less -+$LESS -R
 [log]
 	#-# colors for aliases above
 	baseColors = %s %C(green)(%cd) %C(bold blue)<%an> %C(yellow)%h %C(red)%d%C(reset)
