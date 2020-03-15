@@ -9,6 +9,7 @@ set nocompatible	"--Use Vim advanced settings
 set noexpandtab		"--Don't expand tabs to spaces
 set nu			"--show line number
 set ruler		"--Show the cursor position all the time
+set mouse=a "--support mouse in all modes
 set shiftwidth=4	"--Number of spaces that a <Tab> in the file counts for
 set showcmd		"--show partial of current command
 set showmatch		"--show matching braces
@@ -101,4 +102,3 @@ au BufNewFile,BufRead *.less set filetype=less
 
 "--twig
 au BufRead,BufNewFile *.twig set syntax=htmljinja
-
