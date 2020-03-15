@@ -7,7 +7,7 @@ set ignorecase		"--ignore case in search
 set incsearch		"--Display the match for a search pattern halfway through typing it
 set nocompatible	"--Use Vim advanced settings
 set noexpandtab		"--Don't expand tabs to spaces
-set nu			"--show line number
+set number			"--show line number
 set ruler		"--Show the cursor position all the time
 set mouse=a "--support mouse in all modes
 set shiftwidth=4	"--Number of spaces that a <Tab> in the file counts for
