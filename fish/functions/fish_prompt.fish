@@ -1,5 +1,10 @@
 function fish_prompt
-	set_color white -b green
+	set tputColors (tput colors)
+	if test "$tputColors" -gt 8
+		set_color black -b 00d787
+	else
+		set_color white -b green
+	end
 	echo -n '['
 	echo -n -s "$USER"
 	echo -n ':'

@@ -42,4 +42,15 @@ bindkey '^[[1;5C' forward-word
 
 #==prompt
 autoload -U colors && colors
-export PS1="%{$bg[green]%}%{$fg[white]%}[%n:%1d]>%{$reset_color%} "
+PS1="[%n:%1d]>"
+if [ -n "${TERM}" ]; then
+	tputColors="$(tput colors || 2)"
+	if [ $tputColors -gt 8 ]; then
+		tputFG="$(tput setab 42)$(tput setaf 0)"
+	else
+		tputFG="%{$bg[green]%}%{$fg[white]%}"
+	fi
+	tputReset="%{$reset_color%}"
+	PS1="${tputFG}${PS1}${tputReset}"
+fi
+export PS1="$PS1 "
