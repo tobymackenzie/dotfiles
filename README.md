@@ -17,13 +17,13 @@ Once ran, modify any of the dotfiles to your liking.  You will most likely need 
 Install Atom packages by running:
 
 ``` sh
-apm install --packages-file ~/.dotfiles/packages.txt
+apm install --packages-file ~/.dotfiles/atom/packages.txt
 ```
 
 and update list with:
 
 ``` sh
-apm list --installed --bare > ~/.dotfiles/packages.txt
+apm list --installed --bare > ~/.dotfiles/atom/packages.txt
 ```
 
 Modifying
