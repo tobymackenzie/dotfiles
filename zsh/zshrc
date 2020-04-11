@@ -42,4 +42,4 @@ bindkey '^[[1;5C' forward-word
 
 #==prompt
 autoload -U colors && colors
-export PS1="%{$fg[green]%}[<%n:%1d>]%{$reset_color%}"
+export PS1="%{$bg[green]%}%{$fg[white]%}[<%n:%1d>] %{$reset_color%}"
