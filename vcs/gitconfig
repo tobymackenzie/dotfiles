@@ -10,7 +10,7 @@
 	clo = clone
 	cm = !git com
 	co = checkout
-	comadd = !git add . && git com
+	comadd = !cd -- ${GIT_PREFIX:-.} && git add . && git com
 	com = !git diff --cached | less && git commit
 	contrib = shortlog --numbered --summary
 	count = rev-list HEAD --count
@@ -18,13 +18,13 @@
 	df = diff
 	dw = diff --color-words
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
-	lg = !git logg
-	logg = !gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
-	logn = !gitformat=`git config --get log.baseColors` && git log --date=iso --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
-	logp = !gitformat=`git config --get log.baseColors` && git log --date=iso -p --pretty=format:\"%C(red)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(red)--------------------------------------------------------%C(reset)%n\"
-	logpw = !git logp --color-words
-	lop = !git logp
-	lopw = !git logpw
+	lg = !cd -- ${GIT_PREFIX:-.} && git logg
+	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
+	logn = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
+	logp = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso -p --pretty=format:\"%C(red)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(red)--------------------------------------------------------%C(reset)%n\"
+	logpw = !cd -- ${GIT_PREFIX:-.} && git logp --color-words
+	lop = !cd -- ${GIT_PREFIX:-.} && git logp
+	lopw = !cd -- ${GIT_PREFIX:-.} && git logpw
 	mirror = clone --mirror
 	ph = push
 	pl = pull
