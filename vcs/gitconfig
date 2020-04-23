@@ -32,9 +32,11 @@
 	ps = push
 	psh = push
 	s = status
+	sl = stash list
 	stapupo = !git stashpullpop
 	stashpullpop = !git stash && git pull && git stash pop
 	stat = status
+	stl = stash list
 	stpupo = !git stashpullpop
 	t = tag
 	tl = tag -l
