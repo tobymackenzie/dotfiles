@@ -17,6 +17,8 @@
 	d = diff
 	df = diff
 	dw = diff --color-words
+	h = !git hash
+	hash = rev-parse --short HEAD
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
 	lg = !cd -- ${GIT_PREFIX:-.} && git logg
 	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
