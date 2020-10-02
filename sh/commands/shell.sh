@@ -1,8 +1,8 @@
 #-@ based on <https://meyerweb.com/eric/thoughts/2020/09/29/polite-bash-commands/>
 function rodo(){
-	if [ ! -e $1 ]; then
-		sudo $@
+	if [ -n "$1" ]; then
+		sudo bash -c "$*"
 	else
-		sudo "$BASH" -c "$(history -p !!)"
+		sudo bash -c "$(fc -ln -1)"
 	fi
 }
