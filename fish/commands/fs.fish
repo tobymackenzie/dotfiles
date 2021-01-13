@@ -69,6 +69,10 @@ alias d1="d -d 1"
 alias df="df -h"
 
 #==apps
+#--diff
+alias gdiff="git diff --no-index"
+alias gdiffw="gdiff -w"
+
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 function e -a arg1
 	if test -n "$argv"; and test ! -e "$arg1"; and test -x (command -v "$arg1")
