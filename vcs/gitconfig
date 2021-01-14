@@ -35,6 +35,11 @@
 	psh = push
 	s = status
 	sl = stash list
+	sp = stash pop
+	spo = stash pop
+	spu = stash push
+	ss = stash show -p
+	st = stash
 	stapupo = !git stashpullpop
 	stashpullpop = !git stash && git pull && git stash pop
 	stat = status
