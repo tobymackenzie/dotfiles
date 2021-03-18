@@ -17,8 +17,10 @@ switch $TJM_OS
 	case *
 		alias l="ls -F --color"
 end
+alias l1="l -1h"
 alias ll="l -lh"
 alias la="l -A"
+alias l1a="l1 -A"
 alias lla="ll -A"
 function lll
 	ll $argv | less

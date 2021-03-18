@@ -15,8 +15,10 @@ case $TJM_OS in
 	'darwin') alias l="ls -FG"; ;;
 	*) alias l="ls -F --color"; ;;
 esac
+alias l1="l -1h"
 alias ll="l -lh"
 alias la="l -A"
+alias l1a="l1 -A"
 alias lla="ll -A"
 lll(){
 	ll $@ | less
