@@ -30,6 +30,7 @@
 	mirror = clone --mirror
 	ph = push
 	pl = pull
+	plr = pull --rebase
 	pll = pull
 	ps = push
 	psh = push
