@@ -22,7 +22,7 @@
 	i = info
 	info = !cd -- ${GIT_PREFIX:-.} && export LESS=FRSX && (echo "==stat" && git status -sb && echo "==branches" && git branch -vv --color=always && echo "==remotes" && git branch -r) | less -r
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
-	last = !cd -- ${GIT_PREFIX:-.} && git --no-pager log -1 --oneline --color
+	last = !cd -- ${GIT_PREFIX:-.} && git --no-pager lg -1 --oneline
 	lg = !cd -- ${GIT_PREFIX:-.} && git logg
 	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso --graph --pretty=format:\" ${gitformat}\"
 	logn = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=iso --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
