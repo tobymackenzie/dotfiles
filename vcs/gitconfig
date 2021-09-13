@@ -31,6 +31,7 @@
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
 	last = !cd -- ${GIT_PREFIX:-.} && git --no-pager lg -1 --oneline
 	lg = !cd -- ${GIT_PREFIX:-.} && git logg
+	ll = !cd -- ${GIT_PREFIX:-.} && git logg
 	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --graph --pretty=format:\" ${gitformat}\"
 	logn = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
 	logp = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' -p --pretty=format:\"%C(brightred)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(brightred)--------------------------------------------------------%C(reset)%n\"
