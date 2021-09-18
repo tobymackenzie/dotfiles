@@ -40,6 +40,8 @@
 	lopw = !cd -- ${GIT_PREFIX:-.} && git logpw
 	mirror = clone --mirror
 	ph = push
+	phf = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
+	phff = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force) || echo 'cancelling'
 	pl = pull
 	plr = pull --rebase
 	pll = pull
