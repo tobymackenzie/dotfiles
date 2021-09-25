@@ -148,6 +148,13 @@ class Dotfiles{
 				$placeFile = false;
 			}
 			if($placeFile){
+				$dir = dirname($fullTarget);
+				if(!file_exists($dir)){
+					if($this->verbose){
+						echo "creating parent folder for '{$fullTarget}'\n";
+					}
+					shell_exec("mkdir -p {$dir}");
+				}
 				if($this->verbose){
 					echo "writing symlink for '{$fullTarget}'\n";
 				}
