@@ -14,7 +14,7 @@ class DotfilesTest extends TestCase{
 			'verbose'=> false,
 		));
 		$dotfiles->placeAllFiles();
-		$existingPaths = explode("\n", shell_exec("find {$dir} -type l -or -type f"));
+		$existingPaths = explode("\n", trim(shell_exec("find {$dir} -type l -or -type f")));
 		foreach(array(
 			'.atom',
 			'.bash_profile',
@@ -29,8 +29,14 @@ class DotfilesTest extends TestCase{
 			'.vimrc',
 			'.zshrc',
 		) as $testPath){
-			$this->assertContains($dir . '/' . $testPath, $existingPaths, "File {$testPath} should have been created.");
+			$testPath = $dir . '/' . $testPath;
+			$this->assertContains($testPath, $existingPaths, "File {$testPath} should have been created.");
+			$key = array_search($testPath, $existingPaths);
+			if($key !== false){
+				unset($existingPaths[$key]);
+			}
 		}
+		$this->assertEmpty($existingPaths, 'There should be no extra files found in destination folder, ' . count($existingPaths) . ' found: ' . json_encode($existingPaths));
 		shell_exec("rm -rf {$dir}");
 	}
 }
