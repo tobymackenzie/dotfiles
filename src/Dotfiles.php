@@ -138,7 +138,7 @@ class Dotfiles{
 					unlink($fullTarget);
 				}
 				$placeFile = true;
-			}elseif($this->doesUserWantsToReplaceFile($target, $oldFileTarget)){
+			}elseif($this->doesUserWantsToReplaceFile($fullTarget, $fullOldFileTarget)){
 				$placeFile = true;
 				if($this->verbose){
 					echo "Moving {$target} to {$oldFileTarget}\n";
