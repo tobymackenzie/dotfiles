@@ -43,7 +43,7 @@
 	phf = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
 	phff = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force) || echo 'cancelling'
 	pl = pull
-	plr = pull --rebase
+	plr = pull --rebase --stat
 	pll = pull
 	ps = push
 	psh = push
