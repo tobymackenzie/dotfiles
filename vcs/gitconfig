@@ -31,10 +31,13 @@
 		) | less -FrSX
 	l = log --pretty=format:'%C(green)--%C(reset) %s' --date=short --no-merges
 	last = !cd -- ${GIT_PREFIX:-.} && git --no-pager lg -1 --oneline
+	lf = !cd -- ${GIT_PREFIX:-.} && git logf
 	lg = !cd -- ${GIT_PREFIX:-.} && git logg
 	ll = !cd -- ${GIT_PREFIX:-.} && git logg
+	lp = !cd -- ${GIT_PREFIX:-.} && git logp
+	logf = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
 	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --graph --pretty=format:\" ${gitformat}\"
-	logn = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
+	logn = !cd -- ${GIT_PREFIX:-.} && git logf
 	logp = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' -p --pretty=format:\"%C(brightred)--------------------------------------------------------%C(reset)%n${gitformat}%n%C(brightred)--------------------------------------------------------%C(reset)%n\"
 	logpw = !cd -- ${GIT_PREFIX:-.} && git logp --color-words
 	lop = !cd -- ${GIT_PREFIX:-.} && git logp
