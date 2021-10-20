@@ -53,6 +53,7 @@
 	psh = push
 	s = status
 	sb = status -sb
+	sd = diff 'stash@{0}' HEAD
 	sl = stash list
 	sp = stash pop
 	spo = stash pop
