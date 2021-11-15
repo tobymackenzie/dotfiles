@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -o pipefail
+prefix=''
+if [ -x "$(command -v caffeinate)" ]; then
+	prefix='caffeinate'
+fi
+$prefix rsync "${@}" 2>&1 | (egrep -v "^(file has vanished: |rsync warning: some files vanished before they could be transferred)" || true)
+r=$?
+if [[ $r == 24 ]]; then
+	r=0
+fi
+exit $r

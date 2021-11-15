@@ -1,1 +1,2 @@
 source ~/.dotfiles/sh/load.sh
+export PATH="$PATH:${HOME}/.dotfiles/bin"
