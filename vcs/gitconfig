@@ -42,6 +42,8 @@
 	logpw = !cd -- ${GIT_PREFIX:-.} && git logp --color-words
 	lop = !cd -- ${GIT_PREFIX:-.} && git logp
 	lopw = !cd -- ${GIT_PREFIX:-.} && git logpw
+	m = merge
+	m = merge --ff-only
 	mirror = clone --mirror
 	ph = push
 	phf = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
