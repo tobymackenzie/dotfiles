@@ -16,6 +16,7 @@
 	count = rev-list HEAD --count
 	d = diff
 	df = diff
+	dp = !git dpull
 	dpl = !git dpull
 	dpull = !cd -- ${GIT_PREFIX:-.} && BRANCH=`git branch --show-current` && git fetch && git diff ${BRANCH}..origin/${BRANCH}
 	dw = diff --color-words
