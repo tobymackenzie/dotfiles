@@ -38,6 +38,8 @@
 	lg = !cd -- ${GIT_PREFIX:-.} && git logg
 	ll = !cd -- ${GIT_PREFIX:-.} && git logg
 	lp = !cd -- ${GIT_PREFIX:-.} && git logp
+	lpl= !git lpull
+	lpull = !cd -- ${GIT_PREFIX:-.} && BRANCH=`git branch --show-current` && git fetch && git logp origin/${BRANCH}..
 	logf = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --name-only --pretty=format:\"%C(green)--%C(reset) ${gitformat}\"
 	logg = !cd -- ${GIT_PREFIX:-.} && gitformat=`git config --get log.baseColors` && git log --date=format:'%Y-%m-%d %H:%M' --graph --pretty=format:\" ${gitformat}\"
 	logn = !cd -- ${GIT_PREFIX:-.} && git logf
