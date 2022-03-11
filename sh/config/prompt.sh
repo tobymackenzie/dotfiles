@@ -10,4 +10,6 @@ if [ $tputColors -gt 2 ]; then
 	tputReset="\[$(tput sgr0)\]"
 	PS1="${tputFG}${PS1}${tputReset}"
 fi
-export PS1="$PS1 "
+#-# PS0 shows timestamp before command in BASH>=4.4
+export PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')\n"
+export PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')\n$PS1 "

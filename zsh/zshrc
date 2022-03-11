@@ -53,4 +53,10 @@ if [ $tputColors -gt 2 ]; then
 	tputReset="%{$reset_color%}"
 	PS1="${tputFG}${PS1}${tputReset}"
 fi
+precmd(){
+	echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
+}
+preexec(){
+	echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
+}
 export PS1="$PS1 "
