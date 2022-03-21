@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+if [ "`basename $0`" = 'OH' ]; then echo 'IO';
+else echo 'io';
+fi
