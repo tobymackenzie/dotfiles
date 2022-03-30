@@ -76,6 +76,7 @@
 	tl = tag -l
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
+	who = contrib
 [color]
 	status = always
 [core]
