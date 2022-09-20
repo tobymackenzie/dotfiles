@@ -14,6 +14,11 @@ if test -r $HOME/.env
 	export (cat $HOME/.env | xargs -L 1)
 end
 
+#--load shared files
+for file in (find {$config_path}/../shells -type f -name '*.sh' ! -regex '.*\/config\/.*')
+	source $file
+end
+
 #--load all files other than the config and this script next
 for file in (find {$config_path} -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
 	source $file

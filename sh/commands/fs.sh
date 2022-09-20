@@ -15,11 +15,6 @@ case $TJM_OS in
 	'darwin') alias l="ls -FG"; ;;
 	*) alias l="ls -F --color"; ;;
 esac
-alias l1="l -1h"
-alias ll="l -lh"
-alias la="l -A"
-alias l1a="l1 -A"
-alias lla="ll -A"
 lll(){
 	ll $@ | less
 }
@@ -50,26 +45,13 @@ function checkouts(){
 }
 alias co="checkouts"
 
-#==operations
-alias cp="cp -pri"
-alias mv="mv -i"
-alias rmi=" rm -i"
-alias scp="scp -pr"
-
 #==stats
-alias du="du -h"
 case $TJM_OS in
 	'darwin') alias d="du -hxd 0"; ;;
 	*) alias d="du -hx --max-depth 0"; ;;
 esac
-alias d1="d -d 1"
-alias df="df -h"
 
 #==apps
-#--diff
-alias gdiff="git diff --no-index"
-alias gdiffw="gdiff -w"
-
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 function e(){
 	if [ ! -e $1 ] && [ -x "$(command -v ${1})" ]; then

@@ -17,11 +17,6 @@ switch $TJM_OS
 	case *
 		alias l="ls -F --color"
 end
-alias l1="l -1h"
-alias ll="l -lh"
-alias la="l -A"
-alias l1a="l1 -A"
-alias lla="ll -A"
 function lll
 	ll $argv | less
 end
@@ -53,28 +48,15 @@ function checkouts
 end
 alias co="checkouts"
 
-#==operations
-alias cp="cp -pri"
-alias mv="mv -i"
-alias rmi=" rm -i"
-alias scp="scp -pr"
-
 #==stats
-alias du="du -h"
 switch $TJM_OS
 	case 'darwin'
 		alias d="du -hxd 0"
 	case *
 		alias d="du -hx --max-depth 0"
 end
-alias d1="d -d 1"
-alias df="df -h"
 
 #==apps
-#--diff
-alias gdiff="git diff --no-index"
-alias gdiffw="gdiff -w"
-
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 function e -a arg1
 	if test -n "$argv"; and test ! -e "$arg1"; and test -x (command -v "$arg1")

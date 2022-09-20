@@ -1,4 +1,3 @@
-alias b="bin/console"
 function c(){
 	result=`echo $* | bc -l`
 	if [ ! -z $result ]; then
@@ -7,4 +6,3 @@ function c(){
 		export C
 	fi
 }
-alias x="exit"

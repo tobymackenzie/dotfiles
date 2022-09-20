@@ -1,0 +1,1 @@
+alias ssha="ssh -A"

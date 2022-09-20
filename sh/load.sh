@@ -21,6 +21,11 @@ if test -r ${HOME}/.env; then
 	source ${HOME}/.env
 fi
 
+#--load shared files other than the config and this script next
+for file in $(find ${sh_path}/../shells -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
+	source $file
+done
+
 #--load all files other than the config and this script next
 for file in $(find ${sh_path} -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
 	source $file

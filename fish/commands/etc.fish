@@ -1,4 +1,3 @@
-alias b="bin/console"
 function c
 	set result (echo $argv | bc -l)
 	if test -n "$result"
@@ -6,4 +5,3 @@ function c
 		echo $C
 	end
 end
-alias x="exit"
