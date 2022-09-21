@@ -1,0 +1,9 @@
+#!/bin/bash
+#--view: view argument(s) in `less`. If passed a command, will run that command and pipe to `less`.  Otherwise, pass as arguments to `less`.
+if [ ! -e $1 ] && [ -x "$(command -v ${1})" ]; then
+	$@ | less
+elif [ -d $1 ]; then
+	ll $@ | less
+else
+	less $@
+fi

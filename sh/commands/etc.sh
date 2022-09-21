@@ -1,8 +1,0 @@
-function c(){
-	result=`echo $* | bc -l`
-	if [ ! -z $result ]; then
-		C=$result
-		echo $C
-		export C
-	fi
-}
