@@ -24,6 +24,7 @@ else
 	map <C-/> \c<space><CR>
 	imap <C-/> <esc>\c<space><CR>gi
 endif
+map <Leader>/ \c<space><CR>
 
 "--text
 "---editorconfig
