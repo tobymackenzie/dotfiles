@@ -34,6 +34,9 @@ colorscheme koehler
 "=====
 "==keyboard
 "=====
+"--use space as leader key
+map <space> <leader>
+
 "==autocomplete
 if exists("+omnifunc")
 	set completeopt+=menuone,noinsert,noselect
