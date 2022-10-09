@@ -33,6 +33,44 @@ colorscheme koehler
 "=====
 "==keyboard
 "=====
+"==autocomplete
+if exists("+omnifunc")
+	set completeopt+=menuone,noinsert,noselect
+	"--disable error when no matches found
+	set shortmess+=c
+	"--auto popup when three word characters in a row entered
+	autocmd InsertCharPre * call TMAutopleteOnIns()
+	fun! TMAutopleteOnIns()
+		if len(&omnifunc) != 0
+			\ && v:char =~ '\w'
+			\ && getline('.')[col('.') - 3] =~ '\w'
+			\ && getline('.')[col('.') - 2] =~ '\w'
+			\ && getline('.')[col('.') - 1] !~ '\w'
+			call feedkeys("\<C-x>\<C-o>", 'n')
+		endif
+	endfun
+	"--close func def preview when ')' called to finish function call
+	"-! not useful in all languages, but others would be much more complicated
+	inoremap <expr> ) TMClosePreviewDone()
+	fun! TMClosePreviewDone()
+		for w in range(1, winnr('$'))
+			if getwinvar(w, "&pvw") == 1
+				call feedkeys("\<esc>:pclose\<CR>i\<right>", 'n')
+			endif
+		endfor
+		return ")"
+	endfun
+	"--hide line numbers in preview window
+	autocmd WinEnter * call TMHidePreviewLN()
+	fun! TMHidePreviewLN()
+		if &pvw
+			setlocal nonumber
+		endif
+	endfun
+	"--tab to select first / current item
+	inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
+endif
+
 "==tabs
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
