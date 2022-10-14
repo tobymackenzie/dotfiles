@@ -64,6 +64,9 @@ if exists("+omnifunc")
 		endfor
 		return ")"
 	endfun
+	"--generic autocomplete
+	"-! this only sort of works, not in all file types, not for all words, can be slow
+	set omnifunc=syntaxcomplete#Complete
 	"--hide line numbers in preview window
 	autocmd WinEnter * call TMHidePreviewLN()
 	fun! TMHidePreviewLN()
