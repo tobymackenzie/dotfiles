@@ -5,6 +5,8 @@
 	amend = commit --amend
 	ba = !git branchl
 	bl = !git branchl
+	#--blame for all files, optionally matching on author name
+	blameall = !"cd -- ${GIT_PREFIX:-.} && f(){ (for FILE in $(git ls-files); do tmp=$(git blame -CMw --color-by-age --date='format:%g-%m-%d %H:%M' $FILE | grep -i \" ($*\") && echo \"------------\n$FILE\n------------\n$tmp\n\" ; done | less -FRS) } && f"
 	branchl = !"cd -- ${GIT_PREFIX:-.} && git for-each-ref --color --format='%(color:red)%(HEAD) %(color:reset)%(refname:lstrip=-1)%(color:reset);%(color:green)%(committerdate:format:%y%m%d-%H%M)%(color:reset);%(if)%(push)%(then)[%(color:red)%(upstream:lstrip=-2)%(if)%(upstream:track)%(then) %(color:reset)%(upstream:track)%(end)%(color:reset)] %(end)%(subject)' --sort -committerdate refs/heads/ | column -t -s ';'"
 	cho = checkout
 	clo = clone
