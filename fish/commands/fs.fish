@@ -30,6 +30,9 @@ end
 function cll
 	cd $argv; and ll
 end
+function mkcd
+	mkdir -p $argv; and cd $argv
+end
 #--specific
 #-@ https://stackoverflow.com/a/47902450/1139122
 function __

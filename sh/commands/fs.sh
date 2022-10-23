@@ -28,6 +28,9 @@ cl(){
 cll(){
 	cd $@ && ll
 }
+mkcd(){
+	mkdir -p $@ && cd $@
+}
 #--specific
 alias ~="cd ~"
 function /(){
