@@ -1,5 +1,5 @@
 #!/bin/bash
-result=`echo $* | bc -l`
+result=`echo "$*" | bc -l`
 if [ ! -z $result ]; then
 	C=$result
 	echo $C
