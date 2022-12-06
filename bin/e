@@ -1,8 +1,13 @@
 #!/bin/bash
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
+editor=${VISUAL:-${EDITOR:-vi}}
 if [ ! -e $1 ] && [ -x "$(command -v ${1})" ]; then
 	#-# use read only for standard in to make it easier to quit. To write, use `:w filename` method
-	$@ | vi -R -
+	if [[ $editor == 'vi' ]]; then
+		editor="${editor} -R"
+	fi
+	$@ | $editor -
 else
-	vi $@
+	$editor $@
 fi
+
