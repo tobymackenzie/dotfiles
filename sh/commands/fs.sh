@@ -11,10 +11,6 @@ if [[ "${TJM_OS}" == 'darwin' ]]; then
 fi
 
 #==list
-case $TJM_OS in
-	'darwin') alias l="ls -FG"; ;;
-	*) alias l="ls -F --color"; ;;
-esac
 lll(){
 	ll $@ | less
 }

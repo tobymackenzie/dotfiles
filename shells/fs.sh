@@ -1,4 +1,5 @@
 #==list
+alias l="ls -F --color"
 alias l1="l -1h"
 alias ll="l -lh"
 alias la="l -A"

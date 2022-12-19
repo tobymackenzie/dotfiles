@@ -11,12 +11,6 @@ if [ $TJM_OS = 'darwin' ]
 end
 
 #==list
-switch $TJM_OS
-	case 'darwin'
-		alias l="ls -FG"
-	case *
-		alias l="ls -F --color"
-end
 function lll
 	ll $argv | less
 end
