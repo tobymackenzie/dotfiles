@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ $# -lt 1 ]; then
+	echo 'Usage: a "command" paths' >&2
+	exit 1
+fi
+if [ $# -gt 1 ]; then
+	files="${@:2}"
+else
+	files=*
+fi
+for file in $files; do
+	if [ -d $file ]; then
+		echo '-------' $file
+		cd $file
+		eval $1
+		cd - > /dev/null 2>&1
+	fi
+done
+
