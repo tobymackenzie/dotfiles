@@ -1,8 +1,4 @@
 #!/bin/bash
-if [ $# -lt 1 ]; then
-	echo 'Usage: a "command" paths' >&2
-	exit 1
-fi
 if [ $# -gt 1 ]; then
 	files="${@:2}"
 else
@@ -10,9 +6,13 @@ else
 fi
 for file in $files; do
 	if [ -d $file ] && [ -d $file/.git ]; then
-		echo '-------' $file
-		cd $file
-		eval git $1
-		cd - > /dev/null 2>&1
+		if [ $# -gt 0 ]; then
+			echo '-------' $file
+			cd $file
+			eval git $1
+			cd - > /dev/null 2>&1
+		else
+			basename $file
+		fi
 	fi
 done
