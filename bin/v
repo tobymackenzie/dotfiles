@@ -3,7 +3,7 @@
 if [ ! -e $1 ] && [ -x "$(command -v ${1})" ]; then
 	$@ | less
 elif [ -d $1 ]; then
-	ll $@ | less
+	ls -Flh --color $@ | less -R
 else
 	less $@
 fi
