@@ -119,6 +119,8 @@ endif
 "=====
 "--hide instruction banner
 let g:netrw_banner=0
+"--move pwd with file manager
+let g:netrw_keepdir=0
 "--show human readable sizes
 let g:netrw_sizestyle='h'
 "--ignore case for sort
