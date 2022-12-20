@@ -5,7 +5,14 @@ if &background == "dark"
 	set transp=8
 endif
 
-"==repeat colors from vimrc that get overridden by macvim
+"=====
+"==styles
+"=====
+
+"--font
+set guifont=Menlo\ Regular:h16
+
+"--repeat colors from vimrc that get overridden by macvim
 colorscheme koehler
 highlight NonText ctermfg=darkGray guifg=gray43
 highlight SpecialKey ctermfg=darkGray guifg=gray43

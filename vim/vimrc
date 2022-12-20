@@ -151,11 +151,6 @@ let g:netrw_sort_options="i"
 "==styles
 "=====
 
-"--font
-if has('gui_running')
-	set guifont=Menlo\ Regular:h15
-endif
-
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	guibg=#002200
 au InsertLeave * hi Normal term=NONE	guibg=black
