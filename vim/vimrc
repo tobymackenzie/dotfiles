@@ -115,6 +115,37 @@ if has('gui_macvim')
 endif
 
 "=====
+"==file manager
+"=====
+"--hide instruction banner
+let g:netrw_banner=0
+"--show human readable sizes
+let g:netrw_sizestyle='h'
+"--ignore case for sort
+let g:netrw_sort_options="i"
+"-! may switch to only use for gui mode
+"if has('gui_running')
+	"--auto-open
+	fun! TJMAutoOpenVExplore()
+		let g:netrw_winsize=25
+		:Vexplore
+		let g:netrw_winsize=75
+		if argc() == 1 && !isdirectory(argv()[0])
+			call feedkeys("\<C-w>\<C-w>", 'n')
+		endif
+	endfunc
+	augroup NetrwVexplore
+		autocmd!
+		autocmd VimEnter * :call TJMAutoOpenVExplore()
+	augroup END
+	"--vertical split 25 netrw, 75 file as preview
+	let g:netrw_altv=1
+	let g:netrw_browse_split=4
+	let g:netrw_preview=1
+	let g:netrw_winsize=75
+"endif
+
+"=====
 "==styles
 "=====
 
