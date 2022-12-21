@@ -36,6 +36,10 @@ colorscheme koehler
 "=====
 "--use space as leader key
 map <space> <leader>
+"--quicker ex mode access
+noremap ; :
+noremap <Space><Space> :
+noremap <Leader>; ;
 
 "==autocomplete
 if exists("+omnifunc")
