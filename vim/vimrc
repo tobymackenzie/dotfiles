@@ -188,3 +188,13 @@ au BufNewFile,BufRead *.less set filetype=less
 
 "--twig
 au BufRead,BufNewFile *.twig set syntax=htmljinja
+
+"=====
+"==term
+"=====
+
+"--no line numbers in term
+augroup TJMTermNoNum
+	autocmd!
+	autocmd TerminalOpen * set nonu nornu
+augroup END
