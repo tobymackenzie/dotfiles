@@ -192,6 +192,8 @@ au BufRead,BufNewFile *.twig set syntax=htmljinja
 "=====
 "==term
 "=====
+"--quick open
+nnoremap <leader>t :term<cr>
 
 "--no line numbers in term
 augroup TJMTermNoNum
