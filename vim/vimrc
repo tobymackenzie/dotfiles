@@ -118,6 +118,11 @@ if has('gui_macvim')
 	vnoremap <A-C-Up> :m '<-2<CR>gv=gv
 endif
 
+"==windows
+"--quicker close/quit
+nnoremap <leader>c :close<CR>
+nnoremap <leader>q :qa<CR>
+
 "=====
 "==file manager
 "=====
