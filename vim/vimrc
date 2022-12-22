@@ -198,3 +198,9 @@ augroup TJMTermNoNum
 	autocmd!
 	autocmd TerminalOpen * set nonu nornu
 augroup END
+
+
+"--switch term to normal mode
+"-! only works when in insert mode, beeps if not
+tnoremap <esc><esc> <C-\><C-n>
+
