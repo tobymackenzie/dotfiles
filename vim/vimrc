@@ -138,9 +138,11 @@ let g:netrw_sort_options="i"
 "if has('gui_running')
 	"--auto-open
 	fun! TJMAutoOpenVExplore()
-		let g:netrw_winsize=25
-		:Vexplore
-		let g:netrw_winsize=75
+		if argc() == 0 || !isdirectory(argv()[0])
+			let g:netrw_winsize=25
+			:Vexplore
+			let g:netrw_winsize=75
+		endif
 		if argc() == 1 && !isdirectory(argv()[0])
 			call feedkeys("\<C-w>\<C-w>", 'n')
 		endif
