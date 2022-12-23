@@ -120,7 +120,7 @@ endif
 
 "==windows
 "--quicker close/quit
-nnoremap <leader>c :close<CR>
+nnoremap <leader>x :close<CR>
 nnoremap <leader>q :qa<CR>
 
 "--quicker switch
