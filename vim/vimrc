@@ -128,8 +128,11 @@ endif
 
 "==windows
 "--quicker close/quit
+"-! backspace in v mode to delete auto inserted range
 nnoremap <leader>x :close<CR>
+vnoremap <leader>x :<bs><bs><bs><bs><bs>close<CR>
 nnoremap <leader>q :qa<CR>
+vnoremap <leader>q :<bs><bs><bs><bs><bs>qa<CR>
 
 "--quicker switch
 nnoremap <leader>w <c-w><c-w>
