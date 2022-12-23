@@ -45,9 +45,9 @@ map <space> <leader>
 noremap ; :
 noremap <Space><Space> :
 noremap <Leader>; ;
-"--copy line
+"--duplicate line / selection
 nnoremap <leader>d :copy.<cr>
-vnoremap <leader>d Y`]p
+vnoremap <leader>d y`]p
 
 "==autocomplete
 if exists("+omnifunc")
