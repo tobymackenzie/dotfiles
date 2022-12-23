@@ -2,7 +2,12 @@ source ~/.vim/plugins.vim
 
 set ai			"--autoindenting
 set backspace=eol,indent,start "--make backspace key work
-set clipboard=unnamedplus "--use OS clipboard
+"--use OS clipboard
+if system('uname -s') == "Darwin\n"
+	set clipboard=unnamed
+else
+	set clipboard=unnamedplus
+endif
 set cursorline "--highlight current line
 set hlsearch		"--highlight search terms
 set history=50		"--keep 50 lines of command history
