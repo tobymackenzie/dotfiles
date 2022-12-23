@@ -123,6 +123,9 @@ endif
 nnoremap <leader>c :close<CR>
 nnoremap <leader>q :qa<CR>
 
+"--quicker switch
+nnoremap <leader>w <c-w><c-w>
+
 "=====
 "==file manager
 "=====
