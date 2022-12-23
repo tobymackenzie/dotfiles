@@ -3,7 +3,7 @@ source ~/.vim/plugins.vim
 set ai			"--autoindenting
 set backspace=eol,indent,start "--make backspace key work
 "--use OS clipboard
-if system('uname -s') == "Darwin\n"
+if has('mac')
 	set clipboard=unnamed
 else
 	set clipboard=unnamedplus
