@@ -90,6 +90,10 @@ if exists("+omnifunc")
 	inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
 endif
 
+"==buffers
+"--toggle last
+nnoremap <leader>b <C-^>
+
 "==tabs
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
