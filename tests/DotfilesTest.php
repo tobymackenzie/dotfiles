@@ -27,6 +27,7 @@ class DotfilesTest extends TestCase{
 			'.screenrc',
 			'.vim',
 			'.vimrc',
+			'.zshenv',
 			'.zshrc',
 		) as $testPath){
 			$testPath = $dir . '/' . $testPath;
