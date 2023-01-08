@@ -95,6 +95,7 @@ endif
 
 "==buffers
 "--toggle last
+nnoremap <leader>B :buffers<cr>:b
 nnoremap <leader>b <C-^>
 
 "==tabs
