@@ -1,0 +1,6 @@
+#==bash stuff
+if [[ ( -o interactive || -n "${VIMRUNTIME+1}"]) && -f ~/.bash_profile ]]; then
+	setopt aliases
+	source ~/.bash_profile
+fi
+

@@ -169,6 +169,29 @@ let g:netrw_sort_options="i"
 		autocmd!
 		autocmd VimEnter * :call TJMAutoOpenVExplore()
 	augroup END
+	"--
+	"fun! TJMNetrwWinSettings()
+		"if &ft ==# "netrw"
+			"let g:netrw_winsize=75
+		"else
+			"let g:netrw_winsize=25
+		"endif
+	"endfunc
+	"augroup NetrwWinSettings
+		"autocmd!
+		"autocmd WinEnter * :call TJMNetrwWinSettings()
+	"augroup END
+	"fun! TJMNetrwBufSettings()
+		"if &ft ==# "netrw"
+			"let g:netrw_winsize=25
+		"else
+			"let g:netrw_winsize=75
+		"endif
+	"endfunc
+	"augroup NetrwBufSettings
+		"autocmd!
+		"autocmd BufEnter * :call TJMNetrwBufSettings()
+	"augroup END
 	"--vertical split 25 netrw, 75 file as preview
 	let g:netrw_altv=1
 	let g:netrw_browse_split=4
@@ -210,6 +233,9 @@ au BufRead,BufNewFile *.twig set syntax=htmljinja
 "=====
 "==term
 "=====
+"--load shell aliases, etc for !
+let $BASH_ENV = "~/.vim/bashenv"
+
 "--quick open
 nnoremap <leader>t :term<cr>
 

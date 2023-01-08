@@ -1,7 +1,6 @@
-echo 'Welcome, '`whoami`', to zsh'
-
-#==bash stuff
-source $HOME/.bash_profile
+if [[ -o interactive ]]; then
+	echo 'Welcome, '`whoami`', to zsh'
+fi
 
 #==options
 setopt AUTO_CD #-# automatically change directory

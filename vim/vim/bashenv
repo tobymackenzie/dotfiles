@@ -1,0 +1,6 @@
+#--ensure bashrc test for profile passes
+PS1='>'
+#--ensure we use aliases
+shopt -s expand_aliases
+#--load standard bash config
+source ~/.bashrc

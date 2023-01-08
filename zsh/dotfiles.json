@@ -1,6 +1,10 @@
 {
 	"symlinks": [
 		{
+			"source": "zshenv"
+			,"target": ".zshenv"
+		},
+		{
 			"source": "zshrc"
 			,"target": ".zshrc"
 		}
