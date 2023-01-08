@@ -237,6 +237,7 @@ au BufRead,BufNewFile *.twig set syntax=htmljinja
 let $BASH_ENV = "~/.vim/bashenv"
 
 "--quick open
+nnoremap <leader>1 :!
 nnoremap <leader>t :term<cr>
 
 "--no line numbers in term
