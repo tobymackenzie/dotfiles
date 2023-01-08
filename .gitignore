@@ -10,5 +10,6 @@
 /atom/packages
 /atom/projects.cson
 /atom/storage
+/vim/vim/.netrwhist
 /vim/vim/autoload/
 /vim/vim/plugged/
