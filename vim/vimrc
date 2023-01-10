@@ -154,6 +154,8 @@ let g:netrw_banner=0
 let g:netrw_keepdir=0
 "--show human readable sizes
 let g:netrw_sizestyle='h'
+"--tree view
+let g:netrw_liststyle=3
 "--ignore case for sort
 let g:netrw_sort_options="i"
 "-! may switch to only use for gui mode
