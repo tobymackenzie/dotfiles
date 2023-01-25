@@ -154,33 +154,40 @@ let g:netrw_banner=0
 let g:netrw_keepdir=0
 "--show human readable sizes
 let g:netrw_sizestyle='h'
-"--tree view
-let g:netrw_liststyle=3
 "--ignore case for sort
 let g:netrw_sort_options="i"
-"-! may switch to only use for gui mode
-"if has('gui_running')
-	"--auto-open
-	fun! TJMAutoOpenVExplore()
-		if argc() == 0 || !isdirectory(argv()[0])
-			let g:netrw_winsize=25
-			:Vexplore
-			let g:netrw_winsize=75
+"--sidebar
+let t:TMExploreOn=0
+fun! TMExploreFn(...)
+	"--close sidebar if we think it's open, still exists, and not alone
+	if t:TMExploreOn != 0 && win_id2win(t:TMExploreOn) != 0 && winnr('$') > 1
+		call win_execute(t:TMExploreOn, 'close')
+		let t:TMExploreOn=0
+		"--revert some settings we can't immediately
+		let g:netrw_liststyle=0
+		let g:netrw_browse_split=0
+	else
+		let g:netrw_altv=1
+		let g:netrw_browse_split=4
+		let g:netrw_preview=1
+		let g:netrw_winsize=25
+		"---tree view
+		let g:netrw_liststyle=3
+		if a:0 > 0
+			execute ':Vexplore ' . join(a:000)
+		else
+			execute ':Vexplore'
 		endif
-		if argc() >= 1 && !isdirectory(argv()[0])
-			call feedkeys("\<C-w>\<C-w>", 'n')
-		endif
-	endfunc
-	augroup NetrwVexplore
-		autocmd!
-		autocmd VimEnter * :call TJMAutoOpenVExplore()
-	augroup END
-	"--vertical split 25 netrw, 75 file as preview
-	let g:netrw_altv=1
-	let g:netrw_browse_split=4
-	let g:netrw_preview=1
-	let g:netrw_winsize=75
-"endif
+		"--revert settings to normal
+		let g:netrw_altv=0
+		let g:netrw_preview=0
+		let g:netrw_winsize=50
+		let t:TMExploreOn=win_getid()
+	endif
+endfun
+command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
+nnoremap <leader>f :TMexplore<cr>
+nnoremap <leader>F :TMexplore<space>
 
 "=====
 "==styles
