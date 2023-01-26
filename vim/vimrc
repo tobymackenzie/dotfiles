@@ -34,20 +34,11 @@ filetype plugin indent on	"--detects filetype, loads appropriate options and ind
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "--disable auto comment
 filetype indent off "--generic auto indent only
 
-colorscheme koehler
-
 "=====
 "==keyboard
 "=====
-"--use space as leader key
-map <space> <leader>
 "--quicker ex mode access
 noremap ; :
-noremap <Space><Space> :
-noremap <Leader>; ;
-"--duplicate line / selection
-nnoremap <leader>d :copy.<cr>
-vnoremap <leader>d y`]p
 "--search for selection in visual mode
 vnoremap // y/<c-R>=escape(@", '/\')<cr><cr>
 vnoremap / y/<c-R>=escape(@", '/\')<cr>
@@ -93,10 +84,35 @@ if exists("+omnifunc")
 	inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
 endif
 
-"==buffers
-"--toggle last
-nnoremap <leader>B :buffers<cr>:b
+"==leader
+"--use space as leader key
+map <space> <leader>
+"--ex mode
+noremap <Space><Space> :
+"--toggle buffers
 nnoremap <leader>b <C-^>
+nnoremap <leader>B :buffers<cr>:b
+"--duplicate line / selection
+nnoremap <leader>d :copy.<cr>
+vnoremap <leader>d y`]p
+"--file sidebar
+nnoremap <leader>f :TMexplore<cr>
+nnoremap <leader>F :TMexplore<space>
+"--quit
+"-! backspace in v mode to delete auto inserted range
+nnoremap <leader>q :qa<CR>
+vnoremap <leader>q :<bs><bs><bs><bs><bs>qa<CR>
+"--open terminal
+nnoremap <leader>t :term<cr>
+"--window switch
+nnoremap <leader>w <c-w><c-w>
+"--window close
+nnoremap <leader>x :close<CR>
+vnoremap <leader>x :<bs><bs><bs><bs><bs>close<CR>
+"--run terminal command
+nnoremap <leader>1 :!
+"--restore ; (movement repeat)
+noremap <Leader>; ;
 
 "==tabs
 "--move tabs
@@ -133,17 +149,6 @@ if has('gui_macvim')
 	inoremap <A-C-Up> <esc>:m .-2<CR>==gi
 	vnoremap <A-C-Up> :m '<-2<CR>gv=gv
 endif
-
-"==windows
-"--quicker close/quit
-"-! backspace in v mode to delete auto inserted range
-nnoremap <leader>x :close<CR>
-vnoremap <leader>x :<bs><bs><bs><bs><bs>close<CR>
-nnoremap <leader>q :qa<CR>
-vnoremap <leader>q :<bs><bs><bs><bs><bs>qa<CR>
-
-"--quicker switch
-nnoremap <leader>w <c-w><c-w>
 
 "=====
 "==file manager
@@ -186,12 +191,12 @@ fun! TMExploreFn(...)
 	endif
 endfun
 command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
-nnoremap <leader>f :TMexplore<cr>
-nnoremap <leader>F :TMexplore<space>
 
 "=====
 "==styles
 "=====
+
+colorscheme koehler
 
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	guibg=#002200
@@ -225,10 +230,6 @@ au BufRead,BufNewFile *.twig set syntax=htmljinja
 "=====
 "--load shell aliases, etc for !
 let $BASH_ENV = "~/.vim/bashenv"
-
-"--quick open
-nnoremap <leader>1 :!
-nnoremap <leader>t :term<cr>
 
 "--no line numbers in term
 augroup TJMTermNoNum
