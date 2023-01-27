@@ -87,8 +87,8 @@ endif
 "==leader
 "--use space as leader key
 map <space> <leader>
-"--ex mode
-noremap <Space><Space> :
+"--window switch
+nnoremap <Space><Space> <c-w><c-w>
 "--toggle buffers
 nnoremap <leader>b <C-^>
 nnoremap <leader>B :buffers<cr>:b
@@ -104,11 +104,9 @@ nnoremap <leader>q :qa<CR>
 vnoremap <leader>q :<bs><bs><bs><bs><bs>qa<CR>
 "--open terminal
 nnoremap <leader>t :term<cr>
-"--window switch
-nnoremap <leader>w <c-w><c-w>
 "--window close
-nnoremap <leader>x :close<CR>
-vnoremap <leader>x :<bs><bs><bs><bs><bs>close<CR>
+nnoremap <leader>w :close<CR>
+vnoremap <leader>w :<bs><bs><bs><bs><bs>close<CR>
 "--run terminal command
 nnoremap <leader>1 :!
 "--restore ; (movement repeat)
