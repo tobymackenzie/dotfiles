@@ -62,7 +62,7 @@
 	ps = push
 	psh = push
 	root = rev-parse --show-toplevel
-	s = status
+	s = status -sb
 	sb = status -sb
 	sd = diff 'stash@{0}' HEAD
 	sl = stash list --pretty=format:'%C(yellow)%gd %C(green)%cs%C(reset): %<(70,trunc)%gs'
