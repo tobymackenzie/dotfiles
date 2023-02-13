@@ -160,8 +160,10 @@ let g:netrw_sizestyle='h'
 "--ignore case for sort
 let g:netrw_sort_options="i"
 "--sidebar
-let t:TMExploreOn=0
 fun! TMExploreFn(...)
+	if !exists('t:TMExploreOn')
+		let t:TMExploreOn=0
+	endif
 	"--close sidebar if we think it's open, still exists, and not alone
 	if t:TMExploreOn != 0 && win_id2win(t:TMExploreOn) != 0 && winnr('$') > 1
 		call win_execute(t:TMExploreOn, 'close')
