@@ -169,20 +169,19 @@ fun! TMExploreFn(...)
 		call win_execute(t:TMExploreOn, 'close')
 		let t:TMExploreOn=0
 		"--revert some settings we can't immediately
-		let g:netrw_liststyle=0
 		let g:netrw_browse_split=0
 	else
 		let g:netrw_altv=1
 		let g:netrw_browse_split=4
 		let g:netrw_preview=1
 		let g:netrw_winsize=25
-		"---tree view
-		let g:netrw_liststyle=3
 		if a:0 > 0
 			execute ':Vexplore ' . join(a:000)
 		else
 			execute ':Vexplore'
 		endif
+		"---tree view
+		call feedkeys('iii')
 		"--revert settings to normal
 		let g:netrw_altv=0
 		let g:netrw_preview=0
