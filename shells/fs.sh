@@ -5,6 +5,7 @@ alias ll="l -lh"
 alias la="l -A"
 alias l1a="l1 -A"
 alias lla="ll -A"
+alias lld="ll -d"
 
 #==operations
 alias cp="cp -pri"
