@@ -197,6 +197,9 @@ command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
 
 colorscheme koehler
 
+"--current line
+highlight CursorLine guibg=#444444
+
 "--make it noticeable which mode I'm in
 au InsertEnter * hi Normal term=reverse	guibg=#002200
 au InsertLeave * hi Normal term=NONE	guibg=black
