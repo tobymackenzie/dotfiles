@@ -9,11 +9,10 @@ else
 	files=*
 fi
 for file in $files; do
-	if [ -d $file ]; then
-		echo '-------' $file
-		cd $file
+	if [ -d "$file" ]; then
+		echo '-------' "$file"
+		cd "$file"
 		eval $1
 		cd - > /dev/null 2>&1
 	fi
 done
-
