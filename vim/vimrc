@@ -35,6 +35,15 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "
 filetype indent off "--generic auto indent only
 
 "=====
+"==ex
+"=====
+"--"menu" for file/multi completions
+set wildignorecase
+set wildmenu
+set wildmode=full:list
+set wildoptions=pum
+
+"=====
 "==keyboard
 "=====
 "--quicker ex mode access
