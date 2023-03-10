@@ -40,7 +40,6 @@ filetype indent off "--generic auto indent only
 "--"menu" for file/multi completions
 set wildignorecase
 set wildmenu
-set wildmode=full:list
 set wildoptions=pum
 
 "=====
