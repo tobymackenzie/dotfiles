@@ -120,21 +120,20 @@ vnoremap <leader>w :<bs><bs><bs><bs><bs>close<CR>
 "--run terminal command
 nnoremap <leader>1 :!
 "--surround text with parens
-"-! normal mode version should insert at end of line if at end of line
 "-! visual mode version should either leave selection selected or move to end of selection when done
-nnoremap <leader>( i()<esc>i
+nnoremap <expr> <leader>( 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '()<esc>i'
 vnoremap <leader>( :keeppatterns lockmarks s/\%V\_.*\%V/(&)/<cr>
 "--surround text with block
-nnoremap <leader>[ i[]<esc>i
+nnoremap <expr> <leader>[ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '[]<esc>i'
 vnoremap <leader>[ :keeppatterns lockmarks s/\%V\_.*\%V/[&]/<cr>
 "--surround text with curly braces
-nnoremap <leader>{ i{}<esc>i
+nnoremap <expr> <leader>{ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '{}<esc>i'
 vnoremap <leader>{ :keeppatterns lockmarks s/\%V\_.*\%V/{&}/<cr>
 "--surround text with single quotes
-nnoremap <leader>' i''<esc>i
+nnoremap <expr> <leader>' 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '\'\'<esc>i'
 vnoremap <leader>' :keeppatterns lockmarks s/\%V\_.*\%V/'&'/<cr>
 "--surround text with double quotes
-nnoremap <leader>" i""<esc>i
+nnoremap <expr> <leader>" 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '""<esc>i'
 vnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 "--restore ; (movement repeat)
 noremap <Leader>; ;
