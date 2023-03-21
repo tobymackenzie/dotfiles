@@ -34,6 +34,19 @@ filetype plugin indent on	"--detects filetype, loads appropriate options and ind
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "--disable auto comment
 filetype indent off "--generic auto indent only
 
+"--wider width for wide characters
+if has('gui_macvim')
+	"-# doesn't seem to work in mac CLI version, not sure for others.  may need better `has()`
+	"-# not helping most wide characters. Add double wides as needed
+	"-# need listchars to be single width for ambiwidth
+	call setcellwidths([
+	\	str2list('…') + str2list('…') + [1],
+	\	str2list('·') + str2list('·') + [1],
+	\	str2list('•') + str2list('•') + [1]
+	\])
+	set ambiwidth=double
+endif
+
 "=====
 "==ex
 "=====
