@@ -133,14 +133,11 @@ else
 	nnoremap <leader>o :e **/
 endif
 "--quit
-"-! backspace in v mode to delete auto inserted range
-nnoremap <leader>q :qa<CR>
-vnoremap <leader>q :<bs><bs><bs><bs><bs>qa<CR>
+noremap <leader>q :<c-u>qa<CR>
 "--open terminal
 nnoremap <leader>t :term<cr>
 "--window close
-nnoremap <leader>w :close<CR>
-vnoremap <leader>w :<bs><bs><bs><bs><bs>close<CR>
+noremap <leader>w :<c-u>close<CR>
 "--run terminal command
 nnoremap <leader>1 :!
 "--surround text with parens
