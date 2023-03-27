@@ -271,7 +271,11 @@ highlight GitGutterDelete ctermfg=red guifg=red
 au BufNewFile,BufRead *.less set filetype=less
 
 "--twig
-au BufRead,BufNewFile *.twig set syntax=htmljinja
+augroup twig
+	au!
+	au BufRead,BufNewFile *.twig set syntax=htmldjango
+	au BufRead,BufNewFile *.twig set syntax=htmljinja
+augroup end
 
 "=====
 "==term
