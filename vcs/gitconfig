@@ -82,7 +82,7 @@
 	stl = stash list
 	stpupo = !git stashpullpop
 	t = tag
-	tl = tag -l
+	tl = tag -l --sort=-committerdate
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 	who = contrib
