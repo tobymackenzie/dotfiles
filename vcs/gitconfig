@@ -100,6 +100,7 @@
 	last = false
 	status = false
 	stash = false
+	tag = less -FX
 [user]
 	email = public@tobymackenzie.com
 	name = Toby Mackenzie
