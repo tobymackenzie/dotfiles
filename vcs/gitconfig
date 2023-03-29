@@ -99,7 +99,8 @@
 	contrib = false
 	last = false
 	status = false
-	stash = false
+	#-! we would like alt screen for `stash show`, but this forces no alt screen for all stash subcommands
+	stash = less -FX
 	tag = less -FX
 [user]
 	email = public@tobymackenzie.com
