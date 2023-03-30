@@ -275,7 +275,6 @@ au BufNewFile,BufRead *.less set filetype=less
 augroup twig
 	au!
 	au BufRead,BufNewFile *.twig set syntax=htmldjango
-	au BufRead,BufNewFile *.twig set syntax=htmljinja
 augroup end
 
 "=====
