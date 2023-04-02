@@ -135,7 +135,7 @@ endif
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
-nnoremap <leader>r :!open -R %<cr>
+nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
 "--open terminal
 nnoremap <leader>t :term<cr>
 "--window close
