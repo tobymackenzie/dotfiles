@@ -135,7 +135,9 @@ endif
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
-nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
+if has('mac')
+	nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
+endif
 "--open terminal
 nnoremap <leader>t :term<cr>
 "--window close
@@ -239,6 +241,26 @@ fun! TMExploreFn(...)
 	endif
 endfun
 command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
+"---ensure proper `netrw_browse_split` setting
+"fun! TMExploreBrowseSplitSet()
+	"if !exists('t:TMExploreOn')
+		"let t:TMExploreOn=0
+	"endif
+	"if t:TMExploreOn != 0 && win_id2win(t:TMExploreOn) != 0
+		"echo 'split 4'
+		"let g:netrw_browse_split=4
+	"else
+		"echo 'split 0'
+		"let g:netrw_browse_split=0
+	"endif
+"endfun
+"augroup TJMExploreBrowseSplitSet
+	"autocmd!
+	"autocmd WinEnter * call TMExploreBrowseSplitSet()
+"augroup END
+
+
+
 
 "=====
 "==styles
@@ -296,3 +318,40 @@ augroup END
 "-! only works when in insert mode, beeps if not
 tnoremap <esc><esc> <C-\><C-n>
 
+
+
+
+"--function to surround current text with parens, etc
+
+
+
+fun! TMSurroundFn(strstart, strend = v:null, mode = v:null)
+	if a:mode is v:null
+		let a:mode = mode()
+	endif
+	if a:strstart == '(' && a:strend is v:null
+		let a:strend = ")"
+	endif
+	if a:mode == 'v'
+		let start = getpos("'<")
+		let end = getpos("'>")
+		"execute ':keeppatterns lockmarks s/\%V\_.*\%V/' .. a:strstart .. '&' .. a:strend .. '/'
+		"call setpos(".", start)
+		call setpos(".", [0,5,5,0])
+		"call feedkeys("\<esc>i" .. a:strstart .. "\<esc>", 'n')
+		"call setpos(".", end)
+		"call feedkeys('i' .. a:strend .. "\<esc>", 'n')
+		"if col(".") == col("$") - 1
+			"call feedkeys('i', 'n')
+		"else
+			"call feedkeys('li', 'n')
+		"endif
+	""--attempt to handle no selection
+	else
+		call feedkeys('i' .. (col(".") == col("$") - 1 ? '<right>' : '') .. a:strstart .. a:strend .. "\<esc>i", 'n')
+	endif
+endfun
+"command! -nargs=+ -range TMSurround call TMSurroundFn(<args>)
+"noremap <expr> <leader>( TMSurroundFn('(', ')')
+"vnoremap <expr> <leader>( TMSurroundFn('(', ')', "v")
+"(V=`git describe --tags --abbrev=0`)
