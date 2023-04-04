@@ -112,6 +112,10 @@ if exists("+omnifunc")
 	inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
 endif
 
+"==buffers
+"--allow hiding / switching away from modified buffers
+set hidden
+
 "==leader
 "--use space as leader key
 map <space> <leader>
