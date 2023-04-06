@@ -22,6 +22,7 @@ set shiftwidth=4	"--Number of spaces that a <Tab> in the file counts for
 set showcmd		"--show partial of current command
 set showmatch		"--show matching braces
 "##set smarttab		"--Use smart tab sizes
+set smoothscroll "--nicer scrolling for large wrapped lines
 set softtabstop=4	"--Number of spaces that a <Tab> in the file counts for
 "##set spell
 "##set spelllang=en
