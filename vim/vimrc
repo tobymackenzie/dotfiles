@@ -271,6 +271,7 @@ command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
 "=====
 
 colorscheme koehler
+highlight Normal ctermfg=lightgreen guifg=#b0ffb3
 
 "--current line
 highlight CursorLine guibg=#444444
