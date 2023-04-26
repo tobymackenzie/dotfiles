@@ -125,12 +125,14 @@ nnoremap <Space><Space> <c-w><c-w>
 "--toggle buffers
 nnoremap <leader>b <C-^>
 nnoremap <leader>B :buffers<cr>:b
+nnoremap <s-space>B :buffers<cr>:b
 "--duplicate line / selection
 nnoremap <leader>d :copy.<cr>
 vnoremap <leader>d y`]p
 "--file sidebar
 nnoremap <leader>f :TMexplore<cr>
 nnoremap <leader>F :TMexplore<space>
+nnoremap <s-space>F :TMexplore<space>
 "--open
 if has('gui')
 	nnoremap <leader>o :tabe **/
