@@ -151,6 +151,8 @@ endif
 nnoremap <leader>t :term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
+"--yank all
+noremap <leader>y :%y+<cr>
 "--run terminal command
 nnoremap <leader>1 :!
 "--surround text with parens
