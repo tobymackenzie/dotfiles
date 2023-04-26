@@ -147,6 +147,8 @@ noremap <leader>q :<c-u>qa<CR>
 if has('mac')
 	nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
 endif
+"--save
+noremap <leader>s :w<cr>
 "--open terminal
 nnoremap <leader>t :term<cr>
 "--window close
