@@ -122,6 +122,8 @@ set hidden
 map <space> <leader>
 "--window switch
 nnoremap <Space><Space> <c-w><c-w>
+"--select all
+nnoremap <leader>a ggVG
 "--toggle buffers
 nnoremap <leader>b <C-^>
 nnoremap <leader>B :buffers<cr>:b
