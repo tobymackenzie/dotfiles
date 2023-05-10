@@ -1,0 +1,5 @@
+#!/bin/bash -i
+#-# vim with no swap file, no viminfo
+#-! should we disable some plugins, etc?
+vim -i NONE -n $@
+
