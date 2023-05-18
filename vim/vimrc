@@ -153,6 +153,8 @@ noremap <leader>s :w<cr>
 nnoremap <leader>t :term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
+"--tab close
+noremap <expr> <leader>x len(getbufinfo({'buflisted':1})) > 1 ? ':bdelete<CR>' : ''
 "--yank all
 noremap <leader>y :%y+<cr>
 "--run terminal command
