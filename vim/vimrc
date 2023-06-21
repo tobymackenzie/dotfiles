@@ -159,6 +159,20 @@ noremap <expr> <leader>x len(getbufinfo({'buflisted':1})) > 1 ? ':bdelete<CR>' :
 noremap <leader>y :%y+<cr>
 "--run terminal command
 nnoremap <leader>1 :!
+"--command mode
+noremap <leader>; :
+noremap <leader>: :
+"--leader keys
+"-# must not be `nore` to allow leader key to work, except 'c'
+"-! trying various options
+imap <c-bslash> <c-o><leader>
+map <c-bslash> <leader>
+"cnoremap <a-space> <c-r>=<leader>
+imap <a-space> <c-o><leader>
+map <a-space> <leader>
+"cnoremap <f1> <esc><leader>
+imap <f1> <c-o><leader>
+map <f1> <leader>
 "--surround text with parens
 "-! visual mode version should either leave selection selected or move to end of selection when done
 nnoremap <expr> <leader>( 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '()<esc>i'
@@ -176,7 +190,7 @@ vnoremap <leader>' :keeppatterns lockmarks s/\%V\_.*\%V/'&'/<cr>
 nnoremap <expr> <leader>" 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '""<esc>i'
 vnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 "--restore ; (movement repeat)
-noremap <Leader>; ;
+noremap <Leader>. ;
 
 "==tabs
 "--move tabs
