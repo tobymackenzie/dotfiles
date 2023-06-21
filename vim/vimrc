@@ -64,9 +64,12 @@ noremap ; :
 
 "--text indent
 nnoremap <tab> >>
-vnoremap <tab> >
+vnoremap <tab> >gv
 nnoremap <s-tab> <<
-vnoremap <s-tab> <
+vnoremap <s-tab> <gv
+"---improve standard indent in visual mode
+vnoremap < <gv
+vnoremap > >gv
 
 "--search for selection in visual mode
 vnoremap // y/<c-R>=escape(@", '/\')<cr><cr>
