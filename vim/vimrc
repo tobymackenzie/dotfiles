@@ -159,6 +159,10 @@ noremap <expr> <leader>x len(getbufinfo({'buflisted':1})) > 1 ? ':bdelete<CR>' :
 noremap <leader>y :%y+<cr>
 "--run terminal command
 nnoremap <leader>1 :!
+"--reload vimrc
+nmap <leader>< :so ~/.vimrc<cr>:echo 'reloaded vimrc'<cr>
+"--edit vimrc
+nmap <leader>, :e ~/.vimrc<cr>
 "--command mode
 noremap <leader>; :
 noremap <leader>: :
