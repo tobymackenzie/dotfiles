@@ -59,6 +59,9 @@ set wildoptions=pum
 "=====
 "==keyboard
 "=====
+"--shift key plus motion selects in visual mode
+set keymodel=startsel
+
 "--quicker ex mode access
 noremap ; :
 
