@@ -2,5 +2,16 @@
 #-# vim with no swap file, no viminfo
 #-@ ideas from https://vi.stackexchange.com/questions/6177/the-simplest-way-to-start-vim-in-private-mode
 #-! should we disable some plugins, etc?
-vim -i NONE -n -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' $@
+opts=(-i NONE -n -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' ${@})
+#--handle stdin
+if [ -p /dev/stdin ]; then
+	if [ "${opts[${#opts[@]}-1]}" != "-" ]; then
+		echo 'modifying opts'
+		opts+=('-')
+	fi
+	cat | vim "${opts[@]}"
+#--regular
+else
+	vim "${opts[@]}"
+fi
 
