@@ -1,0 +1,2 @@
+#!/bin/bash -i
+man $@ 2> /dev/null || help $@ 2> /dev/null || cheat $@
