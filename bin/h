@@ -1,2 +1,7 @@
 #!/bin/bash -i
-man $@ 2> /dev/null || help $@ 2> /dev/null || cheat $@
+out=`man $@ 2> /dev/null && echo '---------' && help $@ 2> /dev/null || help $@ 2> /dev/null`
+if [ -n "${out}" ]; then
+	echo "${out}" | less -R
+else
+	cheat $@
+fi
