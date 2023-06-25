@@ -14,7 +14,7 @@ function handleStdinOpts(){
 }
 if [ -p /dev/stdin ]; then
 	handleStdinOpts
-	cat | $editor $@ $opts
+	$editor $@ $opts
 elif [ ! -e $1 ] && ([ -x "$(command -v ${1})" ] || type $1 >/dev/null 2>&1); then
 	handleStdinOpts
 	eval "$@" | $editor $opts

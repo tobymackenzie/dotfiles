@@ -8,7 +8,7 @@ if [ -p /dev/stdin ]; then
 	if [ "${opts[@]: -1}" != "-" ]; then
 		opts+=('-')
 	fi
-	cat | vim "${opts[@]}"
+	vim "${opts[@]}"
 #--regular
 else
 	vim "${opts[@]}"
