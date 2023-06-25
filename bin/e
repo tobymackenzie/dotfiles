@@ -2,12 +2,22 @@
 shopt -s expand_aliases
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 editor=${VISUAL:-${EDITOR:-vi}}
-if [ ! -e $1 ] && ([ -x "$(command -v ${1})" ] || type $1 >/dev/null 2>&1); then
-	#-# use read only for standard in to make it easier to quit. To write, use `:w filename` method
-	if [[ $editor == 'vi' ]]; then
+opts=()
+function handleStdinOpts(){
+	if [[ $editor == 'vi' || $editor == 'vim' ]]; then
+		#-# use read only for standard in to make it easier to quit. To write, use `:w filename` method
 		editor="${editor} -R"
+		if [[ "${@: -1}" != "-" ]]; then
+			opts+=('-')
+		fi
 	fi
-	eval "$@" | $editor -
+}
+if [ -p /dev/stdin ]; then
+	handleStdinOpts
+	cat | $editor $@ $opts
+elif [ ! -e $1 ] && ([ -x "$(command -v ${1})" ] || type $1 >/dev/null 2>&1); then
+	handleStdinOpts
+	eval "$@" | $editor $opts
 else
 	$editor $@
 fi
