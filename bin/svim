@@ -4,7 +4,7 @@
 #-! should we disable some plugins, etc?
 opts=(-i NONE -n -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' ${@})
 #--handle stdin
-if [ -p /dev/stdin ]; then
+if [ -s /dev/stdin ]; then
 	if [ "${opts[@]: -1}" != "-" ]; then
 		opts+=('-')
 	fi

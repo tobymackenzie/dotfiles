@@ -12,7 +12,7 @@ function handleStdinOpts(){
 		fi
 	fi
 }
-if [ -p /dev/stdin ]; then
+if [ -s /dev/stdin ]; then
 	handleStdinOpts
 	$editor $@ $opts
 elif [ ! -e $1 ] && ([ -x "$(command -v ${1})" ] || type $1 >/dev/null 2>&1); then
