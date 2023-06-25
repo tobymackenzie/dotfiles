@@ -5,7 +5,7 @@
 opts=(-i NONE -n -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' ${@})
 #--handle stdin
 if [ -p /dev/stdin ]; then
-	if [ "${opts[${#opts[@]}-1]}" != "-" ]; then
+	if [ "${opts[@]: -1}" != "-" ]; then
 		opts+=('-')
 	fi
 	cat | vim "${opts[@]}"
