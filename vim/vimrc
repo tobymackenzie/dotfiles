@@ -64,6 +64,7 @@ set keymodel=startsel
 
 "--quicker ex mode access
 noremap ; :
+noremap <f2>; ;
 
 "--emacs beginning / end keys
 inoremap <c-a> <home>
@@ -139,7 +140,9 @@ imap <a-space> <c-o><leader>
 map <a-space> <leader>
 "cnoremap <f1> <esc><leader>
 imap <f1> <c-o><leader>
+inoremap <f2><f1> <help>
 map <f1> <leader>
+noremap <f2><f1> <help>
 "--window switch
 nnoremap <Space><Space> <c-w><c-w>
 "--select all
