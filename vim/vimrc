@@ -135,9 +135,6 @@ map <space> <leader>
 "--leader key in other modes
 "-# must not be `nore` to allow leader key to work, except 'c'
 "-! trying various options
-imap <c-bslash> <c-o><leader>
-map <c-bslash> <leader>
-"cnoremap <a-space> <c-r>=<leader>
 imap <a-space> <c-o><leader>
 map <a-space> <leader>
 "cnoremap <f1> <esc><leader>
