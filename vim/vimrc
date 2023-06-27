@@ -65,6 +65,12 @@ set keymodel=startsel
 "--quicker ex mode access
 noremap ; :
 
+"--emacs beginning / end keys
+inoremap <c-a> <home>
+inoremap <a-a> <c-a>
+inoremap <c-e> <end>
+inoremap <a-e> <c-e>
+
 "--text indent
 nnoremap <tab> >>
 vnoremap <tab> >gv
