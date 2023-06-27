@@ -67,9 +67,9 @@ noremap ; :
 
 "--emacs beginning / end keys
 inoremap <c-a> <home>
-inoremap <a-a> <c-a>
+inoremap <f2>a <c-a>
 inoremap <c-e> <end>
-inoremap <a-e> <c-e>
+inoremap <f2>e <c-e>
 
 "--text indent
 nnoremap <tab> >>
