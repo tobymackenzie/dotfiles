@@ -177,7 +177,14 @@ nnoremap <leader>t :term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
 "--tab close
-noremap <leader>x :bdelete<CR>
+fun! TMCloseBuffer()
+	if len(getbufinfo({'buflisted':1})) > 1 || confirm('Final buffer.  Close?', "&Yes\n&No", 0) == 1
+		redraw #--prevent requiring additional return hit for `confirm()`
+		bdelete
+	endif
+endfun
+noremap <leader>x :call TMCloseBuffer()<cr>
+"-! confirm() when one?
 "--yank all
 noremap <leader>y :%y+<cr>
 "--run terminal command
