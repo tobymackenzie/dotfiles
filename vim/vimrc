@@ -67,6 +67,8 @@ noremap ; :
 noremap <f2>; ;
 
 "--emacs beginning / end keys
+cnoremap <c-a> <home>
+cnoremap <f2>a <c-a>
 inoremap <c-a> <home>
 inoremap <f2>a <c-a>
 inoremap <c-e> <end>
