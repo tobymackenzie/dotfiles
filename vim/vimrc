@@ -178,7 +178,10 @@ nnoremap <leader>t :term<cr>
 noremap <leader>w :<c-u>close<CR>
 "--tab close
 fun! TMCloseBuffer()
-	if len(getbufinfo({'buflisted':1})) > 1 || confirm('Final buffer.  Close?', "&Yes\n&No", 0) == 1
+	let l:len = len(getbufinfo({'buflisted':1}))
+	if &ft == 'help' && l:len < 2
+		close
+	elseif l:len > 1 || confirm('Final buffer.  Close?', "&Yes\n&No", 0) == 1
 		"--prevent requiring additional return hit for `confirm()`
 		redraw
 		bdelete
