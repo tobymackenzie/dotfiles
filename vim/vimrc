@@ -145,6 +145,7 @@ imap <f1> <c-o><leader>
 inoremap <f2><f1> <help>
 map <f1> <leader>
 noremap <f2><f1> <help>
+noremap <leader><f1> <help>
 "--window switch
 nnoremap <Space><Space> <c-w><c-w>
 "--select all
