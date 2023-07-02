@@ -179,7 +179,8 @@ noremap <leader>w :<c-u>close<CR>
 "--tab close
 fun! TMCloseBuffer()
 	if len(getbufinfo({'buflisted':1})) > 1 || confirm('Final buffer.  Close?', "&Yes\n&No", 0) == 1
-		redraw #--prevent requiring additional return hit for `confirm()`
+		#--prevent requiring additional return hit for `confirm()`
+		redraw
 		bdelete
 	endif
 endfun
