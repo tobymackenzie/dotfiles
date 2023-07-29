@@ -10,3 +10,8 @@ fi
 if [ -f ~/.dotfiles/_local/alias ]; then
 	source ~/.dotfiles/_local/alias
 fi
+
+#==custom
+if [ -f ~/.dotfiles/_local/bash ]; then
+	source ~/.dotfiles/_local/bash
+fi

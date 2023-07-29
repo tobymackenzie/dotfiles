@@ -22,3 +22,9 @@ alias cdhome="cd $HOME"
 if test -f ~/.dotfiles/_local/alias
 	source ~/.dotfiles/_local/alias
 end
+
+#--custom
+if test -f ~/.dotfiles/_local/fish
+	source ~/.dotfiles/_local/fish
+end
+

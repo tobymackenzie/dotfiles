@@ -59,3 +59,8 @@ preexec(){
 	echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
 }
 export PS1="$PS1 "
+
+#==custom
+if [ -f ~/.dotfiles/_local/zsh ]; then
+	source ~/.dotfiles/_local/zsh
+fi
