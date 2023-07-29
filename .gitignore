@@ -5,12 +5,16 @@
 /.phpunit.result.cache
 /_local/
 /atom/.apm
+/atom/.atom*
 /atom/.node-gyp
 /atom/blob-store
 /atom/compile-cache
+/atom/github.cson
 /atom/packages
+/atom/recovery
 /atom/projects.cson
 /atom/storage
+/atom/xcom*
 /vim/vim/.netrwhist
 /vim/vim/autoload/
 /vim/vim/plugged/
