@@ -19,3 +19,6 @@ end
 #--aliases
 #---directories
 alias cdhome="cd $HOME"
+if test -f ~/.dotfiles/_local/alias
+	source ~/.dotfiles/_local/alias
+end
