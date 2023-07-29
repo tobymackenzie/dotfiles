@@ -3,6 +3,7 @@
 *.swp
 .DS_Store
 /.phpunit.result.cache
+/_local/
 /atom/.apm
 /atom/.node-gyp
 /atom/blob-store

@@ -26,6 +26,13 @@ and update list with:
 apm list --installed --bare > ~/.dotfiles/atom/packages.txt
 ```
 
+Configuration
+-------------
+
+You can create a `_local` folder in the project with the following configuration files:
+
+- path: line-break separated list of paths to use as `$PATH`.  Be sure to include `$PATH` where the existing paths should go.  Works for bash, zsh, and fish
+
 Modifying
 ---------
 This project is organized into folders for each different type of thing the configuration is for ('/sh' for sh based shells, 'vim' for vim, etc).  Each folder has a 'dotfiles.json' that specifies what files are to be symlinked where.  If you add any files that need to be symlinked in the home folder (or elsewhere) add them to the 'dotfiles.json'.

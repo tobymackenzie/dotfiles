@@ -1,2 +1,7 @@
 source ~/.dotfiles/sh/load.sh
+
+#==path
 export PATH="$PATH:${HOME}/.dotfiles/bin"
+if [ -f ~/.dotfiles/_local/path ]; then
+	export PATH=$(cat ~/.dotfiles/_local/path | tr '\n' ':' | sed "s!\$PATH!"$(echo $PATH)"!" | sed 's!~/!'$(echo $HOME)'/!g' | sed 's/:://g' | xargs)
+fi
