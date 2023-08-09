@@ -163,9 +163,9 @@ nnoremap <leader>F :TMexplore<space>
 nnoremap <s-space>F :TMexplore<space>
 "--open
 if has('gui')
-	nnoremap <leader>o :tabe **/
+	nnoremap <leader>o :tab drop **/
 else
-	nnoremap <leader>o :e **/
+	nnoremap <leader>o :drop **/
 endif
 "--quit
 noremap <leader>q :<c-u>qa<CR>
