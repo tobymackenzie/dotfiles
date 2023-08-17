@@ -327,6 +327,10 @@ command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
 
 colorscheme koehler
 highlight Normal ctermfg=lightgreen guifg=#b0ffb3
+"--use our colorscheme if MacVim
+if has('gui_macvim')
+	let macvim_skip_colorscheme=1
+endif
 
 "--current line
 highlight CursorLine guibg=#444444
