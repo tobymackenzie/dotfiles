@@ -55,6 +55,9 @@ endif
 set wildignorecase
 set wildmenu
 set wildoptions=pum
+"--ignore some directories for file matching
+set wildignore+=*/node_modules/*
+set wildignore+=*/vendor/*
 
 "=====
 "==keyboard
