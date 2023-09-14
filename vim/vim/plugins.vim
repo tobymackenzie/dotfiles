@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 "> https://vimawesome.com/plugin/the-nerd-commenter
 " commands for toggling comments on selected lines
 "-@ sublime keymap help via <https://stackoverflow.com/questions/11553382/vim-map-d-to-comment-code>
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 if has('mac')
 	map <D-/> \c<space><CR>
 	imap <D-/> <esc>\c<space><CR>gi
@@ -27,7 +27,5 @@ Plug 'editorconfig/editorconfig-vim'
 "--vcs
 "> https://vimawesome.com/plugin/vim-gitgutter
 " shows git line status in gutter
-if v:version > 703
-	Plug 'airblade/vim-gitgutter'
-endif
+Plug 'airblade/vim-gitgutter'
 call plug#end()
