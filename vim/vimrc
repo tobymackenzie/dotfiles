@@ -87,8 +87,9 @@ vnoremap < <gv
 vnoremap > >gv
 
 "--search for selection in visual mode
-vnoremap // y/<c-R>=escape(@", '/\')<cr><cr>
-vnoremap / y/<c-R>=escape(@", '/\')<cr>
+"-@ https://vi.stackexchange.com/a/6209
+vnoremap // :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
+vnoremap / :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr>
 
 "==autocomplete
 if exists("+omnifunc")
