@@ -79,17 +79,17 @@ inoremap <f2>e <c-e>
 
 "--text indent
 nnoremap <tab> >>
-vnoremap <tab> >gv
+xnoremap <tab> >gv
 nnoremap <s-tab> <<
-vnoremap <s-tab> <gv
+xnoremap <s-tab> <gv
 "---improve standard indent in visual mode
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
 "--search for selection in visual mode
 "-@ https://vi.stackexchange.com/a/6209
-vnoremap // :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
-vnoremap / :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr>
+xnoremap // :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
+xnoremap / :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr>
 
 "==autocomplete
 if exists("+omnifunc")
@@ -160,7 +160,7 @@ nnoremap <leader>B :buffers<cr>:b
 nnoremap <s-space>B :buffers<cr>:b
 "--duplicate line / selection
 nnoremap <leader>d :copy.<cr>
-vnoremap <leader>d y`]p
+xnoremap <leader>d y`]p
 "--file sidebar
 nnoremap <leader>f :TMexplore<cr>
 nnoremap <leader>F :TMexplore<space>
@@ -210,19 +210,19 @@ noremap <leader>: :
 "--surround text with parens
 "-! visual mode version should either leave selection selected or move to end of selection when done
 nnoremap <expr> <leader>( 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '()<esc>i'
-vnoremap <leader>( :keeppatterns lockmarks s/\%V\_.*\%V/(&)/<cr>
+xnoremap <leader>( :keeppatterns lockmarks s/\%V\_.*\%V/(&)/<cr>
 "--surround text with block
 nnoremap <expr> <leader>[ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '[]<esc>i'
-vnoremap <leader>[ :keeppatterns lockmarks s/\%V\_.*\%V/[&]/<cr>
+xnoremap <leader>[ :keeppatterns lockmarks s/\%V\_.*\%V/[&]/<cr>
 "--surround text with curly braces
 nnoremap <expr> <leader>{ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '{}<esc>i'
-vnoremap <leader>{ :keeppatterns lockmarks s/\%V\_.*\%V/{&}/<cr>
+xnoremap <leader>{ :keeppatterns lockmarks s/\%V\_.*\%V/{&}/<cr>
 "--surround text with single quotes
 nnoremap <expr> <leader>' 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '\'\'<esc>i'
-vnoremap <leader>' :keeppatterns lockmarks s/\%V\_.*\%V/'&'/<cr>
+xnoremap <leader>' :keeppatterns lockmarks s/\%V\_.*\%V/'&'/<cr>
 "--surround text with double quotes
 nnoremap <expr> <leader>" 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '""<esc>i'
-vnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
+xnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 "--restore ; (movement repeat)
 noremap <Leader>. ;
 
