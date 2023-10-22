@@ -25,7 +25,7 @@ set showmatch		"--show matching braces
 set smoothscroll "--nicer scrolling for large wrapped lines
 set softtabstop=4	"--Number of spaces that a <Tab> in the file counts for
 "##set spell
-"##set spelllang=en
+set spelllang=en
 set tabstop=4		"--Number of spaces that a <Tab> in the file counts for
 set undolevels=100	"--set number of undo's remembered
 set wrapscan		"--search wraps around
@@ -178,6 +178,9 @@ if has('mac')
 endif
 "--save
 noremap <leader>s :update<cr>
+noremap <leader>ss :update<cr>
+"--spell check
+noremap <leader>sc :set spell!<CR>
 "--open terminal
 nnoremap <leader>t :term<cr>
 "--window close
