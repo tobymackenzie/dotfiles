@@ -7,7 +7,7 @@ Usage
 Clone this repo to wherever you want and `cd` into the repo directory.  Then run the dotfiles script to install all dotfiles:
 
 ```
-./dotfiles
+./bin/dotfiles
 ```
 
 It will ask you to confirm replacing any files (it will store a backup of them).
