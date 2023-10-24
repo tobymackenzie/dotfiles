@@ -67,6 +67,10 @@ class Dotfiles{
 		}
 	}
 
+	public function getBaseDir(){
+		return $this->baseDir;
+	}
+
 	/*=====
 	==file placement
 	=====*/
