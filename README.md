@@ -18,7 +18,7 @@ Clone this repo to wherever you want and `cd` into the repo directory.  Then run
 
 It will ask you to confirm replacing any files (it will store a backup of them).
 
-Once ran, modify any of the dotfiles to your liking.  You will most likely need to add to $PATH in .bash_profile and .config/fish/config.fish depending on which shell you use.
+Once ran, modify any of the dotfiles to your liking.  See ["Configuration" section](#configuration) below for setting `$PATH`, etc.
 
 Install Atom packages by running:
 
