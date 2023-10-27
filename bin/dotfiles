@@ -6,14 +6,14 @@ $path = $dotfiles->getBaseDir();
 if(substr($path, 0, 1) === '~'){
 	$path = str_replace('~', $_SERVER['HOME'], $path);
 }
-$cmd = $argv[0] || null;
-
-if(file_exists($path) || $cmd === 'update'){
+$cmd = $argv[1] ?? null;
+if((!$cmd && file_exists($path)) || $cmd === 'update'){
 	echo "updating dotfiles\n";
 	chdir($path);
 	passthru('git pull');
-}elseif(!file_exists($path) || $cmd === 'init'){
+}elseif(!file_exists($path) || $cmd === 'init' || $cmd === 'install'){
 	echo "placing all dotfiles\n";
 	$dotfiles->placeAllFiles();
+}else{
+	throw new Exception("Unknown command");
 }
-
