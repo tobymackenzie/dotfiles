@@ -22,6 +22,7 @@ class DotfilesTest extends TestCase{
 			'.config/fish/config.fish',
 			'.config/fish/functions',
 			'.dotfiles',
+			'.editorconfig',
 			'.gitconfig',
 			'.gvimrc',
 			'.screenrc',
