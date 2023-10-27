@@ -1,0 +1,8 @@
+{
+	"symlinks": [
+		{
+			"source": "editorconfig"
+			,"target": ".editorconfig"
+		}
+	]
+}
