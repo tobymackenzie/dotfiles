@@ -7,13 +7,21 @@ if(substr($path, 0, 1) === '~'){
 	$path = str_replace('~', $_SERVER['HOME'], $path);
 }
 $cmd = $argv[1] ?? null;
-if((!$cmd && file_exists($path)) || $cmd === 'update'){
-	echo "updating dotfiles\n";
-	chdir($path);
-	passthru('git pull');
-}elseif(!file_exists($path) || $cmd === 'init' || $cmd === 'install'){
-	echo "placing all dotfiles\n";
-	$dotfiles->placeAllFiles();
-}else{
-	throw new Exception("Unknown command");
+if(!$cmd){
+	$cmd = file_exists($path) ? 'update' : 'init';
+}
+switch($cmd){
+	case 'update':
+		echo "updating dotfiles\n";
+		chdir($path);
+		passthru('git pull');
+	break;
+	case 'init':
+	case 'install':
+		echo "placing all dotfiles\n";
+		$dotfiles->placeAllFiles();
+	break;
+	default:
+		throw new Exception("Unknown command");
+	break;
 }
