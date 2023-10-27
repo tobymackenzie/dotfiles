@@ -21,6 +21,12 @@ switch($cmd){
 		echo "placing all dotfiles\n";
 		$dotfiles->placeAllFiles();
 	break;
+	case 'test':
+	case 'tests':
+		echo "running phpunit\n";
+		chdir(__DIR__ . '/..');
+		passthru('phpunit --display-deprecations');
+	break;
 	default:
 		throw new Exception("Unknown command");
 	break;
