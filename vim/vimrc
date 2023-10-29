@@ -190,10 +190,13 @@ fun! TMCloseBuffer()
 	let l:len = len(getbufinfo({'buflisted':1}))
 	if &ft == 'help' && l:len < 2
 		close
-	elseif l:len > 1 || confirm('Final buffer.  Close?', "&Yes\n&No", 0) == 1
-		"--prevent requiring additional return hit for `confirm()`
-		redraw
-		bdelete
+	else
+		if l:len > 1 || &ft !=# 'netrw'
+			bdelete
+		endif
+		if l:len <= 1 && &ft !=# 'netrw'
+			Explore
+		endif
 	endif
 endfun
 noremap <leader>x :call TMCloseBuffer()<cr>
