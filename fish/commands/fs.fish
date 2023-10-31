@@ -1,6 +1,8 @@
 #==gui
 if [ $TJM_OS = 'darwin' ]
 	alias console="open -a console"
+	alias ff="open -a 'Firefox'"
+	alias ffd="open -a 'Firefox Developer Edition'"
 	alias o="open"
 	alias oa="open -a"
 	alias og="ogit"
