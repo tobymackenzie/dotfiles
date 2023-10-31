@@ -15,8 +15,9 @@ if test -r $HOME/.env
 end
 
 #--load shared files
-for file in (find {$config_path}/../shells -type f -name '*.sh' ! -regex '.*\/config\/.*')
-	source $file
+source {$config_path}/../shells/short.sh
+if [ $TJM_OS = 'darwin' ]
+	source {$config_path}/../shells/mac.sh
 end
 
 #--load all files other than the config and this script next

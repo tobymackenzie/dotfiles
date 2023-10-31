@@ -22,9 +22,10 @@ if test -r ${HOME}/.env; then
 fi
 
 #--load shared files other than the config and this script next
-for file in $(find ${sh_path}/../shells -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
-	source $file
-done
+source ${sh_path}/../shells/short.sh
+if [[ "${TJM_OS}" == 'darwin' ]]; then
+	source ${sh_path}/../shells/mac.sh
+fi
 
 #--load all files other than the config and this script next
 for file in $(find ${sh_path} -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do

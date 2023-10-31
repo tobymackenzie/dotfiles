@@ -1,17 +1,3 @@
-#==gui
-if [ $TJM_OS = 'darwin' ]
-	alias console="open -a console"
-	alias ff="open -a 'Firefox'"
-	alias ffd="open -a 'Firefox Developer Edition'"
-	alias o="open"
-	alias oa="open -a"
-	alias og="ogit"
-	alias ogit="open -a 'GitX'"
-	alias ot="open -t"
-	alias sublime="oa 'Sublime Text 2'"
-	alias macvim="oa MacVim"
-end
-
 #==list
 function lll
 	ll $argv | less
