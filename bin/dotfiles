@@ -13,16 +13,16 @@ cd $binPath/..
 case $cmd in
 	'u'|'up'|'update')
 		echo 'updating dotfiles'
-		git pull
+		git pull ${@:2}
 	;;
 	'i'|'init'|'install')
-		${binPath}/_dotfilesInit
+		${binPath}/_dotfilesInit ${@:2}
 	;;
 	'bin')
 		ls -1A bin ${@:2}
 	;;
 	'd'|'diff')
-		git diff --color-words -w
+		git diff --color-words -w ${@:2}
 	;;
 	'g'|'git')
 		git ${@:2}
@@ -31,11 +31,11 @@ case $cmd in
 		ls -1AFh --color ${@:2}
 	;;
 	's'|'stat'|'status')
-		git status -bs
+		git status -bs ${@:2}
 	;;
 	'test'|'tests')
 		echo 'running phpunit'
-		phpunit --display-deprecations
+		phpunit --display-deprecations ${@:2}
 	;;
 	*)
 		>&2 echo 'Unknown command'
