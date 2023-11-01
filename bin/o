@@ -35,7 +35,7 @@ main(){
 					cmd=`buildCmd 'GitX' git-cola gitg gitk tig`
 				;;
 				't'|'text')
-					if (( hasNoOpen === 0 )); then
+					if (( hasNoOpen == 0 )); then
 						cmd="open -t"
 					else
 						cmd=`buildCmd 'MacVim' gvim edit vim`
