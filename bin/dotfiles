@@ -11,11 +11,11 @@ else
 fi
 cd $binPath/..
 case $cmd in
-	'update')
+	'u'|'up'|'update')
 		echo 'updating dotfiles'
 		git pull
 	;;
-	'init'|'install')
+	'i'|'init'|'install')
 		${binPath}/_dotfilesInit
 	;;
 	'd'|'diff')
