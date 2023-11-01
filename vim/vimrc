@@ -65,6 +65,10 @@ set wildignore+=vendor/*
 "--shift key plus motion selects in visual mode
 set keymodel=startsel
 
+"--delete keys delete in visual mode
+xnoremap <bs> "dd
+xnoremap <del> "dd
+
 "--quicker ex mode access
 noremap ; :
 noremap <f2>; ;
