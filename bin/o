@@ -1,0 +1,101 @@
+#!/bin/bash -i
+#-----
+# open: short alias of `open` command or equivalent
+#
+# attempts to work on any OS
+# first arg can specify app to use, see `case $1` for options
+# otherwise, all args passed directly to `open`
+# falls back to `see` / `edit` / `vi` if no real `open` equivalent, which may not be considered the same
+#-----
+
+main(){
+	hasNoOpen=`command -v 'open' > /dev/null; echo $?`
+	noFileExists=1
+	hasArgs=0
+	args=''
+	if [ "$#" -ge 1 ]; then
+		noFileExists=`[ -e $1 ]; echo $?`
+		hasArgs=1
+		args=$@
+		if (( noFileExists == 1 )); then
+			case $1 in
+				'con'|'console')
+					cmd=`buildCmd Console less`
+				;;
+				'f'|'file'|'files'|'finder')
+					cmd=`buildCmd Finder nautilus konqueror mc`
+				;;
+				'ff')
+					cmd=`buildCmd Firefox firefox w3m links lynx`
+				;;
+				'ffd')
+					cmd=`buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m`
+				;;
+				'g'|'git')
+					cmd=`buildCmd 'GitX' git-cola gitg gitk tig`
+				;;
+				't'|'text')
+					if (( hasNoOpen === 0 )); then
+						cmd="open -t"
+					else
+						cmd=`buildCmd 'MacVim' gvim edit vim`
+					fi
+				;;
+			esac
+			err=$?
+			if (( err != 0 )); then
+				exit $err
+			fi
+			if [ -n "$cmd" ]; then
+				args=${@:2}
+			fi
+		fi
+	fi
+	if [ -z "$cmd" ]; then
+		if (( hasNoOpen == 0 )); then
+			#--for mac
+			cmd='open %%'
+		elif command -v 'xdg-open' > /dev/null; then
+			#--for linux
+			#-! untested
+			cmd='xdg-open %% &> /dev/null &'
+		elif command -v 'start' > /dev/null; then
+			#--for windows
+			#-! completely untested
+			cmd='start %% &> /dev/null &'
+		elif command -v 'edit' > /dev/null; then
+			cmd='edit %%'
+		else
+			cmd='vi -- %%'
+		fi
+	fi
+	cmd=${cmd/\%\%/$args}
+	eval $cmd
+}
+
+buildCmd(){
+	local name="$1"
+
+	if (( hasNoOpen == 0 )); then
+		echo "open -a '${name}' %%"
+		return 0
+	else
+		for var in "${@:2}"; do
+			if command -v "$var" > /dev/null; then
+				local c="${var} %%"
+				#--if gui command, we don't want CLI output, so eat it
+				case "$var" in
+					firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
+					c="${c} &> /dev/null &"
+					;;
+				esac
+				echo $c
+				return 0
+			fi
+		done
+	fi
+	>&2 echo "${name} command not found"
+	exit 1
+}
+
+main "$@"
