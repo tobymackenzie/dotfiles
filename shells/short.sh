@@ -1,3 +1,4 @@
+alias .f='dotfiles'
 alias b="bin/console"
 alias cont="killall -CONT"
 alias console="o console"
