@@ -18,6 +18,15 @@ case $cmd in
 	'init'|'install')
 		${binPath}/_dotfilesInit
 	;;
+	'd'|'diff')
+		git diff --color-words -w
+	;;
+	'g'|'git')
+		git ${@:2}
+	;;
+	's'|'stat'|'status')
+		git status -bs
+	;;
 	'test'|'tests')
 		echo 'running phpunit'
 		phpunit --display-deprecations
