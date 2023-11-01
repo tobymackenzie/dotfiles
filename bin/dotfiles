@@ -18,11 +18,17 @@ case $cmd in
 	'i'|'init'|'install')
 		${binPath}/_dotfilesInit
 	;;
+	'bin')
+		ls -1A bin ${@:2}
+	;;
 	'd'|'diff')
 		git diff --color-words -w
 	;;
 	'g'|'git')
 		git ${@:2}
+	;;
+	'l'|'ls')
+		ls -1AFh --color ${@:2}
 	;;
 	's'|'stat'|'status')
 		git status -bs
