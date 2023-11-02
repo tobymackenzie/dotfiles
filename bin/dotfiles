@@ -15,7 +15,10 @@ case $cmd in
 		echo 'updating dotfiles'
 		git pull ${@:2}
 	;;
-	'i'|'init'|'install')
+	'i'|'info'|'help')
+		less README.md
+	;;
+	'init'|'install')
 		${binPath}/_dotfilesInit ${@:2}
 	;;
 	'bin')
