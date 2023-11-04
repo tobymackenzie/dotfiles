@@ -36,7 +36,7 @@ main(){
 				;;
 				't'|'text')
 					if (( hasNoOpen == 0 )); then
-						cmd="open -t"
+						cmd="open -t %%"
 					else
 						cmd=`buildCmd 'MacVim' gvim edit vim`
 					fi
