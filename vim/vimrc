@@ -195,7 +195,8 @@ fun! TMCloseBuffer()
 	if &ft == 'help' && l:len < 2
 		close
 	else
-		if l:len > 1 || &ft !=# 'netrw'
+		let l:tabs = tabpagenr('$')
+		if l:len > 1 || l:tabs > 1 || &ft !=# 'netrw'
 			bdelete
 		endif
 		if l:len <= 1 && &ft !=# 'netrw'
