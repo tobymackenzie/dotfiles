@@ -13,7 +13,7 @@ cd $binPath/..
 case $cmd in
 	'u'|'up'|'update')
 		echo 'updating dotfiles'
-		git pull ${@:2}
+		git pull --autostash ${@:2}
 	;;
 	'i'|'info'|'help')
 		less README.md
