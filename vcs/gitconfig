@@ -67,6 +67,9 @@
 	pll = pull
 	ps = push
 	psh = push
+	rb = rebase
+	rba = rebase --abort
+	rbi = rebase --interactive
 	root = rev-parse --show-toplevel
 	s = status -sb
 	sb = status -sb
