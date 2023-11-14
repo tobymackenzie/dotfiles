@@ -169,11 +169,7 @@ nnoremap <leader>f :TMexplore<cr>
 nnoremap <leader>F :TMexplore<space>
 nnoremap <s-space>F :TMexplore<space>
 "--open
-if has('gui')
-	nnoremap <leader>o :tab drop **/
-else
-	nnoremap <leader>o :drop **/
-endif
+nnoremap <leader>o :tab drop **/
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
