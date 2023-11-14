@@ -205,7 +205,7 @@ noremap <leader>x :call TMCloseBuffer()<cr>
 "--yank all
 noremap <leader>y :%y+<cr>
 "--run terminal command
-nnoremap <leader>1 :!
+nnoremap <leader>! :!
 "--reload vimrc
 nmap <leader>< :so ~/.vimrc<cr>:echo 'reloaded vimrc'<cr>
 "--edit vimrc
@@ -255,6 +255,13 @@ if has('gui_macvim')
 	noremap <D-9> :tablast<CR>
 	inoremap <D-9> <esc>:tablast<CR>i
 endif
+let i = 1
+while i <= 8
+	exe 'noremap <leader>' . i . ' :tabn ' . i . '<CR>'
+	let i += 1
+endwhile
+unlet i
+noremap <leader>9 :tablast<CR>
 
 "==text
 "--move lines
