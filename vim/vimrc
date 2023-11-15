@@ -182,7 +182,9 @@ noremap <leader>ss :update<cr>
 "--spell check
 noremap <leader>sc :set spell!<CR>
 "--open terminal
-nnoremap <leader>t :term<cr>
+nnoremap <leader>! :!
+nnoremap <leader>t :!
+nnoremap <leader>T :term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
 "--tab close
@@ -204,8 +206,6 @@ noremap <leader>x :call TMCloseBuffer()<cr>
 "-! confirm() when one?
 "--yank all
 noremap <leader>y :%y+<cr>
-"--run terminal command
-nnoremap <leader>! :!
 "--reload vimrc
 nmap <leader>< :so ~/.vimrc<cr>:echo 'reloaded vimrc'<cr>
 "--edit vimrc
