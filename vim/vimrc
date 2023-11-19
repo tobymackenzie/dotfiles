@@ -190,11 +190,19 @@ noremap <leader>w :<c-u>close<CR>
 "--tab close
 fun! TMCloseBuffer()
 	let l:len = len(getbufinfo({'buflisted':1}))
-	if &ft == 'help' && l:len < 2
-		close
+	if &ft == 'help'
+		"--if only window, close
+		if winnr() == winnr('$')
+			bdelete
+			if l:len < 1
+				Explore
+			endif
+		else
+			close
+		endif
 	else
 		let l:tabs = tabpagenr('$')
-		if l:len > 1 || l:tabs > 1 || &ft !=# 'netrw'
+		if l:len > 0 || l:tabs > 1 || &ft !=# 'netrw'
 			bdelete
 		endif
 		if l:len <= 1 && &ft !=# 'netrw'
