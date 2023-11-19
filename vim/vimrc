@@ -168,6 +168,9 @@ xnoremap <leader>d y`]p
 nnoremap <leader>f :TMexplore<cr>
 nnoremap <leader>F :TMexplore<space>
 nnoremap <s-space>F :TMexplore<space>
+"--help
+nnoremap <leader>h :tab help<space>
+nnoremap <leader>H :tab help<cr>
 "--open
 nnoremap <leader>o :tab drop **/
 "--quit
