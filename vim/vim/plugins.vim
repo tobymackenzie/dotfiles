@@ -27,5 +27,7 @@ Plug 'editorconfig/editorconfig-vim'
 "--vcs
 "> https://vimawesome.com/plugin/vim-gitgutter
 " shows git line status in gutter
+" don't use default key maps (causes `h` delay)
+let g:gitgutter_map_keys = 0
 Plug 'airblade/vim-gitgutter'
 call plug#end()
