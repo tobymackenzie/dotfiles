@@ -14,6 +14,9 @@ fi
 if test -z "${TJM_BIN_PATH}"; then
 	export TJM_BIN_PATH="${HOME}/bin"
 fi
+if test -z "${TJM_PROJ_PATH}"; then
+	export TJM_PROJ_PATH="${TJM_MAIN_PATH}/checkouts"
+fi
 if test -z "${TJM_CHECKOUTS_PATH}"; then
-	export TJM_CHECKOUTS_PATH="${TJM_MAIN_PATH}/checkouts"
+	export TJM_CHECKOUTS_PATH="${TJM_PROJ_PATH}"
 fi

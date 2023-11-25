@@ -1,0 +1,3 @@
+#!/bin/bash -i
+_tjmRunProj base.proj bin/console $@
+

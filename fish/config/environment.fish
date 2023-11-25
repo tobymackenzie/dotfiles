@@ -16,6 +16,9 @@ end
 if test -z "$TJM_BIN_PATH"
 	set -x TJM_BIN_PATH ~/bin
 end
+if test -z "$TJM_PROJ_PATH"
+	set -x TJM_PROJ_PATH $TJM_MAIN_PATH/checkouts
+end
 if test -z "$TJM_CHECKOUTS_PATH"
-	set -x TJM_CHECKOUTS_PATH $TJM_MAIN_PATH/checkouts
+	set -x TJM_CHECKOUTS_PATH $TJM_PROJ_PATH
 end
