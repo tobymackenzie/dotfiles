@@ -1,2 +1,5 @@
 #!/bin/bash -i
+if [ ! -d ${TJM_PROJ_PATH}/${1} ]; then
+	_tjmConfirm "${0} repo not installed.  Install?" && git clone https://github.com/tobymackenzie/${1}.git ${TJM_PROJ_PATH}/${1} || exit 1
+fi
 ${TJM_PROJ_PATH}/${1}/${2} ${@:3}
