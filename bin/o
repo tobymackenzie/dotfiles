@@ -17,7 +17,7 @@ main(){
 		noFileExists=`[ -e $1 ]; echo $?`
 		hasArgs=1
 		args=$@
-		if (( noFileExists == 1 )); then
+		if (( noFileExists == 1 )) || [ -n "$tjmOpenApp" ] && [[ "$tjmOpenApp" != "0" ]]; then
 			case $1 in
 				'con'|'console')
 					cmd=`buildCmd Console less`
