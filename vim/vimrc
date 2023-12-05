@@ -62,6 +62,9 @@ set wildignore+=vendor/*
 "=====
 "==keyboard
 "=====
+"--prevent jumping to start of line when moving cursor
+set nostartofline
+
 "--shift key plus motion selects in visual mode
 set keymodel=startsel
 
