@@ -1,6 +1,5 @@
 source ~/.vim/plugins.vim
 
-set ai			"--autoindenting
 set backspace=eol,indent,start "--make backspace key work
 "--use OS clipboard
 if has('mac')
@@ -9,31 +8,20 @@ else
 	set clipboard=unnamedplus
 endif
 set cursorline "--highlight current line
-set hlsearch		"--highlight search terms
 set history=50		"--keep 50 lines of command history
-set ignorecase		"--ignore case in search
-set incsearch		"--Display the match for a search pattern halfway through typing it
 set nocompatible	"--Use Vim advanced settings
-set noexpandtab		"--Don't expand tabs to spaces
 set number			"--show line number
 set ruler		"--Show the cursor position all the time
-set mouse=a "--support mouse in all modes
-set shiftwidth=4	"--Number of spaces that a <Tab> in the file counts for
 set showcmd		"--show partial of current command
 set showmatch		"--show matching braces
 "##set smarttab		"--Use smart tab sizes
 set smoothscroll "--nicer scrolling for large wrapped lines
-set softtabstop=4	"--Number of spaces that a <Tab> in the file counts for
 "##set spell
 set spelllang=en
-set tabstop=4		"--Number of spaces that a <Tab> in the file counts for
 set undolevels=100	"--set number of undo's remembered
-set wrapscan		"--search wraps around
 "##spell checker
 syntax on		"--syntax highlighting
-filetype plugin indent on	"--detects filetype, loads appropriate options and indentation rules
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o "--disable auto comment
-filetype indent off "--generic auto indent only
 
 "--wider width for wide characters
 if has('gui_macvim')
@@ -60,7 +48,7 @@ set wildignore+=*/node_modules/*
 set wildignore+=vendor/*
 
 "=====
-"==keyboard
+"==keyboard/ui
 "=====
 "--prevent jumping to start of line when moving cursor
 set nostartofline
@@ -141,6 +129,24 @@ endif
 "==buffers
 "--allow hiding / switching away from modified buffers
 set hidden
+
+"==gui
+"--support mouse in all modes
+set mouse=a
+
+"==indent
+"--auto indent
+set ai
+"--Don't expand tabs to spaces
+set noexpandtab
+"--generic auto indent only
+filetype indent off
+"--detects filetype, loads appropriate options and indentation rules
+filetype plugin indent on
+"--Number of spaces that a <Tab> in the file counts for
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
 
 "==leader
 "--use space as leader key
@@ -247,8 +253,16 @@ xnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 noremap <Leader>. ;
 
 "==search
+"--highlight search terms
+set hlsearch
+"--ignore case in search
+set ignorecase
+"--display search matches while typing
+set incsearch
 "--show found count of search results
 set shortmess-=S
+"--search wraps around
+set wrapscan
 
 "==tabs
 "--move tabs
