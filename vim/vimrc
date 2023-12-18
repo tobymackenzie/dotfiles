@@ -246,6 +246,10 @@ xnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 "--restore ; (movement repeat)
 noremap <Leader>. ;
 
+"==search
+"--show found count of search results
+set shortmess-=S
+
 "==tabs
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
