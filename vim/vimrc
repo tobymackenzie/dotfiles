@@ -264,6 +264,23 @@ set shortmess-=S
 "--search wraps around
 set wrapscan
 
+"==statusline
+"-# intersting colors: #Cursor# #DiffAdd# #GitGutterAddIntraLine#
+set laststatus=2
+set statusline=%!TJMStatusLine()
+fun! TJMStatusLine()
+	let l:sl = '%#Cursor# %n %*'
+	if &ft == 'help'
+		let l:sl .= ' %Y'
+	elseif &ft == 'netrw'
+		let l:sl .= ' %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
+	else
+		let l:sl .= ' %<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %m%y%w%q%r'
+	endif
+	let l:sl .= '%=%#GitGutterAddIntraLine# %-10.(%l/%L,%c%V%) %*'
+	return l:sl
+endfun
+
 "==tabs
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
