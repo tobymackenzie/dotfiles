@@ -265,7 +265,7 @@ set shortmess-=S
 set wrapscan
 
 "==statusline
-"-# intersting colors: #Cursor# #DiffAdd# #GitGutterAddIntraLine#
+"-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine#
 set laststatus=2
 set statusline=%!TJMStatusLine()
 fun! TJMStatusLine()
@@ -277,7 +277,7 @@ fun! TJMStatusLine()
 	else
 		let l:sl .= ' %<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %m%y%w%q%r'
 	endif
-	let l:sl .= '%=%#GitGutterAddIntraLine# %-10.(%l/%L,%c%V%) %*'
+	let l:sl .= '%=%#CursorColumn# %-10.(%l/%L,%c%V%) %*'
 	return l:sl
 endfun
 
