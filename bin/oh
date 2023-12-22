@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-if [ "`basename $0`" = 'OH' ]; then echo 'IO';
-else echo 'io';
+if [ "$#" -gt 0 ]; then echo "! O H I O, ${@}!";
+elif [ "`basename $0`" = 'OH' ]; then echo 'IO!';
+else echo 'io!';
 fi
