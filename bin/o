@@ -76,7 +76,7 @@ main(){
 buildCmd(){
 	local name="$1"
 
-	if (( hasNoOpen == 0 )); then
+	if (( hasNoOpen == 0 )) && open -Ra "${name}" 2> /dev/null ; then
 		echo "open -a '${name}' %%"
 		return 0
 	else
