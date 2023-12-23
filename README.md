@@ -1,12 +1,18 @@
 TJM Dotfiles
 ============
 
-The dotfiles (configuration files for various POSIX applications) of Toby Mackenzie.  Will primarily be used by Toby Mackenzie himself to easily set up and maintain configuration across multiple machines, but can be used by anybody who likes what they see.  Feel free to take parts if you like.
+The dotfiles (configuration files for various POSIX applications) of Toby Mackenzie. Primarily config for:
+
+- fish (shell) + CLI helper aliases and commands
+- git
+- vim
+
+Designed for Toby Mackenzie to easily set up and maintain configuration across multiple machines, but can be used by anybody who likes what they see.
 
 Requirements
 ----------
 
-Only works on POSIX-like OS's such as Mac, Linux, BSD.  Install script currently requires PHP to be installed, eg `brew install php`, `apt install php`, `yum install php`, etc.
+Only works on POSIX-like OS's such as Mac, Linux, BSD.  Generally requires bash shell.  Install script requires PHP to be installed, eg `brew install php`, `apt install php`, `yum install php`, etc.
 
 Usage
 ----------
