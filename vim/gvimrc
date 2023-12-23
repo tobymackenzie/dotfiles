@@ -19,3 +19,5 @@ highlight SpecialKey ctermfg=darkGray guifg=gray43
 highlight GitGutterAdd ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
+highlight! link StatusLine DiffAdd
+highlight! link StatusLineNC Pmenu
