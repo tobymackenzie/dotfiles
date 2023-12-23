@@ -37,6 +37,54 @@ if has('gui_macvim')
 endif
 
 "=====
+"==styles
+"=====
+
+colorscheme koehler
+highlight Normal ctermfg=lightgreen guifg=#b0ffb3
+"--use our colorscheme if MacVim
+if has('gui_macvim')
+	let macvim_skip_colorscheme=1
+endif
+
+"--current line
+highlight CursorLine guibg=#444444
+
+"--make it noticeable which mode I'm in
+au InsertEnter * hi Normal term=reverse	guibg=#002200
+au InsertLeave * hi Normal term=NONE	guibg=black
+
+"--show whitespace
+if has('patch-7.4.710')
+	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,space:·,tab:»\ ,trail:•
+else
+	"-# older vim doesn't support `space`
+	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,tab:»\ ,trail:•
+endif
+set list
+highlight NonText ctermfg=darkGray guifg=gray43
+highlight SpecialKey ctermfg=darkGray guifg=gray43
+
+"--vcs
+highlight GitGutterAdd ctermfg=green guifg=green
+highlight GitGutterChange ctermfg=yellow guifg=yellow
+highlight GitGutterDelete ctermfg=red guifg=red
+
+"--show colors
+command TMShowColors so $VIMRUNTIME/syntax/hitest.vim
+
+"==languagues
+"--less
+au BufNewFile,BufRead *.less set filetype=less
+
+"--twig
+augroup twig
+	au!
+	au BufRead,BufNewFile *.twig set syntax=htmldjango
+augroup end
+
+
+"=====
 "==ex
 "=====
 "--"menu" for file/multi completions
@@ -391,53 +439,6 @@ command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
 
 
 
-
-"=====
-"==styles
-"=====
-
-colorscheme koehler
-highlight Normal ctermfg=lightgreen guifg=#b0ffb3
-"--use our colorscheme if MacVim
-if has('gui_macvim')
-	let macvim_skip_colorscheme=1
-endif
-
-"--current line
-highlight CursorLine guibg=#444444
-
-"--make it noticeable which mode I'm in
-au InsertEnter * hi Normal term=reverse	guibg=#002200
-au InsertLeave * hi Normal term=NONE	guibg=black
-
-"--show whitespace
-if has('patch-7.4.710')
-	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,space:·,tab:»\ ,trail:•
-else
-	"-# older vim doesn't support `space`
-	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,tab:»\ ,trail:•
-endif
-set list
-highlight NonText ctermfg=darkGray guifg=gray43
-highlight SpecialKey ctermfg=darkGray guifg=gray43
-
-"--vcs
-highlight GitGutterAdd ctermfg=green guifg=green
-highlight GitGutterChange ctermfg=yellow guifg=yellow
-highlight GitGutterDelete ctermfg=red guifg=red
-
-"--show colors
-command TMShowColors so $VIMRUNTIME/syntax/hitest.vim
-
-"==languagues
-"--less
-au BufNewFile,BufRead *.less set filetype=less
-
-"--twig
-augroup twig
-	au!
-	au BufRead,BufNewFile *.twig set syntax=htmldjango
-augroup end
 
 "=====
 "==term
