@@ -267,11 +267,11 @@ set shortmess-=S
 set wrapscan
 
 "==statusline
-"-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine#
+"-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine# #Pmenu#
 set laststatus=2
 set statusline=%!TJMStatusLine()
 fun! TJMStatusLine()
-	let l:sl = '%#Cursor# %n %*'
+	let l:sl = '%#CursorColumn# %n %*'
 	if &ft == 'help'
 		let l:sl .= ' %Y'
 	elseif &ft == 'netrw'
@@ -282,6 +282,9 @@ fun! TJMStatusLine()
 	let l:sl .= '%=%#CursorColumn# %-10.(%l/%L,%c%V%) %*'
 	return l:sl
 endfun
+"--standard colors
+highlight! link StatusLine DiffAdd
+highlight! link StatusLineNC Pmenu
 
 "==tabs
 "--move tabs
