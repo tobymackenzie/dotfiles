@@ -269,7 +269,7 @@ set wrapscan
 "==statusline
 "-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine# #Pmenu#
 set laststatus=2
-set statusline=%!TJMStatusLine()
+set statusline=%{%TJMStatusLine()%}
 fun! TJMStatusLine()
 	let l:sl = '%#CursorColumn# %n %*'
 	if &ft == 'help'
