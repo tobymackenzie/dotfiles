@@ -32,7 +32,7 @@ main(){
 					cmd=`buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m`
 				;;
 				'g'|'git')
-					cmd=`buildCmd 'GitX' git-cola gitg gitk tig`
+					cmd=`buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G'`
 				;;
 				't'|'text')
 					if (( hasNoOpen == 0 )); then
