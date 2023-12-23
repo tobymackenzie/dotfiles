@@ -81,7 +81,7 @@ buildCmd(){
 		return 0
 	else
 		for var in "${@:2}"; do
-			if command -v "$var" > /dev/null; then
+			if command -v `echo $var | cut -d ' ' -f1` > /dev/null; then
 				local c="${var} %%"
 				#--if gui command, we don't want CLI output, so eat it
 				case "$var" in
