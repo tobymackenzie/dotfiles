@@ -25,6 +25,10 @@ map <Leader>/ \c<space>
 Plug 'editorconfig/editorconfig-vim'
 
 "--vcs
+"---fugitive: run git commands from vim, show status, stage chunks
+Plug 'tpope/vim-fugitive'
+
+"---gitgutter: show changed lines
 "> https://vimawesome.com/plugin/vim-gitgutter
 " shows git line status in gutter
 " don't use default key maps (causes `h` delay)
