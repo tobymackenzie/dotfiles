@@ -319,7 +319,8 @@ set wrapscan
 set laststatus=2
 set statusline=%{%TJMStatusLine()%}
 fun! TJMStatusLine()
-	let l:sl = '%#CursorColumn# %02.n %#Cursor# '
+	let l:isCurrent = g:actual_curwin == win_getid(winnr())
+	let l:sl = '%#CursorColumn# %02.n %#' . (l:isCurrent ? 'Cursor' : 'DiffAdd') . '# '
 	if &ft == 'help'
 		let l:sl .= '%Y %* %f'
 	elseif &ft == 'netrw'
