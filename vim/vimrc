@@ -71,7 +71,7 @@ highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
 "--show colors
-command TMShowColors so $VIMRUNTIME/syntax/hitest.vim
+command! TMShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
 
 "==languagues
 "--less
