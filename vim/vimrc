@@ -319,13 +319,14 @@ set wrapscan
 set laststatus=2
 set statusline=%{%TJMStatusLine()%}
 fun! TJMStatusLine()
-	let l:sl = '%#CursorColumn# %n %*'
+	let l:sl = '%#CursorColumn# %02.n %*'
 	if &ft == 'help'
-		let l:sl .= ' %Y'
+		let l:sl .= ' %Y (%f)'
 	elseif &ft == 'netrw'
-		let l:sl .= ' %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
+		let l:sl .= ' DIR %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
 	else
-		let l:sl .= ' %<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %m%y%w%q%r'
+		let l:sl .= '%#Cursor# %{g:actual_curwin == win_getid(winnr()) ? toupper(mode()) : "-"} %* '
+		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %m%y%w%q%r'
 	endif
 	let l:sl .= '%=%#CursorColumn# %-10.(%l/%L,%c%V%) %*'
 	return l:sl
