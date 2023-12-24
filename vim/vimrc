@@ -246,7 +246,7 @@ noremap <leader>sc :set spell!<CR>
 "--open terminal
 nnoremap <leader>! :!
 nnoremap <leader>t :!
-nnoremap <leader>T :term<cr>
+nnoremap <leader>T :tab term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
 "--tab close
