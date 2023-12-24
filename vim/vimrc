@@ -422,7 +422,7 @@ fun! TMExploreFn(...)
 		let t:TMExploreOn=win_getid()
 	endif
 endfun
-command -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
+command! -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
 "---ensure proper `netrw_browse_split` setting
 "fun! TMExploreBrowseSplitSet()
 	"if !exists('t:TMExploreOn')
