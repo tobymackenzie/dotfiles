@@ -90,7 +90,7 @@
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 	#-! only works with three number version style with leading "v", eg "v1.2.3", and no "-beta", etc.
-	versionbump = !"cd -- ${GIT_PREFIX:-.} && V=$(git tag --sort=-refname --list \"v[0-9]*\" | head -n 1) \
+	versionbump = !"cd -- ${GIT_PREFIX:-.} && V=$(git tag --sort=-version:refname --list \"v[0-9]*\" | head -n 1) \
 		&& if [ -z \"$V\" ]; then V='0.0.0'; fi \
 		&& if [ \"$1\" == '.' ] || [ \"$1\" == 'patch' ]; then \
 				awkV='{OFS=\".\"; $NF+=1; print $0}'; \
