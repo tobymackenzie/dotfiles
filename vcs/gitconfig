@@ -62,6 +62,7 @@
 	pha = push --all --follow-tags
 	phf = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
 	phff = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force) || echo 'cancelling'
+	pht = push --tags
 	pl = pull
 	plr = pull --rebase --stat
 	pll = pull
