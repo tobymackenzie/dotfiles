@@ -328,8 +328,8 @@ fun! TJMStatusLine()
 	elseif &ft == 'fugitive'
 		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
 	else
-		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . ' %* '
-		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %m%y%w%q%r'
+		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
+		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r'
 	endif
 	let l:sl .= '%=%#CursorColumn# %-10.(%l/%L,%c%V%) %*'
 	return l:sl
