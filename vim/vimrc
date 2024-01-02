@@ -21,10 +21,6 @@ set spelllang=en
 set undolevels=100	"--set number of undo's remembered
 "##spell checker
 syntax on		"--syntax highlighting
-"--disable filetype based auto-wrap of comments
-autocmd FileType * setlocal formatoptions-=c
-"--disable filetype based auto-comment
-autocmd FileType * setlocal formatoptions-=o formatoptions-=r
 
 "--wider width for wide characters
 if has('gui_macvim')
@@ -180,6 +176,12 @@ endif
 "==buffers
 "--allow hiding / switching away from modified buffers
 set hidden
+
+"==comments
+"--disable filetype based auto-wrap of comments
+autocmd FileType * setlocal formatoptions-=c
+"--disable filetype based auto-comment
+autocmd FileType * setlocal formatoptions-=o formatoptions-=r
 
 "==gui
 "--support mouse in all modes
