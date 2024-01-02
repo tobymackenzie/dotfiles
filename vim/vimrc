@@ -138,7 +138,10 @@ if exists("+omnifunc")
 	"--disable error when no matches found
 	set shortmess+=c
 	"--auto popup when three word characters in a row entered
-	autocmd InsertCharPre * call TMAutopleteOnIns()
+	augroup TJMAutopleteOnIns
+		autocmd!
+		autocmd InsertCharPre * call TMAutopleteOnIns()
+	augroup END
 	fun! TMAutopleteOnIns()
 		if len(&omnifunc) != 0
 			\ && v:char =~ '\w'
@@ -163,7 +166,10 @@ if exists("+omnifunc")
 	"-! this only sort of works, not in all file types, not for all words, can be slow
 	set omnifunc=syntaxcomplete#Complete
 	"--hide line numbers in preview window
-	autocmd WinEnter * call TMHidePreviewLN()
+	augroup TJMHidePreviewLN
+		autocmd!
+		autocmd WinEnter * call TMHidePreviewLN()
+	augroup END
 	fun! TMHidePreviewLN()
 		if &pvw
 			setlocal nonumber
@@ -178,10 +184,13 @@ endif
 set hidden
 
 "==comments
-"--disable filetype based auto-wrap of comments
-autocmd FileType * setlocal formatoptions-=c
-"--disable filetype based auto-comment
-autocmd FileType * setlocal formatoptions-=o formatoptions-=r
+augroup TJMCommentFormatOpts
+	autocmd!
+	"--disable filetype based auto-wrap of comments
+	autocmd FileType * setlocal formatoptions-=c
+	"--disable filetype based auto-comment
+	autocmd FileType * setlocal formatoptions-=o formatoptions-=r
+augroup END
 
 "==gui
 "--support mouse in all modes
