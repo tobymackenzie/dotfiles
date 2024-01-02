@@ -1,39 +1,12 @@
+"=====
+"==general
+"=====
+"--load plugins.  load first so we can override
 source ~/.vim/plugins.vim
 
-set backspace=eol,indent,start "--make backspace key work
-"--use OS clipboard
-if has('mac')
-	set clipboard=unnamed
-else
-	set clipboard=unnamedplus
-endif
-set cursorline "--highlight current line
-set history=50		"--keep 50 lines of command history
-set nocompatible	"--Use Vim advanced settings
-set number			"--show line number
-set ruler		"--Show the cursor position all the time
-set showcmd		"--show partial of current command
-set showmatch		"--show matching braces
-"##set smarttab		"--Use smart tab sizes
-set smoothscroll "--nicer scrolling for large wrapped lines
-"##set spell
-set spelllang=en
-set undolevels=100	"--set number of undo's remembered
-"##spell checker
-syntax on		"--syntax highlighting
+"--Use Vim advanced settings
+set nocompatible
 
-"--wider width for wide characters
-if has('gui_macvim')
-	"-# doesn't seem to work in mac CLI version, not sure for others.  may need better `has()`
-	"-# not helping most wide characters. Add double wides as needed
-	"-# need listchars to be single width for ambiwidth
-	call setcellwidths([
-	\	str2list('…') + str2list('…') + [1],
-	\	str2list('·') + str2list('·') + [1],
-	\	str2list('•') + str2list('•') + [1]
-	\])
-	set ambiwidth=double
-endif
 
 "=====
 "==styles
@@ -41,13 +14,24 @@ endif
 
 colorscheme koehler
 highlight Normal ctermfg=lightgreen guifg=#b0ffb3
+
 "--use our colorscheme if MacVim
 if has('gui_macvim')
 	let macvim_skip_colorscheme=1
 endif
 
-"--current line
+"--syntax highlighting
+syntax on
+
+"--show line numbers
+set number
+
+"--highlight current line
+set cursorline
 highlight CursorLine guibg=#444444
+
+"--Show the cursor position all the time
+set ruler
 
 "--make it noticeable which mode I'm in
 augroup TJMInsertBGStyle
@@ -66,6 +50,19 @@ endif
 set list
 highlight NonText ctermfg=darkGray guifg=gray43
 highlight SpecialKey ctermfg=darkGray guifg=gray43
+
+"--wider width for wide characters
+if has('gui_macvim')
+	"-# doesn't seem to work in mac CLI version, not sure for others.  may need better `has()`
+	"-# not helping most wide characters. Add double wides as needed
+	"-# need listchars to be single width for ambiwidth
+	call setcellwidths([
+	\	str2list('…') + str2list('…') + [1],
+	\	str2list('·') + str2list('·') + [1],
+	\	str2list('•') + str2list('•') + [1]
+	\])
+	set ambiwidth=double
+endif
 
 "--vcs
 highlight GitGutterAdd ctermfg=green guifg=green
@@ -92,22 +89,42 @@ augroup end
 "=====
 "==ex
 "=====
+"--keep 50 lines of command history
+set history=50
+
 "--"menu" for file/multi completions
 set wildignorecase
 set wildmenu
 set wildoptions=pum
-"--ignore some directories for file matching
+"---ignore some directories for file matching
 set wildignore+=*/node_modules/*
 set wildignore+=vendor/*
+
+"--show partial of current command
+set showcmd
+
 
 "=====
 "==keyboard/ui
 "=====
+"--use OS clipboard
+if has('mac')
+	set clipboard=unnamed
+else
+	set clipboard=unnamedplus
+endif
+
 "--prevent jumping to start of line when moving cursor
 set nostartofline
 
+"--show matching braces
+set showmatch
+
 "--shift key plus motion selects in visual mode
 set keymodel=startsel
+
+"--make backspace key work
+set backspace=eol,indent,start
 
 "--delete keys delete in visual mode
 xnoremap <bs> "dd
@@ -137,6 +154,9 @@ xnoremap > >gv
 "--search for selection in visual mode
 "-@ https://vi.stackexchange.com/a/6209
 xnoremap / :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
+
+"--set number of undo's remembered
+set undolevels=100
 
 "==autocomplete
 if exists("+omnifunc")
@@ -201,6 +221,9 @@ augroup END
 "==gui
 "--support mouse in all modes
 set mouse=a
+
+"--nicer scrolling for large wrapped lines
+set smoothscroll
 
 "==indent
 "--auto indent
@@ -334,6 +357,9 @@ set shortmess-=S
 "--search wraps around
 set wrapscan
 
+"==spell check
+set spelllang=en
+
 "==statusline
 "-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine# #Pmenu#
 set laststatus=2
@@ -400,6 +426,7 @@ if has('gui_macvim')
 	inoremap <A-C-Up> <esc>:m .-2<CR>==gi
 	vnoremap <A-C-Up> :m '<-2<CR>gv=gv
 endif
+
 
 "=====
 "==file manager
