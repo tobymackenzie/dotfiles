@@ -35,7 +35,13 @@ main(){
 					cmd=`buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G'`
 				;;
 				't'|'text')
-					if (( hasNoOpen == 0 )); then
+					#--if in vim terminal, we want to open text within that same vim instance
+					if [[ -n $VIM_TERMINAL ]] && [[ -n "${@:2}" ]]; then
+						for var in "${@:2}"; do
+							printf '\033]51;["call", "Tapi_OpenInTab", ["'$var'"]]\07'
+						done
+						exit 0
+					elif (( hasNoOpen == 0 )); then
 						cmd="open -t %%"
 					else
 						cmd=`buildCmd 'MacVim' gvim edit vim`

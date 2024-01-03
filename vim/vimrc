@@ -508,18 +508,14 @@ augroup END
 tnoremap <esc><esc> <C-\><C-n>
 
 "--load new instance in existing instance when opening from terminal
+"-# requires special call from terminal, see `o` command
 "-@ https://www.reddit.com/r/vim/comments/tkcxhq/how_to_open_a_file_in_the_current_neovimvim_from/
-if has("gui_running")
-	if $tjmVimRunning
-		augroup TJMOpenFromTerm
-			autocmd!
-			autocmd BufNewFile,BufReadPre * exec 'bd | !printf "\033]51;[\"drop\", \"' . expand('%:p') . '\"]\007"' | q
-		augroup END
-	else
-		let $tjmVimRunning = 1
-	endif
-endif
-
+fun! Tapi_OpenInTab(bufnum, arglist)
+	echo "opening " . a:arglist[0]
+	for fn in a:arglist
+		execute 'tab drop ' . fn
+	endfor
+endfun
 
 
 "--function to surround current text with parens, etc
