@@ -11,37 +11,43 @@ else
 fi
 cd $binPath/..
 case $cmd in
-	'u'|'up'|'update')
+	'u'|'up'|'update') #: update dotfiles repository from upstream (ie `git pull`)
 		echo 'updating dotfiles'
 		git pull --autostash ${@:2}
 	;;
-	'i'|'info'|'help')
+	'h'|'help') #: show help for this command
+		echo "Usage: dotfiles <subcommand> [options]"
+		echo "dotfiles command must be run with one of the following subcommands"
+		grep --color -o "'.*)\(\s*#.*\)\$" $binPath/dotfiles
+	;;
+	'i'|'info') #: show project readme
 		less README.md
 	;;
-	'init'|'install')
+	'init'|'install') #: dotfiles install. must run again if any new files are added
 		${binPath}/_dotfilesInit ${@:2}
 	;;
-	'bin')
+	'bin') #: list bin commands
 		ls -1A bin ${@:2}
 	;;
-	'd'|'diff')
+	'd'|'diff') #: show git diff of dotfiles repo
 		git diff --color-words -w ${@:2}
 	;;
-	'g'|'git')
+	'g'|'git') #: run git command on dotfiles repo
 		git ${@:2}
 	;;
-	'l'|'ls')
+	'l'|'ls') #: list files in dotfiles repo
 		ls -1AFh --color ${@:2}
 	;;
-	's'|'stat'|'status')
+	's'|'stat'|'status') #: get git status of dotfiles repo
 		git status -bs ${@:2}
 	;;
-	'test'|'tests')
+	'test'|'tests') #: run phpunit tests on dotfiles repo
 		echo 'running phpunit'
 		phpunit --display-deprecations ${@:2}
 	;;
 	*)
-		>&2 echo 'Unknown command'
+		>&2 echo 'Unknown subcommand: '$cmd
+		${binPath}/dotfiles help
 		exit 1
 	;;
 esac
