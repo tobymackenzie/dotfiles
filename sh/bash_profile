@@ -1,17 +1,23 @@
-source ~/.dotfiles/sh/load.sh
+#-@http://stackoverflow.com/a/246128
+#-@http://stackoverflow.com/a/14728194
+if test -z "${TJM_DOTFILES_PATH}"; then
+	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]:-${(%):-%x}})))
+fi
+
+source ${TJM_DOTFILES_PATH}/sh/load.sh
 
 #==path
-export PATH="$PATH:${HOME}/.dotfiles/bin"
-if [ -f ~/.dotfiles/_local/path ]; then
-	export PATH=$(cat ~/.dotfiles/_local/path | tr '\n' ':' | sed "s!\$PATH!"$(echo $PATH)"!" | sed 's!~/!'$(echo $HOME)'/!g' | sed 's/:://g' | xargs)
+export PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+if [ -f ${TJM_DOTFILES_PATH}/_local/path ]; then
+	export PATH=$(cat ${TJM_DOTFILES_PATH}/_local/path | tr '\n' ':' | sed "s!\$PATH!"$(echo $PATH)"!" | sed 's!~/!'$(echo $HOME)'/!g' | sed 's/:://g' | xargs)
 fi
 
 #==alias
-if [ -f ~/.dotfiles/_local/alias ]; then
-	source ~/.dotfiles/_local/alias
+if [ -f ${TJM_DOTFILES_PATH}/_local/alias ]; then
+	source ${TJM_DOTFILES_PATH}/_local/alias
 fi
 
 #==custom
-if [ -f ~/.dotfiles/_local/bash ]; then
-	source ~/.dotfiles/_local/bash
+if [ -f ${TJM_DOTFILES_PATH}/_local/bash ]; then
+	source ${TJM_DOTFILES_PATH}/_local/bash
 fi

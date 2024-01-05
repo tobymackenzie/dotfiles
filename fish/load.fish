@@ -1,9 +1,6 @@
 #==load all files
-#-@ http://stackoverflow.com/a/4407130
-set config_path (dirname (status -f))
-
 #--load config first, so that other scripts have access to config
-for file in {$config_path}/config/*.fish
+for file in {$TJM_DOTFILES_PATH}/fish/config/*.fish
 	source $file
 end
 
@@ -15,12 +12,12 @@ if test -r $HOME/.env
 end
 
 #--load shared files
-source {$config_path}/../shells/short.sh
+source {$TJM_DOTFILES_PATH}/fish/../shells/short.sh
 if [ $TJM_OS = 'darwin' ]
-	source {$config_path}/../shells/mac.sh
+	source {$TJM_DOTFILES_PATH}/fish/../shells/mac.sh
 end
 
 #--load all files other than the config and this script next
-for file in (find {$config_path} -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
+for file in (find {$TJM_DOTFILES_PATH} -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
 	source $file
 end

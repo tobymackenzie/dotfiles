@@ -8,6 +8,9 @@ case $TJM_OS in
 esac
 
 #--paths
+if test -z "${TJM_DOTFILES_PATH}"; then
+	export TJM_DOTFILES_PATH=~/.dotfiles
+fi
 if test -z "${TJM_MAIN_PATH}"; then
 	export TJM_MAIN_PATH="${HOME}/__"
 fi

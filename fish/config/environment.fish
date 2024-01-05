@@ -10,6 +10,9 @@ switch $TJM_OS
 end
 
 #--paths
+if test -z "$TJM_DOTFILES_PATH"
+	set -x TJM_DOTFILES_PATH ~/.dotfiles
+end
 if test -z "$TJM_MAIN_PATH"
 	set -x TJM_MAIN_PATH ~/__
 end
