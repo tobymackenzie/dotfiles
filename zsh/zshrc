@@ -61,6 +61,6 @@ preexec(){
 export PS1="$PS1 "
 
 #==custom
-if [ -f ~/.dotfiles/_local/zsh ]; then
-	source ~/.dotfiles/_local/zsh
+if [ -f ${TJM_DOTFILES_PATH}/_local/zsh ]; then
+	source ${TJM_DOTFILES_PATH}/_local/zsh
 fi
