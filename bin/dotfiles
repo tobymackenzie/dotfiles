@@ -43,7 +43,7 @@ case $cmd in
 	;;
 	'test'|'tests') #: run phpunit tests on dotfiles repo
 		echo 'running phpunit'
-		phpunit --display-deprecations ${@:2}
+		phpunit --display-deprecations --display-warnings ${@:2}
 	;;
 	*)
 		>&2 echo 'Unknown subcommand: '$cmd
