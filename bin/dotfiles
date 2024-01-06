@@ -1,7 +1,7 @@
 #!/bin/bash -i
 binPath=`dirname ${BASH_SOURCE[0]}`
 if [ -z "$1" ]; then
-	if [ -e `${binPath}/_dotfilesGetBaseDir` ]; then
+	if [ -e ~/.dotfiles ]; then
 		cmd='update'
 	else
 		cmd='init'

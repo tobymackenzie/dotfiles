@@ -1,9 +1,0 @@
-#!/usr/bin/env php
-<?php
-require_once(__DIR__ . '/../src/Dotfiles.php');
-$dotfiles = new TJM\Dotfiles\Dotfiles();
-$path = $dotfiles->getBaseDir();
-if(substr($path, 0, 1) === '~'){
-	$path = str_replace('~', $_SERVER['HOME'], $path);
-}
-echo $path;
