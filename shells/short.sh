@@ -1,5 +1,6 @@
 alias .f='dotfiles'
 alias b="bin/console"
+alias cdhome="cd $HOME"
 alias cont="killall -CONT"
 alias console="tjmOpenApp=1 o console"
 alias cp="cp -pri"

@@ -27,7 +27,6 @@ end
 
 #--aliases
 #---directories
-alias cdhome="cd $HOME"
 if test -f {$TJM_DOTFILES_PATH}/_local/alias
 	source {$TJM_DOTFILES_PATH}/_local/alias
 end
