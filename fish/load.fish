@@ -18,6 +18,6 @@ if [ $TJM_OS = 'darwin' ]
 end
 
 #--load all files other than the config and this script next
-for file in (find {$TJM_DOTFILES_PATH} -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
+for file in (find {$TJM_DOTFILES_PATH}/fish -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
 	source $file
 end
