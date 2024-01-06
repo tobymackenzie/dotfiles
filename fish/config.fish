@@ -1,11 +1,5 @@
 if test -z "$TJM_DOTFILES_PATH"
-	#-# for some reason home based path loads much faster
-	if test -d ~/.dotfiles 
-		and test -f {$TJM_DOTFILES_PATH}/fish/load.fish
-		set -x TJM_DOTFILES_PATH ~/.dotfiles
-	else
-		set -x TJM_DOTFILES_PATH (dirname (dirname (readlink -f (status -f))))
-	end
+	set -x TJM_DOTFILES_PATH (dirname (dirname (readlink -f (status -f))))
 end
 source {$TJM_DOTFILES_PATH}/fish/load.fish
 
