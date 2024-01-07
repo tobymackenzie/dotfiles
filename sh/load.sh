@@ -19,3 +19,4 @@ fi
 for file in $(find ${TJM_DOTFILES_PATH}/sh -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
 	source $file
 done
+unset -v file
