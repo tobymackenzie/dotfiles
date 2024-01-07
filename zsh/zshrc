@@ -24,6 +24,12 @@ setopt INC_APPEND_HISTORY #-# append history incrementally
 setopt SHARE_HISTORY #-# share history across sessions
 setopt HIST_IGNORE_ALL_DUPS
 
+#--arrow keys match on partial history with 'zsh-history-substring-search' plugin
+if typeset -f history-substring-search-up > /dev/null; then
+	bindkey '^[[A' history-substring-search-up
+	bindkey '^[[B' history-substring-search-down
+fi
+
 #===keys
 #-@ based on https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/key-bindings.zsh
 #--fix delete key (forward delete)
