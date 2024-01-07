@@ -2,12 +2,11 @@ if [[ -o interactive ]]; then
 	echo 'Welcome, '`whoami`', to zsh'
 fi
 
+source $TJM_DOTFILES_PATH/zsh/plugins.zsh
 #==options
 setopt AUTO_CD #-# automatically change directory
 
 #===completions
-autoload -U compinit; compinit #-# completions
-autoload predict-on; predict-on #-# inline completions
 unsetopt correctall #-# auto correction of commands
 unsetopt LIST_BEEP #-# disable awful errors when autocompleting
 
