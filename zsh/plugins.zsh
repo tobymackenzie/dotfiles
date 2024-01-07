@@ -12,6 +12,7 @@ function plug {
 
 	#--loop through args
 	for repo in $@; do
+		[[ $repo =~ ^# ]] && continue
 		plugdir=$ZPLUGINDIR/${repo:gs/\//-}
 		initfile=$plugdir/${repo:t}.plugin.zsh
 		#--install plugin if it hasn't been
