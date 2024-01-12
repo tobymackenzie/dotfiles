@@ -210,12 +210,15 @@ endif
 set hidden
 
 "==comments
+"--disable filetype based auto-wrap of comments
+set formatoptions-=c
+"--disable filetype based auto-comment
+set formatoptions-=o formatoptions-=r
+"--ensure these survive any ftplugins
 augroup TJMCommentFormatOpts
 	autocmd!
-	"--disable filetype based auto-wrap of comments
-	autocmd FileType * setlocal formatoptions-=c
-	"--disable filetype based auto-comment
-	autocmd FileType * setlocal formatoptions-=o formatoptions-=r
+	autocmd BufEnter * setlocal formatoptions-=c
+	autocmd BufEnter * setlocal formatoptions-=o formatoptions-=r
 augroup END
 
 "==gui
