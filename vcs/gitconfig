@@ -111,6 +111,8 @@
 	who = contrib
 [color]
 	status = always
+[commit]
+	verbose = true
 [core]
 	#--git log, etc should properly use alt screen of less, not mess up terminal history
 	#-@ https://superuser.com/a/367160
