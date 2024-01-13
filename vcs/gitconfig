@@ -24,7 +24,7 @@
 	dpl = !git dpull
 	dpull = !cd -- ${GIT_PREFIX:-.} && BRANCH=`git branch --show-current` && git fetch && git diff ${BRANCH}..origin/${BRANCH}
 	dw = diff --color-words
-	h = !git hash
+	h = help
 	hash = rev-parse --short HEAD
 	i = !"cd -- ${GIT_PREFIX:-.} && (git rev-parse 2>/dev/null && ( \
 		echo '==stat' && git status -sb ; \
