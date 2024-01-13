@@ -14,7 +14,7 @@
 	cm = !git com
 	co = checkout
 	comadd = !cd -- ${GIT_PREFIX:-.} && git add . && git com
-	com = !git diff --cached | less && git commit
+	com = commit -v
 	contrib = shortlog --numbered --summary
 	count = rev-list HEAD --count
 	d = diff
