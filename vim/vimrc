@@ -442,6 +442,8 @@ let g:netrw_list_hide= '.*\.swp$'
 let g:netrw_sizestyle='h'
 "--ignore case for sort
 let g:netrw_sort_options="i"
+"--open files in new tab by default
+let g:netrw_browse_split = 3
 "--sidebar
 fun! TMExploreFn(...)
 	if !exists('t:TMExploreOn')
@@ -452,7 +454,7 @@ fun! TMExploreFn(...)
 		call win_execute(t:TMExploreOn, 'close')
 		let t:TMExploreOn=0
 		"--revert some settings we can't immediately
-		let g:netrw_browse_split=0
+		let g:netrw_browse_split=3
 	else
 		let g:netrw_altv=1
 		let g:netrw_browse_split=4
