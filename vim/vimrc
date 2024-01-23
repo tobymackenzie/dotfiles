@@ -445,36 +445,34 @@ let g:netrw_sort_options="i"
 "--open files in new tab by default
 let g:netrw_browse_split = 3
 "--sidebar
-fun! TMExploreFn(...)
-	if !exists('t:TMExploreOn')
-		let t:TMExploreOn=0
+if !exists('g:TMExploreWin')
+	let g:TMExploreWin=0
+endif
+fun! TMExploreFn(fp = '')
+	if !exists('g:TMExploreOn')
+		let g:TMExploreOn=0
 	endif
-	"--close sidebar if we think it's open, still exists, and not alone
-	if t:TMExploreOn != 0 && win_id2win(t:TMExploreOn) != 0 && winnr('$') > 1
-		call win_execute(t:TMExploreOn, 'close')
-		let t:TMExploreOn=0
-		"--revert some settings we can't immediately
-		let g:netrw_browse_split=3
-	else
-		let g:netrw_altv=1
-		let g:netrw_browse_split=4
-		let g:netrw_preview=1
-		let g:netrw_winsize=25
-		if a:0 > 0
-			execute ':Vexplore ' . join(a:000)
+	if g:TMExploreOn != 0 && g:TMExploreWin != 0
+		execute ':tabn ' . g:TMExploreOn
+		if len(a:fp) != 0
+			execute ':e ' . a:fp
+			echo 'opening args'
 		else
-			execute ':Vexplore'
+			echo 'no args: ' . a:0 . ',' . a:fp
 		endif
-		"---tree view
-		call feedkeys('iii')
-		"--revert settings to normal
-		let g:netrw_altv=0
-		let g:netrw_preview=0
-		let g:netrw_winsize=50
-		let t:TMExploreOn=win_getid()
+	else
+		execute ':0tabnew'
+		execute ':e ' . (len(a:fp) > 0 ? a:fp : '.')
+		echo 'opening new with args ' . a:0 . ',' . a:fp
+		let g:TMExploreOn=tabpagenr()
+		let g:TMExploreWin=win_getid()
 	endif
 endfun
-command! -nargs=* -complete=dir TMexplore call TMExploreFn('<args>')
+command! -nargs=? -complete=dir TMexplore call TMExploreFn(<f-args>)
+augroup TJMExploreListen
+	autocmd!
+	autocmd WinClosed * if expand('<amatch>') == g:TMExploreWin | let g:TMExploreWin = 0 | endif
+augroup END
 "---ensure proper `netrw_browse_split` setting
 "fun! TMExploreBrowseSplitSet()
 	"if !exists('t:TMExploreOn')
