@@ -297,25 +297,19 @@ nnoremap <leader>T :tab term<cr>
 noremap <leader>w :<c-u>close<CR>
 "--tab close
 fun! TMCloseBuffer()
-	let l:len = len(getbufinfo({'buflisted':1}))
-	if &ft == 'help'
-		"--if only window, close
-		if winnr() == winnr('$')
-			bdelete
-			if l:len < 1
-				Explore
-			endif
-		else
-			close
-		endif
-	else
-		let l:tabs = tabpagenr('$')
-		if l:len > 0 || l:tabs > 1 || &ft !=# 'netrw'
-			bdelete
-		endif
-		if l:len <= 1 && &ft !=# 'netrw'
-			Explore
-		endif
+	"--for help, need close unless last window
+	if &ft == 'help' && winnr() != winnr('$')
+		close
+	"--otherwise, delete buffer unless last netrw
+	elseif &ft !=# 'netrw' || len(getbufinfo({'buflisted':1})) > 1 || tabpagenr('$') > 1
+		bdelete
+	endif
+	if &ft !=# 'netrw' && expand('%') == '' && len(getbufinfo({'buflisted':1})) <= 1 && tabpagenr('$') <= 1
+		Explore
+		"--prevent empty files being added to buffer list
+		for buf in filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+			execute 'bdelete' buf
+		endfor
 	endif
 endfun
 noremap <leader>x :call TMCloseBuffer()<cr>
