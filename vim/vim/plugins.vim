@@ -9,6 +9,8 @@ call plug#begin('~/.vim/plugged')
 "> https://vimawesome.com/plugin/the-nerd-commenter
 " commands for toggling comments on selected lines
 "-@ sublime keymap help via <https://stackoverflow.com/questions/11553382/vim-map-d-to-comment-code>
+"---space after / before begin / end delimiters
+let NERDSpaceDelims=1
 Plug 'preservim/nerdcommenter'
 if has('mac')
 	map <D-/> \c<space><CR>
