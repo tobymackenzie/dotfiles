@@ -1,15 +1,15 @@
-"--plug.vim plugin manager
+"==plug.vim plugin manager
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
-"--comments
+"==comments
 "> https://vimawesome.com/plugin/the-nerd-commenter
 " commands for toggling comments on selected lines
 "-@ sublime keymap help via <https://stackoverflow.com/questions/11553382/vim-map-d-to-comment-code>
-"---space after / before begin / end delimiters
+"--space after / before begin / end delimiters
 let NERDSpaceDelims=1
 Plug 'preservim/nerdcommenter'
 if has('mac')
@@ -21,16 +21,16 @@ else
 endif
 map <Leader>/ \c<space>
 
-"--text
-"---editorconfig
+"==text
+"--editorconfig
 "> https://vimawesome.com/plugin/editorconfig-vim
 Plug 'editorconfig/editorconfig-vim'
 
-"--vcs
-"---fugitive: run git commands from vim, show status, stage chunks
+"==vcs
+"--fugitive: run git commands from vim, show status, stage chunks
 Plug 'tpope/vim-fugitive'
 
-"---gitgutter: show changed lines
+"--gitgutter: show changed lines
 "> https://vimawesome.com/plugin/vim-gitgutter
 " shows git line status in gutter
 " don't use default key maps (causes `h` delay)
