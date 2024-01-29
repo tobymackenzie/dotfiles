@@ -72,6 +72,8 @@
 		themeColor: "Green"
 	tabs:
 		enableVcsColoring: true
+	"tree-view":
+		hiddenOnStartup: true
 	"vim-mode":
 		useClipboardAsDefaultRegister: false
 		wrapLeftRightMotion: true
