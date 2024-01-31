@@ -486,6 +486,46 @@ augroup END
 "augroup END
 
 
+"==projects
+" open project path in tjm proj path or elsewhere
+" depends on TJM_PROJ_PATH environment variable to define base path
+let g:currentProj = ''
+fun! TMProjectComplete(proj, cmd, pos) abort
+	let firstChar = a:proj[0]
+	"--glob for relative or absolute paths
+	if firstChar == '~' || firstChar == '/' || firstChar == '.'
+		return glob(a:proj .. '*', 0, 1)
+	else
+		"--otherwise check in proj path
+		if a:proj =~ '/'
+			"--if subpath implied, glob in path
+			let dirs = glob(expand($TJM_PROJ_PATH) .. '/' .. a:proj .. '*', 0, 1)
+		else
+			"--otherwise, just glob proj root
+			let dirs = glob(expand($TJM_PROJ_PATH) .. '/*', 0, 1)
+		endif
+		"--format more nicely
+		let ldirs = []
+		for dir in dirs
+			call add(ldirs, substitute(dir, $TJM_PROJ_PATH .. '/', '', ''))
+		endfor
+		"--filter to match passed value
+		return filter(ldirs, 'v:val =~ a:proj')
+	endif
+endfun
+fun! TMOpenProject(proj)
+	let firstChar = a:proj[0]
+	if firstChar == '~' || firstChar == '/' || firstChar == '.'
+		let l:proj = a:proj
+	else
+		let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
+	endif
+	let g:currentProj = l:proj
+	execute 'cd ' .. l:proj
+	call TMExploreFn(l:proj)
+	"-! should we load session file if set up in project root?
+endfun
+command! -nargs=1 -complete=customlist,TMProjectComplete Project call TMOpenProject('<args>')
 
 
 "=====
