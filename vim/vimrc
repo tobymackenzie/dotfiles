@@ -302,7 +302,14 @@ fun! TMCloseBuffer()
 		close
 	"--otherwise, delete buffer unless last netrw
 	elseif &ft !=# 'netrw' || len(getbufinfo({'buflisted':1})) > 1 || tabpagenr('$') > 1
+		let origTab = tabpagenr()
 		bdelete
+		"--special handling of no name buffer when it's open with netrw as only other tab
+		if expand('%') == '' && tabpagenr() > 1 && origTab == tabpagenr()
+			let origBuffer = bufnr()
+			close
+			execute 'bdelete ' .. origBuffer
+		endif
 	endif
 	if &ft !=# 'netrw' && expand('%') == '' && len(getbufinfo({'buflisted':1})) <= 1 && tabpagenr('$') <= 1
 		Explore
