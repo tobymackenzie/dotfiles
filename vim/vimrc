@@ -273,6 +273,8 @@ nnoremap <leader>F :TMexplore<space>
 nnoremap <s-space>F :TMexplore<space>
 "--git (fugitive plugin)
 nnoremap <leader>g :tab G<cr>
+"--git command line
+nnoremap <leader>G :!git<space>
 "--help
 nnoremap <leader>h :tab help<space>
 nnoremap <leader>H :tab help<cr>
