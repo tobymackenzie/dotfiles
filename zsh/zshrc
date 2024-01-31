@@ -2,6 +2,10 @@ if [[ -o interactive ]]; then
 	echo 'Welcome, '`whoami`', to zsh'
 fi
 
+#==autosuggest
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+#==plugins
 source $TJM_DOTFILES_PATH/zsh/plugins.zsh
 
 #==options
