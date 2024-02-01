@@ -531,7 +531,9 @@ fun! TMOpenProject(proj)
 	endif
 	"--store old buffer for removal if "No Name"
 	let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
-	let g:currentProj = l:proj
+	if !empty(a:proj)
+		let g:currentProj = l:proj
+	endif
 	execute 'cd ' .. l:proj
 	call TMExploreFn(l:proj)
 	"--remove "No Name" buffer
@@ -540,7 +542,7 @@ fun! TMOpenProject(proj)
 	endif
 	"-! should we load session file if set up in project root?
 endfun
-command! -nargs=1 -complete=customlist,TMProjectComplete Project call TMOpenProject('<args>')
+command! -nargs=? -complete=customlist,TMProjectComplete Project call TMOpenProject('<args>')
 
 
 "=====
