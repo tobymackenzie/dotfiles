@@ -18,6 +18,9 @@ unsetopt LIST_BEEP #-# disable awful errors when autocompleting
 #-@ via https://stackoverflow.com/a/69014927
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit && compinit
+#---git completions seem to be broken for files, disable
+#!! to remove if this gets fixed
+compdef -d git
 
 #===history
 if [ -z $HISTFILE ]; then
