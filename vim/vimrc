@@ -117,6 +117,14 @@ endif
 "--prevent jumping to start of line when moving cursor
 set nostartofline
 
+"--prevent auto-insert of line breaks
+set textwidth=0
+"---ensure this survives any ftplugins
+augroup TJMTextWidth
+	autocmd!
+	autocmd BufEnter * setlocal textwidth=0
+augroup END
+
 "--show matching braces
 set showmatch
 
