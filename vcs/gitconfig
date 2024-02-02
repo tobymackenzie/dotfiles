@@ -7,7 +7,7 @@
 	bl = !git branchl
 	#--blame for all files, optionally matching on author name
 	blameall = !"cd -- ${GIT_PREFIX:-.} && f(){ (for FILE in $(git ls-files); do tmp=$(git blame -CMw --color-by-age --date='format:%g-%m-%d %H:%M' $FILE | grep -i \" ($*\") && echo \"------------\n$FILE\n------------\n$tmp\n\" ; done | less -FRS) } && f"
-	branchl = !"cd -- ${GIT_PREFIX:-.} && git for-each-ref --color --format='%(color:red)%(HEAD) %(color:reset)%(refname:lstrip=-1)%(color:reset);%(color:green)%(committerdate:format:%y%m%d-%H%M)%(color:reset);%(if)%(push)%(then)[%(color:red)%(upstream:lstrip=-2)%(if)%(upstream:track)%(then) %(color:reset)%(upstream:track)%(end)%(color:reset)] %(end)%(subject)' --sort -committerdate refs/heads/ | column -t -s ';'"
+	branchl = !"git for-each-ref --color --format='%(color:red)%(HEAD) %(color:reset)%(refname:lstrip=-1)%(color:reset);%(color:green)%(committerdate:format:%y%m%d-%H%M)%(color:reset);%(if)%(push)%(then)[%(color:red)%(upstream:lstrip=-2)%(if)%(upstream:track)%(then) %(color:reset)%(upstream:track)%(end)%(color:reset)] %(end)%(subject)' --sort -committerdate refs/heads/ | column -t -s ';'"
 	bump = !git versionbump
 	c = !git com
 	cho = checkout
@@ -22,7 +22,7 @@
 	df = diff
 	dp = !git dpull
 	dpl = !git dpull
-	dpull = !cd -- ${GIT_PREFIX:-.} && BRANCH=`git branch --show-current` && git fetch && git diff ${BRANCH}..origin/${BRANCH}
+	dpull = !BRANCH=`git branch --show-current` && git fetch && git diff ${BRANCH}..origin/${BRANCH}
 	dw = diff --color-words
 	h = help
 	hash = rev-parse --short HEAD
@@ -61,8 +61,8 @@
 	mirror = clone --mirror
 	ph = push
 	pha = push --all --follow-tags
-	phf = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
-	phff = !cd -- ${GIT_PREFIX:-.} && read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force) || echo 'cancelling'
+	phf = !read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force-with-lease) || echo 'cancelling'
+	phff = !read -r -p \"Do you really want to force push?: \" tmp && ([[ $tmp =~ ^[Yy] ]] && git push --force) || echo 'cancelling'
 	pht = push --tags
 	pl = pull
 	plr = pull --rebase --stat
@@ -92,7 +92,7 @@
 	uncommit = reset --soft HEAD^
 	unstage = reset HEAD
 	#-! only works with three number version style with leading "v", eg "v1.2.3", and no "-beta", etc.
-	versionbump = !"cd -- ${GIT_PREFIX:-.} && V=$(git tag --sort=-version:refname --list \"v[0-9]*\" | head -n 1) \
+	versionbump = !"V=$(git tag --sort=-version:refname --list \"v[0-9]*\" | head -n 1) \
 		&& if [ -z \"$V\" ]; then V='0.0.0'; fi \
 		&& if [ \"$1\" == '.' ] || [ \"$1\" == 'patch' ]; then \
 				awkV='{OFS=\".\"; $NF+=1; print $0}'; \
