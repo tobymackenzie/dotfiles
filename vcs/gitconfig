@@ -72,6 +72,12 @@
 	rb = rebase
 	rba = rebase --abort
 	rbi = rebase --interactive
+	#--remove from history
+	#-# affects all branches
+	#-# will require force pushing if there is an upstream repo
+	#-# dangerous, rewrites history with no reverting. may be best done on clone
+	#-! does not follow renames.  will need to determine any other matching filenames, preferably before running.  Can we determine this in command and loop through all names?
+	remove-from-history = "!cd -- ${GIT_PREFIX:-.} && FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --index-filter \"git update-index --force-remove -- $@\" --prune-empty --tag-name-filter cat -- --all #"
 	root = rev-parse --show-toplevel
 	s = status -sb
 	sb = status -sb
