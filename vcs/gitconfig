@@ -120,6 +120,8 @@
 [log]
 	#-# colors for aliases above
 	baseColors = %s %C(green)(%cd) %C(bold brightblue)<%an> %C(brightyellow)%h %C(brightred)%d%C(reset)
+	#--ensure `--follow` option is used when possible
+	follow = true
 [pager]
 	contrib = false
 	last = false
