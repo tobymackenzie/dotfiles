@@ -441,6 +441,10 @@ if has('gui_macvim')
 	vnoremap <A-C-Up> :m '<-2<CR>gv=gv
 endif
 
+"==wrap
+"--don't wrap mid-word
+set linebreak
+
 
 "=====
 "==file manager
