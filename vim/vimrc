@@ -596,6 +596,13 @@ command! -nargs=0 ProjectClear call TMClearProject()
 "--load shell aliases, etc for !
 let $BASH_ENV = "~/.vim/bashenv"
 
+"--support colors in gui terminal
+"-@ https://superuser.com/a/449959
+"-! has weird extra <return> press required in some cases
+if has('patch-9.0.0100') && has('gui')
+	set guioptions+=!
+endif
+
 "--no line numbers in term
 augroup TJMTermNoNum
 	autocmd!
