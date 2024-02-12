@@ -16,6 +16,7 @@
 /atom/projects.cson
 /atom/storage
 /atom/xcom*
+/i3/config.local
 /vim/vim/.netrwhist
 /vim/vim/autoload/
 /vim/vim/plugged/
