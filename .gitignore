@@ -3,6 +3,7 @@
 *.swp
 .DS_Store
 /.phpunit.result.cache
+/.vagrant
 /_local/
 /atom/.apm
 /atom/.atom*
