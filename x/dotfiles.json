@@ -1,0 +1,8 @@
+{
+	"symlinks": [
+		{
+			"source": "Xresources"
+			,"target": ".Xresources"
+		}
+	]
+}
