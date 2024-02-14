@@ -330,7 +330,7 @@ fun! TMCloseBuffer()
 	endif
 endfun
 noremap <leader>x :call TMCloseBuffer()<cr>
-"-! confirm() when one?
+noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
 "--yank all
 noremap <leader>y :%y+<cr>
 "--reload vimrc
