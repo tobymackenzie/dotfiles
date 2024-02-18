@@ -124,6 +124,10 @@
 	#--git log, etc should properly use alt screen of less, not mess up terminal history
 	#-@ https://superuser.com/a/367160
 	pager = less -+$LESS -R
+[diff]
+	#--different color for moved lines
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
 [help]
 	#--prompt to correct misspellings
 	autocorrect = prompt
