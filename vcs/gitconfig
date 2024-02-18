@@ -123,6 +123,9 @@
 	#--git log, etc should properly use alt screen of less, not mess up terminal history
 	#-@ https://superuser.com/a/367160
 	pager = less -+$LESS -R
+[help]
+	#--prompt to correct misspellings
+	autocorrect = prompt
 [log]
 	#-# colors for aliases above
 	baseColors = %s %C(green)(%cd) %C(bold brightblue)<%an> %C(brightyellow)%h %C(brightred)%d%C(reset)
