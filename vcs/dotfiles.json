@@ -1,8 +1,0 @@
-{
-	"symlinks": [
-		{
-			"source": "gitconfig"
-			,"target": ".gitconfig"
-		}
-	]
-}

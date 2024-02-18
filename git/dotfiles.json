@@ -1,0 +1,8 @@
+{
+	"symlinks": [
+		{
+			"source": "."
+			,"target": ".config/git"
+		}
+	]
+}
