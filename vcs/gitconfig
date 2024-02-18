@@ -125,6 +125,8 @@
 	#-@ https://superuser.com/a/367160
 	pager = less -+$LESS -R
 [diff]
+	#--better diff ordering for moving chunks, particularly functions
+	algorithm = histogram
 	#--different color for moved lines
 	colorMoved = default
 	colorMovedWS = allow-indentation-change
