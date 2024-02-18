@@ -118,6 +118,7 @@
 [color]
 	status = always
 [commit]
+	#--show staged diff in commit message editor
 	verbose = true
 [core]
 	#--git log, etc should properly use alt screen of less, not mess up terminal history
