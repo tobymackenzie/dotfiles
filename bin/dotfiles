@@ -1,5 +1,5 @@
 #!/bin/bash -i
-binPath=`dirname ${BASH_SOURCE[0]}`
+binPath=`realpath $(dirname ${BASH_SOURCE[0]})`
 if [ -z "$1" ]; then
 	if [ -e ~/.dotfiles ]; then
 		cmd='update'
@@ -24,7 +24,7 @@ case $cmd in
 		less README.md
 	;;
 	'init'|'install') #: dotfiles install. must run again if any new files are added
-		${binPath}/_dotfilesInit ${@:2}
+		bash ${binPath}/../src/init.sh
 	;;
 	'bin') #: list bin commands
 		ls -1A bin ${@:2}
@@ -42,8 +42,8 @@ case $cmd in
 		git status -bs ${@:2}
 	;;
 	'test'|'tests') #: run phpunit tests on dotfiles repo
-		echo 'running phpunit'
-		phpunit --display-deprecations --display-warnings ${@:2}
+		echo 'running tests'
+		bash ${binPath}/../tests/init.sh
 	;;
 	*)
 		>&2 echo 'Unknown subcommand: '$cmd

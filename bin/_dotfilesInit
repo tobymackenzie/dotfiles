@@ -1,5 +1,0 @@
-#!/usr/bin/env php
-<?php
-require_once(__DIR__ . '/../src/Dotfiles.php');
-echo "placing all dotfiles\n";
-$dotfiles = (new TJM\Dotfiles\Dotfiles())->placeAllFiles();

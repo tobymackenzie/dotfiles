@@ -12,7 +12,7 @@ Designed for Toby Mackenzie to easily set up and maintain configuration across m
 Requirements
 ----------
 
-Only works on POSIX-like OS's such as Mac, Linux, BSD.  Generally requires bash shell.  Install script requires PHP to be installed, eg `brew install php`, `apt install php`, `yum install php`, etc.
+Only works on POSIX-like OS's such as Mac, Linux, BSD.  Generally requires bash or compatible shell.
 
 Usage
 ----------

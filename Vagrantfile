@@ -19,8 +19,6 @@ Vagrant.configure(2) do |config|
 		demo.vm.provision 'shell', privileged: true, inline: <<-'INIT'
 			date > /etc/_provisionDate
 			apt update
-			#--php for dotfiles install
-			apt install -y php
 			#--install managed apps.  others are installed by default: bash, git, screen, vim.  ignoring atom and svn, as they are on their way out
 			apt install -y fish i3 vim-gui-common zsh
 			#---need for i3
