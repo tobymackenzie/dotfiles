@@ -607,7 +607,7 @@ endif
 "--no line numbers in term
 augroup TJMTermNoNum
 	autocmd!
-	autocmd TerminalOpen * set nonu nornu
+	autocmd TerminalOpen term://* set nonu nornu
 augroup END
 
 "--switch term to normal mode
