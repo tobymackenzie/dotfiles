@@ -29,6 +29,7 @@ set number
 "--highlight current line
 set cursorline
 highlight CursorLine guibg=#444444
+highlight CursorLineNr ctermfg=black ctermbg=green guifg=black guibg=green
 
 "--Show the cursor position all the time
 set ruler
