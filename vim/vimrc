@@ -377,10 +377,10 @@ set spelllang=en
 "==statusline
 "-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine# #Pmenu#
 set laststatus=2
-set statusline=%{%TJMStatusLine()%}
+set statusline=%#CursorColumn#\ %02.n\ %{%TJMStatusLine()%}%=%#CursorColumn#\ %-6.(%l/%L,%c%V%)\ %*
 fun! TJMStatusLine()
 	let l:isCurrent = g:actual_curwin == win_getid(winnr())
-	let l:sl = '%#CursorColumn# %02.n %#' . (l:isCurrent ? 'Cursor' : 'DiffAdd') . '# '
+	let l:sl = '%#' . (l:isCurrent ? 'Cursor' : 'DiffAdd') . '# '
 	if &ft == 'help'
 		let l:sl .= '%Y %* %f'
 	elseif &ft == 'netrw'
@@ -391,7 +391,6 @@ fun! TJMStatusLine()
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
 		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r'
 	endif
-	let l:sl .= '%=%#CursorColumn# %-6.(%l/%L,%c%V%) %*'
 	return l:sl
 endfun
 "--standard colors
