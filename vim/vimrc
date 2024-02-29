@@ -39,6 +39,8 @@ augroup TJMInsertBGStyle
 	autocmd!
 	autocmd InsertEnter * hi Normal term=reverse	guibg=#002200
 	autocmd InsertLeave * hi Normal term=NONE	guibg=black
+	autocmd InsertEnter * hi LineNr term=reverse ctermfg=cyan guifg=cyan guibg=#003300
+	autocmd InsertLeave * hi LineNr term=NONE ctermfg=yellow guifg=yellow guibg=#001100
 augroup end
 
 "--show whitespace
