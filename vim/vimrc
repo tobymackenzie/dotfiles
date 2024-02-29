@@ -391,7 +391,7 @@ fun! TJMStatusLine()
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
 		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r'
 	endif
-	let l:sl .= '%=%#CursorColumn# %-10.(%l/%L,%c%V%) %*'
+	let l:sl .= '%=%#CursorColumn# %-6.(%l/%L,%c%V%) %*'
 	return l:sl
 endfun
 "--standard colors
