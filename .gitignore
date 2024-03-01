@@ -17,7 +17,7 @@
 /atom/storage
 /atom/xcom*
 /i3/config.local
-/vim/vim/.netrwhist
-/vim/vim/autoload/
-/vim/vim/plugged/
+/vim/.netrwhist
+/vim/autoload/
+/vim/plugged/
 /zsh/plugins
