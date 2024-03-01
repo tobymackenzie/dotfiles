@@ -15,6 +15,7 @@ endif
 set guifont=Menlo\ Regular:h16
 
 "--repeat colors from vimrc that get overridden by macvim
+highlight CursorLineNr ctermfg=black ctermbg=green guifg=black guibg=green
 highlight Normal ctermfg=lightgreen guifg=#b0ffb3
 highlight NonText ctermfg=darkGray guifg=gray43
 highlight SpecialKey ctermfg=darkGray guifg=gray43
