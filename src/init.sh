@@ -12,15 +12,34 @@ fi
 
 #==place dot files
 #--if we have .dotfiles shortcut, let's do relative links to there for movability
+relatively=0
 if [[ "$fromPath" == $(readlink "${toPath}/.dotfiles") ]]; then
 	cd $toPath
 	toPath=.
 	fromPath=./.dotfiles
+	relatively=1
 fi
 while IFS="," read -r left right; do
 	if [ "$right" != '' ] && [ "$left" != '' ]; then
 		file="${fromPath}/${left}"
 		location="${toPath}/${right}"
+
+		#--need to symlink relatively
+		if [ $relatively -eq 1 ]; then
+			slashes="${right//[^\/]}"
+			slashCount=${#slashes}
+			if [ $slashCount -gt 0 ]; then
+				echo $slashCount
+				file=".$file"
+				for (( i=1; i<slashCount; ++i )); do
+					echo "adding dd"
+					file="../$file"
+				done
+				echo $file
+				echo $location
+			fi
+		fi
+
 		if [ ! -h "$location" ] || [ "$file" != $(readlink "$location") ]; then
 			locationDir=`dirname $location`
 			if [ ! -d "$locationDir" ]; then
