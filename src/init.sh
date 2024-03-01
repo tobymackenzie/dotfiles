@@ -29,14 +29,11 @@ while IFS="," read -r left right; do
 			slashes="${right//[^\/]}"
 			slashCount=${#slashes}
 			if [ $slashCount -gt 0 ]; then
-				echo $slashCount
 				file=".$file"
 				for (( i=1; i<slashCount; ++i )); do
 					echo "adding dd"
 					file="../$file"
 				done
-				echo $file
-				echo $location
 			fi
 		fi
 
