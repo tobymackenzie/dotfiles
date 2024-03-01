@@ -27,7 +27,7 @@ while IFS="," read -r left right; do
 				echo "mkdir -p $locationDir"
 				mkdir -p "$locationDir"
 			fi
-			if [ -e "$location" ] && [[ "${file}" != $(readlink "${location}") ]]; then
+			if ([ -e "$location" ] || [ -h "$location" ]) && [[ "${file}" != $(readlink "${location}") ]]; then
 				backupLocation="${location}.bu-"$(date -I)
 				#-# /dev/tty to use regular stdin instead of file
 				if ${binPath}/_tjmConfirm "Would you like to replace the file ${right} with the dotfile version?  The existing file will be moved to ${backupLocation}. [yN]" 0</dev/tty; then
