@@ -7,6 +7,9 @@ source ~/.vim/plugins.vim
 "--Use Vim advanced settings
 set nocompatible
 
+"--vim info
+command! Info echo "-----version" | version | echo "\n-----scriptnames" | scriptnames
+
 
 "=====
 "==styles
