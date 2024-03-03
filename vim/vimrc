@@ -7,9 +7,7 @@ source ~/.vim/plugins.vim
 "--Use Vim advanced settings
 set nocompatible
 
-"--vim info
-command! Info echo "-----version" | version | echo "\n-----scriptnames" | scriptnames
-
+source ~/.vim/commandp.vim
 
 "=====
 "==styles
@@ -56,9 +54,6 @@ if has('gui_macvim')
 else
 	source ~/.vim/colors.vim
 endif
-
-"--show colors
-command! TMShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
 
 "==languagues
 "--less
@@ -156,49 +151,7 @@ set undolevels=100
 
 "==autocomplete
 if exists("+omnifunc")
-	set completeopt+=menuone,noinsert,noselect
-	"--disable error when no matches found
-	set shortmess+=c
-	"--auto popup when three word characters in a row entered
-	augroup TJMAutopleteOnIns
-		autocmd!
-		autocmd InsertCharPre * call TMAutopleteOnIns()
-	augroup END
-	fun! TMAutopleteOnIns()
-		if len(&omnifunc) != 0
-			\ && v:char =~ '\w'
-			\ && getline('.')[col('.') - 3] =~ '\w'
-			\ && getline('.')[col('.') - 2] =~ '\w'
-			\ && getline('.')[col('.') - 1] !~ '\w'
-			call feedkeys("\<C-x>\<C-o>", 'n')
-		endif
-	endfun
-	"--close func def preview when ')' called to finish function call
-	"-! not useful in all languages, but others would be much more complicated
-	inoremap <expr> ) TMClosePreviewDone()
-	fun! TMClosePreviewDone()
-		for w in range(1, winnr('$'))
-			if getwinvar(w, "&pvw") == 1
-				call feedkeys("\<esc>:pclose\<CR>i\<right>", 'n')
-			endif
-		endfor
-		return ")"
-	endfun
-	"--generic autocomplete
-	"-! this only sort of works, not in all file types, not for all words, can be slow
-	set omnifunc=syntaxcomplete#Complete
-	"--hide line numbers in preview window
-	augroup TJMHidePreviewLN
-		autocmd!
-		autocmd WinEnter * call TMHidePreviewLN()
-	augroup END
-	fun! TMHidePreviewLN()
-		if &pvw
-			setlocal nonumber
-		endif
-	endfun
-	"--tab to select first / current item
-	inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
+	source ~/.vim/autocomplete.vim
 endif
 
 "==buffers
@@ -252,100 +205,8 @@ inoremap <f2><f1> <help>
 map <f1> <leader>
 noremap <f2><f1> <help>
 noremap <leader><f1> <help>
-"--window switch
-nnoremap <Space><Space> <c-w><c-w>
-"--select all
-nnoremap <leader>a ggVG
-"--toggle buffers
-nnoremap <leader>b <C-^>
-nnoremap <leader>B :buffers<cr>:b
-nnoremap <s-space>B :buffers<cr>:b
-"--duplicate line / selection
-nnoremap <leader>d :copy.<cr>
-xnoremap <leader>d y`]p
-"--file sidebar
-nnoremap <leader>f :TMexplore<cr>
-nnoremap <leader>F :TMexplore<space>
-nnoremap <s-space>F :TMexplore<space>
-"--git (fugitive plugin)
-nnoremap <leader>g :tab G<cr>
-"--git command line
-nnoremap <leader>G :!git<space>
-"--help
-nnoremap <leader>h :tab help<space>
-nnoremap <leader>H :tab help<cr>
-"--open
-nnoremap <leader>o :tab drop **/
-"--quit
-noremap <leader>q :<c-u>qa<CR>
-"--reveal in file browser (mac only)
-if has('mac')
-	nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
-endif
-"--save
-noremap <leader>s :update<cr>
-noremap <leader>ss :update<cr>
-"--spell check
-noremap <leader>sc :set spell!<CR>
-"--open terminal
-nnoremap <leader>! :!
-nnoremap <leader>t :!
-nnoremap <leader>T :tab term<cr>
-"--window close
-noremap <leader>w :<c-u>close<CR>
-"--tab close
-fun! TMCloseBuffer()
-	"--for help, need close unless last window
-	if &ft == 'help' && winnr() != winnr('$')
-		close
-	"--otherwise, delete buffer unless last netrw
-	elseif &ft !=# 'netrw' || len(getbufinfo({'buflisted':1})) > 1 || tabpagenr('$') > 1
-		let origTab = tabpagenr()
-		bdelete
-		"--special handling of no name buffer when it's open with netrw as only other tab
-		if expand('%') == '' && tabpagenr() > 1 && origTab == tabpagenr()
-			let origBuffer = bufnr()
-			close
-			execute 'bdelete ' .. origBuffer
-		endif
-	endif
-	if &ft !=# 'netrw' && expand('%') == '' && len(getbufinfo({'buflisted':1})) <= 1 && tabpagenr('$') <= 1
-		Explore
-		"--prevent empty files being added to buffer list
-		for buf in filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
-			execute 'bdelete' buf
-		endfor
-	endif
-endfun
-noremap <leader>x :call TMCloseBuffer()<cr>
-noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
-"--yank all
-noremap <leader>y :%y+<cr>
-"--reload vimrc
-nmap <leader>< :so $MYVIMRC<cr>:echo 'reloaded vimrc'<cr>
-"--edit vimrc
-nmap <leader>, :e $MYVIMRC<cr>
-"--command mode
-noremap <leader>; :
-noremap <leader>: :
-"--surround text with parens
-"-! visual mode version should either leave selection selected or move to end of selection when done
-nnoremap <expr> <leader>( 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '()<esc>i'
-xnoremap <leader>( :keeppatterns lockmarks s/\%V\_.*\%V/(&)/<cr>
-"--surround text with block
-nnoremap <expr> <leader>[ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '[]<esc>i'
-xnoremap <leader>[ :keeppatterns lockmarks s/\%V\_.*\%V/[&]/<cr>
-"--surround text with curly braces
-nnoremap <expr> <leader>{ 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '{}<esc>i'
-xnoremap <leader>{ :keeppatterns lockmarks s/\%V\_.*\%V/{&}/<cr>
-"--surround text with single quotes
-nnoremap <expr> <leader>' 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '\'\'<esc>i'
-xnoremap <leader>' :keeppatterns lockmarks s/\%V\_.*\%V/'&'/<cr>
-"--surround text with double quotes
-nnoremap <expr> <leader>" 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '""<esc>i'
-xnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
-"--restore ; (movement repeat)
-noremap <Leader>. ;
+"--quickkeys
+source ~/.vim/quickkeys.vim
 
 "==search
 "--highlight search terms
@@ -467,7 +328,6 @@ fun! TMExploreFn(fp = '')
 		let g:TMExploreWin=win_getid()
 	endif
 endfun
-command! -nargs=? -complete=dir TMexplore call TMExploreFn(<f-args>)
 augroup TJMExploreListen
 	autocmd!
 	autocmd WinClosed * if expand('<amatch>') == g:TMExploreWin | let g:TMExploreWin = 0 | endif
@@ -492,88 +352,7 @@ augroup END
 
 
 "==projects
-" open project path in tjm proj path or elsewhere
-" depends on TJM_PROJ_PATH environment variable to define base path
-"-@ [ideas](https://vi.stackexchange.com/questions/39720/is-there-a-project-manager-extension-like-vscode-in-vim)
-let g:currentProj = ''
-fun! TMProjectComplete(proj, cmd, pos) abort
-	let firstChar = a:proj[0]
-	"--glob for relative or absolute paths
-	if firstChar == '~' || firstChar == '/' || firstChar == '.'
-		return glob(a:proj .. '*', 0, 1)
-	else
-		"--otherwise check in proj path
-		if a:proj =~ '/'
-			"--if subpath implied, glob in path
-			let dirs = glob(expand($TJM_PROJ_PATH) .. '/' .. a:proj .. '*', 0, 1)
-		else
-			"--otherwise, just glob proj root
-			let dirs = glob(expand($TJM_PROJ_PATH) .. '/*', 0, 1)
-		endif
-		"--format more nicely
-		let ldirs = []
-		for dir in dirs
-			call add(ldirs, substitute(dir, $TJM_PROJ_PATH .. '/', '', ''))
-		endfor
-		"--filter to match passed value
-		return filter(ldirs, 'v:val =~ a:proj')
-	endif
-endfun
-fun! TMOpenProject(proj)
-	let firstChar = a:proj[0]
-	if firstChar == '~' || firstChar == '/' || firstChar == '.'
-		let l:proj = a:proj
-	else
-		let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
-	endif
-	"--store old buffer for removal if "No Name"
-	if !empty(a:proj)
-		let g:currentProj = l:proj
-	endif
-	let loaded = 0
-	"--restore project session if exists
-	if !empty(a:proj) && filereadable(l:proj .. '/.projvimsess')
-		let origSecure = &secure
-		if !origSecure
-			set secure
-		endif
-		"-! silent prevents error running `bwipe` stored in session, but also masks any other errors while loading
-		execute 'silent! source ' .. l:proj .. '/.projvimsess'
-		let loaded = 1
-		if !origSecure
-			set nosecure
-		endif
-		echow "loaded project from session"
-	endif
-	"--otherwise, cd and explore
-	if !loaded
-		let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
-		execute 'cd ' .. l:proj
-		call TMExploreFn(l:proj)
-		let loaded = 1
-		"--remove "No Name" buffer
-		if origBuffer && loaded
-			execute 'bdelete ' .. origBuffer
-		endif
-	endif
-endfun
-command! -nargs=? -complete=customlist,TMProjectComplete Project call TMOpenProject('<args>')
-"--save project session
-fun! TMSaveProject()
-	if !empty(g:currentProj)
-		execute 'mksession! ' .. g:currentProj .. '/.projvimsess'
-	endif
-endfun
-command! -nargs=0 ProjectSave call TMSaveProject()
-"---storing options will override changes to this config, take up much more space
-set sessionoptions-=options
-"--clear project session
-fun! TMClearProject()
-	if !empty(g:currentProj)
-		execute '!rm ' .. g:currentProj .. '/.projvimsess'
-	endif
-endfun
-command! -nargs=0 ProjectClear call TMClearProject()
+source ~/.vim/projects.vim
 
 "=====
 "==term
