@@ -31,7 +31,6 @@ while IFS="," read -r left right; do
 			if [ $slashCount -gt 0 ]; then
 				file=".$file"
 				for (( i=1; i<slashCount; ++i )); do
-					echo "adding dd"
 					file="../$file"
 				done
 			fi
