@@ -26,7 +26,7 @@ nnoremap <leader>o :tab drop **/
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
 if has('mac')
-	nnoremap <silent> <leader>r :silent !open -R % &<cr>:redraw!<cr>
+	nnoremap <silent> <leader>r :Reveal<cr>
 endif
 "--save
 noremap <leader>s :update<cr>
