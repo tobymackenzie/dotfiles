@@ -15,14 +15,6 @@ command! Info echo "-----version" | version | echo "\n-----scriptnames" | script
 "==styles
 "=====
 
-colorscheme koehler
-highlight Normal ctermfg=lightgreen guifg=#b0ffb3
-
-"--use our colorscheme if MacVim
-if has('gui_macvim')
-	let macvim_skip_colorscheme=1
-endif
-
 "--syntax highlighting
 syntax on
 
@@ -31,20 +23,9 @@ set number
 
 "--highlight current line
 set cursorline
-highlight CursorLine guibg=#444444
-highlight CursorLineNr ctermfg=black ctermbg=green guifg=black guibg=green
 
 "--Show the cursor position all the time
 set ruler
-
-"--make it noticeable which mode I'm in
-augroup TJMInsertBGStyle
-	autocmd!
-	autocmd InsertEnter * hi Normal term=reverse	guibg=#002200
-	autocmd InsertLeave * hi Normal term=NONE	guibg=black
-	autocmd InsertEnter * hi LineNr term=reverse ctermfg=cyan guifg=cyan guibg=#003300
-	autocmd InsertLeave * hi LineNr term=NONE ctermfg=yellow guifg=yellow guibg=#001100
-augroup end
 
 "--show whitespace
 if has('patch-7.4.710')
@@ -54,8 +35,6 @@ else
 	set listchars=conceal:?,eol:¬,extends:…,nbsp:␣,precedes:…,tab:»\ ,trail:•
 endif
 set list
-highlight NonText ctermfg=darkGray guifg=gray43
-highlight SpecialKey ctermfg=darkGray guifg=gray43
 
 "--wider width for wide characters
 if has('gui_macvim')
@@ -70,10 +49,13 @@ if has('gui_macvim')
 	set ambiwidth=double
 endif
 
-"--vcs
-highlight GitGutterAdd ctermfg=green guifg=green
-highlight GitGutterChange ctermfg=yellow guifg=yellow
-highlight GitGutterDelete ctermfg=red guifg=red
+"--colors
+if has('gui_macvim')
+	"--use our colorscheme if MacVim
+	let macvim_skip_colorscheme=1
+else
+	source ~/.vim/colors.vim
+endif
 
 "--show colors
 command! TMShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
@@ -399,9 +381,6 @@ fun! TJMStatusLine()
 	endif
 	return l:sl
 endfun
-"--standard colors
-highlight! link StatusLine DiffAdd
-highlight! link StatusLineNC Pmenu
 
 "==tabs
 "--move tabs
