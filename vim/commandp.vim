@@ -6,7 +6,8 @@
 command! Info echo "-----version" | version | echo "\n-----scriptnames" | scriptnames
 
 "--show colors
-command! TMShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
+command! ShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
 
 "--file manager
-command! -nargs=? -complete=dir TMexplore call TMExploreFn(<f-args>)
+command! -nargs=? -complete=dir FileManager call TMExploreFn(<f-args>)
+command! -nargs=? -complete=dir FM call TMExploreFn(<f-args>)
