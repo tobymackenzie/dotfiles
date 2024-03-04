@@ -27,6 +27,10 @@ fun! TMProjectComplete(proj, cmd, pos) abort
 	endif
 endfun
 fun! TMOpenProject(proj)
+	if empty(a:proj)
+		echo g:currentProj
+		return
+	endif
 	let firstChar = a:proj[0]
 	if firstChar == '~' || firstChar == '/' || firstChar == '.'
 		let l:proj = a:proj
