@@ -67,6 +67,11 @@ noremap <leader>x :call TMCloseBuffer()<cr>
 noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
 "--yank all
 noremap <leader>y :%y+<cr>
+"--switch window / tab directionally
+noremap <expr> <leader><left> winnr('$') > 1 ? '<c-w><left>' : ':tabprevious<cr>'
+noremap <expr> <leader><right> winnr('$') > 1 ? '<c-w><right>' : ':tabnext<cr>'
+noremap <leader><up> <c-w><up>
+noremap <leader><down> <c-w><down>
 "--reload vimrc
 nmap <leader>< :so $MYVIMRC<cr>:echo 'reloaded vimrc'<cr>
 "--edit vimrc
