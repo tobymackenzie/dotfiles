@@ -1,7 +1,8 @@
 "--window switch
 nnoremap <Space><Space> <c-w><c-w>
 "--select all
-nnoremap <leader>a ggVG
+"-# ggVG adds extra line break
+nnoremap <leader>a G$vgg0
 "--toggle buffers
 nnoremap <leader>b <C-^>
 nnoremap <leader>B :buffers<cr>:b
@@ -97,5 +98,4 @@ nnoremap <expr> <leader>" 'i' . (col(".") == col("$") - 1 ? '<right>' : '') . '"
 xnoremap <leader>" :keeppatterns lockmarks s/\%V\_.*\%V/"&"/<cr>
 "--restore ; (movement repeat)
 noremap <Leader>. ;
-
 
