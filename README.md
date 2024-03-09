@@ -28,10 +28,10 @@ It will ask you to confirm replacing any files (it will store a backup of them).
 Install and init can be done as this one liner:
 
 ``` sh
-([ -z "$TJM_PROJ_PATH" ] && pth="~/.dotfiles" || pth="${TJM_PROJ_PATH}/dotfiles") && git clone https://github.com/tobymackenzie/dotfiles.git $pth && $pth/bin/dotfiles init
+(: ${pth:=~/.dotfiles} && git clone https://github.com/tobymackenzie/dotfiles.git $pth && $pth/bin/dotfiles init)
 ```
 
-where the `TJM_PROJ_PATH` environment variable can be used to set a parent folder for storing the dotfiles project.
+where the `pth` shell variable can be used to set a folder for storing the dotfiles project.
 
 Once ran, modify any of the dotfiles to your liking.  See ["Configuration" section](#configuration) below for setting `$PATH`, etc.
 
