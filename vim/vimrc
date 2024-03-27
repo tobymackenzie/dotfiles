@@ -7,6 +7,11 @@ source ~/.vim/plugins.vim
 "--Use Vim advanced settings
 set nocompatible
 
+"--auto reload external changes if no changes made in vim
+set autoread
+"---show message that buffer was updated
+autocmd FileChangedShellPost * echohl WarningMsg | echo "Buffer updated to match file on disk" | echohl None
+
 source ~/.vim/commandp.vim
 
 "=====
