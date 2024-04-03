@@ -7,6 +7,9 @@ source ~/.vim/plugins.vim
 "--Use Vim advanced settings
 set nocompatible
 
+"--prevent modelines for security reasons, lack of need
+set nomodeline
+
 "--auto reload external changes if no changes made in vim
 set autoread
 "---show message that buffer was updated
