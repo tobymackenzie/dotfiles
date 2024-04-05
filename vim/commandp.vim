@@ -14,11 +14,4 @@ command! -nargs=? -complete=dir FM call TMExploreFn(<f-args>)
 command! Reveal execute ':silent !open -R ' . expand('%') . ' & ' | execute ':redraw!'
 
 "--lint
-fun! TMLint()
-	if &filetype == 'php'
-		!php -l %
-	else
-		echoerr "Don't know how to lint file type " . &filetype . "."
-	endif
-endfun
-command! Lint call TMLint()
+command! Lint ALELint
