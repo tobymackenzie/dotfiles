@@ -30,7 +30,7 @@ show(){
 }
 if ! show; then
 	#--if doesn't exist, launch
-	${@:2} &
+	$cmd &
 	#--wait for window
 	i3-msg -t subscribe '[ "window" ]'
 	#--mark
