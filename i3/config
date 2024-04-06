@@ -71,6 +71,9 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 #---alt option for Mac, because cmd-h doesn't work
 bindsym Mod1+h split h
+#--send to scratchpad
+bindsym $mod+z move scratchpad
+bindsym $mod+Shift+z scratchpad show
 
 #==workspaces
 #--switch
