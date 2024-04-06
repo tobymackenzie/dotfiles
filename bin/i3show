@@ -1,0 +1,42 @@
+#!/bin/bash
+#=====
+# show a marked i3 scratchpad or launch connected app
+# to simplify a show or launch flow
+#-@ based on https://whhone.com/posts/automating-i3-scratchpad-setup/
+#=====
+
+if ! command -v 'i3-msg' > /dev/null; then
+	>&2 echo 'i3 must be running for this command to work'
+	exit 1
+elif [ "$#" -lt 1 ]; then
+	>&2 echo 'must specify at least one argument, the command to run to launch the desired app in the scratchpad'
+	exit 1
+fi
+
+#--first arg is mark
+mark=$1
+
+#--try to allow first argument to be command while also allowing separate naming of mark
+#-# if we: have multiple arguments, arg 1 is not a command, arg 2 is not an option and is a command
+if [ "$#" -gt 1 ] && ! command -v $1 > /dev/null && [[ "${2:0:1}" != '-' ]] && command -v $2 > /dev/null; then
+	cmd="${@:2}"
+else
+	cmd="$@"
+fi
+
+#--try to show through i3
+show(){
+	i3-msg "[con_mark=${mark}]" scratchpad show
+}
+if ! show; then
+	#--if doesn't exist, launch
+	${@:2} &
+	#--wait for window
+	i3-msg -t subscribe '[ "window" ]'
+	#--mark
+	i3-msg mark ${mark}
+	#--attach to scratchpad
+	i3-msg move scratchpad
+	#--show
+	show
+fi
