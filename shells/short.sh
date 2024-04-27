@@ -7,6 +7,7 @@ alias cp="cp -pri"
 alias du="du -h"
 alias d1="d -d 1"
 alias df="df -h"
+alias down="shutdown now"
 alias ff="tjmOpenApp=1 o ff"
 alias ffd="tjmOpenApp=1 o ffd"
 alias g='git'
