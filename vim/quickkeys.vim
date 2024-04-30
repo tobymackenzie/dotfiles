@@ -19,7 +19,7 @@ nnoremap <leader>g :tab G<cr>
 "--git command line
 nnoremap <leader>G :!git<space>
 "--help
-nnoremap <leader>h :tab help<space>
+nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
 nnoremap <leader>H :tab help<cr>
 "--open
 nnoremap <leader>o :tab drop **/
