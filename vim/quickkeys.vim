@@ -66,8 +66,8 @@ fun! TMCloseBuffer()
 endfun
 noremap <leader>x :call TMCloseBuffer()<cr>
 noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
-"--yank line(s) without break
-noremap <leader>y :<c-u>call setreg('+', getline('.', v:count > 1 ? line('.') + v:count - 1 : line('.')), 'v')<cr>
+"--yank current line without break / indent
+noremap <leader>y m'^y$``
 "--yank all
 noremap <leader>Y :%y+<cr>
 "--switch window / tab directionally
