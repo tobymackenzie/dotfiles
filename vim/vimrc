@@ -241,7 +241,14 @@ fun! TJMStatusLine()
 	if &ft == 'help'
 		let l:sl .= '%Y %* %f%='
 	elseif &ft == 'netrw'
-		let l:sl .= 'DIR %* %<' . substitute(expand('%:p'), '^' . $HOME, '~', 'i') . '%='
+		let l:cd = expand('%:p')
+		if exists('g:currentProj') && strlen(g:currentProj) > 0 && match(l:cd, '^' . g:currentProj) != -1
+			"--special handling of project paths
+			let l:cd = substitute(expand('%:p'), '^' . $TJM_PROJ_PATH . '/\([^/]\+\)/\(.*\)$', ':/\2 [Project: \1]', 'i')
+		else
+			let l:cd = substitute(l:cd, '^' . $HOME, '~', 'i')
+		endif
+		let l:sl .= 'DIR %* %<' . l:cd . '%='
 	elseif &ft == 'fugitive' || &ft == 'gitcommit'
 		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
 	else
