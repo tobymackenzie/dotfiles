@@ -2,7 +2,9 @@
 " open project path in tjm proj path or elsewhere
 " depends on TJM_PROJ_PATH environment variable to define base path
 "-@ [ideas](https://vi.stackexchange.com/questions/39720/is-there-a-project-manager-extension-like-vscode-in-vim)
-let g:currentProj = ''
+if !exists('g:currentProj')
+	let g:currentProj = ''
+endif
 fun! TMProjectComplete(proj, cmd, pos) abort
 	let firstChar = a:proj[0]
 	"--glob for relative or absolute paths
