@@ -242,7 +242,7 @@ fun! TJMStatusLine()
 		let l:sl .= '%Y %* %f%='
 	elseif &ft == 'netrw'
 		let l:sl .= 'DIR %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
-	elseif &ft == 'fugitive'
+	elseif &ft == 'fugitive' || &ft == 'gitcommit'
 		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
 	else
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
@@ -256,7 +256,7 @@ endfun
 "--cache file mod datetime for statusline
 "-# don't want to be reading value constantly
 fun! TJMSetStatusLineDT()
-	if &ft != 'fugitive' && &ft != 'help' && &ft != 'netrw'
+	if &ft != 'fugitive' && &ft != 'gitcommit' && &ft != 'help' && &ft != 'netrw'
 		let b:tjmStatusLineDT = strftime('%T %Y-%m-%d', getftime(expand('%:p')))
 	else
 		let b:tjmStatusLineDT = ''
