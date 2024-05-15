@@ -246,9 +246,26 @@ fun! TJMStatusLine()
 	else
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
 		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r'
+		if exists('b:tjmStatusLineDT')
+			let l:sl .= ' (Mod: ' . b:tjmStatusLineDT . ')'
+		endif
 	endif
 	return l:sl
 endfun
+"--cache file mod datetime for statusline
+"-# don't want to be reading value constantly
+fun! TJMSetStatusLineDT()
+	if &ft != 'fugitive' && &ft != 'help' && &ft != 'netrw'
+		let b:tjmStatusLineDT = strftime('%T %Y-%m-%d', getftime(expand('%:p')))
+	else
+		let b:tjmStatusLineDT = ''
+	endif
+endfun
+augroup TJMStatusDT
+	autocmd!
+	autocmd BufRead,BufWritePost * call TJMSetStatusLineDT()
+augroup END
+
 
 "==tabs
 "--move tabs
