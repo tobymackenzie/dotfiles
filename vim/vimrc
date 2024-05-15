@@ -241,7 +241,7 @@ fun! TJMStatusLine()
 	if &ft == 'help'
 		let l:sl .= '%Y %* %f%='
 	elseif &ft == 'netrw'
-		let l:sl .= 'DIR %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
+		let l:sl .= 'DIR %* %<' . substitute(expand('%:p'), '^' . $HOME, '~', 'i') . '%='
 	elseif &ft == 'fugitive' || &ft == 'gitcommit'
 		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
 	else
