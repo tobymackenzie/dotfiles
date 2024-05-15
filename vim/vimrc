@@ -264,7 +264,15 @@ endfun
 "-# don't want to be reading value constantly
 fun! TJMSetStatusLineDT()
 	if &ft != 'fugitive' && &ft != 'gitcommit' && &ft != 'help' && &ft != 'netrw'
-		let b:tjmStatusLineDT = strftime('%T %Y-%m-%d', getftime(expand('%:p')))
+		let l:ftime = getftime(expand('%:p'))
+		if strftime('%Y') != strftime('%Y', l:ftime)
+			let l:format = '%Y-%m-%d %T'
+		elseif strftime('%m%d') != strftime('%m%d', l:ftime)
+			let l:format = '%m-%d %T'
+		else
+			let l:format = '%T'
+		endif
+		let b:tjmStatusLineDT = strftime(l:format, l:ftime)
 	else
 		let b:tjmStatusLineDT = ''
 	endif
