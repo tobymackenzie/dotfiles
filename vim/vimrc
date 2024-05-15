@@ -233,21 +233,22 @@ set spelllang=en
 "==statusline
 "-# intersting colors: #Cursor# #CursorColumn# #DiffAdd# #GitGutterAddIntraLine# #Pmenu#
 set laststatus=2
-set statusline=%#CursorColumn#\ %02.n\ %{%TJMStatusLine()%}%=%#CursorColumn#\ %-6.(%l/%L,%c%V%)\ %*
+set statusline=%#CursorColumn#\ %02.n\ %{%TJMStatusLine()%}%#CursorColumn#\ %-6.(%l/%L,%c%V%)\ %*
 fun! TJMStatusLine()
 	let l:isCurrent = g:actual_curwin == win_getid(winnr())
-	let l:sl = '%#' . (l:isCurrent ? 'Cursor' : 'DiffAdd') . '# '
+	let l:hl = '%#' . (l:isCurrent ? 'Cursor' : 'DiffAdd') . '#'
+	let l:sl = l:hl . ' '
 	if &ft == 'help'
-		let l:sl .= '%Y %* %f'
+		let l:sl .= '%Y %* %f%='
 	elseif &ft == 'netrw'
-		let l:sl .= 'DIR %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
+		let l:sl .= 'DIR %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
 	elseif &ft == 'fugitive'
-		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i')
+		let l:sl .= 'GIT %* %<' . substitute(getcwd(), '^' . $HOME, '~', 'i') . '%='
 	else
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
-		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r'
+		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r %='
 		if exists('b:tjmStatusLineDT')
-			let l:sl .= ' (Mod: ' . b:tjmStatusLineDT . ')'
+			let l:sl .= l:hl . ' Mod: ' . b:tjmStatusLineDT . ' %#DiffAdd# '
 		endif
 	endif
 	return l:sl
