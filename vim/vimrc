@@ -266,9 +266,12 @@ fun! TJMSetStatusLineDT()
 	if &ft != 'fugitive' && &ft != 'gitcommit' && &ft != 'help' && &ft != 'netrw'
 		let l:ftime = getftime(expand('%:p'))
 		if strftime('%Y') != strftime('%Y', l:ftime)
-			let l:format = '%Y-%m-%d %T'
+			let l:format = '%Y-%m-%d'
 		elseif strftime('%m%d') != strftime('%m%d', l:ftime)
-			let l:format = '%m-%d %T'
+			let l:format = '%m-%d'
+			if strftime('%m') == strftime('%m', l:ftime)
+				let l:format .= ' %T'
+			endif
 		else
 			let l:format = '%T'
 		endif
