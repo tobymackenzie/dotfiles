@@ -42,3 +42,9 @@ fun! TMHidePreviewLN()
 endfun
 "--tab to select first / current item
 inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
+
+"==per language fixes
+"--sql: disable special plugin autocomplete if plugin not installed
+if !exists('g:loaded_dbext') && !exists('g:omni_sql_default_compl_type')
+	let g:omni_sql_default_compl_type = 'syntax'
+endif
