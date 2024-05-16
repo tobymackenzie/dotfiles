@@ -25,4 +25,4 @@ highlight GitGutterDelete ctermfg=red guifg=red
 "==statusline
 highlight! link StatusLine DiffAdd
 highlight! link StatusLineNC Pmenu
-
+highlight! TJMStatusEtc ctermfg=0 ctermbg=10 guifg=black guibg=#00cc55
