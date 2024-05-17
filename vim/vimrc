@@ -242,7 +242,8 @@ fun! TJMStatusLine()
 		let l:sl .= '%Y %* %f%='
 	elseif &ft == 'netrw'
 		let l:cd = expand('%:p')
-		if exists('g:currentProj') && strlen(g:currentProj) > 0 && match(l:cd, '^' . g:currentProj) != -1
+		let projLen = exists('g:currentProj') ? strlen(g:currentProj) : 0
+		if projLen > 0 && g:currentProj == l:cd[0:projLen-1]
 			"--special handling of project paths
 			let l:cd = substitute(l:cd, '^' . $TJM_PROJ_PATH . '/\([^/]\+\)/\(.*\)$', ':/\2 [Project: \1]', 'i')
 		else
