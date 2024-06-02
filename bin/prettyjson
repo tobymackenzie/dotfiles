@@ -1,7 +1,10 @@
 #!/usr/bin/env php
 <?php
 function pretty($string){
-	return json_encode(json_decode($string), JSON_PRETTY_PRINT);
+	$result = json_encode(json_decode($string), JSON_PRETTY_PRINT);
+	return preg_replace_callback('/^([ ]+)/m', function($matches){
+		return str_repeat("\t", floor(strlen($matches[1]) / 4));
+	}, $result);
 }
 if($argc > 1){
 	array_shift($argv);
