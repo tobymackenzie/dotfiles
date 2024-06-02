@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+function pretty($string){
+	return json_encode(json_decode($string), JSON_PRETTY_PRINT);
+}
+if($argc > 1){
+	array_shift($argv);
+	foreach($argv as $arg){
+		if(!empty($arg) && file_exists($arg)){
+			echo pretty(file_get_contents($arg));
+		}else{
+			throw new Exception("File '{$arg}' not found.");
+		}
+	}
+}else{
+	// echo strlen(file_get_contents("php://stdin"));
+	echo pretty(file_get_contents("php://stdin"));
+}
+
