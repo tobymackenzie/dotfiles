@@ -16,7 +16,6 @@ if($argc > 1){
 		}
 	}
 }else{
-	// echo strlen(file_get_contents("php://stdin"));
 	echo pretty(file_get_contents("php://stdin"));
 }
 
