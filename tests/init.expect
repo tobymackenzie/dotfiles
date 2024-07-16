@@ -5,10 +5,8 @@
 .config
 .dotfiles
 .editorconfig
-.gvimrc
 .screenrc
 .vim
-.vimrc
 .zshenv
 .zshrc
 
