@@ -23,6 +23,8 @@ nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
 nnoremap <leader>H :tab help<cr>
 "--open
 nnoremap <leader>o :tab drop **/
+"--paste (without copying)
+noremap <leader>p "0p
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
