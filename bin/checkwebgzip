@@ -1,0 +1,66 @@
+#!/usr/bin/env php
+<?php
+$url = $argv[1] ?? null;
+if(empty($url)){
+	throw new Exception("Must specify URL argument");
+}
+
+function runRequest($url, $opts = Array()){
+	$opts = array_replace(Array(
+		CURLOPT_HEADER=> true
+		,CURLOPT_RETURNTRANSFER=> true
+	), $opts);
+	$ch = curl_init($url);
+	curl_setopt_array($ch, $opts);
+	$result = curl_exec($ch);
+	$chInfo = curl_getinfo($ch);
+	curl_close($ch);
+	return $chInfo;
+};
+
+$uncompressedRequestData = runRequest($url);
+$compressedRequestData = runRequest($url, Array(
+	CURLOPT_HTTPHEADER=> Array(
+		'Accept-Encoding: gzip,deflate'
+	)
+));
+$data = Array(
+	'uncompressed'=> Array(
+		'label'=> 'Without Gzip'
+		,'headerSize'=> $uncompressedRequestData['header_size']
+		,'contentSize'=> $uncompressedRequestData['size_download']
+	)
+	,'compressed'=> Array(
+		'label'=> 'With Gzip'
+		,'headerSize'=> $compressedRequestData['header_size']
+		,'contentSize'=> $compressedRequestData['size_download']
+	)
+);
+foreach($data as $key=> $item){
+	$data[$key]['total'] = $item['headerSize'] + $item['contentSize'];
+}
+$data['savings'] = Array(
+	'label'=> 'Savings'
+	,'headerSize'=> $data['uncompressed']['headerSize'] - $data['compressed']['headerSize']
+	,'contentSize'=> $data['uncompressed']['contentSize'] - $data['compressed']['contentSize']
+	,'total'=> $data['uncompressed']['total'] - $data['compressed']['total']
+);
+foreach(Array('headerSize', 'contentSize', 'total') as $field){
+	$data['savings'][$field . 'Percentage'] = $data['savings'][$field] / $data['uncompressed'][$field] * 100;
+}
+$fields = Array(
+	'Header Size'=> 'headerSize'
+	,'Content Size'=> 'contentSize'
+	,'Total Size'=> 'total'
+);
+foreach($data as $item){
+	echo $item['label'] . ":\n";
+	foreach($fields as $label=> $key){
+		echo "\t{$label}: {$item[$key]} bytes";
+		if(isset($item[$key . 'Percentage'])){
+			echo " (" . number_format($item[$key . 'Percentage'], 3) . "%)\n";
+		}else{
+			echo "\n";
+		}
+	}
+}
