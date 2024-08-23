@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+$srcs = Array(
+	'iana'=> 'http://data.iana.org/TLD/tlds-alpha-by-domain.txt'
+	,'publicsuffix'=> 'https://publicsuffix.org/list/public_suffix_list.dat'
+);
+$src = (isset($argv[2]) ? $argv[2] : 'iana');
+if(isset($srcs[$src])){
+	$src = $srcs[$src];
+}
+$strLength = (isset($argv[1]) ? (int) $argv[1] : 3);
+
+//--get all
+$all = explode("\n", file_get_contents($src));
+
+//--get items of specified length
+$specified = Array();
+foreach($all as $line){
+	if($line && substr($line, 0, 1) !== '/' && strlen($line) === $strLength){
+		$specified[] = strtolower($line);
+	}
+}
+
+//--sort
+sort($specified);
+
+//--output
+echo "." . implode("\n.", $specified) . "\n";
