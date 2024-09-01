@@ -25,10 +25,10 @@ main(){
 				'f'|'file'|'files'|'finder')
 					cmd=`buildCmd Finder nautilus konqueror mc`
 				;;
-				'ff')
+				'ff'|'web')
 					cmd=`buildCmd Firefox firefox w3m links lynx`
 				;;
-				'ffd')
+				'ffd'|'webd')
 					cmd=`buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m`
 				;;
 				'g'|'git')

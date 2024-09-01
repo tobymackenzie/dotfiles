@@ -8,6 +8,7 @@ alias du="du -h"
 alias d1="d -d 1"
 alias df="df -h"
 alias down="shutdown now"
+alias f="tjmOpenApp=1 o f"
 alias ff="tjmOpenApp=1 o ff"
 alias ffd="tjmOpenApp=1 o ffd"
 alias g='git'
@@ -40,5 +41,7 @@ alias tcpu="top -S -ocpu -s 2"
 alias tmem='top -S -orsize -s 5'
 alias tt="top -S -n 0 -s 5"
 alias ttime='top -otime -s 5'
+alias web="tjmOpenApp=1 o web"
+alias webd="tjmOpenApp=1 o webd"
 alias x="exit"
 
