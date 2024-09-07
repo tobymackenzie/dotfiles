@@ -23,7 +23,7 @@ main(){
 					cmd=`buildCmd Console less`
 				;;
 				'f'|'file'|'files'|'finder')
-					cmd=`buildCmd Finder nautilus konqueror mc`
+					cmd=`buildCmd Finder nautilus konqueror mc ls`
 				;;
 				'ff'|'web')
 					cmd=`buildCmd Firefox firefox w3m links lynx`
