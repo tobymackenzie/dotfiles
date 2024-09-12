@@ -22,6 +22,9 @@ highlight GitGutterAdd ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
+"==popup menu
+highlight! PMenuSel ctermfg=16 ctermbg=46 guifg=#000000 guibg=#00ff00
+
 "==statusline
 highlight! link StatusLine DiffAdd
 highlight! link StatusLineNC Pmenu
