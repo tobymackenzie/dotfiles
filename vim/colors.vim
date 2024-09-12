@@ -23,6 +23,8 @@ highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
 "==popup menu
+highlight! PMenuMatch ctermfg=14 ctermbg=13 guifg=#ff0000 guibg=#444444
+highlight! PMenuMatchSel ctermfg=14 ctermbg=46 guifg=#ff0000 guibg=#00ff00
 highlight! PMenuSel ctermfg=16 ctermbg=46 guifg=#000000 guibg=#00ff00
 
 "==statusline
