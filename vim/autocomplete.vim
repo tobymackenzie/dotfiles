@@ -5,15 +5,29 @@ set shortmess+=c
 "--auto popup when three word characters in a row entered
 augroup TJMAutopleteOnIns
 	autocmd!
-	autocmd InsertCharPre * call TMAutopleteOnIns()
+	autocmd InsertCharPre * noautocmd call TMAutopleteOnIns()
 augroup END
-fun! TMAutopleteOnIns()
-	if len(&omnifunc) != 0
+fun! TMAutopleteOnIns() abort
+	if !pumvisible()
 		\ && v:char =~ '\w'
 		\ && getline('.')[col('.') - 3] =~ '\w'
 		\ && getline('.')[col('.') - 2] =~ '\w'
 		\ && getline('.')[col('.') - 1] !~ '\w'
-		call feedkeys("\<C-x>\<C-o>", 'n')
+		if len(&omnifunc) != 0
+			noautocmd call feedkeys("\<C-x>\<C-o>", 'n')
+			"--fallback to c-p. need timer because feedkeys isn't done immediately
+			if exists('b:TMAutopletePTimer')
+				call timer_stop(b:TMAutopletePTimer)
+			endif
+			let b:TMAutopletePTimer = timer_start(20, {->TMShowAutopleteP()})
+		else
+			call TMShowAutopleteP()
+		endif
+	endif
+endfun
+fun! TMShowAutopleteP() abort
+	if !pumvisible()
+		noautocmd call feedkeys("\<C-x>\<C-p>", 'n')
 	endif
 endfun
 "--close func def preview when ')' called to finish function call
