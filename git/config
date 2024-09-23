@@ -23,7 +23,9 @@
 	dp = !git dpull
 	dpl = !git dpull
 	dpull = !BRANCH=`git branch --show-current` && git fetch && git diff ${BRANCH}..origin/${BRANCH}
+	ds = diff --staged
 	dw = diff --color-words
+	dws = diff --color-words --staged
 	h = help
 	hash = rev-parse --short HEAD
 	i = !"cd -- ${GIT_PREFIX:-.} && (git rev-parse 2>/dev/null && ( \
@@ -88,6 +90,7 @@
 	spu = stash push
 	ss = stash show -p
 	st = stash
+	staged = diff --staged
 	stapupo = !git stashpullpop
 	stashpullpop = !git stash && git pull && git stash pop
 	stat = status
