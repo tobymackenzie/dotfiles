@@ -27,6 +27,9 @@ let g:ale_lint_on_enter = 0
 " let g:ale_lint_on_text_changed = 'never'
 Plug 'dense-analysis/ale'
 
+"==match: better `%` matching
+packadd! matchit
+
 "==text
 "--editorconfig
 "> https://vimawesome.com/plugin/editorconfig-vim
