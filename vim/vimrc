@@ -187,6 +187,10 @@ set mouse=a
 "--nicer scrolling for large wrapped lines
 set smoothscroll
 
+"--nicer scroll for nowrap lines
+set sidescroll
+set sidescrolloff=100
+
 "==indent
 "--auto indent
 set ai
