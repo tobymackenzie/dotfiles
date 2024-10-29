@@ -188,7 +188,7 @@ set mouse=a
 set smoothscroll
 
 "--nicer scroll for nowrap lines
-set sidescroll
+set sidescroll=1
 set sidescrolloff=100
 
 "==indent
