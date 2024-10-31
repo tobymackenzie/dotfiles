@@ -1,0 +1,2 @@
+#!/bin/bash
+echo `seq $((1 + $RANDOM % 10)) | awk '{printf "a"}'``seq $((2 + $RANDOM % 12)) | awk '{printf "h"}'`
