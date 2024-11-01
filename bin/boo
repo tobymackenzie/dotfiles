@@ -1,2 +1,15 @@
 #!/bin/bash
-echo `seq $((1 + $RANDOM % 10)) | awk '{printf "a"}'``seq $((2 + $RANDOM % 12)) | awk '{printf "h"}'`
+cat << H
+           ___
+         .'   \  .-.
+        /  O O \/ /
+    ___,  .___.  /
+   (___   \  /  /
+      /    ˜˜  .'
+     (        /
+      \     .'
+      /  .-'
+    <:_-'
+
+H
+echo '👻' `seq $((1 + $RANDOM % 20)) | awk '{printf "a"}'``seq $((2 + $RANDOM % 22)) | awk '{printf "h"}'`
