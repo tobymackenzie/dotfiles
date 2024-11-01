@@ -44,4 +44,9 @@ alias ttime='top -otime -s 5'
 alias web="tjmOpenApp=1 o web"
 alias webd="tjmOpenApp=1 o webd"
 alias x="exit"
+alias .1='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
 
