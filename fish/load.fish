@@ -12,6 +12,7 @@ if test -r $HOME/.env
 end
 
 #--load shared files
+source {$TJM_DOTFILES_PATH}/fish/../shells/alias.sh
 source {$TJM_DOTFILES_PATH}/fish/../shells/short.sh
 if [ $TJM_OS = 'darwin' ]
 	source {$TJM_DOTFILES_PATH}/fish/../shells/mac.sh

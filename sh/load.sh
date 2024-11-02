@@ -10,6 +10,7 @@ if test -r ${HOME}/.env; then
 fi
 
 #--load shared files other than the config and this script next
+source ${TJM_DOTFILES_PATH}/sh/../shells/alias.sh
 source ${TJM_DOTFILES_PATH}/sh/../shells/short.sh
 if [[ "${TJM_OS}" == 'darwin' ]]; then
 	source ${TJM_DOTFILES_PATH}/sh/../shells/mac.sh
