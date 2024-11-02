@@ -180,6 +180,9 @@ augroup TJMCommentFormatOpts
 	autocmd BufEnter * setlocal formatoptions-=o formatoptions-=r
 augroup END
 
+"--join single line comments nicely
+set formatoptions+=j
+
 "==gui
 "--support mouse in all modes
 set mouse=a
