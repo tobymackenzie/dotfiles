@@ -3,5 +3,5 @@
 #display_image 1
 #--show link URL when selected
 display_link 1
-extbrowser o web
+extbrowser o web %s &
 tabstop 4
