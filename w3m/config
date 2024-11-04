@@ -1,0 +1,7 @@
+#--display inline images
+#auto_image 1
+#display_image 1
+#--show link URL when selected
+display_link 1
+extbrowser o web
+tabstop 4
