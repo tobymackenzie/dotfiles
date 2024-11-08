@@ -4,4 +4,5 @@
 #--show link URL when selected
 display_link 1
 extbrowser o web %s &
+keymap_file ~/.dotfiles/w3m/keymap
 tabstop 4
