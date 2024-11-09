@@ -1,0 +1,58 @@
+/*==conf */
+:root{
+	--accent: #8e3;
+	--head: #3c3;
+	--bg: #020;
+	--fg: #afa;
+	--outside: #080c08;
+	@media (prefers-color-scheme: light){
+		--accent: #5a5;
+		--head: #383;
+		--bg: #fbfdfb;
+		--fg: #030;
+		--outside: #4e784e;
+	}
+}
+
+/*==base */
+:root{
+	accent-color: var(--accent);
+	background: var(--outside);
+	color-scheme: dark light;
+}
+body{
+	background: var(--bg);
+	color: var(--fg);
+	padding: 1em 2em;
+	margin: auto;
+	max-width: 80vw;
+	&:after{
+		color: var(--accent);
+		content: '<toby/>';
+	}
+}
+a{
+	color: var(--accent);
+	&:focus,
+	&:hover,
+	&:visited{
+		color: var(--head);
+	}
+}
+b, h1, h2, h3, strong{
+	color: var(--head);
+}
+h1{
+	border-bottom: 1px solid;
+}
+
+/*==links boxes */
+.links{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 5em;
+	ul{
+		padding-left: 1em;
+	}
+}
+
