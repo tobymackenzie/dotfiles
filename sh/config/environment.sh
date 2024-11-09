@@ -23,3 +23,8 @@ fi
 if test -z "${TJM_CHECKOUTS_PATH}"; then
 	export TJM_CHECKOUTS_PATH="${TJM_PROJ_PATH}"
 fi
+
+#--etc
+if test -z "${WWW_HOME}"; then
+	export WWW_HOME="${TJM_DOTFILES_PATH}/lynx/index.html"
+fi

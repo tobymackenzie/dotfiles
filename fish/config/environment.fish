@@ -25,3 +25,9 @@ end
 if test -z "$TJM_CHECKOUTS_PATH"
 	set -x TJM_CHECKOUTS_PATH $TJM_PROJ_PATH
 end
+
+#--etc
+if test -z "$WWW_HOME"
+	set -x WWW_HOME $TJM_DOTFILES_PATH/lynx/index.html
+end
+
