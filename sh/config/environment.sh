@@ -26,5 +26,5 @@ fi
 
 #--etc
 if test -z "${WWW_HOME}"; then
-	export WWW_HOME="${TJM_DOTFILES_PATH}/lynx/index.html"
+	export WWW_HOME="${TJM_DOTFILES_PATH}/www/index.html"
 fi

@@ -28,6 +28,6 @@ end
 
 #--etc
 if test -z "$WWW_HOME"
-	set -x WWW_HOME $TJM_DOTFILES_PATH/lynx/index.html
+	set -x WWW_HOME $TJM_DOTFILES_PATH/www/index.html
 end
 
