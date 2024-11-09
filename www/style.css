@@ -51,6 +51,7 @@ h1{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0 5em;
+	justify-content: space-between;
 	ul{
 		padding-left: 1em;
 	}
