@@ -26,7 +26,7 @@ body{
 	color: var(--fg);
 	padding: 1em 2em;
 	margin: auto;
-	max-width: 80vw;
+	max-width: 60em;
 	&:after{
 		color: var(--accent);
 		content: '<toby/>';
