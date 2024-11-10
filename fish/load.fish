@@ -1,3 +1,8 @@
+#--helper: set env variable if not set
+function setdefaultenv --no-scope-shadowing
+	set -q $argv[1] || set -x $argv[1] $argv[2]
+end
+
 #==load all files
 #--load config first, so that other scripts have access to config
 for file in {$TJM_DOTFILES_PATH}/fish/config/*.fish
@@ -12,6 +17,7 @@ if test -r $HOME/.env
 end
 
 #--load shared files
+source {$TJM_DOTFILES_PATH}/fish/../shells/env.sh
 source {$TJM_DOTFILES_PATH}/fish/../shells/alias.sh
 source {$TJM_DOTFILES_PATH}/fish/../shells/short.sh
 if [ $TJM_OS = 'darwin' ]
