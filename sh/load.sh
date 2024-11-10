@@ -15,7 +15,7 @@ else
 	}
 fi
 
-#==load all files
+#==load built-in files
 #--load config first, so that other scripts have access to config
 for file in ${TJM_DOTFILES_PATH}/sh/config/*.sh; do
 	source $file
@@ -39,3 +39,22 @@ for file in $(find ${TJM_DOTFILES_PATH}/sh -type f -name '*.sh' ! -name 'load.sh
 	source $file
 done
 unset -v file
+
+
+#==load local files
+#--path
+export PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+if [ -f ${TJM_DOTFILES_PATH}/_local/path ]; then
+	export PATH=$(cat ${TJM_DOTFILES_PATH}/_local/path | tr '\n' ':' | sed "s!\$PATH!"$(echo $PATH)"!" | sed 's!~/!'$(echo $HOME)'/!g' | sed 's/:://g' | xargs)
+fi
+
+#--alias
+if [ -f ${TJM_DOTFILES_PATH}/_local/alias ]; then
+	source ${TJM_DOTFILES_PATH}/_local/alias
+fi
+
+#--custom
+if [ -f ${TJM_DOTFILES_PATH}/_local/bash ]; then
+	source ${TJM_DOTFILES_PATH}/_local/bash
+fi
+

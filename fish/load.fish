@@ -3,7 +3,7 @@ function setdefaultenv --no-scope-shadowing
 	set -q $argv[1] || set -x $argv[1] $argv[2]
 end
 
-#==load all files
+#==load built-in files
 #--load config first, so that other scripts have access to config
 for file in {$TJM_DOTFILES_PATH}/fish/config/*.fish
 	source $file
@@ -28,3 +28,31 @@ end
 for file in (find {$TJM_DOTFILES_PATH}/fish -type f -name '*.fish' ! -name 'config.fish' ! -name 'load.fish' ! -regex '.*\/config\/.*' ! -regex '.*\/functions\/.*')
 	source $file
 end
+
+#==load local files
+#--path
+set -x PATH $PATH $TJM_DOTFILES_PATH/bin
+if test -f {$TJM_DOTFILES_PATH}/_local/path
+	for aPath in (cat {$TJM_DOTFILES_PATH}/_local/path | sed "s!\$PATH!"(echo $PATH)"!" | sed "s!~/!$HOME/!")
+		if [ $aPath != '$PATH' -a $aPath != '' -a -d $aPath ]
+			set -x PATH $PATH $aPath
+		end
+	end
+	#--unlike bash / zsh, `fish_add_path` will be before OS paths.  Do we want this?
+	#for aPath in (cat {$TJM_DOTFILES_PATH}/_local/path | sed "s!~/!$HOME/!")
+		#if [ $aPath != '$PATH' -a $aPath != '' -a -d $aPath ]
+			#fish_add_path -a $aPath
+		#end
+	#end
+end
+
+#--aliases
+if test -f {$TJM_DOTFILES_PATH}/_local/alias
+	source {$TJM_DOTFILES_PATH}/_local/alias
+end
+
+#--custom
+if test -f {$TJM_DOTFILES_PATH}/_local/fish
+	source {$TJM_DOTFILES_PATH}/_local/fish
+end
+
