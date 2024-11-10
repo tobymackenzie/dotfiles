@@ -19,6 +19,7 @@
 	accent-color: var(--accent);
 	background: var(--outside);
 	color-scheme: dark light;
+	font-family: meslo, "Meslo LG S", menlo, "Menlo Regular", "Apple Color Emoji", cousine, Consolas, "Courier New", courier, monospace;
 }
 body{
 	background: var(--bg);
