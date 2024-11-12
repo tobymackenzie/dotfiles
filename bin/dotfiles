@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash
 binPath=`realpath $(dirname ${BASH_SOURCE[0]})`
 if [ -z "$1" ]; then
 	if [ -e ~/.dotfiles ]; then

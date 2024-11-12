@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash
 out=`help $@ 2> /dev/null || man $@ 2> /dev/null`
 if [ -n "${out}" ]; then
 	echo "${out}" | less -R
