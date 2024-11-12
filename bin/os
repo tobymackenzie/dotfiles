@@ -68,7 +68,7 @@ runPkg(){
 	fi
 
 	#--run
-	echo $cmd $sub $args
+	$cmd $sub $args
 }
 
 #==main
