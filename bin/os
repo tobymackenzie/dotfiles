@@ -1,0 +1,169 @@
+#!/bin/bash
+#=====
+# general grouping command for running OS level commands without needing to know which OS / window manager is being run
+#=====
+
+#==handle args
+if [ -z "$1" ]; then
+	cmd='version'
+else
+	cmd="$1"
+fi
+args=${@:2}
+
+#==helpers
+die(){
+	>&2 echo "$@"
+	exit 1
+}
+runPkg(){
+	local cmd=""
+	local sub="$1"
+	local args=${@:2}
+
+	#--find installed package manager command
+	# debian mac fedora arch bsd mac
+	declare -a cmds=(apt brew dnf yum pacman pkg port)
+	for val in "${cmds[@]}"; do
+		if command -v "$val" > /dev/null; then
+			cmd="$val"
+			break
+		fi
+	done
+	if [ -z "$cmd" ]; then
+		die "don't know how to update"
+	fi
+
+	#--normalize subcommand
+	if [ "$sub" = 'up' ] || [ "$sub" = 'update' ] || [ "$sub" = 'upgrade' ]; then
+		case "$cmd" in
+			'apt')
+				sub='update'
+			;;
+			'brew'|'dnf'|'port'|'yum')
+				sub='upgrade'
+			;;
+			'pacman')
+				sub='-Syu'
+			;;
+		esac
+		if [ "$cmd" = 'brew' ] && [ -z "$args" ]; then
+			args='--greedy'
+		fi
+	elif [ "$sub" = 'remove' ] || [ "$sub" = 'remove' ] || [ "$sub" = 'uninstall' ]; then
+		case "$cmd" in
+			'apt'|'dnf'|'yum')
+				sub='remove'
+			;;
+			'brew')
+				sub='uninstall'
+			;;
+		esac
+	fi
+
+	#--check permissions to run command
+	#---homebrew must be owned by us to modify
+	if [[ (! -O `which brew` && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
+		die "don't have permissions to run brew command"
+	fi
+
+	#--run
+	echo $cmd $sub $args
+}
+
+#==main
+case $cmd in
+	'down'|'off'|'poweroff'|'shutdown')
+		if command -v 'shutdown' > /dev/null; then
+			if [ -z "$args" ]; then
+				args='now'
+			fi
+			shutdown $args
+		else
+			die "don't know how to shutdown"
+		fi
+	;;
+	'halt')
+		if command -v 'halt' > /dev/null; then
+			halt $args
+		else
+			die "don't know how to halt"
+		fi
+	;;
+	'hibernate'|'sleep'|'suspend')
+		#--mac
+		if command -v 'pmset' > /dev/null; then
+			pmset sleepnow $args
+		else
+			die "don't know how to sleep"
+		fi
+	;;
+	'in'|'install')
+		runPkg install $args
+	;;
+	'i'|'info'|'-v'|'v'|'version')
+		#--linux
+		if command -v 'hostnamectl' > /dev/null; then
+			hostnamectl $args
+		#--mac
+		elif command -v 'sw_vers' > /dev/null; then
+			sw_vers $args
+			#-!super verbose and slow. do we want this?
+			# if [ -z "$args" ]; then
+				# args='-detailLevel mini'
+			# fi
+			# system_profiler $args | less 
+		else
+			die "don't know how to get version"
+		fi
+	;;
+	'lock'|'lockscreen')
+		#--i3
+		if command -v 'i3lock' > /dev/null; then
+			i3lock $args
+		#--mac
+		elif command -v 'pmset' > /dev/null; then
+			pmset displaysleepnow $args
+		else
+			die "don't know how to lock"
+		fi
+	;;
+	'logout'|'out')
+		#--gnome
+		if command -v 'gnome-session-quit' > /dev/null; then
+			if [ -z "$args" ]; then
+				args='--no-prompt'
+			fi
+			gnome-session-quit $args
+		#--i3
+		elif command -v 'i3-msg' > /dev/null; then
+			i3-msg exit $args
+		#--mac
+		elif command -v 'osascript' > /dev/null; then
+			osascript -e 'tell application \"System Events\" to log out'
+			# launchctl bootout user/$(id -u)
+		else
+			logout
+		fi
+	;;
+	'p'|'package'|'packages'|'pkg')
+		runPkg $args
+	;;
+	're'|'reboot'|'restart')
+		if command -v 'reboot' > /dev/null; then
+			reboot $args
+		else
+			die "don't know how to reboot"
+		fi
+	;;
+	'remove'|'rm'|'uninstall')
+		runPkg remove $args
+	;;
+	'up'|'update'|'upgrade')
+		runPkg up $args
+	;;
+	*)
+		die "Unknown os command ${cmd} command"
+	;;
+esac
+
