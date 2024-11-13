@@ -35,8 +35,8 @@ runPkg(){
 	local args=${@:2}
 
 	#--find installed package manager command
-	# debian mac fedora arch bsd mac
-	declare -a cmds=(apt brew dnf yum pacman pkg port)
+	# fedora debian mac fedora fedora arch bsd mac
+	declare -a cmds=(pkcon apt brew dnf yum pacman pkg port)
 	for val in "${cmds[@]}"; do
 		if command -v "$val" > /dev/null; then
 			cmd="$val"
@@ -50,7 +50,7 @@ runPkg(){
 	#--normalize subcommand
 	if [ "$sub" = 'up' ] || [ "$sub" = 'update' ] || [ "$sub" = 'upgrade' ]; then
 		case "$cmd" in
-			'apt')
+			'apt'|'pkcon')
 				sub='update'
 			;;
 			'brew'|'dnf'|'port'|'yum')
@@ -78,6 +78,10 @@ runPkg(){
 	#---homebrew must be owned by us to modify
 	if [[ ("$cmd" == 'brew' && ! -O `which brew` && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
 		die "don't have permissions to run brew command"
+	fi
+	#---some must run as root
+	if [[ "$EUID" == 0 && ("$cmd" = 'apt' || "$cmd" = 'dnf' || "$cmd" = 'port' || "$cmd" = 'yum') ]]; then
+		command="sudo ${command}"
 	fi
 
 	#--run
