@@ -63,7 +63,7 @@ runPkg(){
 
 	#--check permissions to run command
 	#---homebrew must be owned by us to modify
-	if [[ (! -O `which brew` && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
+	if [[ ("$cmd" == 'brew' && ! -O `which brew` && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
 		die "don't have permissions to run brew command"
 	fi
 
@@ -112,7 +112,7 @@ case $cmd in
 			# if [ -z "$args" ]; then
 				# args='-detailLevel mini'
 			# fi
-			# system_profiler $args | less 
+			# system_profiler $args | less
 		else
 			die "don't know how to get version"
 		fi
