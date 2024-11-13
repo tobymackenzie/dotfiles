@@ -16,6 +16,19 @@ die(){
 	>&2 echo "$@"
 	exit 1
 }
+getWM(){
+	if [ -n "$_localWM" ]; then
+		>&2 echo 'cached'
+		echo "$_localWM"
+		return
+	elif [ "$TJM_OS" = 'darwin' ]; then
+		>&2 echo 'in darwin'
+		_localWM='darwin'
+	else
+		_localWM="${XDG_CURRENT_DESKTOP,,}"
+	fi
+	echo "$_localWM"
+}
 runPkg(){
 	local cmd=""
 	local sub="$1"
@@ -119,7 +132,7 @@ case $cmd in
 	;;
 	'lock'|'lockscreen')
 		#--i3
-		if command -v 'i3lock' > /dev/null; then
+		if [ `getWM` = 'i3' ] && command -v 'i3lock' > /dev/null; then
 			i3lock $args
 		#--mac
 		elif command -v 'pmset' > /dev/null; then
@@ -130,13 +143,13 @@ case $cmd in
 	;;
 	'logout'|'out')
 		#--gnome
-		if command -v 'gnome-session-quit' > /dev/null; then
+		if [ `getWM` = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
 			if [ -z "$args" ]; then
 				args='--no-prompt'
 			fi
 			gnome-session-quit $args
 		#--i3
-		elif command -v 'i3-msg' > /dev/null; then
+		elif [ `getWM` = 'i3' ] && command -v 'i3-msg' > /dev/null; then
 			i3-msg exit $args
 		#--mac
 		elif command -v 'osascript' > /dev/null; then
