@@ -32,6 +32,12 @@ case $cmd in
 	'd'|'diff') #: show git diff of dotfiles repo
 		git diff --color-words -w ${@:2}
 	;;
+	'e'|'edit') #: edit dotfiles file
+		if [ -z $EDITOR ]; then
+			EDITOR=vi
+		fi
+		$EDITOR ${binPath}/../${@:2}
+	;;
 	'g'|'git') #: run git command on dotfiles repo
 		git ${@:2}
 	;;
@@ -44,6 +50,9 @@ case $cmd in
 	'test'|'tests') #: run phpunit tests on dotfiles repo
 		echo 'running tests'
 		bash ${binPath}/../tests/init.sh
+	;;
+	'v'|'view') #: view dotfiles file
+		less ${binPath}/../${@:2}
 	;;
 	*)
 		>&2 echo 'Unknown subcommand: '$cmd
