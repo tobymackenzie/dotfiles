@@ -86,7 +86,7 @@ runPkg(){
 
 #==main
 case $cmd in
-	'down'|'off'|'poweroff'|'shutdown')
+	'down'|'off'|'poweroff'|'shutdown') #: shut down computer / OS
 		if command -v 'shutdown' > /dev/null; then
 			if [ -z "$args" ]; then
 				args='now'
@@ -96,14 +96,19 @@ case $cmd in
 			die "don't know how to shutdown"
 		fi
 	;;
-	'halt')
+	'-h'|'h'|'help') #: show help for this command
+		echo "Usage: os <subcommand> [options]"
+		echo "os command must be run with one of the following subcommands"
+		grep --color -o "'.*)\(\s*#.*\)\$" ${BASH_SOURCE[0]}
+	;;
+	'halt') #: halt computer / OS
 		if command -v 'halt' > /dev/null; then
 			halt $args
 		else
 			die "don't know how to halt"
 		fi
 	;;
-	'hibernate'|'sleep'|'suspend')
+	'hibernate'|'sleep'|'suspend') #: hibernate computer / OS
 		#--mac
 		if command -v 'pmset' > /dev/null; then
 			pmset sleepnow $args
@@ -111,10 +116,10 @@ case $cmd in
 			die "don't know how to sleep"
 		fi
 	;;
-	'in'|'install')
+	'in'|'install') #: install OS package
 		runPkg install $args
 	;;
-	'i'|'info'|'-v'|'v'|'version')
+	'i'|'info'|'-v'|'v'|'version') #: get os info
 		#--linux
 		if command -v 'hostnamectl' > /dev/null; then
 			hostnamectl $args
@@ -130,7 +135,7 @@ case $cmd in
 			die "don't know how to get version"
 		fi
 	;;
-	'lock'|'lockscreen')
+	'lock'|'lockscreen') #: lock screen
 		#--i3
 		if [ `getWM` = 'i3' ] && command -v 'i3lock' > /dev/null; then
 			i3lock $args
@@ -141,7 +146,7 @@ case $cmd in
 			die "don't know how to lock"
 		fi
 	;;
-	'logout'|'out')
+	'logout'|'out') #: log out
 		#--gnome
 		if [ `getWM` = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
 			if [ -z "$args" ]; then
@@ -159,20 +164,20 @@ case $cmd in
 			logout
 		fi
 	;;
-	'p'|'package'|'packages'|'pkg')
+	'p'|'package'|'packages'|'pkg') #: run package manager command
 		runPkg $args
 	;;
-	're'|'reboot'|'restart')
+	're'|'reboot'|'restart') #: reboot computer / OS
 		if command -v 'reboot' > /dev/null; then
 			reboot $args
 		else
 			die "don't know how to reboot"
 		fi
 	;;
-	'remove'|'rm'|'uninstall')
+	'remove'|'rm'|'uninstall') #: uninstall OS package
 		runPkg remove $args
 	;;
-	'up'|'update'|'upgrade')
+	'up'|'update'|'upgrade') #: upgrade OS packages
 		runPkg up $args
 	;;
 	*)
