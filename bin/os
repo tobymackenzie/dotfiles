@@ -122,6 +122,15 @@ case $cmd in
 	'i'|'info'|'-v'|'v'|'version') #: get os info
 		#--linux
 		if command -v 'hostnamectl' > /dev/null; then
+			if [ -r '/etc/os-release' ]; then
+				source /etc/os-release
+				if [ -n "$PRETTY_NAME" ]; then
+					echo $PRETTY_NAME
+				else
+					echo $NAME $VERSION
+				fi
+
+			fi
 			hostnamectl $args
 		#--mac
 		elif command -v 'sw_vers' > /dev/null; then
