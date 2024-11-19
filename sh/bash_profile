@@ -1,7 +1,18 @@
+#--store shell name for `reshell`
+if [ ! -z "${ZSH_VERSION+x}" ]; then
+	TJM_SHELL=zsh
+elif [ ! -z "${BASH_VERSION+x}" ]; then
+	TJM_SHELL=bash
+else
+	TJM_SHELL=$SHELL
+fi
+
+#--set dotfiles path
 #-@http://stackoverflow.com/a/246128
 #-@http://stackoverflow.com/a/14728194
 if test -z "${TJM_DOTFILES_PATH}"; then
 	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]:-${(%):-%x}})))
 fi
 
+#--load all conf
 source ${TJM_DOTFILES_PATH}/sh/load.sh
