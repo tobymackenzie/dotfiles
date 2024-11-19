@@ -4,8 +4,7 @@ function lll
 end
 
 #==path movement
-#-! fish can't handle function names beginning with dash, via <https://github.com/oh-my-fish/oh-my-fish/issues/487>.  So…
-#alias -- -="cd -"
+abbr --add -- - 'cd -'
 function cl
 	cd $argv; and l
 end
