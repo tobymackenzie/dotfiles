@@ -72,6 +72,18 @@ runPkg(){
 				sub='uninstall'
 			;;
 		esac
+	elif [ "$sub" = 'get-details' ] || [ "$sub" = 'info' ] || [ "$sub" = 'show' ]; then
+		case "$cmd" in
+			'apt')
+				sub='show'
+			;;
+			'pkcon')
+				sub='get-details'
+			;;
+			*)
+				sub='info'
+			;;
+		esac
 	fi
 
 	#--check permissions to run command
