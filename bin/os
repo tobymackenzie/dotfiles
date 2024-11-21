@@ -18,11 +18,9 @@ die(){
 }
 getWM(){
 	if [ -n "$_localWM" ]; then
-		>&2 echo 'cached'
 		echo "$_localWM"
 		return
 	elif [ "$TJM_OS" = 'darwin' ]; then
-		>&2 echo 'in darwin'
 		_localWM='darwin'
 	else
 		_localWM="${XDG_CURRENT_DESKTOP,,}"
