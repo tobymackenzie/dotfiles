@@ -193,7 +193,7 @@ case $cmd in
 			i3-msg exit $args
 		#--mac
 		elif command -v 'osascript' > /dev/null; then
-			osascript -e 'tell application \"System Events\" to log out'
+			osascript -e 'tell application "System Events" to log out'
 			# launchctl bootout user/$(id -u)
 		else
 			logout
