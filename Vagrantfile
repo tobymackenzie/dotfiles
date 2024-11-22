@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
 			date > /etc/_provisionDate
 			apt update
 			#--install managed apps.  others are installed by default: bash, git, screen, vim.  ignoring atom and svn, as they are on their way out
-			apt install -y fish i3 vim-gui-common zsh
+			apt install -y fish i3 lynx vim-gui-common w3m zsh
 			#---need for i3
 			apt install -y xinit
 		INIT
