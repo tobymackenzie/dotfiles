@@ -22,8 +22,10 @@ getWM(){
 		return
 	elif [ "$TJM_OS" = 'darwin' ]; then
 		_localWM='darwin'
-	else
+	elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
 		_localWM="${XDG_CURRENT_DESKTOP,,}"
+	else
+		_localWM=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep "_NET_WM_NAME = " | cut --delimiter=' ' --fields=3 | cut --delimiter='"' --fields=2)
 	fi
 	echo "$_localWM"
 }
