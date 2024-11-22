@@ -2,7 +2,8 @@ Vagrant.require_version '>= 1.7.0'
 Vagrant.configure(2) do |config|
 	config.vm.define 'demo' do |demo|
 		#-# latest ubuntu, see <https://app.vagrantup.com/ubuntu>
-		demo.vm.box = 'ubuntu/mantic64'
+		# demo.vm.box = 'ubuntu/mantic64'
+		demo.vm.box = 'ubuntu/jammy64'
 
 		#==network
 		#--access by this IP
