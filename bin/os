@@ -172,9 +172,8 @@ case $cmd in
 				# args='-detailLevel mini'
 			# fi
 			# system_profiler $args | less
-		else
-			die "don't know how to get version"
 		fi
+		echo 'WM: ' `getWM`
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--i3
