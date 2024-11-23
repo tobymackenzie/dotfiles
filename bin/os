@@ -176,8 +176,11 @@ case $cmd in
 		echo 'WM: ' `getWM`
 	;;
 	'lock'|'lockscreen') #: lock screen
+		#--gnome
+		if [ `getWM` = 'gnome' ] && command -v 'xdg-screensaver' > /dev/null; then
+			xdg-screensaver lock
 		#--i3
-		if [ `getWM` = 'i3' ] && command -v 'i3lock' > /dev/null; then
+		elif [ `getWM` = 'i3' ] && command -v 'i3lock' > /dev/null; then
 			i3lock $args
 		#--mac
 		elif command -v 'pmset' > /dev/null; then
