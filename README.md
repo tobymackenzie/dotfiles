@@ -35,18 +35,6 @@ where the `pth` shell variable can be used to set a folder for storing the dotfi
 
 Once ran, modify any of the dotfiles to your liking.  See ["Configuration" section](#configuration) below for setting `$PATH`, etc.
 
-Install Atom packages by running:
-
-``` sh
-apm install --packages-file ~/.dotfiles/atom/packages.txt
-```
-
-and update list with:
-
-``` sh
-apm list --installed --bare > ~/.dotfiles/atom/packages.txt
-```
-
 Configuration
 -------------
 
