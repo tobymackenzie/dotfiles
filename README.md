@@ -40,7 +40,7 @@ Configuration
 
 You can create a `_local` folder in the project with the following configuration files:
 
-- alias: sourced file with list of shell aliases, must be sourcable by bash, fish, and zsh
+- alias: sourced file with list of shell aliases, must be sourcable by any of bash, fish, and zsh that are being used
 - bash: custom sourced file for bash shell
 - fish: custom sourced file for fish shell
 - path: line-break separated list of paths to use as `$PATH`.  Be sure to include `$PATH` where the existing paths should go.  Works for bash, zsh, and fish
