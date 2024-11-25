@@ -4,6 +4,8 @@ Vagrant.configure(2) do |config|
 		#-# latest ubuntu, see <https://app.vagrantup.com/ubuntu>
 		# demo.vm.box = 'ubuntu/mantic64'
 		demo.vm.box = 'ubuntu/jammy64'
+		#--don't check for updates once created
+		config.vm.box_check_update = false
 
 		#==network
 		#--access by this IP
