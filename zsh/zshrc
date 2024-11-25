@@ -64,7 +64,7 @@ if [ $tputColors -gt 2 ]; then
 	if [ $tputColors -gt 8 ]; then
 		PS1="%{$(tput setab 42)$(tput setaf 0)%}${PS1}"
 	else
-		PS1="%{$bg[green]%}%{$fg[white]%}${PS1}"
+		PS1="%{$bg[green]%}%{$fg[black]%}${PS1}"
 	fi
 	PS1+="%{$reset_color%}"
 fi
