@@ -4,7 +4,7 @@ function fish_prompt
 	if test "$tputColors" -gt 8
 		set_color black -b 00d787
 	else if test "$tputColors" -gt 2
-		set_color white -b green
+		set_color black -b green
 	end
 	echo -n '['
 	echo -n -s "$USER"
