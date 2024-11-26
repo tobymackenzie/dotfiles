@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#--shows color tput outputs given value.  forces to number <= 256
+echo $(tput setab $1)'      '$(tput sgr0)

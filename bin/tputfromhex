@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#--show tput number value for given RGB hex value.  forced to 256 color table
+#-@ based on https://unix.stackexchange.com/a/269085
+#-! would probably like to reduce this to lowest possible number, eg 'fff' should be '15' instead of '231'
+#--strip leading '#'
+hex=${1#"#"}
+#--convert 3 character hex format to 6
+if [ ${#hex} -eq 3 ]; then
+	hex="${hex:0:1}${hex:0:1}${hex:1:1}${hex:1:1}${hex:2:1}${hex:2:1}"
+fi
+#--math
+r=$(printf '0x%0.2s' "${hex}")
+g=$(printf '0x%0.2s' "${hex#??}")
+b=$(printf '0x%0.2s' "${hex#????}")
+printf '%d\n' "$(( (r < 75 ? 0 : (r - 35) / 40) * 6 * 6 + (g < 75 ? 0 : (g - 35) / 40) * 6 + (b < 75 ? 0 : (b - 35) / 40) + 16 ))"

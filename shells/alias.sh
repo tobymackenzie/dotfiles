@@ -6,5 +6,6 @@ alias lynx="lynx -cfg ~/.dotfiles/lynx/lynx.cfg"
 alias mv="mv -i"
 alias reshell="exec $TJM_SHELL"
 alias scp="scp -pr"
+alias tputshow='tputcolor'
 alias w3m="w3m -config ~/.dotfiles/w3m/config"
 
