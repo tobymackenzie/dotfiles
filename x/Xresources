@@ -1,3 +1,7 @@
 *.background: black
 *.foreground: white
 *.font: xft:Dejavu Sans Mono,monospace:size=12
+*.pointerColor: #003300
+*.pointerColor2: #009933
+*.scrollColor: #009933
+*.troughColor: #003300

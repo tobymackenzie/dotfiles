@@ -1,0 +1,46 @@
+general {
+	colors = false
+	interval = 5
+	markup = "pango"
+}
+
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+order += "load"
+order += "memory"
+order += "tztime local"
+
+wireless _first_ {
+	format_up = "<span background='#00b757'> W: (%quality at %essid) %ip </span>"
+	format_down = ""
+}
+
+ethernet _first_ {
+	format_up = "<span background='#00b757'> E: %ip (%speed) </span>"
+	format_down = ""
+}
+
+battery all {
+	format = "<span background='#00b757'> %status: %percentage </span>"
+	format_down = ""
+	status_bat = "🔋"
+	status_chr = "⚡"
+	status_full = "⚡"
+	status_unk = "?"
+}
+
+load {
+	format = "<span background='#00b757'> L: %1min </span>"
+}
+
+memory {
+	format = "<span background='#00b757'> M: %available free </span>"
+	format_degraded = "M: < %available"
+	threshold_degraded = "200M"
+}
+
+tztime local {
+	format = "<span background='#00b757'> %time </span>"
+	format_time = "%m-%d %H:%M"
+}

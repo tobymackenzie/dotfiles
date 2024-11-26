@@ -14,10 +14,31 @@ set $refreshI3status killall -SIGUSR1 i3status
 #==setup
 #=====
 #--font for titles / bar
-font pango:monospace 12
+font pango:monospace 10
+#--colors
+#-# border bg fg indicator childBorder
+client.focused #009933 #00b757 #000000 #00b757 #000000
+client.focused_inactive #003300 #00b757 #003300 #00b757 #003300
+client.unfocused #003300 #003300 #ffffff #009933 #ffffff
+client.urgent #663399 #663399 #ffffff #663399 #ffffff
+client.placeholder #003300 #000000 #ffffff #003300 #003300
+client.background #003300
+
 #--status bar
 bar {
 	status_command i3status
+	separator_symbol " "
+	colors {
+		background #009933
+		statusline #000000
+
+		#-# border bg fg
+		active_workspace #00b757 #00b757 #000000
+		focused_workspace #663399 #00b757 #000000
+		inactive_workspace #009933 #009933 #000000
+		urgent_workspace #663399 #663399 #000000
+	}
+	workspace_min_width 32
 }
 
 
