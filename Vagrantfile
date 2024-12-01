@@ -43,4 +43,43 @@ Vagrant.configure(2) do |config|
 		#-! must increase zoom in VB to make visible
 		#-! cpu cap, cpu sometimes runs for no reason
 	end
+	config.vm.define 'debian', autostart: false do |debian|
+		debian.vm.box = 'debian/bookworm64'
+		#--don't check for updates once created
+		config.vm.box_check_update = false
+
+		#==network
+		#--access by this IP
+		debian.vm.network 'private_network', ip: '192.168.56.13'
+		#--connect to internet
+		#-@ https://stackoverflow.com/a/18457420/1139122
+		debian.vm.provider 'virtualbox' do |vb|
+			vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+			vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+		end
+
+		#==provision
+		debian.vm.provision 'shell', privileged: true, inline: <<-'INIT'
+			date > /etc/_provisionDate
+			apt update
+			#--install managed apps.  others are installed by default: bash, git, screen, vim.  ignoring atom and svn, as they are on their way out
+			apt install -y fish i3 lynx vim-gui-common w3m zsh
+			#---need for X
+			apt install x11-xserver-utils
+			#---need for i3
+			apt install -y xinit
+			#---need for vim, etc
+			apt install -y git
+		INIT
+
+		#==sync project folder
+		debian.vm.synced_folder '.', '/home/vagrant/__/checkouts/dotfiles'
+		#--disable syncing vagrant folder
+		debian.vm.synced_folder '.', '/vagrant', disabled: true
+
+		#==enable gui
+		debian.vm.provider 'virtualbox' do |vb|
+			vb.gui = true
+		end
+	end
 end
