@@ -40,7 +40,7 @@ runPkg(){
 
 	#--find installed package manager command
 	# fedora debian mac fedora fedora arch bsd mac
-	declare -a cmds=(pkcon apt brew dnf yum pacman pkg port)
+	declare -a cmds=(pkcon pkg apt brew dnf yum pacman port)
 	for val in "${cmds[@]}"; do
 		if hash "$val" 2> /dev/null; then
 			cmd="$val"
