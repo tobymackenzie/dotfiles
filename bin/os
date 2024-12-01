@@ -42,7 +42,7 @@ runPkg(){
 	# fedora debian mac fedora fedora arch bsd mac
 	declare -a cmds=(pkcon apt brew dnf yum pacman pkg port)
 	for val in "${cmds[@]}"; do
-		if command -v "$val" > /dev/null; then
+		if hash "$val" 2> /dev/null; then
 			cmd="$val"
 			break
 		fi
