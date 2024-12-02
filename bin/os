@@ -108,7 +108,7 @@ runPkg(){
 		die "don't have permissions to run brew command"
 	fi
 	#---some must run as root
-	if [[ "$EUID" != 0 && "$cmd" != 'brew' && ("$sub" == 'add' || "$sub" == 'delete' || "$sub" == 'install' || "$sub" == 'remove' || "$sub" == '-Syu' || "$sub" == 'update' || "$sub" == 'upgrade') ]]; then
+	if [[ "$EUID" != 0 && "$cmd" != 'brew' && "$cmd" != 'pkg' && ("$sub" == 'add' || "$sub" == 'delete' || "$sub" == 'install' || "$sub" == 'remove' || "$sub" == '-Syu' || "$sub" == 'update' || "$sub" == 'upgrade') ]]; then
 		cmd="sudo ${cmd}"
 	fi
 
