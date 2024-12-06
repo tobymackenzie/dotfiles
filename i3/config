@@ -27,15 +27,15 @@ client.background #003300
 #--status bar
 bar {
 	status_command i3status
-	separator_symbol " "
+	separator_symbol "·"
 	colors {
-		background #009933
+		background #00b757
 		statusline #000000
 
 		#-# border bg fg
-		active_workspace #00b757 #00b757 #000000
-		focused_workspace #663399 #00b757 #000000
-		inactive_workspace #009933 #009933 #000000
+		active_workspace #009933 #00b757 #000000
+		focused_workspace #77ff77 #00b757 #000000
+		inactive_workspace #00b757 #00b757 #000000
 		urgent_workspace #663399 #663399 #000000
 	}
 	workspace_min_width 32
