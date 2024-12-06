@@ -20,7 +20,7 @@ font pango:monospace 10
 client.focused #009933 #00b757 #000000 #00b757 #000000
 client.focused_inactive #003300 #00b757 #003300 #00b757 #003300
 client.unfocused #003300 #003300 #ffffff #009933 #ffffff
-client.urgent #663399 #663399 #ffffff #663399 #ffffff
+client.urgent #00ff00 #00ff00 #ffffff #00ff00 #ffffff
 client.placeholder #003300 #000000 #ffffff #003300 #003300
 client.background #003300
 
@@ -33,10 +33,10 @@ bar {
 		statusline #000000
 
 		#-# border bg fg
-		active_workspace #009933 #00b757 #000000
-		focused_workspace #77ff77 #00b757 #000000
+		active_workspace #009933 #11c868 #000000
+		focused_workspace #77ff77 #44cc44 #000000
 		inactive_workspace #00b757 #00b757 #000000
-		urgent_workspace #663399 #663399 #000000
+		urgent_workspace #00ff00 #aaffaa #000000
 	}
 	workspace_min_width 32
 }
@@ -147,7 +147,7 @@ bindsym $mod+r mode "resize"
 #==mouse
 #=====
 #--drag title to move window
-tiling_drag modifier titlebar
+# tiling_drag modifier titlebar
 #--use mode to click anywhere to move floating window
 floating_modifier $mod
 
