@@ -1,27 +1,32 @@
 #!/usr/bin/env bash
 #--show RGB hex value for given tput number value
 #-@ based on https://unix.stackexchange.com/a/269085
-#--force number <= 256
-num=$(($1 % 256))
+for arg in "$@"; do
+	#--force number <= 256
+	num=$(($arg % 256))
 
-if [ "$num" -lt "16" ]; then
-	base=$((num % 16))
-	multiplier=128
-	if [ "$base" -eq "7" ]; then
-		multiplier=192
-	elif [ "$base" -eq "8" ]; then
-		base=7
-	elif [ "$base" -gt "8" ]; then
-		multiplier=255
+	if [ "$num" -lt "16" ]; then
+		base=$((num % 16))
+		multiplier=128
+		if [ "$base" -eq "7" ]; then
+			multiplier=192
+		elif [ "$base" -eq "8" ]; then
+			base=7
+		elif [ "$base" -gt "8" ]; then
+			multiplier=255
+		fi
+		r="$(((base & 1) * multiplier))"
+		g="$((((base & 2) >> 1) * multiplier))"
+		b="$((((base & 4) >> 2) * multiplier))"
+	elif [ "$num" -gt 15 ] && [ "$num" -lt 232 ]; then
+		r=$(((num - 16) / 36)); r=$((r == 0 ? 0 : r * 40 + 55))
+		g=$(((num - 16) / 6 % 6)); g=$((g == 0 ? 0 : g * 40 + 55))
+		b=$(((num - 16) % 6 )); b=$((b == 0 ? 0 : b * 40 + 55))
+	else
+		declare {r,g,b}=$(((num - 232) * 10 + 8))
 	fi
-	r="$(((base & 1) * multiplier))"
-	g="$((((base & 2) >> 1) * multiplier))"
-	b="$((((base & 4) >> 2) * multiplier))"
-elif [ "$num" -gt 15 ] && [ "$num" -lt 232 ]; then
-	r=$(((num - 16) / 36)); r=$((r == 0 ? 0 : r * 40 + 55))
-	g=$(((num - 16) / 6 % 6)); g=$((g == 0 ? 0 : g * 40 + 55))
-	b=$(((num - 16) % 6 )); b=$((b == 0 ? 0 : b * 40 + 55))
-else
-	declare {r,g,b}=$(((num - 232) * 10 + 8))
-fi
-printf '#%02x%02x%02x\n' "$r" "$g" "$b"
+	if [ "$#" -ne 1 ]; then
+		printf '%s-> ' "$arg"
+	fi
+	printf '#%02x%02x%02x\n' "$r" "$g" "$b"
+done
