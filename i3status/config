@@ -1,5 +1,7 @@
 general {
-	colors = false
+	color_bad = '#cc3333'
+	color_degraded = '#775500'
+	color_good = '#000000'
 	interval = 5
 }
 
