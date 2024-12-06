@@ -41,6 +41,5 @@ memory {
 }
 
 tztime local {
-	format = "<span background='#00b757'> %time </span>"
-	format_time = "%m-%d %H:%M"
+	format = "%m-%d %H:%M  "
 }
