@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 #--shows color tput outputs given value.  forces to number <= 256
 for arg in "$@"; do
-	printf $(tput setab $arg)'      '$(tput sgr0)
+	if [ $arg -gt 99 ]; then
+		pad=' '
+	elif [ $arg -gt 9 ]; then
+		pad='  '
+	else
+		pad='   '
+	fi
+	printf "$(tput setab $arg)$pad$(tput setaf 0)$arg $(tput setaf 7)$arg$pad$(tput sgr0)"
 done
 printf "\n"
