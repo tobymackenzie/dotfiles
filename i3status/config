@@ -15,13 +15,15 @@ order += "tztime locald"
 order += "tztime localt"
 
 load {
-	format = "%1min"
+	format = ""
+	format_above_threshold = "%1min"
+	max_threshold = 0.5
 }
 
 memory {
-	format = "%available free"
-	format_degraded = "%available!"
-	threshold_degraded = "200M"
+	format = ""
+	format_degraded = "%available free"
+	threshold_degraded = "300M"
 }
 
 wireless _first_ {
