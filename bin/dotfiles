@@ -27,7 +27,14 @@ case $cmd in
 		bash ${binPath}/../src/init.sh
 	;;
 	'bin') #: list bin commands
-		ls -1A bin ${@:2}
+		cd bin
+		if [ "$#" -lt 2 ]; then
+			ls -1A
+		else
+			for arg in "${@:2}"; do
+				ls -1A $arg*
+			done
+		fi
 	;;
 	'd'|'diff') #: show git diff of dotfiles repo
 		git diff --color-words -w ${@:2}
