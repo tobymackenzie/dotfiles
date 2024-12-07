@@ -23,6 +23,7 @@ nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
 nnoremap <leader>H :tab help<cr>
 "--open
 nnoremap <leader>o :tab drop **/
+nnoremap <leader>O :tab drop
 "--paste (without copying)
 noremap <leader>p "0p
 "--quit
