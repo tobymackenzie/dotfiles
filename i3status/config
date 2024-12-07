@@ -9,38 +9,46 @@ order += "load"
 order += "memory"
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "volume master"
 order += "battery all"
-order += "tztime local"
+order += "tztime locald"
+order += "tztime localt"
 
 load {
-	format = "L: %1min"
+	format = "%1min"
 }
 
 memory {
-	format = "M: %available free"
-	format_degraded = "M: < %available"
+	format = "%available free"
+	format_degraded = "%available!"
 	threshold_degraded = "200M"
 }
 
 wireless _first_ {
-	format_up = "W: %quality at %essid"
+	format_up = "%quality at %essid (wifi)"
 	format_down = ""
 }
 
 ethernet _first_ {
-	format_up = "E: %speed"
+	format_up = "%speed (eth)"
 	format_down = ""
 }
 
+volume master {
+}
 battery all {
-	format = "%status: %percentage"
+	format = "%status %percentage"
 	format_down = ""
+	integer_battery_capacity = true
 	status_bat = "🔋"
 	status_chr = "⚡"
 	status_full = "⚡"
 	status_unk = "?"
 }
 
-tztime local {
-	format = "%m-%d %H:%M  "
+tztime locald {
+	format = "%m/%d"
+}
+tztime localt {
+	format = "%H:%M  "
 }
