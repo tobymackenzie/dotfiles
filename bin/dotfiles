@@ -26,7 +26,7 @@ case $cmd in
 	'init'|'install') #: dotfiles install. must run again if any new files are added
 		bash ${binPath}/../src/init.sh
 	;;
-	'bin') #: list bin commands
+	'bin'|'commands') #: list bin commands
 		cd bin
 		if [ "$#" -lt 2 ]; then
 			ls -1A
@@ -39,7 +39,7 @@ case $cmd in
 	'd'|'diff') #: show git diff of dotfiles repo
 		git diff --color-words -w ${@:2}
 	;;
-	'e'|'edit') #: edit dotfiles file
+	'e'|'edit'|'vi'|'vim') #: edit dotfiles file
 		if [ -z $EDITOR ]; then
 			EDITOR=vi
 		fi
@@ -48,7 +48,7 @@ case $cmd in
 	'g'|'git') #: run git command on dotfiles repo
 		git ${@:2}
 	;;
-	'l'|'ls') #: list files in dotfiles repo
+	'l'|'ls'|'list') #: list files in dotfiles repo
 		ls -1AFh --color ${@:2}
 	;;
 	's'|'stat'|'status') #: get git status of dotfiles repo
@@ -58,7 +58,7 @@ case $cmd in
 		echo 'running tests'
 		bash ${binPath}/../tests/init.sh
 	;;
-	'v'|'view') #: view dotfiles file
+	'v'|'view'|'less') #: view dotfiles file
 		less ${binPath}/../${@:2}
 	;;
 	*)
