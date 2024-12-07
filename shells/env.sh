@@ -5,6 +5,9 @@ setdefaultenv TJM_BIN_PATH ~/bin
 setdefaultenv TJM_PROJ_PATH $TJM_MAIN_PATH/checkouts
 setdefaultenv TJM_CHECKOUTS_PATH $TJM_PROJ_PATH
 
-#--etc
+#--common
+setdefaultenv BROWSER w3m
+setdefaultenv EDITOR vi
+setdefaultenv VISUAL vim
 setdefaultenv WWW_HOME $TJM_DOTFILES_PATH/www/index.html
 
