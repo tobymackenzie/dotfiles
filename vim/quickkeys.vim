@@ -44,9 +44,10 @@ nnoremap <leader>T :tab term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
 "--tab close
-fun! TMCloseBuffer()
+fun! TMCloseCleanly()
+	"--close if buffer open in more than one window
 	"--for help, need close unless last window
-	if &ft == 'help' && winnr() != winnr('$')
+	if len(win_findbuf(bufnr('%'))) > 1 || (&ft == 'help' && winnr() != winnr('$'))
 		close
 	"--otherwise, delete buffer unless last netrw
 	elseif &ft !=# 'netrw' || len(getbufinfo({'buflisted':1})) > 1 || tabpagenr('$') > 1
@@ -67,7 +68,7 @@ fun! TMCloseBuffer()
 		endfor
 	endif
 endfun
-noremap <leader>x :call TMCloseBuffer()<cr>
+noremap <leader>x :call TMCloseCleanly()<cr>
 noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
 "--yank current line without break / indent
 noremap <leader>y m'^y$``
