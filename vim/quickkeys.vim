@@ -22,8 +22,8 @@ nnoremap <leader>G :!git<space>
 nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
 nnoremap <leader>H :tab help<cr>
 "--open
-nnoremap <leader>o :tab drop **/
-nnoremap <leader>O :tab drop
+nnoremap <leader>o :OpenFile **/
+nnoremap <leader>O :OpenFile<space>
 "--paste (without copying)
 noremap <leader>p "0p
 "--quit

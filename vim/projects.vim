@@ -39,6 +39,7 @@ fun! TMOpenProject(proj)
 	else
 		let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
 	endif
+	let $openPath = l:proj
 	"--store old buffer for removal if "No Name"
 	if !empty(a:proj)
 		let g:currentProj = l:proj
