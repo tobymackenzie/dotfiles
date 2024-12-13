@@ -15,7 +15,7 @@ set autoread
 "---show message that buffer was updated
 augroup TJMBufferRead
 	autocmd!
-	autocmd FileChangedShellPost * echohl WarningMsg | echo "Buffer '" .. expand('<afile>') .. "' updated to match file on disk " .. strftime('@%H:%M:%S on %m/%d', getftime(expand('<afile>'))) | echohl None
+	autocmd FileChangedShellPost * echohl WarningMsg | echo "'" .. expand('<afile>') .. "' updated to match file on disk " .. strftime('@%H:%M:%S on %m/%d', getftime(expand('<afile>'))) | echohl None
 augroup END
 
 source ~/.vim/commandp.vim
