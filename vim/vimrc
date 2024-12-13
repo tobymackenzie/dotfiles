@@ -13,7 +13,10 @@ set nomodeline
 "--auto reload external changes if no changes made in vim
 set autoread
 "---show message that buffer was updated
-autocmd FileChangedShellPost * echohl WarningMsg | echo "Buffer '" .. expand('<afile>') .. "' updated to match file on disk " .. strftime('@%H:%M:%S on %m/%d', getftime(expand('<afile>'))) | echohl None
+augroup TJMBufferRead
+	autocmd!
+	autocmd FileChangedShellPost * echohl WarningMsg | echo "Buffer '" .. expand('<afile>') .. "' updated to match file on disk " .. strftime('@%H:%M:%S on %m/%d', getftime(expand('<afile>'))) | echohl None
+augroup END
 
 source ~/.vim/commandp.vim
 source ~/.vim/open.vim
