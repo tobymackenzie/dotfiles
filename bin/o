@@ -93,21 +93,26 @@ buildCmd(){
 		echo "open -a '${name}' %%"
 		return 0
 	else
-		for var in "${@:2}"; do
-			if command -v `echo $var | cut -d ' ' -f1` > /dev/null; then
-				local c="${var} %%"
-				#--if gui command, we don't want CLI output, so eat it
-				case "$var" in
-					firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
-					c="${c} &> /dev/null &"
-					;;
-				esac
-				echo $c
-				return 0
-			fi
-		done
+		echo `getFirstValidCommand ${@:2}` && return 0
 	fi
 	>&2 echo "${name} command not found"
+	exit 1
+}
+getFirstValidCommand(){
+	for var in "${@}"; do
+		if command -v `echo $var | cut -d ' ' -f1` > /dev/null; then
+			local c="${var} %%"
+			#--if gui command, we don't want CLI output, so eat it
+			case "$var" in
+				firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
+				c="${c} &> /dev/null &"
+				;;
+			esac
+			echo $c
+			return 0
+		fi
+	done
+	>&2 echo "valid command not found in: ${@}"
 	exit 1
 }
 
