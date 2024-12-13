@@ -1,11 +1,19 @@
 function fish_prompt
 	echo '@ '(date '+%H:%M:%S %Y-%m-%d')
+	#--colors
 	set tputColors (tput colors 2> /dev/null; or echo 2)
 	if test "$tputColors" -gt 8
 		set_color black -b 00d787
 	else if test "$tputColors" -gt 2
 		set_color black -b green
 	end
+	#--shell level
+	if test "$SHLVL" -gt 1
+		echo -n '('
+		echo -n -s "$SHLVL"
+		echo -n ') '
+	end
+	#--main
 	echo -n '['
 	echo -n -s "$USER"
 	echo -n ':'
