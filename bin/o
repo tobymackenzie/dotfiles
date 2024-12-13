@@ -29,7 +29,7 @@ main(){
 					if (( hasNoOpen == 0 )); then
 						cmd='open -R %%'
 					else
-						cmd=`buildCmd nautilus konqueror mc ll`
+						cmd=`getFirstValidCommand nautilus konqueror mc 'ls -l'`
 					fi
 				;;
 				'ff'|'web')
