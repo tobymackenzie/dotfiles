@@ -5,6 +5,9 @@
 if !exists('g:currentProj')
 	let g:currentProj = ''
 endif
+if !exists('g:currentProjName')
+	let g:currentProjName = ''
+endif
 fun! TMProjectComplete(proj, cmd, pos) abort
 	let firstChar = a:proj[0]
 	"--glob for relative or absolute paths
@@ -36,8 +39,12 @@ fun! TMOpenProject(proj)
 	let firstChar = a:proj[0]
 	if firstChar == '~' || firstChar == '/' || firstChar == '.'
 		let l:proj = a:proj
+		let g:currentProjName = strchars(a:proj) > 15
+					\ ? '…' .. strcharpart(a:proj, strchars(a:proj) - 15)
+					\ : a:proj
 	else
 		let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
+		let g:currentProjName = a:proj
 	endif
 	let $openPath = l:proj
 	"--store old buffer for removal if "No Name"
