@@ -25,6 +25,13 @@ main(){
 				'f'|'file'|'files'|'finder')
 					cmd=`buildCmd Finder nautilus konqueror mc ls`
 				;;
+				'-R')
+					if (( hasNoOpen == 0 )); then
+						cmd='open -R %%'
+					else
+						cmd=`buildCmd nautilus konqueror mc ll`
+					fi
+				;;
 				'ff'|'web')
 					cmd=`buildCmd Firefox firefox w3m links lynx`
 				;;

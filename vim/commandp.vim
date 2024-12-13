@@ -5,7 +5,7 @@
 "--files
 command! -nargs=? -complete=dir FileManager call TMExploreFn(<f-args>)
 command! -nargs=? -complete=dir FM call TMExploreFn(<f-args>)
-command! Reveal execute ':silent !open -R ' . expand('%') . ' & ' | execute ':redraw!'
+command! Reveal execute ':silent !o -R ' . expand('%')
 
 "--lint
 command! Lint ALELint
