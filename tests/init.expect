@@ -14,6 +14,7 @@ tmp/.config:
 fish
 git
 i3
+i3status
 
 tmp/.config/fish:
 config.fish
