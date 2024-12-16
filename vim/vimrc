@@ -96,8 +96,10 @@ if has('patch-8.2.4325')
 	set wildoptions=pum
 endif
 "---ignore some directories for file matching
+"-! would be good to use .gitignore
+set wildignore+=dist/*
 set wildignore+=*/node_modules/*
-set wildignore+=*/vendor/*
+set wildignore+=vendor/*
 
 "--show partial of current command
 set showcmd
