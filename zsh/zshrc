@@ -55,6 +55,12 @@ fi
 #--word movements
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+bindkey "\033b" backward-word
+bindkey "\033f" forward-word
+#--emacs
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^k' vi-kill-eol
 
 #==prompt
 autoload -U colors && colors
