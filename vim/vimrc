@@ -18,8 +18,15 @@ augroup TJMBufferRead
 	autocmd FileChangedShellPost * echohl WarningMsg | echo "'" .. expand('<afile>') .. "' updated to match file on disk " .. strftime('@%H:%M:%S on %m/%d', getftime(expand('<afile>'))) | echohl None
 augroup END
 
+"--my "plugins"
+if exists("+omnifunc")
+	source ~/.vim/autocomplete.vim
+endif
+source ~/.vim/colors.vim
 source ~/.vim/commandp.vim
 source ~/.vim/open.vim
+source ~/.vim/projects.vim
+source ~/.vim/quickkeys.vim
 
 "=====
 "==styles
@@ -67,7 +74,6 @@ if has('gui_macvim')
 	"--use our colorscheme if MacVim
 	let macvim_skip_colorscheme=1
 endif
-source ~/.vim/colors.vim
 
 "==languagues
 "--less
@@ -167,11 +173,6 @@ xnoremap / :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(esc
 "--set number of undo's remembered
 set undolevels=100
 
-"==autocomplete
-if exists("+omnifunc")
-	source ~/.vim/autocomplete.vim
-endif
-
 "==buffers
 "--allow hiding / switching away from modified buffers
 set hidden
@@ -232,8 +233,6 @@ inoremap <f2><f1> <help>
 map <f1> <leader>
 noremap <f2><f1> <help>
 noremap <leader><f1> <help>
-"--quickkeys
-source ~/.vim/quickkeys.vim
 
 "==search
 "--highlight search terms
@@ -395,9 +394,6 @@ augroup TJMExploreListen
 	autocmd WinClosed * if expand('<amatch>') == g:TMExploreWin | let g:TMExploreWin = 0 | endif
 augroup END
 
-
-"==projects
-source ~/.vim/projects.vim
 
 "=====
 "==term
