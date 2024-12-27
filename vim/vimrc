@@ -371,7 +371,7 @@ let g:netrw_sizestyle='h'
 let g:netrw_sort_options="i"
 "--open files in new tab by default
 let g:netrw_browse_split = 3
-"--sidebar
+"--open
 if !exists('g:TMExploreWin')
 	let g:TMExploreWin=0
 endif
@@ -383,14 +383,9 @@ fun! TMExploreFn(fp = '')
 		execute ':tabn ' . g:TMExploreOn
 		if len(a:fp) != 0
 			execute ':e ' . a:fp
-			echo 'opening args'
-		else
-			echo 'no args: ' . a:0 . ',' . a:fp
 		endif
 	else
-		execute ':0tabnew'
-		execute ':e ' . (len(a:fp) > 0 ? a:fp : '.')
-		echo 'opening new with args ' . a:0 . ',' . a:fp
+		execute ':0tab drop ' .. (len(a:fp) > 0 ? a:fp : '.')
 		let g:TMExploreOn=tabpagenr()
 		let g:TMExploreWin=win_getid()
 	endif
@@ -399,23 +394,6 @@ augroup TJMExploreListen
 	autocmd!
 	autocmd WinClosed * if expand('<amatch>') == g:TMExploreWin | let g:TMExploreWin = 0 | endif
 augroup END
-"---ensure proper `netrw_browse_split` setting
-"fun! TMExploreBrowseSplitSet()
-	"if !exists('t:TMExploreOn')
-		"let t:TMExploreOn=0
-	"endif
-	"if t:TMExploreOn != 0 && win_id2win(t:TMExploreOn) != 0
-		"echo 'split 4'
-		"let g:netrw_browse_split=4
-	"else
-		"echo 'split 0'
-		"let g:netrw_browse_split=0
-	"endif
-"endfun
-"augroup TJMExploreBrowseSplitSet
-	"autocmd!
-	"autocmd WinEnter * call TMExploreBrowseSplitSet()
-"augroup END
 
 
 "==projects
