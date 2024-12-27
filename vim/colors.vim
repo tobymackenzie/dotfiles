@@ -1,3 +1,7 @@
+if has('gui_macvim')
+	"--use our colorscheme if MacVim
+	let macvim_skip_colorscheme=1
+endif
 colorscheme koehler
 highlight Normal ctermfg=lightgreen guifg=#b0ffb3
 
@@ -28,6 +32,8 @@ highlight! PMenuMatchSel ctermfg=14 ctermbg=46 guifg=#ff0000 guibg=#00ff00
 highlight! PMenuSel ctermfg=16 ctermbg=46 guifg=#000000 guibg=#00ff00
 
 "==statusline
+" highlight StatusLine ctermbg=1 guifg=#ffffff guibg=#5f875f
+" highlight StatusLine ctermfg=21 ctermbg=231 guifg=#ffffff guibg=#5f875f
 highlight! link StatusLine DiffAdd
 highlight! link StatusLineNC Pmenu
 highlight! TJMStatusEtc ctermfg=0 ctermbg=10 guifg=black guibg=#00cc55
