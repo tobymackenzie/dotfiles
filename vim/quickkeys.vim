@@ -11,9 +11,9 @@ nnoremap <s-space>B :buffers<cr>:b
 nnoremap <leader>d :copy.<cr>
 xnoremap <leader>d y`]p
 "--file sidebar
-nnoremap <leader>f :TMexplore<cr>
-nnoremap <leader>F :TMexplore<space>
-nnoremap <s-space>F :TMexplore<space>
+nnoremap <leader>f :FileManager<cr>
+nnoremap <leader>F :FileManager<space>
+nnoremap <s-space>F :FileManager<space>
 "--git (fugitive plugin)
 nnoremap <leader>g :tab G<cr>
 "--git command line
