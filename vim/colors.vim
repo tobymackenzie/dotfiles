@@ -13,8 +13,8 @@ augroup TJMInsertBGStyle
 	autocmd!
 	autocmd InsertEnter * hi Normal term=reverse	guibg=#002200
 	autocmd InsertLeave * hi Normal term=NONE	guibg=black
-	autocmd InsertEnter * hi LineNr term=reverse ctermfg=cyan guifg=cyan guibg=#003300
-	autocmd InsertLeave * hi LineNr term=NONE ctermfg=yellow guifg=yellow guibg=#001100
+	autocmd InsertEnter * hi LineNr term=reverse ctermfg=7 ctermbg=2 guifg=white guibg=#00a000
+	autocmd InsertLeave * hi LineNr ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
 augroup end
 
 "--show whitespace
@@ -25,6 +25,9 @@ highlight SpecialKey ctermfg=darkGray guifg=gray43
 highlight GitGutterAdd ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
+
+"==line number
+highlight! LineNr ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
 
 "==popup menu
 highlight! PMenuMatch ctermfg=14 ctermbg=13 guifg=#ff0000 guibg=#444444
