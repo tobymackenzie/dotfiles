@@ -44,6 +44,23 @@ fi
 
 #===keys
 #-@ based on https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/key-bindings.zsh
+#--vi mode
+#---enable
+bindkey -v
+#---indicate vim command mode by changing cursor
+zle-keymap-select () {
+	case $KEYMAP in
+		vicmd)
+			echo -ne "\e]12;#0c0\a" #--green cursor
+			print -n -- '\e[1 q' #--blink cursor
+		;;
+		viins|main)
+			print -n '\e]112\a' #--normal cursor color
+			print -n '\e[0 q' #--normal cursor
+		;;
+	esac
+}
+zle -N zle-keymap-select
 #--fix delete key (forward delete)
 if [[ "${terminfo[kdch1]}" != "" ]]; then
 	bindkey "${terminfo[kdch1]}" delete-char
