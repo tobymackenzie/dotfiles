@@ -41,6 +41,13 @@ main(){
 				'g'|'git')
 					cmd=`buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G'`
 				;;
+				'h'|'H')
+					if [[ $1 == 'H' ]]; then
+						cmd='echo "I O!" %%'
+					else
+						cmd='echo "i o!" %%'
+					fi
+				;;
 				't'|'text')
 					#--if in vim terminal, we want to open text within that same vim instance
 					if [[ -n $VIM_TERMINAL ]] && [[ -n "${@:2}" ]]; then
