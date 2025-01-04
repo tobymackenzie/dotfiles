@@ -22,6 +22,7 @@ augroup END
 if exists("+omnifunc")
 	source ~/.vim/autocomplete.vim
 endif
+source ~/.vim/colors.vim
 source ~/.vim/commandp.vim
 source ~/.vim/open.vim
 source ~/.vim/projects.vim
@@ -30,13 +31,6 @@ source ~/.vim/quickkeys.vim
 "=====
 "==styles
 "=====
-
-"--syntax highlighting
-syntax on
-
-"--colors # must be after `syntax on`
-source ~/.vim/colors.vim
-
 "--show line numbers
 set number
 
