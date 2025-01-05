@@ -12,5 +12,15 @@ augroup TJMColorFallbacks
 	autocmd ColorScheme * silent highlight link TJMStatusEtc Cursor
 augroup end
 
-"--choose default color scheme
-colorscheme koehlertm
+"--set colors helper
+fun! SetColors(val = 'koehlertm') abort
+	if a:val == 'dark' || a:val == 'light'
+		execute 'set bg=' .. a:val
+	else
+		execute ':colorscheme ' .. a:val
+	endif
+endfun
+command! -nargs=? -complete=color SetColors call SetColors(<f-args>)
+
+"--choose default color scheme (see default arg)
+SetColors
