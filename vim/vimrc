@@ -270,7 +270,7 @@ fun! TJMStatusLine()
 		endif
 	endif
 	if !empty(g:currentProjName)
-		let l:sl .= l:hl .. ' PROJ: ' .. g:currentProjName .. ' %#StatusLine# '
+		let l:sl .= '%#TJMStatusEtc# PROJ: ' .. g:currentProjName .. ' %#StatusLine# '
 	endif
 	return l:sl
 endfun

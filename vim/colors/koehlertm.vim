@@ -41,7 +41,7 @@ highlight! PMenuSel ctermfg=16 ctermbg=46 guifg=#000000 guibg=#00ff00
 " highlight StatusLine ctermfg=21 ctermbg=231 guifg=#ffffff guibg=#5f875f
 highlight! link StatusLine DiffAdd
 highlight! link StatusLineNC Pmenu
-highlight! TJMStatusEtc ctermfg=0 ctermbg=10 guifg=black guibg=#00cc55
+highlight! TJMStatusEtc ctermfg=0 ctermbg=10 guifg=black guibg=#00dd77
 
 "==tabs
 highlight! link Tabline diffadd
