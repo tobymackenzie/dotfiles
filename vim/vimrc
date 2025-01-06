@@ -266,11 +266,11 @@ fun! TJMStatusLine()
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
 		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r %='
 		if exists('b:tjmStatusLineDT')
-			let l:sl .= '%#TJMStatusEtc# Mod: ' . b:tjmStatusLineDT . ' %#DiffAdd# '
+			let l:sl .= '%#TJMStatusEtc# Mod: ' . b:tjmStatusLineDT . ' %#StatusLine# '
 		endif
 	endif
 	if !empty(g:currentProjName)
-		let l:sl .= l:hl .. ' PROJ: ' .. g:currentProjName .. ' %#DiffAdd# '
+		let l:sl .= l:hl .. ' PROJ: ' .. g:currentProjName .. ' %#StatusLine# '
 	endif
 	return l:sl
 endfun
