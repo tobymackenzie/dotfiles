@@ -30,6 +30,21 @@ function plug {
 		. $initfile
 	done
 }
+function plugupdate {
+	if [ -z $ZPLUGINDIR ]; then
+		exit 1
+	fi
+	while read -r repo; do
+		[[ $repo =~ ^# ]] && continue
+		plugdir=$ZPLUGINDIR/${repo:gs/\//-}
+		if [ -d "$plugdir" ]; then
+			git -C "$plugdir" pull
+		fi
+	done < "$TJM_DOTFILES_PATH/zsh/plugins.txt"
+}
+
+#--main
 while read -r plugin; do
 	plug $plugin
 done < "$TJM_DOTFILES_PATH/zsh/plugins.txt"
+
