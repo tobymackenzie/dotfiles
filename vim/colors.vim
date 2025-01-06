@@ -26,3 +26,9 @@ command! -nargs=? -complete=color SetColors call SetColors(<f-args>)
 
 "--choose default color scheme (see default arg)
 SetColors
+
+"--toggle dark mode helper
+fun! ToggleDarkMode() abort
+	let &background = (&background == 'dark' ? 'light' : 'dark')
+endfun
+command! -nargs=0 ToggleDarkMode call ToggleDarkMode()
