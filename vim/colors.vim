@@ -13,6 +13,7 @@ augroup TJMColorFallbacks
 augroup end
 
 "--set colors helper
+"-# pretty much just `:colorscheme` with a `dark` / `light` setting
 fun! SetColors(val = 'koehlertm') abort
 	if a:val == 'dark' || a:val == 'light'
 		execute 'set bg=' .. a:val
