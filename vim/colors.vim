@@ -22,6 +22,7 @@ fun! SetColors(val = 'koehlertm') abort
 	endif
 endfun
 command! -nargs=? -complete=color Colors call SetColors(<f-args>)
+command! -nargs=? -complete=color SetColors call SetColors(<f-args>)
 
 "--choose default color scheme (see default arg)
-Colors
+SetColors
