@@ -10,17 +10,17 @@ if &background ==# 'dark'
 	if exists('g:terminal_ansi_colors')
 		let g:terminal_ansi_colors[-1] = '#cbe392'
 	endif
-	hi Normal ctermfg=193 guifg=#cbe3a2
-	hi Cursor ctermbg=193 guibg=#cbe3a2
+	hi Normal ctermfg=193 guifg=#abf192
+	hi Cursor ctermbg=193 guibg=#abf192
 	hi CursorLine guibg=#203620
 	hi CursorLineNr ctermfg=142 guifg=#b8bb26
 	hi LineNr ctermfg=29 guifg=#427b58
 	hi ModeMsg ctermfg=142 guifg=#b8bb26
 	hi MoreMsg ctermfg=142 guifg=#b8bb26
-	hi Pmenu ctermfg=193 guifg=#cbe3a2
-	hi StatusLine ctermbg=193 guibg=#cbe3a2
-	hi TabLineFill ctermfg=193 guifg=#cbe3a2
-	hi! TJMStatusEtc ctermfg=0 ctermbg=193 guifg=black guibg=#cbe3a2
+	hi Pmenu ctermfg=193 guifg=#abf192
+	hi StatusLine ctermbg=193 guibg=#abf192
+	hi TabLineFill ctermfg=193 guifg=#abf192
+	hi! TJMStatusEtc ctermfg=0 ctermbg=193 guifg=black guibg=#abf192
 
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
