@@ -17,11 +17,13 @@ if &background ==# 'dark'
 	hi LineNr ctermfg=29 guifg=#427b58
 	hi ModeMsg ctermfg=142 guifg=#b8bb26
 	hi MoreMsg ctermfg=142 guifg=#b8bb26
-	hi Pmenu ctermfg=156 guifg=#abf192
+	hi Pmenu ctermfg=156 ctermbg=106 guifg=#abf192 guibg=#98971a
+	hi PmenuMatch ctermbg=106 guibg=#98971a
+	hi PMenuMatchSel ctermbg=142 guibg=#b8bb26
+	hi PMenuSel ctermbg=142 guibg=#b8bb26
 	hi StatusLine ctermfg=235 ctermbg=156 guifg=#203620 guibg=#abf192
 	hi TabLineFill ctermfg=156 guifg=#abf192
 	hi! TJMStatusEtc ctermfg=0 ctermbg=156 guifg=black guibg=#abf192
-	hi PMenuSel ctermbg=142 guibg=#b8bb26
 	hi Visual ctermbg=142 guibg=#b8bb26
 
 	"--make it noticeable which mode I'm in
