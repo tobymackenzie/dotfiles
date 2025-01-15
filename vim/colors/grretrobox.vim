@@ -21,6 +21,8 @@ if &background ==# 'dark'
 	hi StatusLine ctermfg=235 ctermbg=156 guifg=#203620 guibg=#abf192
 	hi TabLineFill ctermfg=156 guifg=#abf192
 	hi! TJMStatusEtc ctermfg=0 ctermbg=156 guifg=black guibg=#abf192
+	hi PMenuSel ctermbg=142 guibg=#b8bb26
+	hi Visual ctermbg=142 guibg=#b8bb26
 
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
