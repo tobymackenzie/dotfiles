@@ -18,7 +18,7 @@ if &background ==# 'dark'
 	hi ModeMsg ctermfg=142 guifg=#b8bb26
 	hi MoreMsg ctermfg=142 guifg=#b8bb26
 	hi Pmenu ctermfg=156 guifg=#abf192
-	hi StatusLine ctermbg=156 guibg=#abf192
+	hi StatusLine ctermfg=235 ctermbg=156 guifg=#203620 guibg=#abf192
 	hi TabLineFill ctermfg=156 guifg=#abf192
 	hi! TJMStatusEtc ctermfg=0 ctermbg=156 guifg=black guibg=#abf192
 
