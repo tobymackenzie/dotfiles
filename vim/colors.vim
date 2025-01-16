@@ -24,6 +24,26 @@ endfun
 command! -nargs=? -complete=color Colors call SetColors(<f-args>)
 command! -nargs=? -complete=color SetColors call SetColors(<f-args>)
 
+"--random color helper
+fun! RandomColors()
+	if !exists('g:colorschemes')
+		"-@ https://stackoverflow.com/a/44102038
+		let g:colorschemes = uniq(
+			\ sort(
+				\ map(
+					\ globpath(&runtimepath, "colors/*.vim", 0, 1),
+					\ 'fnamemodify(v:val, ":t:r")'
+				\ )
+			\ )
+		\ )
+	endif
+	let scheme = g:colorschemes[rand() % len(g:colorschemes)]
+	call SetColors(scheme)
+	redraw
+	echo 'colorscheme ' .. scheme
+endfun
+command! RandomColors call RandomColors()
+
 "--choose default color scheme (see default arg)
 SetColors
 
