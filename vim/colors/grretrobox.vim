@@ -17,9 +17,9 @@ if &background ==# 'dark'
 	hi LineNr ctermfg=29 guifg=#427b58
 	hi ModeMsg ctermfg=142 guifg=#b8bb26
 	hi MoreMsg ctermfg=142 guifg=#b8bb26
-	hi Pmenu ctermfg=156 ctermbg=106 guifg=#abf192 guibg=#98971a
-	hi PmenuMatch ctermbg=106 guibg=#98971a
-	hi PMenuMatchSel ctermbg=142 guibg=#b8bb26
+	hi Pmenu ctermfg=237 ctermbg=72 guifg=#3c3836 guibg=#689d6a
+	hi PmenuMatch ctermfg=229 ctermbg=72 guifg=#fbf1c7 guibg=#689d6a
+	hi PMenuMatchSel ctermfg=132 ctermbg=142 guifg=#b16286 guibg=#b8bb26
 	hi PMenuSel ctermbg=142 guibg=#b8bb26
 	hi StatusLine ctermfg=235 ctermbg=156 guifg=#203620 guibg=#abf192
 	hi TabLineFill ctermfg=156 guifg=#abf192
