@@ -1,3 +1,6 @@
+#--movement
+keymap C-d NEXT_PAGE
+#--search
 keymap `b COMMAND "GOTO file://~/.dotfiles/w3m/bing.html; NEXT_LINK; GOTO_LINK; SUBMIT"
 #keymap `b COMMAND "GOTO https://www.bing.com/search; GOTO_LINE 2; NEXT_LINK; GOTO_LINK; SUBMIT"
 keymap `d COMMAND "GOTO https://duckduckgo.com/lite/; NEXT_LINK; GOTO_LINK; SUBMIT"
