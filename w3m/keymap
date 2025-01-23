@@ -1,3 +1,11 @@
+keymap fx EXTERN_LINK
+keymap fX EXTERN
+keymap FX EXTERN
+keymap fc COMMAND
+keymap `` COMMAND
+#--history
+keymap fb PREV
+keymap ff NEXT
 #--movement
 keymap C-d NEXT_PAGE
 #--search
@@ -6,3 +14,11 @@ keymap `b COMMAND "GOTO file://~/.dotfiles/w3m/bing.html; NEXT_LINK; GOTO_LINK; 
 keymap `d COMMAND "GOTO https://duckduckgo.com/lite/; NEXT_LINK; GOTO_LINK; SUBMIT"
 keymap `g COMMAND "GOTO https://google.com/; GOTO_LINE 6; NEXT_LINK; GOTO_LINK; SUBMIT"
 keymap `w COMMAND "GOTO https://en.wikipedia.org/; GOTO_LINE 24; NEXT_LINK; GOTO_LINK; SUBMIT"
+#--tabs
+keymap fLEFT PREV_TAB
+keymap fj PREV_TAB
+keymap ft PREV_TAB
+keymap fRIGHT NEXT_TAB
+keymap fk NEXT_TAB
+keymap fT NEXT_TAB
+keymap FT NEXT_TAB
