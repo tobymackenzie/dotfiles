@@ -17,8 +17,8 @@ keymap `w COMMAND "GOTO https://en.wikipedia.org/; GOTO_LINE 24; NEXT_LINK; GOTO
 #--tabs
 keymap fLEFT PREV_TAB
 keymap fj PREV_TAB
-keymap ft PREV_TAB
+keymap fT PREV_TAB
+keymap FT PREV_TAB
 keymap fRIGHT NEXT_TAB
 keymap fk NEXT_TAB
-keymap fT NEXT_TAB
-keymap FT NEXT_TAB
+keymap ft NEXT_TAB
