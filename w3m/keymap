@@ -4,6 +4,7 @@ keymap FX EXTERN
 keymap fc COMMAND
 keymap `` COMMAND
 #--history
+keymap dd PREV
 keymap fb PREV
 keymap ff NEXT
 #--movement
