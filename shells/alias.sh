@@ -14,6 +14,7 @@ alias grepr="grep -R"
 alias grepri="grep -Ri"
 alias greprl="grep -Rl"
 alias greprli="grep -Rli"
+alias typa="type -a"
 alias typea="type -a"
 
 #--custom config path
