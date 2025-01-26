@@ -4,11 +4,13 @@
 #- `-C` to find content matching case
 #- use quotes to find continguous string with spaces
 #- `-not` can be added before content search to invert
+#- add `-v` option to echo command before running
 
 fopts=''
 gcmd=''
 inC=0
 inNot=0
+verbose=0
 #--build command strings
 for arg in "$@"; do
 	if [[ "$inC" != 0 ]]; then
@@ -31,6 +33,8 @@ for arg in "$@"; do
 		inC=0
 	elif [[ "$arg" == '-c' || "$arg" == '-C' || "$arg" == '-content' ]]; then
 		inC="${arg}"
+	elif [[ "$arg" == '-v' ]]; then
+		verbose=1
 	elif [[ "$arg" == '-not' ]]; then
 		inNot="$arg"
 	elif [[ "$inNot" != 0 ]]; then
@@ -49,5 +53,8 @@ if [[ $fopts != *"-type"* && ${#gcmd} > 0 ]]; then
 	fopts="${fopts} -type f"
 fi
 #--run
-echo "find${fopts} ${gcmd}"
+if [ $verbose -eq 1 ]; then
+	echo "running: find${fopts} ${gcmd}"
+	echo '-----'
+fi
 eval "find ${fopts} ${gcmd}"
