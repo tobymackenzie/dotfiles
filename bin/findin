@@ -1,0 +1,53 @@
+#!/bin/bash
+#--find with `grep` of content as built in options
+#- `-c` or `-content` to find content ignoring case
+#- `-C` to find content matching case
+#- use quotes to find continguous string with spaces
+#- `-not` can be added before content search to invert
+
+fopts=''
+gcmd=''
+inC=0
+inNot=0
+#--build command strings
+for arg in "$@"; do
+	if [[ "$inC" != 0 ]]; then
+		if [ "${#gcmd}" == 0 ]; then
+			gcmd="-print0 | xargs -0"
+		else
+			gcmd="${gcmd} | xargs"
+		fi
+		gcmd="${gcmd} grep -"
+		if [[ "$inC" != '-C' ]]; then
+			gcmd="${gcmd}i"
+		fi
+		if [[ "${inNot}" == 0 ]]; then
+			gcmd="${gcmd}l"
+		else
+			gcmd="${gcmd}L"
+			inNot=0
+		fi
+		gcmd="${gcmd} '${arg}'"
+		inC=0
+	elif [[ "$arg" == '-c' || "$arg" == '-C' || "$arg" == '-content' ]]; then
+		inC="${arg}"
+	elif [[ "$arg" == '-not' ]]; then
+		inNot="$arg"
+	elif [[ "$inNot" != 0 ]]; then
+		fopts="${fopts} ${inNot} ${arg}"
+		inNot=0
+	else
+		fopts="${fopts} ${arg}"
+	fi
+done
+#--ensure we have a path, default to `.`
+if [[ -z $fopts || ${fopts:0:2} == ' -' ]]; then
+	fopts=" . ${fopts}"
+fi
+#--ensure we're only working with files if not otherwise specific and we want to `grep`
+if [[ $fopts != *"-type"* && ${#gcmd} > 0 ]]; then
+	fopts="${fopts} -type f"
+fi
+#--run
+echo "find${fopts} ${gcmd}"
+eval "find ${fopts} ${gcmd}"
