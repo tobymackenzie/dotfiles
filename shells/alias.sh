@@ -9,3 +9,10 @@ alias scp="scp -pr"
 alias tputshow='tputcolor'
 alias w3m="w3m -config ~/.dotfiles/w3m/config"
 
+#--merge options to command for quicker typing, autocomplete
+alias grepr="grep -R"
+alias grepri="grep -Ri"
+alias greprl="grep -Rl"
+alias greprli="grep -Rli"
+alias typea="type -a"
+
