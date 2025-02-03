@@ -13,8 +13,8 @@ augroup TJMInsertBGStyle
 	autocmd!
 	autocmd InsertEnter * hi Normal term=reverse	guibg=#002200
 	autocmd InsertLeave * hi Normal term=NONE	guibg=black
-	autocmd InsertEnter * hi LineNr term=reverse ctermfg=7 ctermbg=2 guifg=white guibg=#00a000
-	autocmd InsertLeave * hi LineNr ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
+	autocmd InsertEnter * hi LineNr term=reverse ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
+	autocmd InsertLeave * hi LineNr ctermfg=157 ctermbg=59 guifg=#b0ffb3 guibg=#555555
 	"--remove this feature before changing to another color scheme
 	autocmd ColorSchemePre * silent augroup TJMInsertBGStyle | autocmd! | augroup end
 augroup end
@@ -29,7 +29,7 @@ highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
 "==line number
-highlight! LineNr ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
+highlight! LineNr ctermfg=157 ctermbg=59 guifg=#b0ffb3 guibg=#555555
 
 "==popup menu
 highlight! PMenuMatch ctermfg=14 ctermbg=13 guifg=#ff0000 guibg=#444444
