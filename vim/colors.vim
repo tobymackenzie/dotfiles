@@ -9,6 +9,8 @@ syntax on
 "-# using link without ! because that will be ignored if defined
 augroup TJMColorFallbacks
 	autocmd!
+	autocmd ColorScheme * silent highlight link TJMStatus CursorColumn
+	autocmd ColorScheme * silent highlight link TJMStatusMode Cursor
 	autocmd ColorScheme * silent highlight link TJMStatusEtc Cursor
 augroup end
 
