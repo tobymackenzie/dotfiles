@@ -21,11 +21,13 @@ if &background ==# 'dark'
 	hi PmenuMatch ctermfg=229 ctermbg=72 guifg=#fbf1c7 guibg=#689d6a
 	hi PMenuMatchSel ctermfg=132 ctermbg=142 guifg=#b16286 guibg=#b8bb26
 	hi PMenuSel ctermbg=142 guibg=#b8bb26
-	hi StatusLine ctermfg=236 ctermbg=156 guifg=#203620 guibg=#abf192
+	hi StatusLine ctermfg=236 ctermbg=142 guifg=#203620 guibg=#b8bb26
 	hi TabLine ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
 	hi TablineSel ctermfg=156 ctermbg=29 guifg=#abf192 guibg=#427b58
 	hi TabLineFill ctermfg=29 ctermbg=236 guifg=#427b58 guibg=#203620
-	hi! TJMStatusEtc ctermbg=29 guibg=#427b58
+	hi! TJMStatus ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
+	hi! TJMStatusMode ctermfg=156 ctermbg=29 guifg=#abf192 guibg=#427b58
+	hi! TJMStatusEtc ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
 	hi Visual ctermbg=142 guibg=#b8bb26
 
 	"--make it noticeable which mode I'm in
