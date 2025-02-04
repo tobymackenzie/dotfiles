@@ -2,8 +2,6 @@
 runtime colors/retrobox.vim
 let g:colors_name = 'grretrobox'
 
-hi! link TabLineSel Normal
-
 "--replace some colors with greener alternatives
 if &background ==# 'dark'
 	"-! should be less vibrant, more warm, more light
@@ -43,6 +41,11 @@ else
 	hi Normal ctermbg=194 guibg=#d7ffd7
 	hi CursorLineNr ctermfg=64 guifg=#79740e
 	hi LineNr ctermfg=29 guifg=#427b58
+	hi StatusLine ctermfg=188 ctermbg=237 guifg=#e5d4b1 guibg=#3c3836
+	hi TablineSel ctermbg=194 guibg=#d7ffd7
+	hi TJMStatus ctermfg=237 ctermbg=188 guifg=#3c3836 guibg=#e5d4b1
+	hi TJMStatusMode ctermfg=230 ctermbg=100 guifg=#fbf1c7 guibg=#98971a
+	hi TJMStatusEtc ctermfg=237 ctermbg=188 guifg=#3c3836 guibg=#e5d4b1
 
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
