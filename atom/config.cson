@@ -28,6 +28,8 @@
 			"linter-jscs"
 			"open-file-in"
 			"linter-tidy"
+			"whitespace"
+			"github"
 		]
 		ignoredNames: [
 			".DS_Store"
