@@ -20,6 +20,7 @@
 					green: 202
 					red: 121
 	core:
+		automaticallyUpdate: false
 		disabledPackages: [
 			"block-cursor"
 			"linter-csslint"
@@ -79,6 +80,7 @@
 		wrapLeftRightMotion: true
 	welcome:
 		showOnStartup: false
+		showSunsettingOnStartup: false
 	whitespace:
 		ignoreWhitespaceOnCurrentLine: false
 ".editorconfig.source":
