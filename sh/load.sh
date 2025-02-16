@@ -23,7 +23,9 @@ done
 
 #--load `.env`, if it exists
 if test -r ${HOME}/.env; then
+	set -o allexport
 	source ${HOME}/.env
+	set +o allexport
 fi
 
 #--load shared files other than the config and this script next
