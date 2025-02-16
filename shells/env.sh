@@ -11,3 +11,5 @@ setdefaultenv EDITOR vi
 setdefaultenv VISUAL vim
 setdefaultenv WWW_HOME $TJM_DOTFILES_PATH/www/index.html
 
+#--config
+setdefaultenv TJM_GH_USER 'tobymackenzie'

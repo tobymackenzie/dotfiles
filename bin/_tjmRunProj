@@ -1,5 +1,5 @@
 #!/bin/bash
 if [ ! -d ${TJM_PROJ_PATH}/${1} ]; then
-	_tjmConfirm "${1} repo not installed.  Install?" && git clone https://github.com/tobymackenzie/${1}.git ${TJM_PROJ_PATH}/${1} || exit 1
+	_tjmConfirm "${1} repo not installed.  Install?" && git clone https://github.com/${TJM_GH_USER:-tobymackenzie}/${1}.git ${TJM_PROJ_PATH}/${1} || exit 1
 fi
 ${TJM_PROJ_PATH}/${1}/${2} ${@:3}
