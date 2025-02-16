@@ -62,8 +62,7 @@
 	"linter-jshint":
 		disableWhenNoJshintrcFileInPath: true
 	"linter-php": {}
-	"linter-ui-default":
-		showPanel: false
+	"linter-ui-default": {}
 	minimap:
 		moveCursorOnMinimapClick: true
 	"one-dark-ui": {}
