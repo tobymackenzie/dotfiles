@@ -353,8 +353,8 @@ set linebreak
 "=====
 "--hide instruction banner
 let g:netrw_banner=0
-"--hide swap files in list
-let g:netrw_list_hide= '.*\.swp$'
+"--hide some files from list: this, swap files
+let g:netrw_list_hide= '^\./$,.*\.swp$'
 "--show human readable sizes
 let g:netrw_sizestyle='h'
 "--ignore case for sort
