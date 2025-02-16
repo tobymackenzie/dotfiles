@@ -1,11 +1,11 @@
 set go-=T		" hide toolbar
 set bg=dark
-if &background == "dark"
-	hi normal guibg=black guifg=white
-	if has('gui_macvim')
-		set transp=8
-	endif
-endif
+" if &background == "dark"
+	" hi normal guibg=black guifg=white
+	" if has('gui_macvim')
+		" set transp=8
+	" endif
+" endif
 
 "=====
 "==styles
