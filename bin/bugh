@@ -1,0 +1,31 @@
+#!/bin/bash
+#--back up a github account's repos.
+#- first arg is path to store backup at, otherwise uses env TJM_GH_BU_PATH
+#- second arg is github username to back up, otherwise uses env TJM_GH_USER
+dir=${1:-${TJM_GH_BU_PATH:-backup}}
+gh_user=${2:-${TJM_GH_USER:-'tobymackenzie'}}
+if [ ! -d "$dir" ]; then
+	>&2 echo "destination doesn't exist"
+	exit 1
+fi
+if [ ! -e "${dir}/.ghdata" ] || [[ $(find "${dir}/.ghdata" -mtime +7 -print) ]]; then
+	curl "https://api.github.com/users/${gh_user}/repos?per_page=100" | \
+		grep -e '^    "name"*' | \
+		cut -d \" -f 4 > "${dir}/.ghdata"
+fi
+gh_data=`cat "${dir}/.ghdata"`
+for name in ${gh_data}; do
+	case $name in fork-* | 'symfony-docs')
+		continue
+	esac
+	dest="${dir}/${name}"
+	# echo "${dest}"
+	if [ -d "${dest}" ]; then
+		cd "${dest}"
+		git remote -v update --prune
+	else
+		mkdir "${dest}"
+		git clone --mirror "https://github.com/${gh_user}/${name}.git" "${dest}"
+	fi
+done
+
