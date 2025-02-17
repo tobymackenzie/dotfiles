@@ -16,23 +16,6 @@ die(){
 	>&2 echo "$@"
 	exit 1
 }
-getWM(){
-	if [ -n "$_localWM" ]; then
-		echo "$_localWM"
-		return
-	elif [ "$TJM_OS" = 'darwin' ]; then
-		_localWM='darwin'
-	elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
-		_localWM="${XDG_CURRENT_DESKTOP,,}"
-	elif command -v 'xprop' > /dev/null; then
-		_localWM=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep "_NET_WM_NAME = " | cut --delimiter=' ' --fields=3 | cut --delimiter='"' --fields=2)
-	elif [ -n "$I3SOCK" ] && command -v 'i3-msg' > /dev/null; then
-		_localWM='i3'
-	else
-		_localWM='tty'
-	fi
-	echo "$_localWM"
-}
 runPkg(){
 	local cmd=""
 	local sub="$1"
@@ -176,14 +159,14 @@ case $cmd in
 			# fi
 			# system_profiler $args | less
 		fi
-		echo 'WM: ' `getWM`
+		echo 'WM: ' `getwm`
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--gnome
-		if [ `getWM` = 'gnome' ] && command -v 'xdg-screensaver' > /dev/null; then
+		if [ `getwm` = 'gnome' ] && command -v 'xdg-screensaver' > /dev/null; then
 			xdg-screensaver lock
 		#--i3
-		elif [ `getWM` = 'i3' ] && command -v 'i3lock' > /dev/null; then
+		elif [ `getwm` = 'i3' ] && command -v 'i3lock' > /dev/null; then
 			i3lock $args
 		#--mac
 		elif command -v 'pmset' > /dev/null; then
@@ -194,13 +177,13 @@ case $cmd in
 	;;
 	'logout'|'out') #: log out
 		#--gnome
-		if [ `getWM` = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
+		if [ `getwm` = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
 			if [ -z "$args" ]; then
 				args='--no-prompt'
 			fi
 			gnome-session-quit $args
 		#--i3
-		elif [ `getWM` = 'i3' ] && command -v 'i3-msg' > /dev/null; then
+		elif [ `getwm` = 'i3' ] && command -v 'i3-msg' > /dev/null; then
 			i3-msg exit $args
 		#--mac
 		elif command -v 'osascript' > /dev/null; then

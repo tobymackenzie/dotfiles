@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ -n "$_localWM" ]; then
+	echo "$_localWM"
+	return
+elif [ "$TJM_OS" = 'darwin' ]; then
+	_localWM='darwin'
+elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
+	_localWM="${XDG_CURRENT_DESKTOP,,}"
+elif command -v 'xprop' > /dev/null; then
+	_localWM=$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep "_NET_WM_NAME = " | cut --delimiter=' ' --fields=3 | cut --delimiter='"' --fields=2)
+elif [ -n "$I3SOCK" ] && command -v 'i3-msg' > /dev/null; then
+	_localWM='i3'
+else
+	_localWM='tty'
+fi
+echo "$_localWM"
+
