@@ -17,11 +17,11 @@ if test -r $HOME/.env
 end
 
 #--load shared files
-source {$TJM_DOTFILES_PATH}/fish/../shells/env.sh
-source {$TJM_DOTFILES_PATH}/fish/../shells/alias.sh
-source {$TJM_DOTFILES_PATH}/fish/../shells/short.sh
+source {$TJM_DOTFILES_PATH}/shells/env.sh
+source {$TJM_DOTFILES_PATH}/shells/alias.sh
+source {$TJM_DOTFILES_PATH}/shells/short.sh
 if [ $TJM_OS = 'darwin' ]
-	source {$TJM_DOTFILES_PATH}/fish/../shells/mac.sh
+	source {$TJM_DOTFILES_PATH}/shells/mac.sh
 end
 
 #--load all files other than the config and this script next
