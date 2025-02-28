@@ -22,7 +22,7 @@ if &background ==# 'dark'
 	hi StatusLine ctermfg=236 ctermbg=142 guifg=#203620 guibg=#b8bb26
 	hi TabLine ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
 	hi TablineSel ctermfg=156 ctermbg=29 guifg=#abf192 guibg=#427b58
-	hi TabLineFill ctermfg=29 ctermbg=236 guifg=#427b58 guibg=#203620
+	hi TabLineFill ctermfg=29 ctermbg=236 guifg=#427b58 guibg=#1c1c1c
 	hi! TJMStatus ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
 	hi! TJMStatusMode ctermfg=156 ctermbg=29 guifg=#abf192 guibg=#427b58
 	hi! TJMStatusEtc ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620

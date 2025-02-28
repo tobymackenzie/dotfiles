@@ -9,15 +9,20 @@ highlight CursorLine guibg=#444444
 highlight CursorLineNr ctermfg=black ctermbg=green guifg=black guibg=green
 
 "--make it noticeable which mode I'm in
+"-! would like to make this more generic to work with any theme
+"-! perhaps we can store the value, link to another, revert
 augroup TJMInsertBGStyle
 	autocmd!
 	autocmd InsertEnter * hi Normal term=reverse	guibg=#002200
 	autocmd InsertLeave * hi Normal term=NONE	guibg=black
+	" autocmd InsertEnter * hi! link Normal INormal
+	" autocmd InsertLeave * hi! link Normal NONE
 	autocmd InsertEnter * hi LineNr term=reverse ctermfg=231 ctermbg=65 guifg=#ffffff guibg=#5f875f
 	autocmd InsertLeave * hi LineNr ctermfg=157 ctermbg=59 guifg=#b0ffb3 guibg=#555555
 	"--remove this feature before changing to another color scheme
 	autocmd ColorSchemePre * silent augroup TJMInsertBGStyle | autocmd! | augroup end
 augroup end
+highlight INormal term=reverse guibg=#002200
 
 "--show whitespace
 highlight NonText ctermfg=darkGray guifg=gray43
@@ -45,5 +50,5 @@ highlight! TJMStatusEtc ctermfg=0 ctermbg=10 guifg=black guibg=#00dd77
 
 "==tabs
 highlight! link Tabline diffadd
-highlight! link Tablinefill diffadd
+highlight! Tablinefill ctermfg=231 ctermbg=65 guifg=#0000ff guibg=#000000
 highlight! link tablinesel cursor
