@@ -48,10 +48,13 @@ h1{
 }
 
 /*==links boxes */
+.linkBox{
+	flex: 1 1 10em;
+}
 .links{
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0 5em;
+	gap: 0 3em;
 	justify-content: space-between;
 	ul{
 		padding-left: 1em;
