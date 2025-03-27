@@ -56,7 +56,7 @@ if [ -f ${TJM_DOTFILES_PATH}/_local/alias ]; then
 fi
 
 #--custom
-if [ -f ${TJM_DOTFILES_PATH}/_local/bash ]; then
+if [[ -f ${TJM_DOTFILES_PATH}/_local/bash && "$TJM_SHELL" == 'bash' ]]; then
 	source ${TJM_DOTFILES_PATH}/_local/bash
 fi
 
