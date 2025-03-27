@@ -1,5 +1,5 @@
 #--store shell name for `reshell`
-set TJM_SHELL fish
+set -x TJM_SHELL 'fish'
 
 #--set dotfiles path
 if test -z "$TJM_DOTFILES_PATH"

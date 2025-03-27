@@ -6,6 +6,7 @@ elif [ ! -z "${BASH_VERSION+x}" ]; then
 else
 	TJM_SHELL=$SHELL
 fi
+export TJM_SHELL
 
 #--set dotfiles path
 #-@http://stackoverflow.com/a/246128
