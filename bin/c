@@ -1,7 +1,11 @@
 #!/bin/bash
-result=`echo "$*" | bc -l`
-if [ ! -z $result ]; then
-	C=$result
-	echo $C
-	export C
+if [ -z "$1" ]; then
+	bc -l
+else
+	result=`echo "$*" | bc -l`
+	if [ ! -z $result ]; then
+		C=$result
+		echo $C
+		export C
+	fi
 fi
