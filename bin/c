@@ -2,10 +2,25 @@
 if [ -z "$1" ]; then
 	bc -l
 else
-	result=`echo "$*" | bc -l`
-	if [ ! -z $result ]; then
-		C=$result
-		echo $C
-		export C
+	#-# most of this is for storing and getting previous answer.  `bc` line is the only one actually needed otherwise
+	#-# uses `ans` varible for answer
+	#-# negatives of file storage:
+	# - answer is shared between shells
+	# - answer never deleted
+	# - performance penalty for writing, accessing file
+	f="$TJM_DOTFILES_PATH/.c"
+	calc="$*"
+	match='^[\+-/\*%\^]+ '
+	if [[ "$calc" =~ $match ]]; then
+		calc="ans $calc"
 	fi
+	if [[ "$calc" == *"ans"* ]]; then
+		ans=$(cat $f)
+		if [ -z $ans ]; then
+			ans=0
+		fi
+		calc="ans = ${ans}; ${calc}"
+	fi
+	echo "$calc" | bc -l > $f
+	cat $f
 fi

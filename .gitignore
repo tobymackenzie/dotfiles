@@ -2,6 +2,7 @@
 *.swo
 *.swp
 .DS_Store
+/.c
 /.phpunit.result.cache
 /.vagrant
 /_local/
