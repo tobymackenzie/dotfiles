@@ -21,6 +21,17 @@ else
 		fi
 		calc="ans = ${ans}; ${calc}"
 	fi
-	echo "$calc" | bc -l > $f
-	cat $f
+
+	#--run calc
+	v=$(echo "$calc" | bc -l)
+
+	#--trim trailing 0
+	match='0+$'
+	if [[ "$v" == *"."* && "$v" =~ $match ]]; then
+		v=$(echo $v | sed -r 's/\.?[0]+$//')
+	fi
+
+	#--save answer to file and echo
+	echo "$v" > $f
+	echo "$v"
 fi
