@@ -1,6 +1,77 @@
 #!/bin/bash
+#==func
+buildCalc() {
+	calc="$*"
+	match='^[-\+\/\*%\^]+ '
+	if [[ "$calc" =~ $match ]]; then
+		calc="ans $calc"
+	fi
+	echo "$calc"
+}
+cleanOut() {
+	v="$*"
+	#--trim trailing 0
+	match='0+$'
+	if [[ "$v" == *"."* && "$v" =~ $match ]]; then
+		v=$(echo $v | sed -r 's/\.?[0]+$//')
+	fi
+
+	echo "$v"
+}
+
+#==main
 if [ -z "$1" ]; then
-	bc -l
+	#-# add special parsing to interactive `bc -l`, namely `ans` and dropping trailing `0`.  Otherwise, just `bc -l` would work
+	#--create pipes to communicate with bc
+	inp='/tmp/'$(date +'%Y%m%d%H%M%S')'.in'
+	mkfifo -m 0700 $inp
+	exec 3<> "$inp"
+	outp='/tmp/'$(date +'%Y%m%d%H%M%S')'.out'
+	mkfifo -m 0700 $outp
+	exec 4<> "$outp"
+	#---ensure pipes removed at end of script
+	#--# removes files, but n<> keeps node connected until end of script anyways
+	#-@ https://lonkamikaze.github.io/2015/01/17/bin-sh-using-named-pipes-to-talk-to-your-main-process
+	rm "$inp"
+	rm "$outp"
+
+	#--make sure pipe is removed on exit
+	hasPID() {
+		kill -0 "$PID" > /dev/null 2>&1 && return 0
+		return 1
+	}
+	fin() {
+		if hasPID; then
+			kill $PID
+		fi
+	}
+	trap 'fin; exit' EXIT SIGINT SIGTERM
+
+	bc -l <&3 >&4 &
+	PID=$!
+	while hasPID && read -rp '> ' in; do
+		#--no need to pass empty string to `bc`
+		if [ -z "$in" ]; then
+			continue
+		#--we can handle quitting
+		elif [[ "$in" == "quit" || "$in" == "exit" || "$in" == "x" ]]; then
+			fin
+			exit
+		fi
+		#--build input
+		in=$(buildCalc "$in")
+		if [[ "$in" != *'='* ]]; then
+			in="ans = ${in}; ans"
+		fi
+		#--pass to `bc`
+		echo "$in" >&3 || (echo 'error2' && fin)
+		#--read output
+		read -t 1 out <&4 || out=''
+		if [ ! -z "$out" ]; then
+			echo $(cleanOut "$out")
+		fi
+	done
+	fin
 else
 	#-# most of this is for storing and getting previous answer.  `bc` line is the only one actually needed otherwise
 	#-# uses `ans` varible for answer
@@ -9,11 +80,7 @@ else
 	# - answer never deleted
 	# - performance penalty for writing, accessing file
 	f="$TJM_DOTFILES_PATH/.c"
-	calc="$*"
-	match='^[\+-/\*%\^]+ '
-	if [[ "$calc" =~ $match ]]; then
-		calc="ans $calc"
-	fi
+	calc=$(buildCalc "$*")
 	if [[ "$calc" == *"ans"* ]]; then
 		ans=$(cat $f)
 		if [ -z $ans ]; then
@@ -23,13 +90,7 @@ else
 	fi
 
 	#--run calc
-	v=$(echo "$calc" | bc -l)
-
-	#--trim trailing 0
-	match='0+$'
-	if [[ "$v" == *"."* && "$v" =~ $match ]]; then
-		v=$(echo $v | sed -r 's/\.?[0]+$//')
-	fi
+	v=$(cleanOut $(echo "$calc" | bc -l))
 
 	#--save answer to file and echo
 	echo "$v" > $f
