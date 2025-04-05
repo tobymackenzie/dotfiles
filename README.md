@@ -53,7 +53,7 @@ Modify any of the dotfiles to your liking.  You can create a `_local` folder in 
 Modifying
 ---------
 
-This project is organized into folders for each different type of thing the configuration is for ('/sh' for sh based shells, 'vim' for vim, etc).  If you add any files that need to be symlinked in the home folder (or elsewhere) add them to the `src/links.config` file.
+This project is organized into folders for each different type of thing the configuration is for ('/sh' for sh based shells, 'vim' for vim, etc).  Look through the files and modify any to taste.  If you add any files that need to be symlinked in the home folder (or elsewhere) add them to the `src/links.config` file.
 
 License
 -------
