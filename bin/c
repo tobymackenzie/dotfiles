@@ -23,10 +23,10 @@ cleanOut() {
 if [ -z "$1" ]; then
 	#-# add special parsing to interactive `bc -l`, namely `ans` and dropping trailing `0`.  Otherwise, just `bc -l` would work
 	#--create pipes to communicate with `bc`
-	inp='/tmp/'$(date +'%Y%m%d%H%M%S')'.in'
+	inp="${TMPDIR:-/tmp}/"$(date +'%Y%m%d%H%M%S')'.in'
 	mkfifo -m 0700 $inp
 	exec 3<> "$inp"
-	outp='/tmp/'$(date +'%Y%m%d%H%M%S')'.out'
+	outp="${TMPDIR:-/tmp}/"$(date +'%Y%m%d%H%M%S')'.out'
 	mkfifo -m 0700 $outp
 	exec 4<> "$outp"
 	#---ensure pipe files removed
