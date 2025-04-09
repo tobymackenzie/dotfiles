@@ -51,14 +51,17 @@ bindkey -v
 zle-keymap-select () {
 	case $KEYMAP in
 		vicmd)
+			PS1="%F{2}>%{$reset_color%}$TJM_PS_BASE" #--gray PS marker
 			echo -ne "\e]12;#0c0\a" #--green cursor
 			print -n -- '\e[1 q' #--blink cursor
 		;;
 		viins|main)
+			PS1="$TJM_PS_BASE" #--normal PS
 			print -n '\e]112\a' #--normal cursor color
 			print -n '\e[0 q' #--normal cursor
 		;;
 	esac
+	zle reset-prompt
 }
 zle -N zle-keymap-select
 #--fix delete key (forward delete)
@@ -103,7 +106,8 @@ precmd(){
 preexec(){
 	echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
 }
-export PS1="$PS1 "
+TJM_PS_BASE="$PS1 "
+export PS1="$TJM_PS_BASE"
 
 #==custom
 if [ -f ${TJM_DOTFILES_PATH}/_local/zsh ]; then
