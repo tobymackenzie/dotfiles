@@ -6,3 +6,8 @@ function rodo --description 'run last or presented command as root'
 		sudo fish -c "$history[1]"
 	end
 end
+
+#--help
+function h
+	help "$argv" 2> /dev/null; or man "$argv" 2> /dev/null; or cheat "$argv"
+end

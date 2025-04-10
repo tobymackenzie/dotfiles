@@ -12,6 +12,7 @@ alias ffd="tjmOpenApp=1 o ffd"
 alias g='git'
 alias gdiff="git diff --no-index"
 alias gdiffw="gdiff -w"
+# h = function
 alias l="ls -F --color"
 alias l1="l -1h"
 alias l1a="l1 -A"
