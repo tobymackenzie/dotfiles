@@ -40,8 +40,15 @@ for arg in "$@"; do
 	elif [[ "$inNot" != 0 ]]; then
 		fopts="${fopts} ${inNot} ${arg}"
 		inNot=0
-	else
+	elif [[ ${arg:0:1} == '-' ]]; then
 		fopts="${fopts} ${arg}"
+	else
+		#--quote args to deal with special chars, eg `-name '*.php'`
+		#-# will anything break with this?
+		if [[ "$arg" == *"'"* ]]; then
+			arg=`echo "$arg" | sed "s/'/'\\\\\''/g"`
+		fi
+		fopts="${fopts} '${arg}'"
 	fi
 done
 #--ensure we have a path, default to `.`
