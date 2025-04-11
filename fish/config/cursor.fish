@@ -1,0 +1,1 @@
+set fish_cursor_insert block
