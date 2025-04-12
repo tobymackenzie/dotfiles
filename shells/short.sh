@@ -31,6 +31,7 @@ alias ot="tjmOpenApp=1 o t"
 alias out="os logout"
 alias p="os pkg"
 alias rmi=" rm -i"
+alias s='findin'
 alias ssha="ssh -A"
 alias stop="killall -STOP"
 alias svnstatus="svn status --ignore-externals"
