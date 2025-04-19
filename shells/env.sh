@@ -14,4 +14,5 @@ setdefaultenv VISUAL vim
 setdefaultenv WWW_HOME $TJM_DOTFILES_PATH/www/index.html
 
 #--config
+setdefaultenv TJM_COLORS 'koehlertm'
 setdefaultenv TJM_GH_USER 'tobymackenzie'
