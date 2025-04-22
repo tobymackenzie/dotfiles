@@ -35,7 +35,7 @@ for arg in "$@"; do
 		inC="${arg}"
 	elif [[ "$arg" == '-v' ]]; then
 		verbose=1
-	elif [[ "$arg" == '-not' ]]; then
+	elif [[ "$arg" == '-not' || "$arg" == '!' ]]; then
 		inNot="$arg"
 	elif [[ "$inNot" != 0 ]]; then
 		fopts="${fopts} ${inNot} ${arg}"
