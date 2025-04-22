@@ -1,6 +1,10 @@
+#--helper: set env variable
+function senv --no-scope-shadowing
+	set -x $argv
+end
 #--helper: set env variable if not set
 function setdefaultenv --no-scope-shadowing
-	set -q $argv[1] || set -x $argv[1] $argv[2]
+	set -q $argv[1] || senv $argv
 end
 
 #==load built-in files

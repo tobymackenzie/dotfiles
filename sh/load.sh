@@ -1,16 +1,20 @@
+#--helper: set env variable
+senv(){
+	export "$1=$2"
+}
 #--helper: set env variable if not set
 if [ ! -z "${ZSH_VERSION+x}" ]; then
 	#--zsh
 	setdefaultenv(){
 		if [ -z ${(P)1} ]; then
-			export "$1=$2"
+			senv $*
 		fi
 	}
 else
 	#--bash.  may need to use eval for other sh
 	setdefaultenv(){
 		if [ -z "${!1}" ]; then
-			export "$1=$2"
+			senv $*
 		fi
 	}
 fi
