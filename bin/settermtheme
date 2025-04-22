@@ -1,0 +1,18 @@
+#!/bin/bash
+name="$@"
+if [ -z "$name" ]; then
+	name="T"
+fi
+#--Terminal.app
+if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
+	osascript -e "tell application \"Terminal\"
+		repeat with i in windows
+			try
+				set current settings of tabs in i to settings set \"$name\"
+			end try
+		end repeat
+	end tell"
+else
+	echo "Don't know how to change the colors for this terminal"
+	exit 1
+fi
