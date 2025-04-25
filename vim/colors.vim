@@ -2,8 +2,6 @@ if has('gui_macvim')
 	"--use our colorscheme if MacVim
 	let macvim_skip_colorscheme=1
 endif
-"--start with dark
-set background=dark
 "--enable syntax highlighting, must be before colorscheme
 syntax on
 
@@ -49,6 +47,8 @@ endfun
 command! RandomColors call RandomColors()
 
 "--choose default color scheme (see default arg)
+"-# start with dark to avoid flash of white
+set background=dark
 SetColors
 
 "--toggle dark mode helper
