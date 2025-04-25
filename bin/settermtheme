@@ -5,13 +5,8 @@ if [ -z "$name" ]; then
 fi
 #--Terminal.app
 if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
-	osascript -e "tell application \"Terminal\"
-		repeat with i in windows
-			try
-				set current settings of tabs in i to settings set \"$name\"
-			end try
-		end repeat
-	end tell"
+	# current=$(osascript -e 'tell application "Terminal" to return name of current settings of front window')
+	osascript -e "tell application \"Terminal\" to set current settings of selected tab of front window to settings set \"$name\""
 else
 	echo "Don't know how to change the colors for this terminal"
 	exit 1
