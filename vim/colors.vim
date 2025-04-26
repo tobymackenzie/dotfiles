@@ -16,7 +16,10 @@ augroup end
 
 "--set colors helper
 "-# pretty much just `:colorscheme` with a `dark` / `light` setting
-fun! SetColors(val = exists('$TJM_COLORS') ? $TJM_COLORS : 'koehlertm') abort
+if !exists('$TJM_COLORS')
+	let $TJM_COLORS = 'koehlertm'
+endif
+fun! SetColors(val = $TJM_COLORS) abort
 	if a:val == 'dark' || a:val == 'light'
 		execute 'set bg=' .. a:val
 	else
@@ -46,10 +49,10 @@ fun! RandomColors()
 endfun
 command! RandomColors call RandomColors()
 
-"--choose default color scheme (see default arg)
+"--choose default color scheme
 "-# start with dark to avoid flash of white
 set background=dark
-SetColors
+colorscheme $TJM_COLORS
 
 "--toggle dark mode helper
 fun! ToggleDarkMode() abort
