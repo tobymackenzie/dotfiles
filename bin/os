@@ -83,6 +83,15 @@ runPkg(){
 				sub='install'
 			;;
 		esac
+	elif [ "$sub" = 'list' ]; then
+		#--default to list of installed
+		case $cmd in
+			'apt')
+				if [ -z "$args" ]; then
+					args='--installed'
+				fi
+			;;
+		esac
 	fi
 
 	#--check permissions to run command
@@ -167,6 +176,9 @@ case $cmd in
 		else
 			runPkg info $args
 		fi
+	;;
+	'list'|'l') #: list OS packages
+		runPkg list $args
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--gnome
