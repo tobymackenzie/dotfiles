@@ -137,32 +137,36 @@ case $cmd in
 	'in'|'install') #: install OS package
 		runPkg install $args
 	;;
-	'i'|'info'|'-v'|'v'|'version') #: get os info
-		#--linux
-		if command -v 'hostnamectl' > /dev/null; then
-			if [ -r '/etc/os-release' ]; then
-				source /etc/os-release
-				if [ -n "$PRETTY_NAME" ]; then
-					echo $PRETTY_NAME
-				else
-					echo $NAME $VERSION
-				fi
+	'i'|'info'|'-v'|'v'|'version') #: get OS info, or package info with arg(s)
+		if [ -z "$args" ]; then
+			#--linux
+			if command -v 'hostnamectl' > /dev/null; then
+				if [ -r '/etc/os-release' ]; then
+					source /etc/os-release
+					if [ -n "$PRETTY_NAME" ]; then
+						echo $PRETTY_NAME
+					else
+						echo $NAME $VERSION
+					fi
 
+				fi
+				hostnamectl $args
+			#--termux
+			elif command -v 'termux-info' > /dev/null; then
+				termux-info $args
+			#--mac
+			elif command -v 'sw_vers' > /dev/null; then
+				sw_vers $args
+				#-!super verbose and slow. do we want this?
+				# if [ -z "$args" ]; then
+					# args='-detailLevel mini'
+				# fi
+				# system_profiler $args | less
 			fi
-			hostnamectl $args
-		#--termux
-		elif command -v 'termux-info' > /dev/null; then
-			termux-info $args
-		#--mac
-		elif command -v 'sw_vers' > /dev/null; then
-			sw_vers $args
-			#-!super verbose and slow. do we want this?
-			# if [ -z "$args" ]; then
-				# args='-detailLevel mini'
-			# fi
-			# system_profiler $args | less
+			echo 'WM: ' `getwm`
+		else
+			runPkg info $args
 		fi
-		echo 'WM: ' `getwm`
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--gnome
