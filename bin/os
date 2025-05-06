@@ -213,6 +213,9 @@ case $cmd in
 	'remove'|'rm'|'uninstall') #: uninstall OS package
 		runPkg remove $args
 	;;
+	's'|'search') #: search for OS packages
+		runPkg search $args
+	;;
 	'up'|'update'|'upgrade') #: upgrade OS packages
 		runPkg up $args
 	;;
