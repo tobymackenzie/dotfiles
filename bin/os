@@ -114,7 +114,10 @@ case $cmd in
 	'-h'|'h'|'help') #: show help for this command
 		echo "Usage: os <subcommand> [options]"
 		echo "os command must be run with one of the following subcommands"
-		grep -o "'.*)\(\s*#.*\)\$" ${BASH_SOURCE[0]} | sed "s/'//g" | sed 's/^\(.*\))[ ]*#:/\1:/g' | GREP_COLOR='01;32' grep --color '^.*:'
+		grep -o "'.*)\(\s*#.*\)\$" ${BASH_SOURCE[0]} | # grab formatted lines
+			sed "s/'//g" | # strip quotes for terseness
+			sed 's/^\(.*\))[ ]*#:/\1:/g' | # nicer formatting
+			GREP_COLOR='01;32' grep --color '^.*:' # color subcommands
 	;;
 	'halt') #: halt computer / OS
 		if command -v 'halt' > /dev/null; then
