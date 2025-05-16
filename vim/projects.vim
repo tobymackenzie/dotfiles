@@ -54,17 +54,20 @@ fun! TMOpenProject(proj)
 	let loaded = 0
 	"--restore project session if exists
 	if !empty(a:proj) && filereadable(l:proj .. '/.projvimsess')
-		let origSecure = &secure
-		if !origSecure
-			set secure
+		"-! would like to show file before confirming
+		if confirm('Load session file for project?', "&yes\n&no", 2) == 1
+			let origSecure = &secure
+			if !origSecure
+				set secure
+			endif
+			"-! silent prevents error running `bwipe` stored in session, but also masks any other errors while loading
+			execute 'silent! source ' .. l:proj .. '/.projvimsess'
+			let loaded = 1
+			if !origSecure
+				set nosecure
+			endif
+			echow "loaded project from session"
 		endif
-		"-! silent prevents error running `bwipe` stored in session, but also masks any other errors while loading
-		execute 'silent! source ' .. l:proj .. '/.projvimsess'
-		let loaded = 1
-		if !origSecure
-			set nosecure
-		endif
-		echow "loaded project from session"
 	endif
 	"--otherwise, cd and explore
 	if !loaded
