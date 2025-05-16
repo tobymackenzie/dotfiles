@@ -8,6 +8,9 @@ endif
 if !exists('g:currentProjName')
 	let g:currentProjName = ''
 endif
+if !exists('g:isProjLocal')
+	let g:isProjLocal = 1
+endif
 fun! TMProjectComplete(proj, cmd, pos) abort
 	let firstChar = a:proj[0]
 	"--glob for relative or absolute paths
@@ -37,14 +40,25 @@ fun! TMOpenProject(proj)
 		return
 	endif
 	let firstChar = a:proj[0]
+	let g:isProjLocal = 1
 	if firstChar == '~' || firstChar == '/' || firstChar == '.'
 		let l:proj = a:proj
 		let g:currentProjName = strchars(a:proj) > 15
 					\ ? '…' .. strcharpart(a:proj, strchars(a:proj) - 15)
 					\ : a:proj
 	else
-		let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
-		let g:currentProjName = a:proj
+		"--check for URL
+		let matched = matchstr(a:proj, '^\([-a-zA-Z+]\+://[^/]\+\)/')
+		"--normal project
+		if empty(matched)
+			let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
+			let g:currentProjName = a:proj
+		"--URL (sftp, etc)
+		else
+			let g:currentProjName = matched
+			let l:proj = a:proj
+			let g:isProjLocal = 0
+		endif
 	endif
 	let $openPath = l:proj
 	"--store old buffer for removal if "No Name"
@@ -53,7 +67,7 @@ fun! TMOpenProject(proj)
 	endif
 	let loaded = 0
 	"--restore project session if exists
-	if !empty(a:proj) && filereadable(l:proj .. '/.projvimsess')
+	if g:isProjLocal && !empty(a:proj) && filereadable(l:proj .. '/.projvimsess')
 		"-! would like to show file before confirming
 		if confirm('Load session file for project?', "&yes\n&no", 2) == 1
 			let origSecure = &secure
@@ -72,8 +86,13 @@ fun! TMOpenProject(proj)
 	"--otherwise, cd and explore
 	if !loaded
 		let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
-		execute 'cd ' .. l:proj
 		call TMExploreFn(l:proj)
+		if g:isProjLocal
+			execute 'cd ' .. l:proj
+		else
+			"-# for some reason, need to return to explorer when remote
+			execute 'Rex'
+		endif
 		let loaded = 1
 		"--remove "No Name" buffer
 		if origBuffer && loaded
@@ -84,6 +103,10 @@ endfun
 command! -nargs=? -complete=customlist,TMProjectComplete Project call TMOpenProject('<args>')
 "--save project session
 fun! TMSaveProject()
+	if !g:isProjLocal
+		echo "Cannot save non-local project"
+		return
+	endif
 	if !empty(g:currentProj)
 		execute 'mksession! ' .. g:currentProj .. '/.projvimsess'
 	endif
@@ -93,6 +116,10 @@ command! -nargs=0 ProjectSave call TMSaveProject()
 set sessionoptions-=options
 "--clear project session
 fun! TMClearProject()
+	if !g:isProjLocal
+		echo "Cannot clear non-local project"
+		return
+	endif
 	if !empty(g:currentProj)
 		execute '!rm ' .. g:currentProj .. '/.projvimsess'
 	endif
