@@ -278,7 +278,8 @@ endfun
 "--cache file mod datetime for statusline
 "-# don't want to be reading value constantly
 fun! TJMSetStatusLineDT()
-	if &ft != 'fugitive' && &ft != 'gitcommit' && &ft != 'help' && &ft != 'netrw'
+	"-# last check makes sure this isn't a remote file, as `getftime` doesn't work for that
+	if &ft != 'fugitive' && &ft != 'gitcommit' && &ft != 'help' && &ft != 'netrw' && expand('%') !~ '^[-a-zA-Z+]\+://'
 		let l:ftime = getftime(expand('%:p'))
 		if strftime('%Y') != strftime('%Y', l:ftime)
 			let l:format = '%Y-%m-%d'
