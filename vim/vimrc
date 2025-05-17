@@ -266,7 +266,7 @@ fun! TJMStatusLine()
 	else
 		let l:sl .= (l:isCurrent ? toupper(mode()) : "-") . '%M %* '
 		let l:sl .= '%<' . substitute(expand('%f'), '^' . getcwd() . '/\?', '', 'i') . ' %y%w%q%r %='
-		if exists('b:tjmStatusLineDT')
+		if exists('b:tjmStatusLineDT') && !empty(b:tjmStatusLineDT)
 			let l:sl .= '%#TJMStatusEtc# Mod: ' . b:tjmStatusLineDT . ' %#StatusLine# '
 		endif
 	endif
