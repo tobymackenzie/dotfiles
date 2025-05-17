@@ -24,6 +24,7 @@ if exists("+omnifunc")
 endif
 source ~/.vim/colors.vim
 source ~/.vim/commandp.vim
+source ~/.vim/net.vim
 source ~/.vim/open.vim
 source ~/.vim/projects.vim
 source ~/.vim/quickkeys.vim
