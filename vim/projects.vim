@@ -65,26 +65,21 @@ fun! TMOpenProject(proj)
 	if !empty(a:proj)
 		let g:currentProj = l:proj
 	endif
-	let loaded = 0
 	"--restore project session if exists
-	if g:isProjLocal && !empty(a:proj) && filereadable(l:proj .. '/.projvimsess')
+	if g:isProjLocal && !empty(a:proj) && filereadable(l:proj .. '/.projvimsess') && confirm('Load session file for project?', "&yes\n&no", 2) == 1
 		"-! would like to show file before confirming
-		if confirm('Load session file for project?', "&yes\n&no", 2) == 1
-			let origSecure = &secure
-			if !origSecure
-				set secure
-			endif
-			"-! silent prevents error running `bwipe` stored in session, but also masks any other errors while loading
-			execute 'silent! source ' .. l:proj .. '/.projvimsess'
-			let loaded = 1
-			if !origSecure
-				set nosecure
-			endif
-			echow "loaded project from session"
+		let origSecure = &secure
+		if !origSecure
+			set secure
 		endif
-	endif
+		"-! silent prevents error running `bwipe` stored in session, but also masks any other errors while loading
+		execute 'silent! source ' .. l:proj .. '/.projvimsess'
+		if !origSecure
+			set nosecure
+		endif
+		echow "loaded project from session"
 	"--otherwise, cd and explore
-	if !loaded
+	else
 		let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
 		call TMExploreFn(l:proj)
 		if g:isProjLocal
@@ -93,9 +88,8 @@ fun! TMOpenProject(proj)
 			"-# for some reason, need to return to explorer when remote
 			execute 'Rex'
 		endif
-		let loaded = 1
 		"--remove "No Name" buffer
-		if origBuffer && loaded
+		if origBuffer
 			execute 'bdelete ' .. origBuffer
 		endif
 	endif
