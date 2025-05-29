@@ -81,13 +81,13 @@ fun! TMOpenProject(proj)
 	"--otherwise, cd and explore
 	else
 		let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
-		call TMExploreFn(l:proj)
 		if g:isProjLocal
 			execute 'cd ' .. l:proj
 		else
 			"-# for some reason, need to return to explorer when remote
 			execute 'Rex'
 		endif
+		call TMExploreFn(l:proj)
 		"--remove "No Name" buffer
 		if origBuffer
 			execute 'bdelete ' .. origBuffer
