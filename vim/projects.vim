@@ -48,7 +48,7 @@ fun! TMOpenProject(proj)
 					\ : a:proj
 	else
 		"--check for URL
-		let matched = matchstr(a:proj, '^\([-a-zA-Z+]\+://[^/]\+\)/')
+		let matched = TMMatchUrl(a:proj)
 		"--normal project
 		if empty(matched)
 			let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
@@ -83,9 +83,6 @@ fun! TMOpenProject(proj)
 		let origBuffer = &ft != 'netrw' && expand('%') == '' && getline(1,'$') == [''] ? bufnr() : 0
 		if g:isProjLocal
 			execute 'cd ' .. l:proj
-		else
-			"-# for some reason, need to return to explorer when remote
-			execute 'Rex'
 		endif
 		call TMExploreFn(l:proj)
 		"--remove "No Name" buffer

@@ -367,6 +367,9 @@ let g:netrw_browse_split = 3
 if !exists('g:TMExploreWin')
 	let g:TMExploreWin=0
 endif
+fun! TMMatchUrl(str)
+	return matchstr(a:str, '^\([-a-zA-Z+]\+://[^/]\+\)/')
+endfun
 fun! TMExploreFn(fp = '')
 	if !exists('g:TMExploreOn')
 		let g:TMExploreOn=0
@@ -377,7 +380,16 @@ fun! TMExploreFn(fp = '')
 			execute ':e ' . a:fp
 		endif
 	else
-		execute ':0tab drop ' .. (len(a:fp) > 0 ? a:fp : '.')
+		let cmd = ':0tab drop '
+		if len(a:fp) == 0
+			let a:fp = '.'
+		else
+			let urlMatch = TMMatchUrl(a:fp)
+			if !empty(urlMatch)
+				let cmd = ':0tabe '
+			endif
+			execute cmd .. a:fp
+		endif
 		let g:TMExploreOn=tabpagenr()
 		let g:TMExploreWin=win_getid()
 	endif
