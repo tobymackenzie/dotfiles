@@ -91,6 +91,9 @@ runPkg(){
 					args='--installed'
 				fi
 			;;
+			'pkg')
+				sub='list-installed'
+			;;
 		esac
 	fi
 
