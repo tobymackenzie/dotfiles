@@ -26,6 +26,8 @@ nnoremap <leader>o :OpenFile **/
 nnoremap <leader>O :OpenFile<space>
 "--paste (without copying)
 noremap <leader>p "0p
+"--project
+nnoremap <leader>P :Project<space>
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
