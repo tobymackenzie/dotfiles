@@ -79,7 +79,7 @@ else
 	# - answer is shared between shells
 	# - answer never deleted
 	# - performance penalty for writing, accessing file
-	f="$TJM_DOTFILES_PATH/.c"
+	f="$TJM_DOTFILES_PATH/.cache/c"
 	calc=$(buildCalc "$*")
 	if [[ "$calc" == *"ans"* ]]; then
 		ans=$(cat $f)
