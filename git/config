@@ -16,7 +16,7 @@
 	co = checkout
 	comadd = !cd -- ${GIT_PREFIX:-.} && git add . && git com
 	com = commit -v
-	contrib = shortlog --numbered --summary
+	contrib = !cd -- ${GIT_PREFIX:-.} && git --no-pager shortlog --numbered --summary --email
 	count = rev-list HEAD --count
 	d = diff
 	df = diff
