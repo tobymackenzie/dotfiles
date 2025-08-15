@@ -1,9 +1,8 @@
 #--paths
 setdefaultenv TJM_DOTFILES_PATH ~/.dotfiles
-setdefaultenv TJM_MAIN_PATH ~/__
 setdefaultenv TJM_BIN_PATH ~/bin
 setdefaultenv TJM_GH_BU_PATH ~/bu/github
-setdefaultenv TJM_PROJ_PATH $TJM_MAIN_PATH/checkouts
+setdefaultenv TJM_PROJ_PATH ~/projects
 setdefaultenv TJM_CHECKOUTS_PATH $TJM_PROJ_PATH
 
 #--common

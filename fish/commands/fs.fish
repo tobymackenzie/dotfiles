@@ -17,7 +17,7 @@ end
 #--specific
 #-@ https://stackoverflow.com/a/47902450/1139122
 function __
-	cd "$TJM_MAIN_PATH/$argv"
+	cd "~/__/$argv"
 end
 #-! illegal function name
 #function /

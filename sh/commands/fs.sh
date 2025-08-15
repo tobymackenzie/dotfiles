@@ -21,7 +21,7 @@ function /(){
 	cd /$*
 }
 function __(){
-	cd "$TJM_MAIN_PATH/$*"
+	cd "~/__/$*"
 }
 function cdbin(){
 	cd "$TJM_BIN_PATH/$*"
