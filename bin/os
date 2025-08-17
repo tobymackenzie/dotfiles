@@ -22,8 +22,9 @@ runPkg(){
 	local args=${@:2}
 
 	#--find installed package manager command
-	# fedora debian mac fedora fedora arch bsd mac
-	declare -a cmds=(pkcon pkg apt brew dnf yum pacman port)
+	# debian mac fedora fedora arch bsd mac fedora
+	#-# pkcon last because it seems to not find some packages, other problems
+	declare -a cmds=(pkg apt brew dnf yum pacman port pkcon)
 	for val in "${cmds[@]}"; do
 		if hash "$val" 2> /dev/null; then
 			cmd="$val"
