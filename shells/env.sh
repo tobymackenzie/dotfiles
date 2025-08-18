@@ -6,11 +6,11 @@ setdefaultenv TJM_PROJ_PATH ~/projects
 setdefaultenv TJM_CHECKOUTS_PATH $TJM_PROJ_PATH
 
 #--common
-setdefaultenv BROWSER w3m
-setdefaultenv EDITOR vi
-setdefaultenv INPUTRC $TJM_DOTFILES_PATH/etc/inputrc
-setdefaultenv VISUAL vim
-setdefaultenv WWW_HOME $TJM_DOTFILES_PATH/www/index.html
+senv BROWSER w3m
+senv EDITOR vi
+senv INPUTRC $TJM_DOTFILES_PATH/etc/inputrc
+senv VISUAL vim
+senv WWW_HOME $TJM_DOTFILES_PATH/www/index.html
 
 #--config
 setdefaultenv TJM_COLORS 'koehlertm'
