@@ -38,10 +38,6 @@ alias svnstatus="svn status --ignore-externals"
 alias svnstatusa="svn status"
 alias svnupdate="svn update --ignore-externals"
 alias svnupdatea="svnupdate"
-alias tcpu="top -S -F -ocpu -s 2 -stats pid,command,cpu,user,time,mem,threads,state"
-alias tmem='top -S -orsize -s 5 -stats pid,command,mem,purg,cmprs,user,cpu,time,threads,state'
-alias tt="top -S -n 0 -s 5"
-alias ttime='top -F -otime -s 5 -stats pid,command,time,cpu,user,mem,threads,state'
 alias web="tjmOpenApp=1 o web"
 alias webd="tjmOpenApp=1 o webd"
 alias x="exit"
