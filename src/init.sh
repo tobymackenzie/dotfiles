@@ -56,4 +56,4 @@ while IFS="," read -r left right; do
 			ln -s $file $location
 		fi
 	fi
-done < ${binPath}/../src/links.config
+done < ${fromPath}/src/links.config
