@@ -46,6 +46,7 @@ nnoremap <leader>T :tab term<cr>
 "--window close
 noremap <leader>w :<c-u>close<CR>
 "--tab close
+if 1
 fun! TMCloseCleanly()
 	"--close if buffer open in more than one window
 	"--for help, need close unless last window
@@ -71,6 +72,7 @@ fun! TMCloseCleanly()
 	endif
 endfun
 noremap <leader>x :call TMCloseCleanly()<cr>
+endif
 noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
 "--yank current line without break / indent
 noremap <leader>y m'^y$``
