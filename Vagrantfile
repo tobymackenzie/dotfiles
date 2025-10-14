@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
 		INIT
 
 		#==sync project folder
-		demo.vm.synced_folder '.', '/home/vagrant/__/checkouts/dotfiles'
+		demo.vm.synced_folder '.', '/home/vagrant/projects/dotfiles'
 		#--disable syncing vagrant folder
 		demo.vm.synced_folder '.', '/vagrant', disabled: true
 
@@ -73,7 +73,7 @@ Vagrant.configure(2) do |config|
 		INIT
 
 		#==sync project folder
-		debian.vm.synced_folder '.', '/home/vagrant/__/checkouts/dotfiles'
+		debian.vm.synced_folder '.', '/home/vagrant/projects/dotfiles'
 		#--disable syncing vagrant folder
 		debian.vm.synced_folder '.', '/vagrant', disabled: true
 
