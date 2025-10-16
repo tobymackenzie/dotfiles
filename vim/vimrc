@@ -26,12 +26,12 @@ if exists("+omnifunc")
 	source ~/.vim/autocomplete.vim
 endif
 if 1
-source ~/.vim/colors.vim
 source ~/.vim/commandp.vim
 source ~/.vim/net.vim
 source ~/.vim/open.vim
 source ~/.vim/projects.vim
 endif
+source ~/.vim/colors.vim
 source ~/.vim/quickkeys.vim
 
 "=====

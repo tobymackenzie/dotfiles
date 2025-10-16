@@ -1,3 +1,4 @@
+if 1
 if has('gui_macvim')
 	"--use our colorscheme if MacVim
 	let macvim_skip_colorscheme=1
@@ -59,3 +60,7 @@ fun! ToggleDarkMode() abort
 	let &background = (&background == 'dark' ? 'light' : 'dark')
 endfun
 command! -nargs=0 ToggleDarkMode call ToggleDarkMode()
+"--fallback for vim.tiny
+finish
+endif
+colorscheme tiny
