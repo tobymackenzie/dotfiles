@@ -7,8 +7,13 @@ keymap FX EXTERN
 keymap fc COMMAND
 keymap `` COMMAND
 #--history
+keymap dLEFT PREV
 keymap dd PREV
+keymap dj PREV
 keymap fb PREV
+keymap dRIGHT NEXT
+keymap df NEXT
+keymap dk NEXT
 keymap ff NEXT
 #--movement
 keymap C-d NEXT_PAGE
@@ -21,8 +26,12 @@ keymap `w COMMAND "GOTO https://en.wikipedia.org/; GOTO_LINE 24; NEXT_LINK; GOTO
 #--tabs
 keymap fLEFT PREV_TAB
 keymap fj PREV_TAB
-keymap fT PREV_TAB
-keymap FT PREV_TAB
+keymap tj PREV_TAB
+keymap tLEFT PREV_TAB
 keymap fRIGHT NEXT_TAB
 keymap fk NEXT_TAB
-keymap ft NEXT_TAB
+keymap tRIGHT NEXT_TAB
+keymap tm TAB_MENU
+keymap tn TAB_GOTO
+keymap to TAB_GOTO
+keymap tt NEW_TAB
