@@ -1,3 +1,6 @@
+# [defaults](https://raw.githubusercontent.com/tats/w3m/refs/heads/master/doc/keymap.default)
+# [info with function list (partial)](https://www.chiark.greenend.org.uk/doc/w3m/MANUAL.html)
+# [functions list (partial)](https://github.com/felipesaa/A-vim-like-firefox-like-configuration-for-w3m/blob/master/documentation/functions.txt)
 keymap fx EXTERN_LINK
 keymap fX EXTERN
 keymap FX EXTERN
