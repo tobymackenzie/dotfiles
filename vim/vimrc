@@ -356,6 +356,8 @@ if has('gui_macvim')
 endif
 
 "==wrap
+"--maintain indent for wrap
+set breakindent
 "--don't wrap mid-word
 set linebreak
 
