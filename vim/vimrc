@@ -358,7 +358,7 @@ endif
 "==wrap
 "--maintain indent for wrap
 set breakindent
-set breakindentopt=shift:1
+set showbreak=…
 "--don't wrap mid-word
 set linebreak
 
