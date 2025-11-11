@@ -58,6 +58,7 @@
 	logpw = !cd -- ${GIT_PREFIX:-.} && git logp --color-words
 	lop = !cd -- ${GIT_PREFIX:-.} && git logp
 	lopw = !cd -- ${GIT_PREFIX:-.} && git logpw
+	lw = !cd -- ${GIT_PREFIX:-.} && git logpw
 	m = merge
 	m = merge --ff-only
 	mirror = clone --mirror
