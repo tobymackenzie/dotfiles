@@ -74,8 +74,8 @@ endfun
 noremap <leader>x :call TMCloseCleanly()<cr>
 endif
 noremap <leader>X :if confirm('Are you sure you want to close without saving?', "&Yes\n&No", 1) == 1 <bar> q! <bar> endif<cr>
-"--yank current line without break / indent
-noremap <leader>y m'^y$``
+"--yank current line without break / indent / leading '- ' for markdown list item
+noremap <leader>y :let @*=substitute(trim(getline('.')), '^\(- \)', '', '')<cr>
 "--yank all
 noremap <leader>Y :%y+<cr>
 "--switch window / tab directionally
