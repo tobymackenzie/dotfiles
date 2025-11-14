@@ -21,6 +21,9 @@ nnoremap <leader>G :!git<space>
 "--help
 nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
 nnoremap <leader>H :tab help<cr>
+"--page up down
+nnoremap <leader>j <c-d>
+nnoremap <leader>k <c-u>
 "--open
 nnoremap <leader>o :OpenFile **/
 nnoremap <leader>O :OpenFile<space>
