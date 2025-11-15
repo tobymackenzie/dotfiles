@@ -21,3 +21,7 @@ alias typea="type -a"
 alias lynx="lynx -cfg ~/.dotfiles/lynx/lynx.cfg"
 alias w3m="w3m -config ~/.dotfiles/w3m/config"
 
+
+#--run proj
+alias t="_tjmRunProj tbin tbin"
+alias proj="_tjmRunProj base.proj bin/console"
