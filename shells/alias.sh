@@ -21,6 +21,8 @@ alias typea="type -a"
 alias lynx="lynx -cfg ~/.dotfiles/lynx/lynx.cfg"
 alias w3m="w3m -config ~/.dotfiles/w3m/config"
 
+#--data
+alias wttr="curl wttr.in"
 
 #--run proj
 alias t="_tjmRunProj tbin tbin"
