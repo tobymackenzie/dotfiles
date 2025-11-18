@@ -28,6 +28,8 @@ Vagrant.configure(2) do |config|
 			apt install x11-xserver-utils
 			#---need for i3
 			apt install -y xinit
+			#---dev helpers
+			apt install -y shellcheck
 		INIT
 
 		#==sync project folder
@@ -70,6 +72,8 @@ Vagrant.configure(2) do |config|
 			apt install -y xinit
 			#---need for vim, etc
 			apt install -y git
+			#---dev helpers
+			apt install -y shellcheck
 		INIT
 
 		#==sync project folder
