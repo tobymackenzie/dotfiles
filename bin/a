@@ -4,16 +4,18 @@ if [ $# -lt 1 ]; then
 	echo 'Usage: a "command" paths' >&2
 	exit 1
 fi
-if [ $# -gt 1 ]; then
-	files="${@:2}"
+cmd="$1"
+shift
+if [ $# -gt 0 ]; then
+	files=("$@")
 else
-	files=*
+	files=(*)
 fi
-for file in $files; do
+for file in "${files[@]}"; do
 	if [ -d "$file" ]; then
 		echo '-------' "$file"
 		cd "$file"
-		eval $1
+		eval "$cmd"
 		cd - > /dev/null 2>&1
 	fi
 done
