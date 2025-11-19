@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 #--shows color tput outputs given value
 if [ "$#" -gt 0 ]; then
-	args=$@
+	args=$*
 else
 	#--default to all the terminal claims to support, limited to 256
 	colors=$(tput colors 2> /dev/null || 256)
-	if [ $colors -gt 256 ]; then
+	if [ "$colors" -gt 256 ]; then
 		colors=256
 	fi
-	args=$(seq 0 $colors)
+	args=$(seq 0 "$colors")
 fi
 for arg in $args; do
-	if [ $arg -gt 99 ]; then
+	if [ "$arg" -gt 99 ]; then
 		pad=' '
-	elif [ $arg -gt 9 ]; then
+	elif [ "$arg" -gt 9 ]; then
 		pad='  '
 	else
 		pad='   '
 	fi
-	printf "$(tput setab $arg)$pad$(tput setaf 0)$arg $(tput setaf 7)$arg$pad$(tput sgr0)"
+	printf "%s%s%s%s %s%s%s%s" "$(tput setab "$arg")" "$pad" "$(tput setaf 0)" "$arg" "$(tput setaf 7)" "$arg" "$pad" "$(tput sgr0)"
 done
 printf "\n"

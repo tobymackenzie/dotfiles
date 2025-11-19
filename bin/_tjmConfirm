@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "$@ [yN]: " -n 1 -r
+read -p "$* [yN]: " -n 1 -r
 echo ''
 if [[ $REPLY =~ ^[Yy] ]]; then
 	exit 0

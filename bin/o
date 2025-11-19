@@ -9,37 +9,35 @@
 #-----
 
 main(){
-	hasNoOpen=`command -v 'open' > /dev/null; echo $?`
+	hasNoOpen=$(command -v 'open' > /dev/null; echo $?)
 	noFileExists=1
-	hasArgs=0
 	args=''
 	if [ "$#" -ge 1 ]; then
-		noFileExists=`[ -e $1 ]; echo $?`
-		hasArgs=1
-		args=$@
+		noFileExists=$([ -e "$1" ]; echo $?)
+		args=$*
 		if (( noFileExists == 1 )) || [ -n "$tjmOpenApp" ] && [[ "$tjmOpenApp" != "0" ]]; then
 			case $1 in
 				'con'|'console')
-					cmd=`buildCmd Console less`
+					cmd=$(buildCmd Console less)
 				;;
 				'f'|'file'|'files'|'finder')
-					cmd=`buildCmd Finder nautilus konqueror mc ls`
+					cmd=$(buildCmd Finder nautilus konqueror mc ls)
 				;;
 				'-R')
 					if (( hasNoOpen == 0 )); then
 						cmd='open -R %%'
 					else
-						cmd=`getFirstValidCommand nautilus konqueror mc 'ls -l'`
+						cmd=$(getFirstValidCommand nautilus konqueror mc 'ls -l')
 					fi
 				;;
 				'ff'|'web')
-					cmd=`buildCmd Firefox firefox w3m links lynx`
+					cmd=$(buildCmd Firefox firefox w3m links lynx)
 				;;
 				'ffd'|'webd')
-					cmd=`buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m`
+					cmd=$(buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m)
 				;;
 				'g'|'git')
-					cmd=`buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G'`
+					cmd=$(buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G')
 				;;
 				'h'|'H')
 					if [[ $1 == 'H' ]]; then
@@ -50,15 +48,15 @@ main(){
 				;;
 				't'|'text')
 					#--if in vim terminal, we want to open text within that same vim instance
-					if [[ -n $VIM_TERMINAL ]] && [[ -n "${@:2}" ]]; then
+					if [[ -n $VIM_TERMINAL ]] && [[ -n "${*:2}" ]]; then
 						for var in "${@:2}"; do
-							printf '\033]51;["call", "Tapi_OpenInTab", ["'$var'"]]\07'
+							printf '\033]51;["call", "Tapi_OpenInTab", ["%s"]]\07' "$var"
 						done
 						exit 0
 					elif (( hasNoOpen == 0 )); then
 						cmd="open -t %%"
 					else
-						cmd=`buildCmd 'MacVim' gvim edit vim`
+						cmd=$(buildCmd 'MacVim' gvim edit vim)
 					fi
 				;;
 			esac
@@ -67,7 +65,7 @@ main(){
 				exit $err
 			fi
 			if [ -n "$cmd" ]; then
-				args=${@:2}
+				args=${*:2}
 			fi
 		fi
 	fi
@@ -90,7 +88,7 @@ main(){
 		fi
 	fi
 	cmd=${cmd/\%\%/$args}
-	eval $cmd
+	eval "$cmd"
 }
 
 buildCmd(){
@@ -100,14 +98,14 @@ buildCmd(){
 		echo "open -a '${name}' %%"
 		return 0
 	else
-		echo `getFirstValidCommand ${@:2}` && return 0
+		getFirstValidCommand "${@:2}" && return 0
 	fi
 	>&2 echo "${name} command not found"
 	exit 1
 }
 getFirstValidCommand(){
 	for var in "${@}"; do
-		if command -v `echo $var | cut -d ' ' -f1` > /dev/null; then
+		if command -v "$(echo "$var" | cut -d ' ' -f1)" > /dev/null; then
 			local c="${var} %%"
 			#--if gui command, we don't want CLI output, so eat it
 			case "$var" in
@@ -115,11 +113,11 @@ getFirstValidCommand(){
 				c="${c} &> /dev/null &"
 				;;
 			esac
-			echo $c
+			echo "$c"
 			return 0
 		fi
 	done
-	>&2 echo "valid command not found in: ${@}"
+	>&2 echo "valid command not found in: ${*}"
 	exit 1
 }
 

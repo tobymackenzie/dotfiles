@@ -18,10 +18,10 @@ mark=$1
 
 #--try to allow first argument to be command while also allowing separate naming of mark
 #-# if we: have multiple arguments, arg 1 is not a command, arg 2 is not an option and is a command
-if [ "$#" -gt 1 ] && ! command -v $1 > /dev/null && [[ "${2:0:1}" != '-' ]] && command -v $2 > /dev/null; then
-	cmd="${@:2}"
+if [ "$#" -gt 1 ] && ! command -v "$1" > /dev/null && [[ "${2:0:1}" != '-' ]] && command -v "$2" > /dev/null; then
+	cmd="${*:2}"
 else
-	cmd="$@"
+	cmd="$*"
 fi
 
 #--try to show through i3
@@ -34,7 +34,7 @@ if ! show; then
 	#--wait for window
 	i3-msg -t subscribe '[ "window" ]'
 	#--mark
-	i3-msg mark ${mark}
+	i3-msg mark "${mark}"
 	#--attach to scratchpad
 	i3-msg move scratchpad
 	#--show

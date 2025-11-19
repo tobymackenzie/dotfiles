@@ -1,5 +1,5 @@
 #!/bin/bash
-name="$@"
+name="$*"
 if [ -z "$name" ]; then
 	name="T"
 fi

@@ -1,2 +1,2 @@
-#!/bin/bash
-v curl cheat.sh/$@
+#!/bin/sh
+v curl "cheat.sh/$*"

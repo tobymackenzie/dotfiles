@@ -1,10 +1,10 @@
 #!/bin/bash -i
 #-# vim with no swap file, no viminfo, no plugins (third party code)
 #-@ ideas from https://vi.stackexchange.com/questions/6177/the-simplest-way-to-start-vim-in-private-mode
-opts=(-i NONE -n --noplugin -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' ${@})
+opts=(-i NONE -n --noplugin -c 'setlocal nobackup nomodeline noshelltemp noswapfile noundofile nowritebackup secure viminfo=""' "${@}")
 #--handle stdin
 if [ -s /dev/stdin ]; then
-	if [ "${opts[@]: -1}" != "-" ]; then
+	if [ "${opts[*]: -1}" != "-" ]; then
 		opts+=('-')
 	fi
 	vim "${opts[@]}"

@@ -9,7 +9,7 @@ if [ -z "$1" ]; then
 else
 	cmd="$1"
 fi
-args=${@:2}
+args=${*:2}
 
 #==helpers
 die(){
@@ -19,7 +19,7 @@ die(){
 runPkg(){
 	local cmd=""
 	local sub="$1"
-	local args=${@:2}
+	local args=${*:2}
 
 	#--find installed package manager command
 	# debian mac fedora fedora arch bsd mac fedora
@@ -100,7 +100,7 @@ runPkg(){
 
 	#--check permissions to run command
 	#---homebrew must be owned by us to modify
-	if [[ ("$cmd" == 'brew' && ! -O `which brew` && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
+	if [[ ("$cmd" == 'brew' && ! -O $(which brew) && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
 		die "don't have permissions to run brew command"
 	fi
 	#---some must run as root
@@ -109,7 +109,7 @@ runPkg(){
 	fi
 
 	#--run
-	$cmd $sub $args
+	eval "$cmd $sub $args"
 }
 
 #==main
@@ -119,7 +119,7 @@ case $cmd in
 			if [ -z "$args" ]; then
 				args='now'
 			fi
-			shutdown $args
+			shutdown "$args"
 		else
 			die "don't know how to shutdown"
 		fi
@@ -127,14 +127,14 @@ case $cmd in
 	'-h'|'h'|'help') #: show help for this command
 		echo "Usage: os <subcommand> [options]"
 		echo "os command must be run with one of the following subcommands"
-		grep -o "'.*)\(\s*#.*\)\$" ${BASH_SOURCE[0]} | # grab formatted lines
+		grep -o "'.*)\(\s*#.*\)\$" "${BASH_SOURCE[0]}" | # grab formatted lines
 			sed "s/'//g" | # strip quotes for terseness
 			sed 's/^\(.*\))[ ]*#:/\1:/g' | # nicer formatting
 			GREP_COLOR='01;32' grep --color '^.*:' # color subcommands
 	;;
 	'halt') #: halt computer / OS
 		if command -v 'halt' > /dev/null; then
-			halt $args
+			halt "$args"
 		else
 			die "don't know how to halt"
 		fi
@@ -142,13 +142,13 @@ case $cmd in
 	'hibernate'|'sleep'|'suspend') #: hibernate computer / OS
 		#--mac
 		if command -v 'pmset' > /dev/null; then
-			pmset sleepnow $args
+			pmset sleepnow "$args"
 		else
 			die "don't know how to sleep"
 		fi
 	;;
 	'in'|'install') #: install OS package
-		runPkg install $args
+		runPkg install "$args"
 	;;
 	'i'|'info'|'-v'|'v'|'version') #: get OS info, or package info with arg(s)
 		if [ -z "$args" ]; then
@@ -157,57 +157,57 @@ case $cmd in
 				if [ -r '/etc/os-release' ]; then
 					source /etc/os-release
 					if [ -n "$PRETTY_NAME" ]; then
-						echo $PRETTY_NAME
+						echo "$PRETTY_NAME"
 					else
-						echo $NAME $VERSION
+						echo "$NAME $VERSION"
 					fi
 
 				fi
-				hostnamectl $args
+				hostnamectl "$args"
 			#--termux
 			elif command -v 'termux-info' > /dev/null; then
-				termux-info $args
+				termux-info "$args"
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
-				sw_vers $args
+				sw_vers "$args"
 				#-!super verbose and slow. do we want this?
 				# if [ -z "$args" ]; then
 					# args='-detailLevel mini'
 				# fi
 				# system_profiler $args | less
 			fi
-			echo 'WM: ' `getwm`
+			echo "WM: $(getwm)"
 		else
-			runPkg info $args
+			runPkg info "$args"
 		fi
 	;;
 	'list'|'l') #: list OS packages
-		runPkg list $args
+		runPkg list "$args"
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--gnome
-		if [ `getwm` = 'gnome' ] && command -v 'xdg-screensaver' > /dev/null; then
+		if [ "$(getwm)" = 'gnome' ] && command -v 'xdg-screensaver' > /dev/null; then
 			xdg-screensaver lock
 		#--i3
-		elif [ `getwm` = 'i3' ] && command -v 'i3lock' > /dev/null; then
-			i3lock $args
+		elif [ "$(getwm)" = 'i3' ] && command -v 'i3lock' > /dev/null; then
+			i3lock "$args"
 		#--mac
 		elif command -v 'pmset' > /dev/null; then
-			pmset displaysleepnow $args
+			pmset displaysleepnow "$args"
 		else
 			die "don't know how to lock"
 		fi
 	;;
 	'logout'|'out') #: log out
 		#--gnome
-		if [ `getwm` = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
+		if [ "$(getwm)" = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
 			if [ -z "$args" ]; then
 				args='--no-prompt'
 			fi
-			gnome-session-quit $args
+			gnome-session-quit "$args"
 		#--i3
-		elif [ `getwm` = 'i3' ] && command -v 'i3-msg' > /dev/null; then
-			i3-msg exit $args
+		elif [ "$(getwm)" = 'i3' ] && command -v 'i3-msg' > /dev/null; then
+			i3-msg exit "$args"
 		#--mac
 		elif command -v 'osascript' > /dev/null; then
 			osascript -e 'tell application "System Events" to log out'
@@ -217,23 +217,23 @@ case $cmd in
 		fi
 	;;
 	'p'|'package'|'packages'|'pkg') #: run package manager command
-		runPkg $args
+		runPkg "$args"
 	;;
 	're'|'reboot'|'restart') #: reboot computer / OS
 		if command -v 'reboot' > /dev/null; then
-			reboot $args
+			reboot "$args"
 		else
 			die "don't know how to reboot"
 		fi
 	;;
 	'remove'|'rm'|'uninstall') #: uninstall OS package
-		runPkg remove $args
+		runPkg remove "$args"
 	;;
 	's'|'search') #: search for OS packages
-		runPkg search $args
+		runPkg search "$args"
 	;;
 	'up'|'update'|'upgrade') #: upgrade OS packages
-		runPkg up $args
+		runPkg up "$args"
 	;;
 	*)
 		die "Unknown os command ${cmd} command"

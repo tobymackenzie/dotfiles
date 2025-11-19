@@ -13,7 +13,7 @@ if [ ! -e "${dir}/.ghdata" ] || [[ $(find "${dir}/.ghdata" -mtime +7 -print) ]];
 		grep -e '^    "name"*' | \
 		cut -d \" -f 4 > "${dir}/.ghdata"
 fi
-gh_data=`cat "${dir}/.ghdata"`
+gh_data=$(cat "${dir}/.ghdata")
 for name in ${gh_data}; do
 	case $name in fork-* | 'symfony-docs')
 		continue
@@ -21,7 +21,7 @@ for name in ${gh_data}; do
 	dest="${dir}/${name}"
 	# echo "${dest}"
 	if [ -d "${dest}" ]; then
-		cd "${dest}"
+		cd "${dest}" || exit 1
 		git remote -v update --prune
 	else
 		mkdir "${dest}"

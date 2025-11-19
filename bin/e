@@ -7,17 +7,17 @@ function handleStdinOpts(){
 	if [[ $editor == 'vi' || $editor == 'vim' ]]; then
 		#-# use read only for standard in to make it easier to quit. To write, use `:w filename` method
 		editor="${editor} -R"
-		if [[ "${@: -1}" != "-" ]]; then
+		if [[ "${*: -1}" != "-" ]]; then
 			opts+=('-')
 		fi
 	fi
 }
 if [ -s /dev/stdin ]; then
-	handleStdinOpts
-	$editor $@ $opts
-elif [ ! -e $1 ] && ([ -x "$(command -v ${1})" ] || type $1 >/dev/null 2>&1); then
-	handleStdinOpts
-	eval "$@" | $editor $opts
+	handleStdinOpts "$@"
+	$editor "$@" "${opts[@]}"
+elif [ ! -e "$1" ] && ([ -x "$(command -v "$1")" ] || type "$1" >/dev/null 2>&1); then
+	handleStdinOpts "$@"
+	"$@" | $editor "${opts[@]}"
 else
-	$editor $@
+	$editor "$@"
 fi

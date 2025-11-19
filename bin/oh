@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-if [ "`basename $0`" = 'OH' ]; then echo 'IO!' ${@};
+if [ "$(basename "$0")" = 'OH' ]; then echo 'IO!' "${@}";
 else
 	str=('boy' 'boy oh boy' 'brother' 'brother, where art thou' 'come on' 'dear' 'heck' 'I know' 'I reckon' 'I see' 'I see, said the blind man, as he picked up his hammer and saw' 'io!' 'jeez' 'man' 'my' 'my gosh' 'no' 'oh oh' 'really' 'well' 'wow' 'yeah')
-	echo ${str[ $((RANDOM % ${#str[@]})) ]} ${@}
+	echo "${str[ $((RANDOM % ${#str[@]})) ]} ${*}"
 fi

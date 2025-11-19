@@ -46,7 +46,7 @@ for arg in "$@"; do
 		#--quote args to deal with special chars, eg `-name '*.php'`
 		#-# will anything break with this?
 		if [[ "$arg" == *"'"* ]]; then
-			arg=`echo "$arg" | sed "s/'/'\\\\\''/g"`
+			arg="${arg//\'/\\\'\'}"
 		fi
 		fopts="${fopts} '${arg}'"
 	fi
@@ -56,7 +56,7 @@ if [[ -z $fopts || ${fopts:0:2} == ' -' ]]; then
 	fopts=" . ${fopts}"
 fi
 #--ensure we're only working with files if not otherwise specific and we want to `grep`
-if [[ $fopts != *"-type"* && ${#gcmd} > 0 ]]; then
+if [[ $fopts != *"-type"* && ${#gcmd} -gt 0 ]]; then
 	fopts="${fopts} -type f"
 fi
 #--run

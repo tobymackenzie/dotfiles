@@ -1,18 +1,23 @@
 #!/bin/bash
 if [ $# -gt 1 ]; then
-	files="${@:2}"
+	files=("${@:2}")
 else
-	files=*
+	files=(*)
 fi
-for file in $files; do
-	if [ -d $file ] && [ -d $file/.git ]; then
+for file in "${files[@]}"; do
+	if [ -d "$file" ] && [ -d "$file/.git" ]; then
 		if [ $# -gt 0 ]; then
-			echo '-------' $file
-			cd $file
-			eval git $1
-			cd - > /dev/null 2>&1
+			echo '-------' "$file"
+			if cd "$file"; then
+				eval git "$1"
+				#-! is `>&` posix?
+				cd - > /dev/null 2>&1 || exit 1
+			else
+				echo "Error: no such directory"
+				continue
+			fi
 		else
-			basename $file
+			basename "$file"
 		fi
 	fi
 done

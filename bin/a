@@ -14,8 +14,12 @@ fi
 for file in "${files[@]}"; do
 	if [ -d "$file" ]; then
 		echo '-------' "$file"
-		cd "$file"
-		eval "$cmd"
-		cd - > /dev/null 2>&1
+		if cd "$file"; then
+			eval "$cmd"
+			cd - > /dev/null 2>&1 || exit 1
+		else
+			echo "Error: no such directory"
+			continue
+		fi
 	fi
 done

@@ -12,4 +12,4 @@ cat << H
    <:__.´
 
 H
-echo '👻' `seq $((1 + $RANDOM % 20)) | awk '{printf "a"}'``seq $((2 + $RANDOM % 22)) | awk '{printf "h"}'`
+echo '👻' "$(seq $((1 + RANDOM % 20)) | awk '{printf "a"}')""$(seq $((2 + RANDOM % 22)) | awk '{printf "h"}')"

@@ -13,7 +13,7 @@ cleanOut() {
 	#--trim trailing 0
 	match='0+$'
 	if [[ "$v" == *"."* && "$v" =~ $match ]]; then
-		v=$(echo $v | sed -r 's/\.?[0]+$//')
+		v=$(echo "$v" | sed -r 's/\.?[0]+$//')
 	fi
 
 	echo "$v"
@@ -24,10 +24,10 @@ if [ -z "$1" ]; then
 	#-# add special parsing to interactive `bc -l`, namely `ans` and dropping trailing `0`.  Otherwise, just `bc -l` would work
 	#--create pipes to communicate with `bc`
 	inp="${TMPDIR:-/tmp}/"$(date +'%Y%m%d%H%M%S')'.in'
-	mkfifo -m 0700 $inp
+	mkfifo -m 0700 "$inp"
 	exec 3<> "$inp"
 	outp="${TMPDIR:-/tmp}/"$(date +'%Y%m%d%H%M%S')'.out'
-	mkfifo -m 0700 $outp
+	mkfifo -m 0700 "$outp"
 	exec 4<> "$outp"
 	#---ensure pipe files removed
 	#--# removes files, but n<> keeps node connected until end of script anyways
@@ -66,9 +66,9 @@ if [ -z "$1" ]; then
 		#--pass to `bc`
 		echo "$in" >&3 || (echo 'error2' && fin)
 		#--read output
-		read -t 1 out <&4 || out=''
-		if [ ! -z "$out" ]; then
-			echo $(cleanOut "$out")
+		read -rt 1 out <&4 || out=''
+		if [ -n "$out" ]; then
+			cleanOut "$out"
 		fi
 	done
 	fin
@@ -82,17 +82,17 @@ else
 	f="$TJM_DOTFILES_PATH/.cache/c"
 	calc=$(buildCalc "$*")
 	if [[ "$calc" == *"ans"* ]]; then
-		ans=$(cat $f)
-		if [ -z $ans ]; then
+		ans=$(cat "$f")
+		if [ -z "$ans" ]; then
 			ans=0
 		fi
 		calc="ans = ${ans}; ${calc}"
 	fi
 
 	#--run calc
-	v=$(cleanOut $(echo "$calc" | bc -l))
+	v=$(cleanOut "$(echo "$calc" | bc -l)")
 
 	#--save answer to file and echo
-	echo "$v" > $f
+	echo "$v" > "$f"
 	echo "$v"
 fi
