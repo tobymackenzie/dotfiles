@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #--shows color tput outputs given value
 if [ "$#" -gt 0 ]; then
 	args=$*
