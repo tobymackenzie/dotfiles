@@ -31,6 +31,7 @@
 	i = !"cd -- ${GIT_PREFIX:-.} && (git rev-parse 2>/dev/null && ( \
 		echo '==stat' && git status -sb ; \
 		[[ $(git rev-parse HEAD 2> /dev/null) != 'HEAD' ]] && echo '==commits' && git --no-pager log --date=format:'%y%m%d-%H%M' --pretty=format:'%C(green)%cd: %C(reset)%s %C(bold brightblue)<%an>%C(bold green)% D%C(brightyellow)% h%C(reset)' -2 --color && echo '' ; \
+		[[ $(git stash list) ]] && echo '==stashes' && git sl --color && echo '' ; \
 		[[ $(git submodule status) ]] && echo '==submodules' && git submodule status \
 		) | less -FRX) || (echo 'not a git repository' >&2 && exit 1)"
 	ii = info
