@@ -14,6 +14,16 @@ command! Lint ALELint
 "--vim info
 command! Info echo "-----version" | version | echo "\n-----scriptnames" | scriptnames
 
+"--refresh current file / page
+command! Refresh {
+	if &ft == 'netrw'
+		call feedkeys('<c-L>')
+	else
+		edit
+	endif
+}
+command! Reload Refresh
+
 "--reload config
 command! ReloadVimrc {
 	so $MYVIMRC
