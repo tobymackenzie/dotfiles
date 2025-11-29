@@ -87,7 +87,7 @@ noremap <expr> <leader><right> winnr('$') > 1 ? '<c-w><right>' : ':tabnext<cr>'
 noremap <leader><up> <c-w><up>
 noremap <leader><down> <c-w><down>
 "--reload vimrc
-nmap <leader>< :ReloadVim<cr>
+nmap <leader>< :ReloadVimrc<cr>
 "--edit vimrc
 nmap <leader>, :e $MYVIMRC<cr>
 "--command mode

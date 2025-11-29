@@ -15,14 +15,13 @@ command! Lint ALELint
 command! Info echo "-----version" | version | echo "\n-----scriptnames" | scriptnames
 
 "--reload config
-command! Reload {
+command! ReloadVimrc {
 	so $MYVIMRC
 	redraw
 	echo 'reloaded vimrc'
 }
-command! ReloadConfig Reload
-command! ReloadVim Reload
-command! Resource Reload
+command! ReloadConfig ReloadVimrc
+command! ReSource Reload
 
 "--show colors
 command! ShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
