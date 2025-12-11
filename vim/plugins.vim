@@ -1,11 +1,11 @@
 "==plug.vim plugin manager
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	if empty(glob('~/.vim/autoload/plug.vim'))
+		"--bail aren't installed
+		finish
+	endif
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-if empty(glob('~/.vim/autoload/plug.vim'))
-	"--bail aren't installed
-	finish
 endif
 
 call plug#begin('~/.vim/plugged')
