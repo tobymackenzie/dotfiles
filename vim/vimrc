@@ -311,6 +311,8 @@ augroup END
 endif
 
 "==tabs
+"--previous focused on close
+set tabclose=uselast
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
 if has('gui_macvim')
