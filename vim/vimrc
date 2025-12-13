@@ -321,6 +321,8 @@ if has('gui_macvim')
 	noremap <A-D-S-Right> :+tabmove<CR>
 	inoremap <A-D-S-Right> <esc>:+tabmove<CR>i
 endif
+"--use tabs when coming from quickfix list and some other actions
+set switchbuf=newtab,usetab
 
 "--switch tabs via index
 "-@ https://superuser.com/questions/382060/shortcut-to-switch-tabs-in-macvim
