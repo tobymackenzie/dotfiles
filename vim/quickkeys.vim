@@ -24,6 +24,8 @@ nnoremap <leader>H :tab help<cr>
 "--page up down
 nnoremap <leader>j <c-d>
 nnoremap <leader>k <c-u>
+"--create new file
+nnoremap <leader>n :call NewFile()<cr>
 "--open
 nnoremap <leader>o :OpenFile **/
 nnoremap <leader>O :OpenFile<space>

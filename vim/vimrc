@@ -417,6 +417,24 @@ augroup TJMExploreListen
 	autocmd WinClosed * if expand('<amatch>') == g:TMExploreWin | let g:TMExploreWin = 0 | endif
 augroup END
 endif
+"--create new file
+fun! NewFile()
+	if &ft == 'netrw'
+		let path = input('Enter filename: ')
+		if path != ''
+			let path = b:netrw_curdir .. '/' .. path
+		else
+			throw 'No filename provided'
+		endif
+	else
+		let path = input('Enter filename: ', getcwd() .. '/')
+	endif
+	if isdirectory(path)
+		throw "Filename can't be a directory"
+	endif
+	" exe 'silent !touch ' .. path
+	exe 'tab drop ' .. path
+endfun
 
 "=====
 "==term
