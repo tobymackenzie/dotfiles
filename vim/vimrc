@@ -425,7 +425,7 @@ fun! NewFile()
 			let path = b:netrw_curdir .. '/' .. path
 		endif
 	else
-		let path = input('Enter filename: ', getcwd() .. '/')
+		let path = input('Enter filename: ', getcwd() .. '/', 'dir')
 	endif
 	if path == ''
 		echohl WarningMsg
