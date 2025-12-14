@@ -423,14 +423,18 @@ fun! NewFile()
 		let path = input('Enter filename: ')
 		if path != ''
 			let path = b:netrw_curdir .. '/' .. path
-		else
-			throw 'No filename provided'
 		endif
 	else
 		let path = input('Enter filename: ', getcwd() .. '/')
 	endif
-	if isdirectory(path)
-		throw "Filename can't be a directory"
+	if path == ''
+		echohl WarningMsg
+		redraw | echo 'cancelling'
+		return
+	elseif isdirectory(path)
+		echohl WarningMsg
+		redraw | echo "Filename can't be a directory"
+		return
 	endif
 	" exe 'silent !touch ' .. path
 	exe 'tab drop ' .. path
