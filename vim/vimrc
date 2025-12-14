@@ -420,24 +420,27 @@ endif
 "--create new file
 fun! NewFile()
 	if &ft == 'netrw'
-		let path = input('Enter filename: ')
-		if path != ''
-			let path = b:netrw_curdir .. '/' .. path
+		let oldpath = &path
+		let &path = b:netrw_curdir
+		let npath = input('Enter filename: ', '', 'file_in_path')
+		if npath != ''
+			let npath = b:netrw_curdir .. '/' .. npath
 		endif
+		let &path = oldpath
 	else
-		let path = input('Enter filename: ', getcwd() .. '/', 'dir')
+		let npath = input('Enter filename: ', getcwd() .. '/', 'dir')
 	endif
-	if path == ''
+	if npath == ''
 		echohl WarningMsg
 		redraw | echo 'cancelling'
 		return
-	elseif isdirectory(path)
+	elseif isdirectory(npath)
 		echohl WarningMsg
 		redraw | echo "Filename can't be a directory"
 		return
 	endif
-	" exe 'silent !touch ' .. path
-	exe 'tab drop ' .. path
+	" exe 'silent !touch ' .. npath
+	exe 'tab drop ' .. npath
 endfun
 
 "=====
