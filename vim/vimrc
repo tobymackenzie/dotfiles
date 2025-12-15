@@ -312,7 +312,9 @@ endif
 
 "==tabs
 "--previous focused on close
-set tabclose=uselast
+if exists('&tabclose')
+	set tabclose=uselast
+endif
 "--move tabs
 "-@ https://stackoverflow.com/a/40919415/1139122
 if has('gui_macvim')
