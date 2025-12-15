@@ -35,5 +35,8 @@ command! ReloadConfig ReloadVimrc
 command! ReSource Reload
 
 "--show colors
+"-! would like this to go to existing tab if already created
+"--! could store variable with tab / buffer and switch to it if set, otherwise tabnew
+"--! would need to unset variable on close of that buffer
 command! ShowColors tabnew | so $VIMRUNTIME/syntax/hitest.vim
 

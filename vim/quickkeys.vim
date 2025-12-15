@@ -36,6 +36,7 @@ nnoremap <leader>P :Project<space>
 "--quit
 noremap <leader>q :<c-u>qa<CR>
 "--reveal in file browser (mac only)
+"-! should do something for non-mac, `o` should work on Linux
 if has('mac')
 	nnoremap <silent> <leader>r :Reveal<cr>
 endif

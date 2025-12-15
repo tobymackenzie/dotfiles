@@ -1,4 +1,4 @@
-
+"-! see new autocomplete feature, :h ins-autocompletion
 set completeopt+=menuone,noinsert,noselect
 "--disable error when no matches found
 set shortmess+=c
