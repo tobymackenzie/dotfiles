@@ -26,7 +26,7 @@ if &background ==# 'dark'
 	hi! TJMStatus ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
 	hi! TJMStatusMode ctermfg=156 ctermbg=29 guifg=#abf192 guibg=#427b58
 	hi! TJMStatusEtc ctermfg=142 ctermbg=236 guifg=#b8bb26 guibg=#203620
-	hi Visual ctermbg=142 guibg=#b8bb26
+	hi Visual ctermfg=142 ctermbg=0 guifg=#000000 guibg=#b8bb26
 
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
