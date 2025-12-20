@@ -7,13 +7,9 @@ endif
 syntax on
 
 "--defaults for custom color names that aren't defined by scheme
-"-# using link without ! because that will be ignored if defined
-augroup TJMColorFallbacks
-	autocmd!
-	autocmd ColorScheme * silent highlight link TJMStatus CursorColumn
-	autocmd ColorScheme * silent highlight link TJMStatusMode Cursor
-	autocmd ColorScheme * silent highlight link TJMStatusEtc Cursor
-augroup end
+highlight! default link TJMStatus CursorColumn
+highlight! default link TJMStatusMode Cursor
+highlight! default link TJMStatusEtc Cursor
 
 "--set colors helper
 "-# pretty much just `:colorscheme` with a `dark` / `light` setting
