@@ -6,6 +6,21 @@ endif
 "--enable syntax highlighting, must be before colorscheme
 syntax on
 
+"--check if highlight group set
+" fun! TJMIsHiSet(val)
+	" if exists('*hlget')
+		" let hl = hlget(a:val)
+		" return !empty(hl) && (!has_key(hl[0], 'cleared') || hl[0].cleared == v:false)
+	" else
+		" "-! only kinda works in that it returns true even if cleared
+		" try
+			" exe 'silent hi ' .. a:val
+			" return v:true
+		" catch
+			" return v:false
+		" endtry
+	" endif
+" endfun
 "--defaults for custom color names that aren't defined by scheme
 highlight! default link TJMStatus CursorColumn
 highlight! default link TJMStatusMode Cursor
