@@ -7,3 +7,4 @@
 *.troughColor: #003300
 URxvt*scrollBar_right: true
 URxvt*scrollstyle: plain
+xterm*faceSize: 18
