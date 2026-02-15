@@ -4,7 +4,7 @@ if [ ! -z "${ZSH_VERSION+x}" ]; then
 elif [ ! -z "${BASH_VERSION+x}" ]; then
 	TJM_SHELL=bash
 else
-	TJM_SHELL=$SHELL
+	TJM_SHELL="$(cat /proc/$$/cmdline || echo 'sh')"
 fi
 export TJM_SHELL
 
