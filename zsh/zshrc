@@ -6,7 +6,7 @@ fi
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 #==plugins
-source $TJM_DOTFILES_PATH/zsh/plugins.zsh
+source "$TJM_DOTFILES_PATH/zsh/plugins.zsh"
 
 #==options
 setopt AUTO_CD #-# automatically change directory
@@ -23,8 +23,8 @@ autoload -Uz compinit && compinit
 compdef -d git
 
 #===history
-if [ -z $HISTFILE ]; then
-	HISTFILE=$HOME/.zsh_history
+if [ -z "$HISTFILE" ]; then
+	HISTFILE="$HOME/.zsh_history"
 fi
 HISTSIZE=10000
 SAVEHIST=10000
@@ -49,7 +49,7 @@ fi
 bindkey -v
 #---indicate vim command mode by changing cursor
 zle-keymap-select () {
-	case $KEYMAP in
+	case "$KEYMAP" in
 		vicmd)
 			PS1="%F{2}>%{$reset_color%}$TJM_PS_BASE" #--gray PS marker
 			echo -ne "\e]12;#0c0\a" #--green cursor
@@ -91,8 +91,8 @@ if (( $SHLVL > 1 )); then
 fi
 #--colors
 tputColors="$(tput colors 2> /dev/null || echo 2)"
-if [ $tputColors -gt 2 ]; then
-	if [ $tputColors -gt 8 ]; then
+if [ "$tputColors" -gt 2 ]; then
+	if [ "$tputColors" -gt 8 ]; then
 		PS1="%{$(tput setab 42)$(tput setaf 0)%}${PS1}"
 	else
 		PS1="%{$bg[green]%}%{$fg[black]%}${PS1}"
@@ -110,6 +110,6 @@ TJM_PS_BASE="$PS1 "
 export PS1="$TJM_PS_BASE"
 
 #==custom
-if [ -f ${TJM_DOTFILES_PATH}/_local/zsh ]; then
-	source ${TJM_DOTFILES_PATH}/_local/zsh
+if [ -f "${TJM_DOTFILES_PATH}/_local/zsh" ]; then
+	source "${TJM_DOTFILES_PATH}/_local/zsh"
 fi

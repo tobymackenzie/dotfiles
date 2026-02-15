@@ -1,5 +1,5 @@
 #==title
-case $TERM in
+case "$TERM" in
 	xterm*|rxvt|eterm)
 		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
 	;;

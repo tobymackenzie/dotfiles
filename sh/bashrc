@@ -15,8 +15,8 @@ export TJM_SHELL
 #-@http://stackoverflow.com/a/246128
 #-@http://stackoverflow.com/a/14728194
 if test -z "${TJM_DOTFILES_PATH}"; then
-	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]:-${(%):-%x}})))
+	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")))
 fi
 
 #--load all conf
-. ${TJM_DOTFILES_PATH}/sh/load.sh
+. "${TJM_DOTFILES_PATH}/sh/load.sh"

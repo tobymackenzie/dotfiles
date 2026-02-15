@@ -20,18 +20,18 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 		#-# need to run twice because it doesn't do error on "failure", must parse to know if we need cheat
 		out=`\run-help "$s" 2> /dev/null`
 		if [[ "$out" == *"$s not found"* ]]; then
-			cheat $s
+			cheat "$s"
 		else
 			#--some run-help files mention looking at specific man pages but don't show them.  let's show them
 			if [[ "$out" =~ "See the section \`([^']+)' in ([^\(]+)" ]]; then
 				man -P "${PAGER:-less} -Ip '${match[1]}'" "$match[2]"
 			else
-				\run-help $s
+				\run-help "$s"
 			fi
 		fi
 	}
 else
 	h(){
-		help $@ 2> /dev/null || man $@ 2> /dev/null || cheat $@
+		help "$@" 2> /dev/null || man "$@" 2> /dev/null || cheat "$@"
 	}
 fi

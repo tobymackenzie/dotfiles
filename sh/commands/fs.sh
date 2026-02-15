@@ -26,7 +26,7 @@ checkouts(){
 alias co="checkouts"
 
 #==stats
-case $TJM_OS in
+case "$TJM_OS" in
 	'darwin') alias d="du -hxd 0"; ;;
 	*) alias d="du -hx --max-depth 0"; ;;
 esac
