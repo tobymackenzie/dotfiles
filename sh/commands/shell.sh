@@ -1,5 +1,5 @@
 #-@ based on <https://meyerweb.com/eric/thoughts/2020/09/29/polite-bash-commands/>
-function rodo(){
+rodo(){
 	if [ -n "$1" ]; then
 		sudo bash -c "$*"
 	else
@@ -8,11 +8,11 @@ function rodo(){
 }
 
 #--help
-if [[ "$TJM_SHELL" == 'zsh' ]]; then
+if [ "$TJM_SHELL" = 'zsh' ]; then
 	#--use zsh's special help files for some internal internal features
 	autoload -Uz run-help
 	alias help='\run-help'
-	function h(){
+	h(){
 		if [ -z "$HELPDIR" ]; then
 			local HELPDIR="/usr/share/zsh/${ZSH_VERSION}/help"
 		fi
@@ -31,7 +31,7 @@ if [[ "$TJM_SHELL" == 'zsh' ]]; then
 		fi
 	}
 else
-	function h(){
+	h(){
 		help $@ 2> /dev/null || man $@ 2> /dev/null || cheat $@
 	}
 fi

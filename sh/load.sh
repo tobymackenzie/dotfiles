@@ -10,40 +10,53 @@ if [ ! -z "${ZSH_VERSION+x}" ]; then
 			senv $*
 		fi
 	}
-else
+elif [ "$TJM_SHELL" = 'bash' ]; then
 	#--bash.  may need to use eval for other sh
 	setdefaultenv(){
 		if [ -z "${!1}" ]; then
 			senv $*
 		fi
 	}
+else
+	setdefaultenv(){
+		eval "tmp=\$$1"
+		if [ -z "$tmp" ]; then
+			senv $*
+		fi
+		unset tmp
+	}
 fi
 
 #==load built-in files
 #--load config first, so that other scripts have access to config
 for file in ${TJM_DOTFILES_PATH}/sh/config/*.sh; do
-	source $file
+	. $file
 done
 
 #--load `.env`, if it exists
 if test -r ${HOME}/.env; then
 	set -o allexport
-	source ${HOME}/.env
+	. ${HOME}/.env
 	set +o allexport
 fi
 
 #--load shared files other than the config and this script next
-source ${TJM_DOTFILES_PATH}/sh/../shells/env.sh
-source ${TJM_DOTFILES_PATH}/sh/../shells/alias.sh
-source ${TJM_DOTFILES_PATH}/sh/../shells/short.sh
-if [[ "${TJM_OS}" == 'darwin' ]]; then
-	source ${TJM_DOTFILES_PATH}/sh/../shells/mac.sh
+. ${TJM_DOTFILES_PATH}/sh/../shells/env.sh
+. ${TJM_DOTFILES_PATH}/sh/../shells/alias.sh
+. ${TJM_DOTFILES_PATH}/sh/../shells/short.sh
+if [ "$TJM_OS" = 'darwin' ]; then
+	. ${TJM_DOTFILES_PATH}/sh/../shells/mac.sh
 fi
 
 #--load all files other than the config and this script next
 for file in $(find ${TJM_DOTFILES_PATH}/sh -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
-	source $file
+	. $file
 done
+if [ "$TJM_SHELL" = 'bash' ] || [ "$TJM_SHELL" = 'zsh' ]; then
+	for file in $(find ${TJM_DOTFILES_PATH}/sh -type f -name '*.bash' ! -regex '\(.*\/config.*\)'); do
+		. $file
+	done
+fi
 unset -v file
 
 
@@ -56,11 +69,11 @@ fi
 
 #--alias
 if [ -f ${TJM_DOTFILES_PATH}/_local/alias ]; then
-	source ${TJM_DOTFILES_PATH}/_local/alias
+	. ${TJM_DOTFILES_PATH}/_local/alias
 fi
 
 #--custom
-if [[ -f ${TJM_DOTFILES_PATH}/_local/bash && "$TJM_SHELL" == 'bash' ]]; then
-	source ${TJM_DOTFILES_PATH}/_local/bash
+if [ -f "${TJM_DOTFILES_PATH}/_local/bash" ] && [ "$TJM_SHELL" = 'bash' ]; then
+	. ${TJM_DOTFILES_PATH}/_local/bash
 fi
 

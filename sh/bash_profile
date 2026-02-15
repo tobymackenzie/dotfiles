@@ -1,10 +1,13 @@
 #--store shell name for `reshell`
 if [ ! -z "${ZSH_VERSION+x}" ]; then
 	TJM_SHELL=zsh
+	TJM_SH='0'
 elif [ ! -z "${BASH_VERSION+x}" ]; then
 	TJM_SHELL=bash
+	TJM_SH='0'
 else
 	TJM_SHELL="$(cat /proc/$$/cmdline || echo 'sh')"
+	TJM_SH='1'
 fi
 export TJM_SHELL
 
@@ -16,4 +19,4 @@ if test -z "${TJM_DOTFILES_PATH}"; then
 fi
 
 #--load all conf
-source ${TJM_DOTFILES_PATH}/sh/load.sh
+. ${TJM_DOTFILES_PATH}/sh/load.sh

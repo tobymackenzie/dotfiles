@@ -5,7 +5,6 @@ lll(){
 
 #==path movement
 alias ..="cd .."
-alias -- -="cd -"
 cl(){
 	cd $@ && l
 }
@@ -17,17 +16,11 @@ mkcd(){
 }
 #--specific
 alias ~="cd ~"
-function /(){
-	cd /$*
-}
-function __(){
-	cd "~/__/$*"
-}
-function cdbin(){
+cdbin(){
 	cd "$TJM_BIN_PATH/$*"
 }
 alias bin='cdbin'
-function checkouts(){
+checkouts(){
 	cd "$TJM_CHECKOUTS_PATH/$*"
 }
 alias co="checkouts"
