@@ -49,11 +49,11 @@ if [ "$TJM_OS" = 'darwin' ]; then
 fi
 
 #--load all files other than the config and this script next
-for file in $(find "${TJM_DOTFILES_PATH}/sh" -type f -name '*.sh' ! -name 'load.sh' ! -regex '\(.*\/config.*\)'); do
+for file in $(find "${TJM_DOTFILES_PATH}/sh/commands" -type f -name '*.sh' ); do
 	. "$file"
 done
 if [ "$TJM_SHELL" = 'bash' ] || [ "$TJM_SHELL" = 'zsh' ]; then
-	for file in $(find "${TJM_DOTFILES_PATH}/sh" -type f -name '*.bash' ! -regex '\(.*\/config.*\)'); do
+	for file in $(find "${TJM_DOTFILES_PATH}/sh/commands" -type f -name '*.bash' ); do
 		. "$file"
 	done
 fi
