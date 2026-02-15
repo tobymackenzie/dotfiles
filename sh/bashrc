@@ -1,4 +1,22 @@
-#-# source bash profile if it exists and this is an interactive shell
-if [ -f ~/.bash_profile ] && [ -n "$PS1" ]; then
-	. ~/.bash_profile
+#--store shell name for `reshell`
+if [ ! -z "${ZSH_VERSION+x}" ]; then
+	TJM_SHELL=zsh
+	TJM_SH='0'
+elif [ ! -z "${BASH_VERSION+x}" ]; then
+	TJM_SHELL=bash
+	TJM_SH='0'
+else
+	TJM_SHELL="$(cat /proc/$$/cmdline || echo 'sh')"
+	TJM_SH='1'
 fi
+export TJM_SHELL
+
+#--set dotfiles path
+#-@http://stackoverflow.com/a/246128
+#-@http://stackoverflow.com/a/14728194
+if test -z "${TJM_DOTFILES_PATH}"; then
+	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]:-${(%):-%x}})))
+fi
+
+#--load all conf
+. ${TJM_DOTFILES_PATH}/sh/load.sh
