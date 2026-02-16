@@ -1,6 +1,6 @@
 #==list
 lll(){
-	ll $@ | less
+	ll $@ | less -R
 }
 
 #==path movement
