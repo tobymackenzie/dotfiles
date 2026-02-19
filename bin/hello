@@ -1,0 +1,26 @@
+#!/bin/sh
+word="$@"
+if command -v 'tr' > /dev/null; then
+	word=$(echo "$word" | tr '[:upper:]' '[:lower:]')
+fi
+case "$word" in
+	bot) echo "Hello, humanoid" ;;
+	computer) echo "Hello Scotty.  What can I do for you today?" ;;
+	dude) echo "Whatup, my dude?" ;;
+	hal) echo "Hello, Dave.  You're looking well today." ;;
+	hello) echo "hello" ;;
+	leo|'uncle leo') echo "Jerry, Hello" ;;
+	lionel) echo "Hello.  Is it me you're looking for?" ;;
+	shirley|surely) echo "Hello ${USER:-$(whoami)}.  And stop calling me Shirley." ;;
+	there) echo "Hi there" ;;
+	weirdo) echo "Greetings, earthling" ;;
+	*)
+		case $(awk 'BEGIN { srand(); print int(rand() * 101) }') in
+			1) echo "Hello.  Is it me you're looking for?" ;;
+			2) echo "Hello world" ;;
+			3) echo "I'm afraid I can't do that, Dave" ;;
+			4) echo "Hello, Dave.  You're looking well today." ;;
+			*) echo "Hello, ${USER:-$(whoami)}.  I am completely operational, and all my circuits are functioning perfectly." ;;
+		esac
+	;;
+esac

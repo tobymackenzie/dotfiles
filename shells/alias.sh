@@ -27,3 +27,10 @@ alias wttr="curl wttr.in"
 #--run proj
 alias t="_tjmRunProj tbin tbin"
 alias proj="_tjmRunProj base.proj bin/console"
+
+#--whimsy
+alias greetings="hello weirdo"
+alias hey="hello"
+alias heya="hello"
+alias hi="hello there"
+alias whatup="hello dude"
