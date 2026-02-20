@@ -21,7 +21,7 @@ case "$word" in
 		case $(awk 'BEGIN { srand(); print int(rand() * 101) }') in
 			1) echo "Hello.  Is it me you're looking for?" ;;
 			2) echo "Hello world" ;;
-			3) echo "I'm afraid I can't do that, Dave" ;;
+			3) echo "I'm sorry Dave.  I'm afraid I can't do that." ;;
 			4) echo "Hello, Dave.  You're looking well today." ;;
 			*) echo "Hello, ${USER:-$(whoami)}.  I am completely operational, and all my circuits are functioning perfectly." ;;
 		esac
