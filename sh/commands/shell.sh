@@ -13,10 +13,14 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 	autoload -Uz run-help
 	alias help='\run-help'
 	h(){
+		s="$@"
+		while [ "$s" = '' ]; do
+			printf '%s' "Please enter something to be helped with: "
+			read -r s
+		done
 		if [ -z "$HELPDIR" ]; then
 			local HELPDIR="/usr/share/zsh/${ZSH_VERSION}/help"
 		fi
-		s="$@"
 		#-# need to run twice because it doesn't do error on "failure", must parse to know if we need cheat
 		out=`\run-help "$s" 2> /dev/null`
 		if [[ "$out" == *"$s not found"* ]]; then
@@ -32,6 +36,11 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 	}
 else
 	h(){
-		help "$@" 2> /dev/null || man "$@" 2> /dev/null || cheat "$@"
+		s="$@"
+		while [ "$s" = '' ]; do
+			printf '%s' "Please enter something to be helped with: "
+			read -r s
+		done
+		help "$s" 2> /dev/null || man "$s" 2> /dev/null || cheat "$s"
 	}
 fi
