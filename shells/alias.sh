@@ -29,9 +29,12 @@ alias t="_tjmRunProj tbin tbin"
 alias proj="_tjmRunProj base.proj bin/console"
 
 #--whimsy
+alias ahoy="hello matey"
+alias ello="hello"
 alias greetings="hello weirdo"
 alias hey="hello"
 alias heya="hello"
 alias hi="hello there"
+alias hola="hello miquel"
 alias whatup="hello dude"
 alias goodbye="echo 'goodbye' && sleep 1 && exit"

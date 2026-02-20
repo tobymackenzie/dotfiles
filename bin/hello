@@ -7,10 +7,13 @@ case "$word" in
 	bot) echo "Hello, humanoid" ;;
 	computer) echo "Hello Scotty.  What can I do for you today?" ;;
 	dude) echo "Whatup, my dude?" ;;
+	'good sir') echo "Why hello, good sire" ;;
 	hal) echo "Hello, Dave.  You're looking well today." ;;
 	hello) echo "hello" ;;
 	leo|'uncle leo') echo "Jerry, Hello" ;;
 	lionel) echo "Hello.  Is it me you're looking for?" ;;
+	matey) echo "Ahoy, matey" ;;
+	miquel) echo "Hola, ${USER:-$(whoami)}" ;;
 	shirley|surely) echo "Hello ${USER:-$(whoami)}.  And stop calling me Shirley." ;;
 	there) echo "Hi there" ;;
 	weirdo) echo "Greetings, earthling" ;;
