@@ -1,4 +1,5 @@
 ##--hold general aliases that don't fit elsewhere
+alias go="cd"
 alias reshell="exec $TJM_SHELL"
 alias tputshow='tputcolor'
 
