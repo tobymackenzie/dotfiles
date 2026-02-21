@@ -31,7 +31,7 @@ if test -z "${TJM_DOTFILES_PATH}"; then
 	if [ "$TJM_SH" = '1' ]; then
 		export TJM_DOTFILES_PATH="$HOME/.dotfiles"
 	else
-		export TJM_DOTFILES_PATH="$(dirname $(dirname $(readlink -f \"${BASH_SOURCE[0]:-${(%):-%x}}\")))"
+		export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")))
 	fi
 fi
 
