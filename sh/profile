@@ -1,5 +1,10 @@
-export ENV="$HOME/.profile"
-#-# source bashrc if it exists and this is an interactive shell
-if [ -f "$HOME/.bashrc" ] && [ -n "$PS1" ]; then
-	. "$HOME/.bashrc"
+if [ -z "$TJM_ENVLOADED" ]; then
+	if [ -n "${TJM_DOTFILES_PATH}" ]; then
+		. "$TJM_DOTFILES_PATH/sh/env.sh"
+	else
+		. "$HOME/.dotfiles/sh/env.sh"
+	fi
+fi
+if [ -f "$TJM_DOTFILES_PATH/sh/load.sh" ] && [ -n "$PS1" ]; then
+	. "$TJM_DOTFILES_PATH/sh/load.sh"
 fi

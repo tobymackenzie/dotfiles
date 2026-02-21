@@ -2,6 +2,9 @@ if [[ -o interactive ]]; then
 	echo 'Welcome, '`whoami`', to zsh'
 fi
 
+#==bash stuff
+source "$TJM_DOTFILES_PATH/sh/load.sh"
+
 #==autosuggest
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 

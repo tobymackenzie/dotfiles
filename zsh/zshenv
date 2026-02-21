@@ -1,6 +1,10 @@
-#==bash stuff
-if [[ ( -o interactive || -n "${VIMRUNTIME+1}"]) && -f ~/.bashrc ]]; then
-	setopt aliases
-	source ~/.bashrc
+if test -z "${TJM_DOTFILES_PATH}"; then
+	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${(%):-%x}")))
 fi
-
+if [ -z "$TJM_ENVLOADED" ]; then
+	. "${TJM_DOTFILES_PATH:-$HOME/.dotfiles}/sh/env.sh"
+fi
+if [[ -n "${VIMRUNTIME+x}" && -f "$TJM_DOTFILES_PATH/sh/load.sh" ]]; then
+	setopt aliases
+	source "$TJM_DOTFILES_PATH/sh/load.sh"
+fi
