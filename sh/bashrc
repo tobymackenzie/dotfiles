@@ -1,5 +1,5 @@
 if test -z "${TJM_DOTFILES_PATH}"; then
-	export TJM_DOTFILES_PATH="$(dirname $(dirname $(readlink -f \"${BASH_SOURCE[0]}\")))"
+	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]}")))
 fi
 #--load all conf
 if [ -z "$TJM_ENVLOADED" ]; then
