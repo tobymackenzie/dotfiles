@@ -22,8 +22,9 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 	preexec(){
 		echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
 	}
-	export TJM_PS_BASE="$PS1 "
-	export PS1="$TJM_PS_BASE"
+	TJM_PS_BASE="$PS1 "
+	export TJM_PS_BASE
+	PS1="$TJM_PS_BASE"
 else
 	if [ "$TJM_SH" = '1' ]; then
 		TJM_PSB=" "
@@ -48,6 +49,8 @@ else
 		unset -v tputColors
 	fi
 	#-# PS0 shows timestamp before command in BASH>=4.4
-	export PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB"
-	export PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB$PS1 "
+	PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB"
+	export PS0
+	PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB$PS1 "
 fi
+export PS1

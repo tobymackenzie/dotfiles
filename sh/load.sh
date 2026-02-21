@@ -28,10 +28,11 @@ unset -v file
 
 #==load local files
 #--path
-export PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
 if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
-	export PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+	PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
 fi
+export PATH
 
 #-!! should probably double quote these paths to prevent nefarious sourcing of multiple files
 #--alias

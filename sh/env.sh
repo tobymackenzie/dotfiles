@@ -29,14 +29,16 @@ fi
 #-@http://stackoverflow.com/a/14728194
 if test -z "${TJM_DOTFILES_PATH}"; then
 	if [ "$TJM_SH" = '1' ]; then
-		export TJM_DOTFILES_PATH="$HOME/.dotfiles"
+		TJM_DOTFILES_PATH="$HOME/.dotfiles"
 	else
-		export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")))
+		TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")))
 	fi
+	export TJM_DOTFILES_PATH
 fi
 
 #--ensure dash loads profile for interactive loads
-export ENV="$HOME/.profile"
+ENV="$HOME/.profile"
+export ENV
 
 #--helper: set env variable
 senv(){

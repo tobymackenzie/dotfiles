@@ -1,2 +1,3 @@
 #==ignore duplicate entries. ignore entries beginning with a space
-export HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth
+export HISTCONTROL
