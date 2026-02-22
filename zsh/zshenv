@@ -1,5 +1,6 @@
 if test -z "${TJM_DOTFILES_PATH}"; then
-	export TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${(%):-%x}")))
+	TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${(%):-%x}")))
+	export TJM_DOTFILES_PATH
 fi
 if [ -z "$TJM_ENVLOADED" ]; then
 	. "${TJM_DOTFILES_PATH:-$HOME/.dotfiles}/sh/env.sh"

@@ -1,5 +1,5 @@
 #!/bin/sh
-word="$@"
+word="$*"
 if command -v 'tr' > /dev/null; then
 	word=$(echo "$word" | tr '[:upper:]' '[:lower:]')
 fi

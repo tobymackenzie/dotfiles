@@ -3,7 +3,7 @@
 #-@ based on https://unix.stackexchange.com/a/269085
 for arg in "$@"; do
 	#--force number <= 256
-	num=$(($arg % 256))
+	num=$((arg % 256))
 
 	if [ "$num" -lt "16" ]; then
 		base=$((num % 16))

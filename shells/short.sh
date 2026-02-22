@@ -1,7 +1,7 @@
 ## hold aliases that are shortcuts
 alias .f='dotfiles'
 alias b="bin/console"
-alias cdhome="cd $HOME"
+alias cdhome='cd $HOME'
 alias cont="killall -CONT"
 alias console="tjmOpenApp=1 o console"
 alias d1="d -d 1"

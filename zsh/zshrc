@@ -1,5 +1,5 @@
 if [[ -o interactive ]]; then
-	echo 'Welcome, '`whoami`', to zsh'
+	echo "Welcome, $(whoami), to zsh"
 fi
 
 #==bash stuff
