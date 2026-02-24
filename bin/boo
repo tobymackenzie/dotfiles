@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 cat << H
           ____
          ⁄    \  .-.
@@ -12,4 +12,18 @@ cat << H
    <:__.´
 
 H
-echo '👻' "$(seq $((1 + RANDOM % 20)) | awk '{printf "a"}')""$(seq $((2 + RANDOM % 22)) | awk '{printf "h"}')"
+printf '%s ' '👻'
+awk 'BEGIN {
+	srand();
+	n = 1 + int(rand() * 20);
+	s="";
+	for (i = 1; i <= n; i++){
+		s = s"a";
+	}
+	n = 2 + int(rand() * 22);
+	for (i = 1; i <= n; i++){
+		s = s"h";
+	}
+	print s;
+}'
+printf "\n"

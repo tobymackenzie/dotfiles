@@ -1,12 +1,13 @@
-#!/usr/bin/env bash
-set -o pipefail
+#!/bin/sh
+# shellcheck disable=SC3040
+(set -o pipefail 2> /dev/null) && set -o pipefail
 prefix=''
 if [ -x "$(command -v caffeinate)" ]; then
 	prefix='caffeinate'
 fi
 $prefix rsync "${@}" 2>&1 | (grep -E -v "^(file has vanished: |rsync warning: some files vanished before they could be transferred)" || true)
 r=$?
-if [[ $r == 24 ]]; then
+if [ $r -eq 24 ]; then
 	r=0
 fi
 exit $r

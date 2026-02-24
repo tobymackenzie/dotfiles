@@ -1,7 +1,11 @@
-#!/bin/bash
-read -p "$* [yN]: " -n 1 -r
+#!/bin/sh
+printf '%s [yN]: ' "$*"
+oldstty=$(stty -g)
+stty raw echo min 1 time 0
+ans=$(dd bs=1 count=1 2> /dev/null)
+stty "$oldstty"
 echo ''
-if [[ $REPLY =~ ^[Yy] ]]; then
+if [ "$ans" != "${ans#[Yy]}" ]; then
 	exit 0
 else
 	exit 1

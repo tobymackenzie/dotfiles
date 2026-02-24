@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #--find with `grep` of content as built in options
 #- `-c` or `-content` to find content ignoring case
 #- `-C` to find content matching case
@@ -13,17 +13,17 @@ inNot=0
 verbose=0
 #--build command strings
 for arg in "$@"; do
-	if [[ "$inC" != 0 ]]; then
-		if [ "${#gcmd}" == 0 ]; then
+	if [ "$inC" != 0 ]; then
+		if [ "${#gcmd}" = 0 ]; then
 			gcmd="-print0 | xargs -0"
 		else
 			gcmd="${gcmd} | xargs"
 		fi
 		gcmd="${gcmd} grep -"
-		if [[ "$inC" != '-C' ]]; then
+		if [ "$inC" != '-C' ]; then
 			gcmd="${gcmd}i"
 		fi
-		if [[ "${inNot}" == 0 ]]; then
+		if [ "${inNot}" = 0 ]; then
 			gcmd="${gcmd}l"
 		else
 			gcmd="${gcmd}L"
@@ -31,32 +31,35 @@ for arg in "$@"; do
 		fi
 		gcmd="${gcmd} '${arg}'"
 		inC=0
-	elif [[ "$arg" == '-c' || "$arg" == '-C' || "$arg" == '-content' ]]; then
+	elif [ "$arg" = '-c' ] || [ "$arg" = '-C' ] || [ "$arg" = '-content' ]; then
 		inC="${arg}"
-	elif [[ "$arg" == '-v' ]]; then
+	elif [ "$arg" = '-v' ]; then
 		verbose=1
-	elif [[ "$arg" == '-not' || "$arg" == '!' ]]; then
+	elif [ "$arg" = '-not' ] || [ "$arg" = '!' ]; then
 		inNot="$arg"
-	elif [[ "$inNot" != 0 ]]; then
+	elif [ "$inNot" != 0 ]; then
 		fopts="${fopts} ${inNot} ${arg}"
 		inNot=0
-	elif [[ ${arg:0:1} == '-' ]]; then
+	elif [ "$(echo "$arg" | cut -c 1)" = '-' ]; then
 		fopts="${fopts} ${arg}"
 	else
 		#--quote args to deal with special chars, eg `-name '*.php'`
 		#-# will anything break with this?
-		if [[ "$arg" == *"'"* ]]; then
-			arg="${arg//\'/\\\'\'}"
-		fi
-		fopts="${fopts} '${arg}'"
+		#-@ https://www.etalabs.net/sh_tricks.html
+		escapearg(){ printf "%s\n" "$1" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/'/" ; }
+		fopts="$fopts $(escapearg "$arg")"
 	fi
 done
 #--ensure we have a path, default to `.`
-if [[ -z $fopts || ${fopts:0:2} == ' -' ]]; then
-	fopts=" . ${fopts}"
+if [ -z "$fopts" ] || [ "$(echo "$fopts" | cut -c 1-2)" = ' -' ]; then
+	fopts=" . $fopts"
 fi
 #--ensure we're only working with files if not otherwise specific and we want to `grep`
-if [[ $fopts != *"-type"* && ${#gcmd} -gt 0 ]]; then
+case "$fopts" in
+	*-type*) hasType=true ;;
+	*) hasType=false ;;
+esac
+if [ "$hasType" = false ] && [ "${#gcmd}" -gt 0 ]; then
 	fopts="${fopts} -type f"
 fi
 #--run

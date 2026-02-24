@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 #--back up a github account's repos.
 #- first arg is path to store backup at, otherwise uses env TJM_GH_BU_PATH
 #- second arg is github username to back up, otherwise uses env TJM_GH_USER
-dir=${1:-${TJM_GH_BU_PATH:-backup}}
-gh_user=${2:-${TJM_GH_USER:-'tobymackenzie'}}
+dir="${1:-${TJM_GH_BU_PATH:-backup}}"
+gh_user="${2:-${TJM_GH_USER:-'tobymackenzie'}}"
 if [ ! -d "$dir" ]; then
 	>&2 echo "destination doesn't exist"
 	exit 1
 fi
-if [ ! -e "${dir}/.ghdata" ] || [[ $(find "${dir}/.ghdata" -mtime +7 -print) ]]; then
+if [ ! -e "${dir}/.ghdata" ] || [ -n "$(find "${dir}/.ghdata" -mtime +7 -print)" ]; then
 	curl "https://api.github.com/users/${gh_user}/repos?per_page=100" | \
 		grep -e '^    "name"*' | \
 		cut -d \" -f 4 > "${dir}/.ghdata"

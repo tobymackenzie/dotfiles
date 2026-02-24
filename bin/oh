@@ -1,6 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 if [ "$(basename "$0")" = 'OH' ] || ! hash 'OH' 2> /dev/null; then echo 'IO!' "${@}";
 else
-	str=('boy' 'boy oh boy' 'brother' 'brother, where art thou' 'come on' 'dear' 'heck' 'I know' 'I reckon' 'I see' 'I see, said the blind man, as he picked up his hammer and saw' 'io!' 'jeez' 'man' 'my' 'my gosh' 'no' 'oh oh' 'really' 'well' 'wow' 'yeah')
-	echo "${str[ $((RANDOM % ${#str[@]})) ]} ${*}"
+	echo "boy|boy oh boy|brother|brother, where art thou|come on|dear|heck|I know|I reckon|I see|I see, said the blind man, as he picked up his hammer and saw|io!|jeez|man|my|my gosh|no|oh oh|really|well|wow|yeah" |
+	awk '{
+		split($0, list, "|")
+		srand()
+		i = int(rand() * length(list)) + 1
+		print list[i]
+	}'
 fi

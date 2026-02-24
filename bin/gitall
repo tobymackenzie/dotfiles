@@ -1,23 +1,27 @@
-#!/bin/bash
-if [ $# -gt 1 ]; then
-	files=("${@:2}")
-else
-	files=(*)
-fi
-for file in "${files[@]}"; do
+#!/bin/sh
+run(){
+	file="$1"
+	shift
+	cmd="$*"
 	if [ -d "$file" ] && [ -d "$file/.git" ]; then
-		if [ $# -gt 0 ]; then
+		if [ "$cmd" != '' ]; then
 			echo '-------' "$file"
-			if cd "$file"; then
-				eval git "$1"
-				#-! is `>&` posix?
-				cd - > /dev/null 2>&1 || exit 1
-			else
-				echo "Error: no such directory"
-				continue
-			fi
+			git -C "$file" "$@"
 		else
 			basename "$file"
 		fi
+	elif [ "$cmd" != '' ]; then
+		echo "$file not a git repo"
 	fi
-done
+}
+cmd="$1"
+if [ $# -gt 1 ]; then
+	shift
+	for file in "$@"; do
+		run "$file" "$cmd"
+	done
+else
+	for file in ./*; do
+		run "$file" "$cmd"
+	done
+fi

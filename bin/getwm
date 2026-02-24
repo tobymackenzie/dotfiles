@@ -1,12 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 if [ -n "$_localWM" ]; then
 	echo "$_localWM"
 	return
 elif [ "$TJM_OS" = 'darwin' ]; then
 	_localWM='darwin'
 elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
-	_localWM="${XDG_CURRENT_DESKTOP,,}"
-elif command -v 'xprop' > /dev/null && xprop -root &> /dev/null; then
+	_localWM="${XDG_CURRENT_DESKTOP}"
+	if command -v 'tr' > /dev/null; then
+		_localWM=$(echo "$_localWM" | tr '[:upper:]' '[:lower:]')
+	fi
+elif command -v 'xprop' > /dev/null && xprop -root > /dev/null 2>&1; then
 	_localWM=$(xprop -id \
 		"$(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" \
 		-notype -f _NET_WM_NAME 8t \

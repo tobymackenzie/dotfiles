@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #--show RGB hex value for given tput number value
 #-@ based on https://unix.stackexchange.com/a/269085
 for arg in "$@"; do
@@ -23,7 +23,9 @@ for arg in "$@"; do
 		g=$(((num - 16) / 6 % 6)); g=$((g == 0 ? 0 : g * 40 + 55))
 		b=$(((num - 16) % 6 )); b=$((b == 0 ? 0 : b * 40 + 55))
 	else
-		declare {r,g,b}=$(((num - 232) * 10 + 8))
+		r=$(((num - 232) * 10 + 8))
+		g=$r
+		b=$r
 	fi
 	if [ "$#" -ne 1 ]; then
 		printf '%s-> ' "$arg"
