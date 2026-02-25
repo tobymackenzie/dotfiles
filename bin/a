@@ -1,4 +1,4 @@
-#!/bin/sh -i
+#!/bin/sh
 # ensure aliases are expanded if `sh` is `bash`
 # shellcheck disable=SC3040
 (set -o posix 2> /dev/null) && set -o posix
@@ -6,22 +6,28 @@ if [ $# -lt 1 ]; then
 	echo 'Usage: a "command" paths' >&2
 	exit 1
 fi
-cmd="$1"
-shift
-if [ $# -gt 0 ]; then
-	files=("$@")
-else
-	files=(*)
-fi
-for file in "${files[@]}"; do
+run(){
+	file="$1"
+	cmd="$2"
 	if [ -d "$file" ]; then
 		echo '-------' "$file"
 		if cd "$file"; then
+			# IFS=' ' read -r cmd rest <<< "$cmd"
 			eval "$cmd"
 			cd - > /dev/null 2>&1 || exit 1
 		else
 			echo "Error: no such directory"
-			continue
 		fi
 	fi
-done
+}
+cmd="$1"
+if [ $# -gt 1 ]; then
+	shift
+	for file in "$@"; do
+		run "$file" "$cmd"
+	done
+else
+	for file in ./*; do
+		run "$file" "$cmd"
+	done
+fi
