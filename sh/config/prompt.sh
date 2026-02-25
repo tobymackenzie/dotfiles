@@ -23,7 +23,6 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 		echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
 	}
 	TJM_PS_BASE="$PS1 "
-	export TJM_PS_BASE
 	PS1="$TJM_PS_BASE"
 else
 	if [ "$TJM_SH" = '1' ]; then
@@ -50,7 +49,5 @@ else
 	fi
 	#-# PS0 shows timestamp before command in BASH>=4.4
 	PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB"
-	export PS0
 	PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB$PS1 "
 fi
-export PS1

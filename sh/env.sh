@@ -44,24 +44,44 @@ export ENV
 senv(){
 	export "$1=$2"
 }
+svar(){
+	eval "$1=\$2"
+}
 #--helper: set env variable if not set
 if [ "$TJM_SHELL" = 'zsh' ]; then
 	setdefaultenv(){
 		if [ -z "${(P)1}" ]; then
-			senv $*
+			senv "$@"
+		fi
+	}
+	setdefaultvar(){
+		if [ -z "${(P)1}" ]; then
+			svar "$@"
 		fi
 	}
 elif [ "$TJM_SHELL" = 'bash' ]; then
 	setdefaultenv(){
 		if [ -z "${!1}" ]; then
-			senv $*
+			senv "$@"
+		fi
+	}
+	setdefaultvar(){
+		if [ -z "${!1}" ]; then
+			svar "$@"
 		fi
 	}
 else
 	setdefaultenv(){
 		eval "tmp=\$$1"
 		if [ -z "$tmp" ]; then
-			senv $*
+			senv "$@"
+		fi
+		unset tmp
+	}
+	setdefaultvar(){
+		eval "tmp=\$$1"
+		if [ -z "$tmp" ]; then
+			svar "$@"
 		fi
 		unset tmp
 	}

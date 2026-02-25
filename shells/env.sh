@@ -13,5 +13,5 @@ senv VISUAL vim
 senv WWW_HOME "$TJM_DOTFILES_PATH/www/index.html"
 
 #--config
-setdefaultenv TJM_COLORS 'koehlertm'
-setdefaultenv TJM_GH_USER 'tobymackenzie'
+setdefaultvar TJM_COLORS 'koehlertm'
+setdefaultvar TJM_GH_USER 'tobymackenzie'
