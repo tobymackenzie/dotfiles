@@ -5,6 +5,10 @@ if [ -z "$TJM_ENVLOADED" ]; then
 		. "$HOME/.dotfiles/sh/env.sh"
 	fi
 fi
-if [ -f "$TJM_DOTFILES_PATH/sh/load.sh" ] && [ -n "$PS1" ]; then
-	. "$TJM_DOTFILES_PATH/sh/load.sh"
-fi
+case "$-" in
+	*i*)
+		if [ -f "$TJM_DOTFILES_PATH/sh/load.sh" ]; then
+			. "$TJM_DOTFILES_PATH/sh/load.sh"
+		fi
+	;;
+esac
