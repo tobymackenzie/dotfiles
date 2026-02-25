@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #=====
 # show a marked i3 scratchpad or launch connected app
 # to simplify a show or launch flow
@@ -18,8 +18,9 @@ mark=$1
 
 #--try to allow first argument to be command while also allowing separate naming of mark
 #-# if we: have multiple arguments, arg 1 is not a command, arg 2 is not an option and is a command
-if [ "$#" -gt 1 ] && ! command -v "$1" > /dev/null && [[ "${2:0:1}" != '-' ]] && command -v "$2" > /dev/null; then
-	cmd="${*:2}"
+if [ "$#" -gt 1 ] && ! command -v "$1" > /dev/null && [ "${2%"${2#?}"}" != '-' ] && command -v "$2" > /dev/null; then
+	shift
+	cmd="$*"
 else
 	cmd="$*"
 fi

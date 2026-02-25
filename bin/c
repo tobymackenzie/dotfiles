@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 #==func
 buildCalc() {
 	calc="$*"
-	match='^[-\+\/\*%\^]+ '
-	if [[ "$calc" =~ $match ]]; then
+	if echo "$calc" | grep -q '^[-+*/%^ ]\+ '; then
 		calc="ans $calc"
 	fi
 	echo "$calc"
@@ -11,11 +10,11 @@ buildCalc() {
 cleanOut() {
 	v="$*"
 	#--trim trailing 0
-	match='0+$'
-	if [[ "$v" == *"."* && "$v" =~ $match ]]; then
-		v=$(echo "$v" | sed -r 's/\.?[0]+$//')
-	fi
-
+	case "$v" in *.*)
+			case "$v" in *0)
+					v=$(echo "$v" | sed -r 's/\.?[0]+$//')
+			;; esac
+	;; esac
 	echo "$v"
 }
 
@@ -45,28 +44,38 @@ if [ -z "$1" ]; then
 			kill $PID
 		fi
 	}
-	trap 'fin; exit' EXIT SIGINT SIGTERM
+	trap 'fin; exit' EXIT INT TERM
 
 	bc -l <&3 >&4 &
 	PID=$!
-	while hasPID && read -rp '> ' in; do
+	while hasPID && printf '> ' && read -r input; do
 		#--no need to pass empty string to `bc`
-		if [ -z "$in" ]; then
+		if [ -z "$input" ]; then
 			continue
 		#--we can handle quitting
-		elif [[ "$in" == "quit" || "$in" == "exit" || "$in" == "x" ]]; then
-			fin
-			exit
+		else
+			case "$input" in
+				quit|exit|x)
+					fin
+					exit
+				;;
+			esac
 		fi
 		#--build input
-		in=$(buildCalc "$in")
-		if [[ "$in" != *'='* ]]; then
-			in="ans = ${in}; ans"
-		fi
+		input=$(buildCalc "$input")
+		case "$input" in
+			*=*) ;;
+			*)
+				input="ans = $input; ans"
+			;;
+		esac
 		#--pass to `bc`
-		echo "$in" >&3 || (echo 'error2' && fin)
+		echo "$input" >&3 || (echo 'error2' && fin)
 		#--read output
-		read -rt 1 out <&4 || out=''
+		oldstty=$(stty -g)
+		trap 'stty "$oldstty"' EXIT
+		stty min 0 time 10
+		read -r out <&4 || out=''
 		if [ -n "$out" ]; then
 			cleanOut "$out"
 		fi
@@ -80,14 +89,16 @@ else
 	# - answer never deleted
 	# - performance penalty for writing, accessing file
 	f="$TJM_DOTFILES_PATH/.cache/c"
-	calc=$(buildCalc "$*")
-	if [[ "$calc" == *"ans"* ]]; then
-		ans=$(cat "$f")
-		if [ -z "$ans" ]; then
-			ans=0
-		fi
-		calc="ans = ${ans}; ${calc}"
-	fi
+	calc=$(buildCalc "$@")
+	case "$calc" in
+		*ans*)
+			ans=$(cat "$f")
+			if [ -z "$ans" ]; then
+				ans=0
+			fi
+			calc="ans = $ans; $calc"
+		;;
+	esac
 
 	#--run calc
 	v=$(cleanOut "$(echo "$calc" | bc -l)")

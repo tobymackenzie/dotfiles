@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #=====
 # general grouping command for running OS level commands without needing to know which OS / window manager is being run
 #=====
@@ -9,7 +9,9 @@ if [ -z "$1" ]; then
 else
 	cmd="$1"
 fi
-args=${*:2}
+if [ $# -gt 0 ]; then
+	shift
+fi
 
 #==helpers
 die(){
@@ -17,15 +19,14 @@ die(){
 	exit 1
 }
 runPkg(){
-	local cmd=""
-	local sub="$1"
-	local args=${*:2}
+	cmd=""
+	sub="$1"
+	shift
 
 	#--find installed package manager command
 	# debian mac fedora fedora arch bsd mac fedora
 	#-# pkcon last because it seems to not find some packages, other problems
-	declare -a cmds=(pkg apt brew dnf yum pacman port pkcon)
-	for val in "${cmds[@]}"; do
+	for val in pkg apt brew dnf yum pacman port pkcon; do
 		if hash "$val" 2> /dev/null; then
 			cmd="$val"
 			break
@@ -48,8 +49,8 @@ runPkg(){
 				sub='-Syu'
 			;;
 		esac
-		if [ "$cmd" = 'brew' ] && [ -z "$args" ]; then
-			args='--greedy'
+		if [ "$cmd" = 'brew' ] && [ -z "$*" ]; then
+			set -- "$@" '--greedy'
 		fi
 	elif [ "$sub" = 'delete' ] || [ "$sub" = 'remove' ] || [ "$sub" = 'uninstall' ]; then
 		case "$cmd" in
@@ -88,8 +89,8 @@ runPkg(){
 		#--default to list of installed
 		case $cmd in
 			'apt')
-				if [ -z "$args" ]; then
-					args='--installed'
+				if [ -z "$*" ]; then
+					set -- "$@" '--installed'
 				fi
 			;;
 			'pkg')
@@ -100,26 +101,28 @@ runPkg(){
 
 	#--check permissions to run command
 	#---homebrew must be owned by us to modify
-	if [[ ("$cmd" == 'brew' && ! -O $(which brew) && ("$sub" == 'install' || "$sub" == 'uninstall' || "$sub" == 'upgrade' )) ]]; then
+	if [ "$cmd" = 'brew' ] && [ "$(stat -f '%Su' "$(which brew)")" != "$(whoami)" ] && { [ "$sub" = 'install' ] || [ "$sub" = 'uninstall' ] || [ "$sub" = 'upgrade' ]; }; then
 		die "don't have permissions to run brew command"
 	fi
 	#---some must run as root
-	if [[ "$EUID" != 0 && "$cmd" != 'brew' && "$cmd" != 'pkg' && ("$sub" == 'add' || "$sub" == 'delete' || "$sub" == 'install' || "$sub" == 'remove' || "$sub" == '-Syu' || "$sub" == 'update' || "$sub" == 'upgrade') ]]; then
-		cmd="sudo ${cmd}"
+	if [ "$(id -u)" -ne 0 ] && [ "$cmd" != 'brew' ] && [ "$cmd" != 'pkg' ] && { [ "$sub" = 'add' ] || [ "$sub" = 'delete' ] || [ "$sub" = 'install' ] || [ "$sub" = 'remove' ] || [ "$sub" = '-Syu' ] || [ "$sub" = 'update' ] || [ "$sub" = 'upgrade' ]; }; then
+		set -- "$cmd" "$@"
+		cmd="sudo"
 	fi
 
 	#--run
-	eval "$cmd $sub $args"
+	set -- "$sub" "$@"
+	$cmd "$@"
 }
 
 #==main
-case $cmd in
+case "$cmd" in
 	'down'|'off'|'poweroff'|'shutdown') #: shut down computer / OS
 		if command -v 'shutdown' > /dev/null; then
-			if [ -z "$args" ]; then
-				args='now'
+			if [ -z "$*" ]; then
+				set -- 'now'
 			fi
-			shutdown "$args"
+			shutdown "$@"
 		else
 			die "don't know how to shutdown"
 		fi
@@ -127,14 +130,14 @@ case $cmd in
 	'-h'|'h'|'help') #: show help for this command
 		echo "Usage: os <subcommand> [options]"
 		echo "os command must be run with one of the following subcommands"
-		grep -o "'.*)\(\s*#.*\)\$" "${BASH_SOURCE[0]}" | # grab formatted lines
+		grep -o "'.*)\(\s*#.*\)\$" "$TJM_DOTFILES_PATH/bin/os" | # grab formatted lines
 			sed "s/'//g" | # strip quotes for terseness
 			sed 's/^\(.*\))[ ]*#:/\1:/g' | # nicer formatting
 			GREP_COLOR='01;32' grep --color '^.*:' # color subcommands
 	;;
 	'halt') #: halt computer / OS
 		if command -v 'halt' > /dev/null; then
-			halt "$args"
+			halt "$@"
 		else
 			die "don't know how to halt"
 		fi
@@ -142,20 +145,22 @@ case $cmd in
 	'hibernate'|'sleep'|'suspend') #: hibernate computer / OS
 		#--mac
 		if command -v 'pmset' > /dev/null; then
-			pmset sleepnow "$args"
+			set -- 'sleepnow' "$@"
+			pmset "$@"
 		else
 			die "don't know how to sleep"
 		fi
 	;;
 	'in'|'install') #: install OS package
-		runPkg install "$args"
+		set -- 'install' "$@"
+		runPkg "$@"
 	;;
 	'i'|'info'|'-v'|'v'|'version') #: get OS info, or package info with arg(s)
-		if [ -z "$args" ]; then
+		if [ -z "$*" ]; then
 			#--linux
 			if command -v 'hostnamectl' > /dev/null; then
 				if [ -r '/etc/os-release' ]; then
-					source /etc/os-release
+					. /etc/os-release
 					if [ -n "$PRETTY_NAME" ]; then
 						echo "$PRETTY_NAME"
 					else
@@ -163,26 +168,28 @@ case $cmd in
 					fi
 
 				fi
-				hostnamectl "$args"
+				hostnamectl "$@"
 			#--termux
 			elif command -v 'termux-info' > /dev/null; then
-				termux-info "$args"
+				termux-info "$@"
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
-				sw_vers "$args"
+				sw_vers "$@"
 				#-!super verbose and slow. do we want this?
-				# if [ -z "$args" ]; then
-					# args='-detailLevel mini'
+				# if [ -z "$*" ]; then
+					# set -- '-detailLevel' 'mini'
 				# fi
-				# system_profiler $args | less
+				# system_profiler "$@" | less
 			fi
 			echo "WM: $(getwm)"
 		else
-			runPkg info "$args"
+			set -- 'info' "$@"
+			runPkg "$@"
 		fi
 	;;
 	'list'|'l') #: list OS packages
-		runPkg list "$args"
+		set -- 'list' "$@"
+		runPkg "$@"
 	;;
 	'lock'|'lockscreen') #: lock screen
 		#--gnome
@@ -190,10 +197,11 @@ case $cmd in
 			xdg-screensaver lock
 		#--i3
 		elif [ "$(getwm)" = 'i3' ] && command -v 'i3lock' > /dev/null; then
-			i3lock "$args"
+			i3lock "$@"
 		#--mac
 		elif command -v 'pmset' > /dev/null; then
-			pmset displaysleepnow "$args"
+			set -- 'displaysleepnow' "$@"
+			pmset "$@"
 		else
 			die "don't know how to lock"
 		fi
@@ -201,13 +209,14 @@ case $cmd in
 	'logout'|'out') #: log out
 		#--gnome
 		if [ "$(getwm)" = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
-			if [ -z "$args" ]; then
-				args='--no-prompt'
+			if [ -z "$*" ]; then
+				set -- '--no-prompt'
 			fi
-			gnome-session-quit "$args"
+			gnome-session-quit "$@"
 		#--i3
 		elif [ "$(getwm)" = 'i3' ] && command -v 'i3-msg' > /dev/null; then
-			i3-msg exit "$args"
+			set -- 'exit' "$@"
+			i3-msg "$@"
 		#--mac
 		elif command -v 'osascript' > /dev/null; then
 			osascript -e 'tell application "System Events" to log out'
@@ -217,23 +226,26 @@ case $cmd in
 		fi
 	;;
 	'p'|'package'|'packages'|'pkg') #: run package manager command
-		runPkg "$args"
+		runPkg "$@"
 	;;
 	're'|'reboot'|'restart') #: reboot computer / OS
 		if command -v 'reboot' > /dev/null; then
-			reboot "$args"
+			reboot "$@"
 		else
 			die "don't know how to reboot"
 		fi
 	;;
 	'remove'|'rm'|'uninstall') #: uninstall OS package
-		runPkg remove "$args"
+		set -- 'remove' "$@"
+		runPkg "$@"
 	;;
 	's'|'search') #: search for OS packages
-		runPkg search "$args"
+		set -- 'search' "$@"
+		runPkg "$@"
 	;;
 	'up'|'update'|'upgrade') #: upgrade OS packages
-		runPkg up "$args"
+		set -- 'up' "$@"
+		runPkg "$@"
 	;;
 	*)
 		die "Unknown os command ${cmd} command"
