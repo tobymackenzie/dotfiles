@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/dash
 #-----
 # open: short alias of `open` command or equivalent
 #
@@ -9,110 +9,140 @@
 #-----
 
 main(){
+	first="$1"
 	hasNoOpen=$(command -v 'open' > /dev/null; echo $?)
 	noFileExists=1
-	args=''
+	eatout=0
+	app=''
 	if [ "$#" -ge 1 ]; then
-		noFileExists=$([ -e "$1" ]; echo $?)
-		args=$*
-		if (( noFileExists == 1 )) || [ -n "$tjmOpenApp" ] && [[ "$tjmOpenApp" != "0" ]]; then
-			case $1 in
+		noFileExists=$([ -e "$first" ]; echo $?)
+		if [ "$noFileExists" = 1 ] || { [ ! -z "$tjmOpenApp" ] && [ "$tjmOpenApp" != "0" ]; }; then
+			shift
+			case "$first" in
 				'con'|'console')
-					cmd=$(buildCmd Console less)
+					app='Console'
+					cmd=$(buildCmd "$app" less)
 				;;
 				'f'|'file'|'files'|'finder')
-					cmd=$(buildCmd Finder nautilus konqueror mc ls)
+					app='Finder'
+					cmd=$(buildCmd "$app" nautilus konqueror mc ls)
 				;;
 				'-R')
-					if (( hasNoOpen == 0 )); then
-						cmd='open -R %%'
+					if [ "$hasNoOpen" -eq 0 ]; then
+						cmd='open'
+						set -- '-R' "$@"
 					else
-						cmd=$(getFirstValidCommand nautilus konqueror mc 'ls -l')
+						cmd=$(getFirstValidCommand nautilus konqueror mc ls)
+						if [ "$cmd" = 'ls' ]; then
+							set -- '-l' "$@"
+						fi
 					fi
 				;;
 				'ff'|'web')
-					cmd=$(buildCmd Firefox firefox w3m links lynx)
+					app='Firefox'
+					cmd=$(buildCmd "$app" firefox w3m links lynx)
 				;;
 				'ffd'|'webd')
-					cmd=$(buildCmd 'Firefox Developer Edition' firefox-developer lynx links w3m)
+					app='Firefox Developer Edition'
+					cmd=$(buildCmd "$app" firefox-developer lynx links w3m)
 				;;
 				'g'|'git')
-					cmd=$(buildCmd 'GitX' git-cola gitg gitk tig 'vi +0G')
+					app='GitX'
+					cmd=$(buildCmd "$app" git-cola gitg gitk tig vi)
+					if [ "$cmd" = 'vi' ]; then
+						set -- '+0G' "$@"
+					fi
 				;;
 				'h'|'H')
-					if [[ $1 == 'H' ]]; then
-						cmd='echo "I O!" %%'
+					cmd="echo"
+					if [ "$first" = 'H' ]; then
+						set -- 'I O!' "@"
 					else
-						cmd='echo "i o!" %%'
+						set -- 'i o!'
 					fi
 				;;
 				't'|'text')
 					#--if in vim terminal, we want to open text within that same vim instance
-					if [[ -n $VIM_TERMINAL ]] && [[ -n "${*:2}" ]]; then
-						for var in "${@:2}"; do
+					if [ -n "$VIM_TERMINAL" ] && [ -n "$1" ]; then
+						for var in "$@"; do
 							printf '\033]51;["call", "Tapi_OpenInTab", ["%s"]]\07' "$var"
 						done
 						exit 0
-					elif (( hasNoOpen == 0 )); then
-						cmd="open -t %%"
+					elif [ "$hasNoOpen" -eq 0 ]; then
+						cmd="open"
+						set -- '-t' "$@"
 					else
-						cmd=$(buildCmd 'MacVim' gvim edit vim)
+						app='MacVim'
+						cmd=$(buildCmd "$app" gvim edit vim)
 					fi
 				;;
 			esac
 			err=$?
-			if (( err != 0 )); then
+			if [ "$err" != 0 ]; then
+				echo "error $err"
 				exit $err
 			fi
-			if [ -n "$cmd" ]; then
-				args=${*:2}
-			fi
+		fi
+		#--clear app for -z block below
+		if [ -n "$app" ] && [ "$cmd" != 'open' ]; then
+			app=''
 		fi
 	fi
 	if [ -z "$cmd" ]; then
-		if (( hasNoOpen == 0 )); then
+		if [ "$hasNoOpen" -eq 0 ]; then
 			#--for mac
-			cmd='open %%'
+			cmd='open'
 		elif command -v 'xdg-open' > /dev/null; then
 			#--for linux
 			#-! untested
-			cmd='xdg-open %% &> /dev/null &'
+			cmd='xdg-open'
+			eatout=1
 		elif command -v 'start' > /dev/null; then
 			#--for windows
 			#-! completely untested
-			cmd='start %% &> /dev/null &'
+			cmd='start'
+			eatout=1
 		elif command -v 'edit' > /dev/null; then
-			cmd='edit %%'
+			cmd='edit'
 		else
-			cmd='vi -- %%'
+			cmd='vi'
 		fi
 	fi
-	cmd=${cmd/\%\%/$args}
-	eval "$cmd"
+	if [ "$cmd" = 'open' ] && [ -n "$app" ]; then
+		set --  '-a' "$app" "$@"
+	fi
+	#--if gui command, we don't want CLI output, so eat it
+	if [ "$eatout" = 0 ]; then
+		case "$cmd" in
+			firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
+				eatout=1
+			;;
+		esac
+	fi
+	# echo "$cmd : $* : $eatout : $app : $first"
+	if [ "$eatout" = 1 ]; then
+		"$cmd" "$@" > /dev/null 2>&1
+	else
+		"$cmd" "$@"
+	fi
 }
 
 buildCmd(){
-	local name="$1"
-
-	if (( hasNoOpen == 0 )) && open -Ra "${name}" 2> /dev/null ; then
-		echo "open -a '${name}' %%"
+	name="$1"
+	if [ "$hasNoOpen" -eq 0 ] && open -Ra "$name" 2> /dev/null ; then
+		echo "open"
 		return 0
 	else
-		getFirstValidCommand "${@:2}" && return 0
+		shift
+		getFirstValidCommand "$@" && return 0
 	fi
-	>&2 echo "${name} command not found"
+	>&2 echo "$name command not found"
 	exit 1
 }
 getFirstValidCommand(){
-	for var in "${@}"; do
+	for var in "$@"; do
 		if command -v "$(echo "$var" | cut -d ' ' -f1)" > /dev/null; then
-			local c="${var} %%"
-			#--if gui command, we don't want CLI output, so eat it
-			case "$var" in
-				firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
-				c="${c} &> /dev/null &"
-				;;
-			esac
+			c="$var"
 			echo "$c"
 			return 0
 		fi
