@@ -5,7 +5,9 @@ fi
 if [ -z "$TJM_ENVLOADED" ]; then
 	. "${TJM_DOTFILES_PATH:-$HOME/.dotfiles}/sh/env.sh"
 fi
-if [[ -n "${VIMRUNTIME+x}" && -f "$TJM_DOTFILES_PATH/sh/load.sh" ]]; then
+#--ensure aliases are used properly for Vim's `!` command execuation
+#-! loads other interactive stuff than aliases, probably not wanted for non-interactive call
+if [[ -n "${VIMRUNTIME+x}" && ! -o interactive ]]; then
 	setopt aliases
 	source "$TJM_DOTFILES_PATH/sh/load.sh"
 fi
