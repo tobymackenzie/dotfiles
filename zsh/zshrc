@@ -55,7 +55,7 @@ zle-keymap-select () {
 	case "$KEYMAP" in
 		vicmd)
 			PS1="%F{2}>%{$reset_color%}$TJM_PS_BASE" #--gray PS marker
-			echo -ne "\e]12;#0c0\a" #--green cursor
+			echo -ne "\e]12;#00cc00\a" #--green cursor
 			print -n -- '\e[1 q' #--blink cursor
 		;;
 		viins|main)
