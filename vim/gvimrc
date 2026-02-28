@@ -18,4 +18,5 @@ set lines=35
 source ~/.vim/colors.vim
 
 "--font
-set guifont=Menlo\ Regular\ 14,Liberation\ Mono\ 14,Menlo\ Regular:h14,Inconsolata:h14
+" Ubuntu pre-installed, Linux preferred, Mac, Windows?
+set guifont=Monospace\ 14,Menlo\ 14,Menlo:h14,Inconsolata:h14,*
