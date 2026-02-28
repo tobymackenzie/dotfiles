@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 #-----
 # open: short alias of `open` command or equivalent
 #
