@@ -10,7 +10,8 @@
 
 main(){
 	first="$1"
-	hasNoOpen=$(command -v 'open' > /dev/null; echo $?)
+	#--check for Mac `open`.  linux `open` as alias for `xdg-open` doesn't have same options
+	hasNoOpen=$([ "$TJM_OS" = 'Darwin' ] && command -v 'open' > /dev/null; echo $?)
 	noFileExists=1
 	eatout=0
 	app=''
