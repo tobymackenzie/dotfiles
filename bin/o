@@ -111,16 +111,18 @@ main(){
 	if [ "$cmd" = 'open' ] && [ -n "$app" ]; then
 		set --  '-a' "$app" "$@"
 	fi
-	#--if gui command, we don't want CLI output, so eat it
+	#--if gui command, we don't want CLI output or foreground in CLI
 	if [ "$eatout" = 0 ]; then
 		case "$cmd" in
 			firefox|firefox-developer|git-cola|gitg|gitk|gvim|konqueror|nautilus)
-				eatout=1
+				eatout=2
 			;;
 		esac
 	fi
 	# echo "$cmd : $* : $eatout : $app : $first"
-	if [ "$eatout" = 1 ]; then
+	if [ "$eatout" = 2 ]; then
+		"$cmd" "$@" > /dev/null 2>&1 &
+	elif [ "$eatout" = 1 ]; then
 		"$cmd" "$@" > /dev/null 2>&1
 	else
 		"$cmd" "$@"
