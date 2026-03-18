@@ -1,6 +1,6 @@
 #!/bin/bash -i
-binPath=$(dirname $(realpath ${BASH_SOURCE[0]}))"/../bin"
-fromPath=`realpath ${binPath}/..`
+binPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../bin"
+fromPath="$(realpath "${binPath}/..")"
 toPath=${TJM_DOTFILES_HOME:-${HOME}}
 testing="${TJMTESTINIT:-0}"
 
@@ -17,7 +17,7 @@ fi
 #--if we have .dotfiles shortcut, let's do relative links to there for movability
 relatively=0
 if [[ "$fromPath" == $(readlink "${toPath}/.dotfiles") ]]; then
-	cd $toPath
+	cd "$toPath" || exit
 	toPath=.
 	fromPath=./.dotfiles
 	relatively=1
@@ -70,7 +70,7 @@ placeFile(){
 		if [ $relatively -eq 1 ]; then
 			slashes="${right//[^\/]}"
 			slashCount=${#slashes}
-			if [ $slashCount -gt 0 ]; then
+			if [ "$slashCount" -gt 0 ]; then
 				file=".$file"
 				for (( i=1; i<slashCount; ++i )); do
 					file="../$file"
@@ -78,24 +78,24 @@ placeFile(){
 			fi
 		fi
 
-		if [ ! -h "$location" ] || [ "$file" != $(readlink "$location") ]; then
-			locationDir=`dirname $location`
+		if [ ! -h "$location" ] || [ "$file" != "$(readlink "$location")" ]; then
+			locationDir=$(dirname "$location")
 			if [ ! -d "$locationDir" ]; then
 				echo "mkdir -p $locationDir"
 				mkdir -p "$locationDir"
 			fi
-			if ([ -e "$location" ] || [ -h "$location" ]) && [[ "${file}" != $(readlink "${location}") ]]; then
+			if { [ -e "$location" ] || [ -h "$location" ]; } && [[ "${file}" != "$(readlink "${location}")" ]]; then
 				backupLocation="${location}.bu-"$(date -I)
 				#-# /dev/tty to use regular stdin instead of file
-				if ${binPath}/_tjmConfirm "Would you like to replace the file ${right} with the dotfile version?  The existing file will be moved to ${backupLocation}. [yN]" 0</dev/tty; then
+				if "$binPath/_tjmConfirm" "Would you like to replace the file ${right} with the dotfile version?  The existing file will be moved to ${backupLocation}. [yN]" 0</dev/tty; then
 					echo "mv $location $backupLocation"
-					mv $location $backupLocation
+					mv "$location" "$backupLocation"
 				else
 					return
 				fi
 			fi
 			echo "ln -s $file $location"
-			ln -s $file $location
+			ln -s "$file" "$location"
 		fi
 	fi
 }
