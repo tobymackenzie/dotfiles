@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+	#--default to akron, IP default wasn't working
+	at="akron"
+else
+	#-# sed to url encode spaces
+	at="$(echo "$@" | sed 's/ /+/g')"
+fi
+curl "https://wttr.in/$at?u"
