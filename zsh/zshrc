@@ -1,8 +1,4 @@
-if [[ -o interactive ]]; then
-	echo "Welcome, $(whoami), to zsh"
-fi
-
-#==bash stuff
+#==sh stuff
 source "$TJM_DOTFILES_PATH/sh/load.sh"
 
 #==autosuggest
@@ -88,4 +84,9 @@ bindkey '^k' vi-kill-eol
 #==custom
 if [ -f "${TJM_DOTFILES_PATH}/_local/zsh" ]; then
 	source "${TJM_DOTFILES_PATH}/_local/zsh"
+fi
+
+#==welcome
+if [[ -o interactive ]]; then
+	welcome
 fi

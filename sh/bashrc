@@ -7,3 +7,8 @@ if [ -z "$TJM_ENVLOADED" ]; then
 	. "${TJM_DOTFILES_PATH}/sh/env.sh"
 fi
 . "${TJM_DOTFILES_PATH}/sh/load.sh"
+case "$-" in
+	*i*)
+		welcome
+	;;
+esac

@@ -10,5 +10,6 @@ case "$-" in
 		if [ -f "$TJM_DOTFILES_PATH/sh/load.sh" ]; then
 			. "$TJM_DOTFILES_PATH/sh/load.sh"
 		fi
+		welcome
 	;;
 esac

@@ -1,0 +1,15 @@
+#!/bin/sh
+tputColors="$(tput colors 2> /dev/null || echo 2)"
+if [ "$tputColors" -gt 2 ]; then
+	if [ "$tputColors" -gt 8 ]; then
+		tput setaf 42
+	else
+		tput setaf 2
+	fi
+fi
+hello
+cat "$TJM_DOTFILES_PATH/shells/welcome.txt"
+uptime
+if [ "$tputColors" -gt 2 ]; then
+	tput sgr0
+fi
