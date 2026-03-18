@@ -7,7 +7,7 @@ cd $testPath
 mkdir -p $testPath/tmp
 
 #--run
-TJM_DOTFILES_HOME="${testPath}/tmp" bash ${testPath}/../src/init.sh
+TJM_DOTFILES_HOME="${testPath}/tmp" TJMTESTINIT=1 bash ${testPath}/../src/init.sh
 
 #--verify
 expect=$(diff $testPath/init.expect <(ls -1AR tmp))
