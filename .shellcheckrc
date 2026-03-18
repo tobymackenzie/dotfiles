@@ -1,0 +1,3 @@
+#--disable following paths, won't be set
+disable=SC1090
+disable=SC1091
