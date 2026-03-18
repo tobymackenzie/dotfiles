@@ -9,6 +9,6 @@ fi
 . "${TJM_DOTFILES_PATH}/sh/load.sh"
 case "$-" in
 	*i*)
-		welcome
+		welcome "$TJM_SHELL"
 	;;
 esac

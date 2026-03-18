@@ -1,3 +1,3 @@
 function fish_greeting
-	welcome
+	welcome "$TJM_SHELL"
 end

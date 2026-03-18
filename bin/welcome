@@ -10,6 +10,9 @@ fi
 hello
 cat "$TJM_DOTFILES_PATH/shells/welcome.txt"
 uptime
+if [ -n "$1" ]; then
+	echo "Welcome to $1 on $TJM_OS."
+fi
 if [ "$tputColors" -gt 2 ]; then
 	tput sgr0
 fi

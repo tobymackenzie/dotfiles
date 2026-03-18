@@ -88,5 +88,5 @@ fi
 
 #==welcome
 if [[ -o interactive ]]; then
-	welcome
+	welcome "$TJM_SHELL"
 fi
