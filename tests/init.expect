@@ -4,6 +4,7 @@
 .config
 .dotfiles
 .editorconfig
+.profile
 .screenrc
 .vim
 .Xresources
