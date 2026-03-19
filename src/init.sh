@@ -85,7 +85,7 @@ placeFile(){
 				mkdir -p "$locationDir"
 			fi
 			if { [ -e "$location" ] || [ -h "$location" ]; } && [[ "${file}" != "$(readlink "${location}")" ]]; then
-				backupLocation="${location}.bu-"$(date -I)
+				backupLocation="${location}.bu-"$(date +%Y%m%d%H%M%S)
 				#-# /dev/tty to use regular stdin instead of file
 				if "$binPath/_tjmConfirm" "Would you like to replace the file ${right} with the dotfile version?  The existing file will be moved to ${backupLocation}. [yN]" 0</dev/tty; then
 					echo "mv $location $backupLocation"
