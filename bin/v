@@ -1,9 +1,6 @@
 #!/bin/sh
 #--load aliases
-# shellcheck disable=SC3044
-if shopt -s expand_aliases 2> /dev/null; then
-	. "${TJM_DOTFILES_PATH}/sh/load.sh"
-fi
+[ -n "$TJM_DOTFILES_PATH" ] && . "$TJM_DOTFILES_PATH/sh/scriptload.sh"
 #--view: view argument(s) in `less`. If passed a command, will run that command and pipe to `less`.  Otherwise, pass as arguments to `less`.
 if [ -s /dev/stdin ]; then
 	less -R "$@"
