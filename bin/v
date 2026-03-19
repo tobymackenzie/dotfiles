@@ -7,8 +7,7 @@ if [ -s /dev/stdin ]; then
 elif [ ! -e "$1" ] && ([ -x "$(command -v "$1")" ] || type "$1" >/dev/null 2>&1); then
 	eval "$*" | less -R
 elif [ -d "$1" ]; then
-	# shellcheck disable=SC2012
-	ls -Flh --color "$@" | less -R
+	ll "$@" | less -R
 else
 	less "$@"
 fi
