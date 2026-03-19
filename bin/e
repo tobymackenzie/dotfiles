@@ -41,10 +41,9 @@ if [ "$usingStdin" = 1 ] || [ "$useCmd" = 1 ]; then
 		set -- "$ro" "$dashOpt"
 		echo "$cmd \"$args\" | $editor \"$*\""
 		if [ -n "$args" ]; then
-			# shellcheck disable=SC2086
-			$cmd $args | $editor "$@"
+			eval "$cmd $args" | $editor "$@"
 		else
-			$cmd | $editor "$@"
+			eval "$cmd" | $editor "$@"
 		fi
 	fi
 else
