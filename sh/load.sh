@@ -2,10 +2,12 @@
 [ -n "$TJMLOADSH" ] && return
 
 #==load built-in files
-#--load config first, so that other scripts have access to config
-for file in "${TJM_DOTFILES_PATH}"/sh/config/*.sh; do
-	. "$file"
-done
+#--load interactive settings
+case "$-" in
+	*i*)
+		. "${TJM_DOTFILES_PATH}/sh/interactive.sh"
+	;;
+esac
 
 #--load shared files other than the config and this script next
 . "${TJM_DOTFILES_PATH}/sh/../shells/alias.sh"
@@ -24,7 +26,6 @@ if [ "$TJM_SHELL" = 'bash' ] || [ "$TJM_SHELL" = 'zsh' ]; then
 	done
 fi
 unset -v file
-
 
 #==load local files
 #--path

@@ -5,11 +5,4 @@ if [ -z "$TJM_ENVLOADED" ]; then
 		. "$HOME/.dotfiles/sh/env.sh"
 	fi
 fi
-case "$-" in
-	*i*)
-		if [ -f "$TJM_DOTFILES_PATH/sh/load.sh" ]; then
-			. "$TJM_DOTFILES_PATH/sh/load.sh"
-		fi
-		welcome "$TJM_SHELL"
-	;;
-esac
+. "$TJM_DOTFILES_PATH/sh/load.sh"

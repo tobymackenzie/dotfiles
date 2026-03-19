@@ -85,8 +85,3 @@ bindkey '^k' vi-kill-eol
 if [ -f "${TJM_DOTFILES_PATH}/_local/zsh" ]; then
 	source "${TJM_DOTFILES_PATH}/_local/zsh"
 fi
-
-#==welcome
-if [[ -o interactive ]]; then
-	welcome "$TJM_SHELL"
-fi

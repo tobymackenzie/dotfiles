@@ -1,6 +1,9 @@
 #!/bin/sh
+#--load aliases
 # shellcheck disable=SC3044
-(shopt -s expand_aliases 2> /dev/null) && shopt -s expand_aliases
+if shopt -s expand_aliases 2> /dev/null; then
+	. "${TJM_DOTFILES_PATH}/sh/load.sh"
+fi
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 editor="${VISUAL:-${EDITOR:-vi}}"
 if [ -s /dev/stdin ]; then

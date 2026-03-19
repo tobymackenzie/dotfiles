@@ -1,3 +1,22 @@
+#--case insensitive completions
+if [ -n "$BASH_VERSION" ] && type caller >/dev/null 2>&1; then
+	bind 'set completion-ignore-case on'
+fi
+
+#--ignore duplicate entries. ignore entries beginning with a space
+HISTCONTROL=ignoreboth
+
+#--window title
+case "$TERM" in
+	xterm*|rxvt|eterm)
+		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
+	;;
+##	screen)
+##		PROMPT_COMMAND='echo -ne "\033k$HOSTNAME\033\\"'
+##	;;
+esac
+
+#--prompt
 if [ "$TJM_SHELL" = 'zsh' ]; then
 	autoload -U colors && colors
 	PS1="[%n:%1d]>"
@@ -51,3 +70,7 @@ else
 	PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB"
 	PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB$PS1 "
 fi
+
+#--welcome
+welcome "$TJM_SHELL"
+
