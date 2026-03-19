@@ -1,7 +1,9 @@
 alias -- -="cd -"
-function /(){
-	cd /$*
-}
-function __(){
-	cd "~/__/$*"
-}
+if [ -z "$TJMISCRIPT" ]; then
+	function /(){
+		cd /$*
+	}
+	function __(){
+		cd "~/__/$*"
+	}
+fi
