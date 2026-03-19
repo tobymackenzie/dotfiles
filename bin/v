@@ -3,7 +3,7 @@
 (shopt -s expand_aliases 2> /dev/null) && shopt -s expand_aliases
 #--view: view argument(s) in `less`. If passed a command, will run that command and pipe to `less`.  Otherwise, pass as arguments to `less`.
 if [ -s /dev/stdin ]; then
-	less "$@"
+	less -R "$@"
 elif [ ! -e "$1" ] && ([ -x "$(command -v "$1")" ] || type "$1" >/dev/null 2>&1); then
 	eval "$*" | less -R
 elif [ -d "$1" ]; then
