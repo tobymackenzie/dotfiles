@@ -176,12 +176,31 @@ case "$cmd" in
 
 				fi
 				hostnamectl "$@"
+				printf "Uptime: %s\n" "$(uptime)"
+				free -h
 			#--termux
 			elif command -v 'termux-info' > /dev/null; then
 				termux-info "$@"
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
 				sw_vers "$@"
+				printf "CPU:			%s\n" "$(sysctl -n machdep.cpu.brand_string)"
+				printf "Uptime:			%s users\n" "$(uptime | sed 's/^.*up //' | sed 's/ user.*$//' | sed 's/  / /g')"
+				top="$(top -l 1 -S -n 0 -s 0)"
+				hi="$(hostinfo)"
+				printf "CPU usage:		%s\n" "$(echo "$top" | grep 'CPU usage' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Load:			%s\n" "$(echo "$top" | grep 'Load ' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Memory:			%s\n" "$(echo "$hi" | grep 'Primary mem' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Mem Used:		%s\n" "$(echo "$top" | grep PhysMem | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Swap:			%s\n" "$(sysctl -n vm.swapusage)"
+				printf "Procs:			%s\n" "$(echo "$top" | grep 'Processes' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Networks:		%s\n" "$(echo "$top" | grep 'Networks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "Disks:			%s\n" "$(echo "$top" | grep 'Disks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				printf "WM:			%s\n" "$(getwm)"
+				# echo "$hi"
+				# echo "-------"
+				# echo "$top"
+				exit
 				#-!super verbose and slow. do we want this?
 				# if [ -z "$*" ]; then
 					# set -- '-detailLevel' 'mini'
