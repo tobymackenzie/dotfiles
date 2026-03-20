@@ -1,6 +1,9 @@
 #--prevent double load, happens in Vim terminal
 [ -n "$TJMLOADSH" ] && return
 
+#--path
+	PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+
 #==load built-in files
 #--load interactive settings
 case "$-" in
@@ -29,7 +32,6 @@ unset -v file
 
 #==load local files
 #--path
-PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
 if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
 	PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
 fi
