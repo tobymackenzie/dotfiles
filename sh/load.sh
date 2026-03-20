@@ -2,7 +2,9 @@
 [ -n "$TJMLOADSH" ] && return
 
 #--path
+if [ -z "$TJMPATHSET" ]; then
 	PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+fi
 
 #==load built-in files
 #--load interactive settings
@@ -32,10 +34,14 @@ unset -v file
 
 #==load local files
 #--path
-if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
-	PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+if [ -z "$TJMPATHSET" ]; then
+	if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
+		PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+	fi
+	export PATH
+	TJMPATHSET=1
+	export TJMPATHSET
 fi
-export PATH
 
 #-!! should probably double quote these paths to prevent nefarious sourcing of multiple files
 #--alias
