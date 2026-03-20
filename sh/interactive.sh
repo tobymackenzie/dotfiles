@@ -72,5 +72,5 @@ else
 fi
 
 #--welcome
-welcome "$TJM_SHELL"
+welcome
 

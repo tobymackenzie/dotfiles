@@ -10,9 +10,17 @@ fi
 hello
 cat "$TJM_DOTFILES_PATH/shells/welcome.txt"
 uptime
-if [ -n "$1" ]; then
-	echo "Welcome to $1 on $TJM_OS."
+if [ -z "$HOST" ]; then
+	HOST="$(hostname)"
 fi
+out="Welcome to $HOST"
+if [ -n "$1" ]; then
+	out="$out, running $1"
+fi
+if [ -n "$TJM_OS" ]; then
+	out="$out on $TJM_OS"
+fi
+echo "$out"
 if [ "$tputColors" -gt 2 ]; then
 	tput sgr0
 fi

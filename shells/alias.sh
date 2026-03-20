@@ -2,6 +2,7 @@
 alias go="cd"
 alias reshell='exec $TJM_SHELL'
 alias tputshow='tputcolor'
+alias welcome='welcome "$TJM_SHELL"'
 
 #--better defaults
 alias cp="cp -pri"
