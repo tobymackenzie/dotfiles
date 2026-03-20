@@ -186,7 +186,7 @@ case "$cmd" in
 				sw_vers "$@"
 				printf "CPU:			%s\n" "$(sysctl -n machdep.cpu.brand_string)"
 				printf "Uptime:			%s users\n" "$(uptime | sed 's/^.*up //' | sed 's/ user.*$//' | sed 's/  / /g')"
-				top="$(top -l 1 -S -n 0 -s 0)"
+				top="$(top -l 1 -n 0 -s 0)"
 				hi="$(hostinfo)"
 				printf "CPU usage:		%s\n" "$(echo "$top" | grep 'CPU usage' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
 				printf "Load:			%s\n" "$(echo "$top" | grep 'Load ' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
