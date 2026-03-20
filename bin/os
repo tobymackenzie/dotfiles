@@ -18,6 +18,10 @@ die(){
 	>&2 echo "I'm sorry Dave.  I'm afraid I can't do that. $@"
 	exit 1
 }
+goodbye(){
+	echo 'Goodbye'
+	sleep 3
+}
 runPkg(){
 	cmd=""
 	sub="$1"
@@ -122,6 +126,7 @@ case "$cmd" in
 			if [ -z "$*" ]; then
 				set -- 'now'
 			fi
+			goodbye
 			shutdown "$@"
 		else
 			die "don't know how to shutdown"
@@ -137,6 +142,7 @@ case "$cmd" in
 	;;
 	'halt') #: halt computer / OS
 		if command -v 'halt' > /dev/null; then
+			goodbye
 			halt "$@"
 		else
 			die "don't know how to halt"
@@ -145,6 +151,7 @@ case "$cmd" in
 	'hibernate'|'sleep'|'suspend') #: hibernate computer / OS
 		#--mac
 		if command -v 'pmset' > /dev/null; then
+			goodbye
 			set -- 'sleepnow' "$@"
 			pmset "$@"
 		else
@@ -207,6 +214,7 @@ case "$cmd" in
 		fi
 	;;
 	'logout'|'out') #: log out
+		goodbye
 		#--gnome
 		if [ "$(getwm)" = 'gnome' ] && command -v 'gnome-session-quit' > /dev/null; then
 			if [ -z "$*" ]; then
@@ -229,6 +237,8 @@ case "$cmd" in
 		runPkg "$@"
 	;;
 	're'|'reboot'|'restart') #: reboot computer / OS
+		echo 'Til we meet again'
+		sleep 3
 		if command -v 'reboot' > /dev/null; then
 			reboot "$@"
 		else
