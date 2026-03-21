@@ -179,6 +179,9 @@ case "$cmd" in
 					top="$(top -b -n 1 | head -5)"
 					cpu="$(grep 'model name' /proc/cpuinfo | head -1 | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
 					cpuUsage="$(echo "$top" | grep '%Cpu' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					if [ -z "$cpuUsage" ]; then
+						cpuUsage="$(echo "$top" | grep '%cpu')"
+					fi
 					load="$(echo "$uptime" | sed 's/^.*average: //')"
 					procs="$(echo "$top" | grep 'Tasks \?:' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
 					mem="$(echo "$top" | grep 'Mem \?:' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
