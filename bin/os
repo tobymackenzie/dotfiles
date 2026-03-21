@@ -201,8 +201,8 @@ case "$cmd" in
 					disk="$(echo "$top" | grep 'Disks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
 				;;
 			esac
-			tabMin='\t\t'
-			tabMax='\t\t\t'
+			tabMin='\t'
+			tabMax='\t\t'
 			#--linux
 			if command -v 'hostnamectl' > /dev/null; then
 				hostnamectl "$@"
@@ -214,6 +214,8 @@ case "$cmd" in
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
 				sw_vers "$@"
+				tabMin='\t\t'
+				tabMax='\t\t\t'
 				# echo "$hi"
 				# echo "-------"
 				# echo "$top"
