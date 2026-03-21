@@ -198,12 +198,16 @@ case "$cmd" in
 					disk="$(echo "$top" | grep 'Disks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
 				;;
 			esac
+			tabMin='\t\t'
+			tabMax='\t\t\t'
 			#--linux
 			if command -v 'hostnamectl' > /dev/null; then
 				hostnamectl "$@"
 			#--termux
 			elif command -v 'termux-info' > /dev/null; then
 				termux-info "$@"
+				tabMin='\t'
+				tabMax='\t'
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
 				sw_vers "$@"
@@ -217,24 +221,24 @@ case "$cmd" in
 				# system_profiler "$@" | less
 			fi
 			if [ -n "$cpu" ]; then
-				printf "CPU:			%s\n" "$cpu"
+				printf "CPU:$tabMax%s\n" "$cpu"
 			fi
-			printf "Uptime:			%s users\n" "$(echo "$uptime" | sed 's/^.*up[[:space:]]\{1,\}//' | sed 's/ user.*$//' | sed 's/  / /g')"
-			printf "CPU usage:		%s\n" "$cpuUsage"
-			printf "Load:			%s\n" "$load"
-			printf "Memory:			%s\n" "$mem"
+			printf "Uptime:$tabMax%s users\n" "$(echo "$uptime" | sed 's/^.*up[[:space:]]\{1,\}//' | sed 's/ user.*$//' | sed 's/  / /g')"
+			printf "CPU usage:$tabMin%s\n" "$cpuUsage"
+			printf "Load:$tabMax%s\n" "$load"
+			printf "Memory:$tabMax%s\n" "$mem"
 			if [ -n "$memUsed" ]; then
-				printf "Mem Used:		%s\n" "$memUsed"
+				printf "Mem Used:$tabMin%s\n" "$memUsed"
 			fi
-			printf "Swap:			%s\n" "$swap"
-			printf "Procs:			%s\n" "$procs"
+			printf "Swap:$tabMax%s\n" "$swap"
+			printf "Procs:$tabMax%s\n" "$procs"
 			if [ -n "$net" ]; then
-				printf "Networks:		%s\n" "$net"
+				printf "Networks:$tabMin%s\n" "$net"
 			fi
 			if [ -n "$disk" ]; then
-				printf "Disks:			%s\n" "$disk"
+				printf "Disks:$tabMax%s\n" "$disk"
 			fi
-			printf "WM:			%s\n" "$(getwm)"
+			printf "WM:$tabMax%s\n" "$(getwm)"
 		else
 			set -- 'info' "$@"
 			runPkg "$@"
