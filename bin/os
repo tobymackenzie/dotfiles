@@ -164,50 +164,77 @@ case "$cmd" in
 	;;
 	'i'|'info'|'-v'|'v'|'version') #: get OS info, or package info with arg(s)
 		if [ -z "$*" ]; then
+			uptime="$(uptime)"
+			case "$TJM_OS" in
+				linux)
+					if [ -r '/etc/os-release' ]; then
+						. /etc/os-release
+						if [ -n "$PRETTY_NAME" ]; then
+							echo "$PRETTY_NAME"
+						else
+							echo "$NAME $VERSION"
+						fi
+					fi
+					# free -h
+					top="$(top -b -n 1 | head -5)"
+					cpu="$(grep 'model name' /proc/cpuinfo | head -1 | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					cpuUsage="$(echo "$top" | grep '%Cpu' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					load="$(echo "$uptime" | sed 's/^.*average: //')"
+					procs="$(echo "$top" | grep 'Tasks \?:' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					mem="$(echo "$top" | grep 'Mem \?:' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					swap="$(echo "$top" | grep 'Swap \?:' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				;;
+				darwin)
+					top="$(top -l 1 -n 0 -s 0)"
+					hi="$(hostinfo)"
+					cpu="$(sysctl -n machdep.cpu.brand_string)"
+					cpuUsage="$(echo "$top" | grep 'CPU usage' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					load="$(echo "$top" | grep 'Load ' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					mem="$(echo "$hi" | grep 'Primary mem' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					memUsed="$(echo "$top" | grep PhysMem | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					swap="$(sysctl -n vm.swapusage)"
+					procs="$(echo "$top" | grep 'Processes' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					net="$(echo "$top" | grep 'Networks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+					disk="$(echo "$top" | grep 'Disks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
+				;;
+			esac
 			#--linux
 			if command -v 'hostnamectl' > /dev/null; then
-				if [ -r '/etc/os-release' ]; then
-					. /etc/os-release
-					if [ -n "$PRETTY_NAME" ]; then
-						echo "$PRETTY_NAME"
-					else
-						echo "$NAME $VERSION"
-					fi
-
-				fi
 				hostnamectl "$@"
-				printf "Uptime: %s\n" "$(uptime)"
-				free -h
 			#--termux
 			elif command -v 'termux-info' > /dev/null; then
 				termux-info "$@"
 			#--mac
 			elif command -v 'sw_vers' > /dev/null; then
 				sw_vers "$@"
-				printf "CPU:			%s\n" "$(sysctl -n machdep.cpu.brand_string)"
-				printf "Uptime:			%s users\n" "$(uptime | sed 's/^.*up //' | sed 's/ user.*$//' | sed 's/  / /g')"
-				top="$(top -l 1 -n 0 -s 0)"
-				hi="$(hostinfo)"
-				printf "CPU usage:		%s\n" "$(echo "$top" | grep 'CPU usage' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Load:			%s\n" "$(echo "$top" | grep 'Load ' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Memory:			%s\n" "$(echo "$hi" | grep 'Primary mem' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Mem Used:		%s\n" "$(echo "$top" | grep PhysMem | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Swap:			%s\n" "$(sysctl -n vm.swapusage)"
-				printf "Procs:			%s\n" "$(echo "$top" | grep 'Processes' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Networks:		%s\n" "$(echo "$top" | grep 'Networks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "Disks:			%s\n" "$(echo "$top" | grep 'Disks' | sed 's/^[^:]*:[[:space:]]\{1,\}//')"
-				printf "WM:			%s\n" "$(getwm)"
 				# echo "$hi"
 				# echo "-------"
 				# echo "$top"
-				exit
 				#-!super verbose and slow. do we want this?
 				# if [ -z "$*" ]; then
 					# set -- '-detailLevel' 'mini'
 				# fi
 				# system_profiler "$@" | less
 			fi
-			echo "WM: $(getwm)"
+			if [ -n "$cpu" ]; then
+				printf "CPU:			%s\n" "$cpu"
+			fi
+			printf "Uptime:			%s users\n" "$(echo "$uptime" | sed 's/^.*up[[:space:]]\{1,\}//' | sed 's/ user.*$//' | sed 's/  / /g')"
+			printf "CPU usage:		%s\n" "$cpuUsage"
+			printf "Load:			%s\n" "$load"
+			printf "Memory:			%s\n" "$mem"
+			if [ -n "$memUsed" ]; then
+				printf "Mem Used:		%s\n" "$memUsed"
+			fi
+			printf "Swap:			%s\n" "$swap"
+			printf "Procs:			%s\n" "$procs"
+			if [ -n "$net" ]; then
+				printf "Networks:		%s\n" "$net"
+			fi
+			if [ -n "$disk" ]; then
+				printf "Disks:			%s\n" "$disk"
+			fi
+			printf "WM:			%s\n" "$(getwm)"
 		else
 			set -- 'info' "$@"
 			runPkg "$@"
