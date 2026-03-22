@@ -7,13 +7,6 @@ if [ -z "$TJMPATHSET" ]; then
 fi
 
 #==load built-in files
-#--load interactive settings
-case "$-" in
-	*i*)
-		. "${TJM_DOTFILES_PATH}/sh/interactive.sh"
-	;;
-esac
-
 #--load shared files other than the config and this script next
 . "${TJM_DOTFILES_PATH}/sh/../shells/alias.sh"
 . "${TJM_DOTFILES_PATH}/sh/../shells/short.sh"
@@ -31,6 +24,13 @@ if [ "$TJM_SHELL" = 'bash' ] || [ "$TJM_SHELL" = 'zsh' ]; then
 	done
 fi
 unset -v file
+
+#--load interactive settings
+case "$-" in
+	*i*)
+		. "${TJM_DOTFILES_PATH}/sh/interactive.sh"
+	;;
+esac
 
 #==load local files
 #--path
