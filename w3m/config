@@ -1,3 +1,4 @@
+#-¡see all options `w3m -show-option | less`
 #--display inline images
 #auto_image 1
 #display_image 1
