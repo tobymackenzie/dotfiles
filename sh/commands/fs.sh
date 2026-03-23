@@ -21,6 +21,9 @@ cdbin(){
 }
 alias bin='cdbin'
 checkouts(){
+	if [ ! -e "$TJM_CHECKOUTS_PATH" ]; then
+		mdkir -p "$TJM_CHECKOUTS_PATH"
+	fi
 	cd "$TJM_CHECKOUTS_PATH/$*"
 }
 alias co="checkouts"

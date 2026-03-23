@@ -28,6 +28,9 @@ function cdbin
 end
 alias bin="cdbin"
 function checkouts
+	if [ ! -e "$TJM_CHECKOUTS_PATH" ]
+		mdkir -p "$TJM_CHECKOUTS_PATH"
+	end
 	cd "$TJM_CHECKOUTS_PATH/$argv"
 end
 alias co="checkouts"
