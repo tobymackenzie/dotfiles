@@ -9,13 +9,13 @@ if [ "$tputColors" -gt 2 ]; then
 fi
 hello
 cat "$TJM_DOTFILES_PATH/shells/welcome.txt"
-uptime
 if [ -z "$HOST" ]; then
 	HOST="$(hostname)"
 fi
-out="Welcome to $HOST"
+printf "%s %s\n" "$HOST" "$(uptime | sed 's/^[ 0-9:]*//')"
+out="Welcome"
 if [ -n "$1" ]; then
-	out="$out, running $1"
+	out="$out to $1"
 fi
 if [ -n "$TJM_OS" ]; then
 	out="$out on $TJM_OS"
