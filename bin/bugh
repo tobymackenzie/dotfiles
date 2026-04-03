@@ -3,7 +3,7 @@
 #- first arg is path to store backup at, otherwise uses env TJM_GH_BU_PATH
 #- second arg is github username to back up, otherwise uses env TJM_GH_USER
 dir="${1:-${TJM_GH_BU_PATH:-backup}}"
-gh_user="${2:-${TJM_GH_USER:-'tobymackenzie'}}"
+gh_user="${2:-${TJM_GH_USER:-tobymackenzie}}"
 if [ ! -d "$dir" ]; then
 	>&2 echo "destination doesn't exist"
 	exit 1
