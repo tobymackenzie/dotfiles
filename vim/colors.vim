@@ -41,6 +41,12 @@ endfun
 command! -nargs=? -complete=color Colors call SetColors(<f-args>)
 command! -nargs=? -complete=color SetColors call SetColors(<f-args>)
 
+"--make it easier to reload current colorscheme
+fun! ReColor() abort
+	execute ':colorscheme ' .. g:colors_name
+endfun
+command! ReColor call ReColor()
+
 "--random color helper
 fun! RandomColors()
 	if !exists('g:colorschemes')
