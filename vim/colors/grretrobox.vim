@@ -31,6 +31,8 @@ if &background ==# 'dark'
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
 		autocmd!
+		autocmd InsertEnter * hi Normal ctermbg=235 guibg=#0c210c
+		autocmd InsertLeave * hi Normal ctermbg=234 guibg=#1c1c1c
 		autocmd InsertEnter * hi LineNr term=reverse ctermfg=243 guifg=#7c6f64
 		autocmd InsertLeave * hi LineNr ctermfg=29 guifg=#427b58
 		"--remove this feature before changing to another color scheme
@@ -50,6 +52,8 @@ else
 	"--make it noticeable which mode I'm in
 	augroup TJMInsertBGStyle
 		autocmd!
+		autocmd InsertEnter * hi Normal ctermbg=193 guibg=#cfffcf
+		autocmd InsertLeave * hi Normal ctermbg=194 guibg=#d7ffd7
 		autocmd InsertEnter * hi LineNr term=reverse ctermfg=72 guifg=#689d6a
 		autocmd InsertLeave * hi LineNr ctermfg=29 guifg=#427b58
 		"--remove this feature before changing to another color scheme
