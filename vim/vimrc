@@ -376,7 +376,7 @@ if 1
 "--hide instruction banner
 let g:netrw_banner=0
 "--hide some files from list: this, swap files
-let g:netrw_list_hide= '^\./$,.*\.swp$'
+let g:netrw_list_hide= '^\./$,\.DS_Store,.*\.swp$'
 "--show human readable sizes
 let g:netrw_sizestyle='h'
 "--ignore case for sort
