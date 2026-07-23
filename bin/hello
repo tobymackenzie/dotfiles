@@ -6,6 +6,7 @@ fi
 case "$word" in
 	bot) echo "Hello, humanoid" ;;
 	computer*) echo "Just use the keyboard." ;;
+	darkness\ my\ old\ friend*) echo "I've come to talk with you again" ;;
 	dude*) echo "Whatup, my dude?" ;;
 	'good sir') echo "Why hello, good sire" ;;
 	hal*) echo "Hello, Dave.  You're looking well today." ;;
