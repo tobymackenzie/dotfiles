@@ -15,6 +15,7 @@ case "$word" in
 	lionel*) echo "Hello.  Is it me you're looking for?" ;;
 	matey*) echo "Ahoy, matey" ;;
 	miquel*) echo "Hola, ${USER:-$(whoami)}" ;;
+	partner*|pardner*) echo "Howdy, pardner" ;;
 	shirley*|surely*) echo "Hello ${USER:-$(whoami)}.  And stop calling me Shirley." ;;
 	there*) echo "Hi there" ;;
 	weirdo*) echo "Greetings, earthling" ;;
