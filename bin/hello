@@ -5,7 +5,7 @@ if command -v 'tr' > /dev/null; then
 fi
 case "$word" in
 	bot) echo "Hello, humanoid" ;;
-	computer*) echo "Hello Scotty.  What can I do for you today?" ;;
+	computer*) echo "Just use the keyboard." ;;
 	dude*) echo "Whatup, my dude?" ;;
 	'good sir') echo "Why hello, good sire" ;;
 	hal*) echo "Hello, Dave.  You're looking well today." ;;
