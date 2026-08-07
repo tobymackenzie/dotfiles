@@ -14,7 +14,7 @@ function runRequest($url, $opts = Array()){
 	curl_setopt_array($ch, $opts);
 	$result = curl_exec($ch);
 	$chInfo = curl_getinfo($ch);
-	curl_close($ch);
+	if(PHP_VERSION_ID < 80500) curl_close($ch);
 	return $chInfo;
 };
 
