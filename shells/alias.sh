@@ -1,7 +1,9 @@
 ##--hold general aliases that don't fit elsewhere
+alias curli='v curl -i'
 alias go="cd"
 alias reshell='exec $TJM_SHELL'
 alias tputshow='tputcolor'
+alias vcurl='v curl'
 alias welcome='welcome "$TJM_SHELL"'
 
 #--better defaults
