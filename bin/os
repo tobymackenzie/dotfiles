@@ -121,6 +121,15 @@ runPkg(){
 
 #==main
 case "$cmd" in
+	'battery'|'bat'|'b')
+		if command -v 'acpi' > /dev/null; then
+			acpi -b
+		elif command -v 'pmset' > /dev/null; then
+			pmset -g batt
+		else
+			die "no battery command known"
+		fi
+	;;
 	'down'|'off'|'poweroff'|'shutdown') #: shut down computer / OS
 		if command -v 'shutdown' > /dev/null; then
 			if [ -z "$*" ]; then
