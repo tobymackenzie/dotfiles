@@ -46,6 +46,9 @@ if hasCmd bash; then
 	placeFile sh/bash_profile .bash_profile
 	placeFile sh/bashrc .bashrc
 fi
+if hasCmd tmux; then
+	placeFile tmux .config/tmux
+fi
 if hasCmd vim; then
 	placeFile vim .vim
 fi

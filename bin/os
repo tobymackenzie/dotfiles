@@ -121,7 +121,7 @@ runPkg(){
 
 #==main
 case "$cmd" in
-	'battery'|'bat'|'b')
+	'battery'|'bat'|'b') #: show battery level / state
 		if command -v 'acpi' > /dev/null; then
 			acpi -b
 		elif command -v 'pmset' > /dev/null; then
