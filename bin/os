@@ -130,6 +130,15 @@ case "$cmd" in
 			die "no battery command known"
 		fi
 	;;
+	'batterylevel'|'bat%'|'b%') #: show battery level
+		if command -v 'acpi' > /dev/null; then
+			acpi -b | grep -m1 -o -E '.{0,2}%'
+		elif command -v 'pmset' > /dev/null; then
+			pmset -g batt | grep -m1 -o -E '.{0,2}%'
+		else
+			die "no battery command known"
+		fi
+	;;
 	'down'|'off'|'poweroff'|'shutdown') #: shut down computer / OS
 		if command -v 'shutdown' > /dev/null; then
 			if [ -z "$*" ]; then
