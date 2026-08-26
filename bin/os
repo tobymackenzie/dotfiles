@@ -132,9 +132,9 @@ case "$cmd" in
 	;;
 	'batterylevel'|'bat%'|'b%') #: show battery level
 		if command -v 'acpi' > /dev/null; then
-			acpi -b | grep -m1 -o -E '.{0,2}%'
+			acpi -b | grep -m1 -o -E '[0-9]{0,3}%'
 		elif command -v 'pmset' > /dev/null; then
-			pmset -g batt | grep -m1 -o -E '.{0,2}%'
+			pmset -g batt | grep -m1 -o -E '[0-9]{0,3}%'
 		else
 			die "no battery command known"
 		fi
