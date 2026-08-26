@@ -9,7 +9,7 @@ setdefaultenv TJM_CHECKOUTS_PATH "$TJM_PROJ_PATH"
 senv BROWSER w3m
 senv EDITOR vi
 senv INPUTRC "$TJM_DOTFILES_PATH/etc/inputrc"
-senv LESS "--ignore-case --incsearch --mouse --quiet --status-column"
+senv LESS "--ignore-case --incsearch --jump-target=4 --mouse --quiet --status-column"
 senv VISUAL vim
 senv WWW_HOME "$TJM_DOTFILES_PATH/www/index.html"
 

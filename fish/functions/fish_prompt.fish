@@ -1,9 +1,8 @@
 function fish_prompt
 	#--colors
-	set tputColors (tput colors 2> /dev/null; or echo 2)
-	if test "$tputColors" -gt 8
+	if test "$TJMTCOLORS" -gt 8
 		set_color black -b 00d787
-	else if test "$tputColors" -gt 2
+	else if test "$TJMTCOLORS" -gt 2
 		set_color black -b green
 	end
 	#--shell level
