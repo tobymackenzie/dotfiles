@@ -1,7 +1,7 @@
 #!/bin/bash -i
 binPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../bin"
 fromPath="$(realpath "${binPath}/..")"
-toPath=${TJM_DOTFILES_HOME:-${HOME}}
+toPath=${TJMDOTHOME:-${HOME}}
 testing="${TJMTESTINIT:-0}"
 
 main(){

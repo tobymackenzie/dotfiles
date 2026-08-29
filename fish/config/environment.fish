@@ -4,10 +4,10 @@ set -x TJMTCOLORS (tput colors 2> /dev/null; or echo 2)
 #--determine OS for later decisions
 #-@ http://stackoverflow.com/a/18434831/1139122
 #-@ http://stackoverflow.com/a/2264537/1139122
-set -x TJM_OS (uname | tr '[:upper:]' '[:lower:]')
-switch $TJM_OS
+set -x TJMOS (uname | tr '[:upper:]' '[:lower:]')
+switch $TJMOS
 	case 'windowsnt'
-		set -x TJM_OS 'windows'
+		set -x TJMOS 'windows'
 	case 'sunos'
-		set -x TJM_OS 'solaris'
+		set -x TJMOS 'solaris'
 end

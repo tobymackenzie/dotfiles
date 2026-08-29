@@ -1,6 +1,6 @@
 #!/bin/sh
 #--load aliases
-[ -n "$TJM_DOTFILES_PATH" ] && . "$TJM_DOTFILES_PATH/sh/scriptload.sh"
+[ -n "$TJMDOT" ] && . "$TJMDOT/sh/scriptload.sh"
 
 #--edit: edit argument(s) in `vi`. If passed a command, will run that command and pipe to `vi`.  Otherwise, pass as arguments to `vi`.
 editor="${VISUAL:-${EDITOR:-vi}}"

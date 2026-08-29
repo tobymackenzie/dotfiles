@@ -264,7 +264,7 @@ fun! TJMStatusLine()
 		let projLen = exists('g:currentProj') ? strlen(g:currentProj) : 0
 		if projLen > 0 && g:currentProj == l:cd[0:projLen-1]
 			"--special handling of project paths
-			let l:cd = substitute(l:cd, '^' . $TJM_PROJ_PATH . '/\([^/]\+\)/\(.*\)$', ':/\2', 'i')
+			let l:cd = substitute(l:cd, '^' . $TJMPROJ . '/\([^/]\+\)/\(.*\)$', ':/\2', 'i')
 		else
 			let l:cd = substitute(l:cd, '^' . $HOME, '~', 'i')
 		endif

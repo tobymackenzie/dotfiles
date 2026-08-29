@@ -5,7 +5,7 @@ function plug {
 	[[ -z "$@" ]] && return 0
 
 	#--determine plugin dir
-	: ${ZPLUGINDIR:=${ZDOTDIR:-$TJM_DOTFILES_PATH/zsh}/plugins}
+	: ${ZPLUGINDIR:=${ZDOTDIR:-$TJMDOT/zsh}/plugins}
 	if [[ ! -d "$ZPLUGINDIR" ]]; then
 		mkdir -p "$ZPLUGINDIR"
 	fi
@@ -40,11 +40,11 @@ function plugupdate {
 		if [ -d "$plugdir" ]; then
 			git -C "$plugdir" pull
 		fi
-	done < "$TJM_DOTFILES_PATH/zsh/plugins.txt"
+	done < "$TJMDOT/zsh/plugins.txt"
 }
 
 #--main
 while read -r plugin; do
 	plug "$plugin"
-done < "$TJM_DOTFILES_PATH/zsh/plugins.txt"
+done < "$TJMDOT/zsh/plugins.txt"
 

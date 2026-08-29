@@ -167,7 +167,7 @@ case "$cmd" in
 	'-h'|'h'|'help') #: show help for this command
 		echo "Usage: os <subcommand> [options]"
 		echo "os command must be run with one of the following subcommands"
-		grep -o "'.*)\(\s*#.*\)\$" "$TJM_DOTFILES_PATH/bin/os" | # grab formatted lines
+		grep -o "'.*)\(\s*#.*\)\$" "$TJMDOT/bin/os" | # grab formatted lines
 			sed "s/'//g" | # strip quotes for terseness
 			sed 's/^\(.*\))[ ]*#:/\1:/g' | # nicer formatting
 			GREP_COLOR='01;32' grep --color '^.*:' # color subcommands
@@ -197,7 +197,7 @@ case "$cmd" in
 	'i'|'info'|'-v'|'v'|'version') #: get OS info, or package info with arg(s)
 		if [ -z "$*" ]; then
 			uptime="$(uptime)"
-			case "$TJM_OS" in
+			case "$TJMOS" in
 				linux)
 					if [ -r '/etc/os-release' ]; then
 						. /etc/os-release

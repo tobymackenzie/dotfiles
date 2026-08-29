@@ -8,7 +8,7 @@ if [ "$tputColors" -gt 2 ]; then
 	fi
 fi
 hello
-cat "$TJM_DOTFILES_PATH/shells/welcome.txt"
+cat "$TJMDOT/shells/welcome.txt"
 if [ -z "$HOST" ]; then
 	HOST="$(hostname)"
 fi
@@ -17,8 +17,8 @@ out="Welcome"
 if [ -n "$1" ]; then
 	out="$out to $1"
 fi
-if [ -n "$TJM_OS" ]; then
-	out="$out on $TJM_OS"
+if [ -n "$TJMOS" ]; then
+	out="$out on $TJMOS"
 fi
 echo "$out"
 if [ "$tputColors" -gt 2 ]; then

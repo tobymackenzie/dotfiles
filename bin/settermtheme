@@ -9,7 +9,7 @@ if [ "$TERM_PROGRAM" = 'Apple_Terminal' ]; then
 	osascript -e "tell application \"Terminal\" to set current settings of selected tab of front window to settings set \"$name\""
 else
 # for urxvt, etc
-# xrdb -merge $TJM_DOTFILES_PATH/x/themes/$name.Xresources
+# xrdb -merge $TJMDOT/x/themes/$name.Xresources
 	echo "Don't know how to change the colors for this terminal"
 	exit 1
 fi

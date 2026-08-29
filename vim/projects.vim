@@ -1,6 +1,6 @@
 "--open
 " open project path in tjm proj path or elsewhere
-" depends on TJM_PROJ_PATH environment variable to define base path
+" depends on TJMPROJ environment variable to define base path
 "-@ [ideas](https://vi.stackexchange.com/questions/39720/is-there-a-project-manager-extension-like-vscode-in-vim)
 if !exists('g:currentProj')
 	let g:currentProj = ''
@@ -20,15 +20,15 @@ fun! TMProjectComplete(proj, cmd, pos) abort
 		"--otherwise check in proj path
 		if a:proj =~ '/'
 			"--if subpath implied, glob in path
-			let dirs = glob(expand($TJM_PROJ_PATH) .. '/' .. a:proj .. '*', 0, 1)
+			let dirs = glob(expand($TJMPROJ) .. '/' .. a:proj .. '*', 0, 1)
 		else
 			"--otherwise, just glob proj root
-			let dirs = glob(expand($TJM_PROJ_PATH) .. '/*', 0, 1)
+			let dirs = glob(expand($TJMPROJ) .. '/*', 0, 1)
 		endif
 		"--format more nicely
 		let ldirs = []
 		for dir in dirs
-			call add(ldirs, substitute(dir, $TJM_PROJ_PATH .. '/', '', ''))
+			call add(ldirs, substitute(dir, $TJMPROJ .. '/', '', ''))
 		endfor
 		"--filter to match passed value
 		return filter(ldirs, 'v:val =~ a:proj')
@@ -51,7 +51,7 @@ fun! TMOpenProject(proj)
 		let matched = TMMatchUrl(a:proj)
 		"--normal project
 		if empty(matched)
-			let l:proj = $TJM_PROJ_PATH .. '/' .. a:proj
+			let l:proj = $TJMPROJ .. '/' .. a:proj
 			let g:currentProjName = a:proj
 		"--URL (sftp, etc)
 		else

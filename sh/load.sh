@@ -3,18 +3,18 @@
 
 #==load built-in files
 #--load shared files other than the config and this script next
-. "${TJM_DOTFILES_PATH}/sh/../shells/alias.sh"
-. "${TJM_DOTFILES_PATH}/sh/../shells/short.sh"
-if [ "$TJM_OS" = 'darwin' ]; then
-	. "${TJM_DOTFILES_PATH}/sh/../shells/mac.sh"
+. "${TJMDOT}/sh/../shells/alias.sh"
+. "${TJMDOT}/sh/../shells/short.sh"
+if [ "$TJMOS" = 'darwin' ]; then
+	. "${TJMDOT}/sh/../shells/mac.sh"
 fi
 
 #--load all files other than the config and this script next
-for file in $(find "${TJM_DOTFILES_PATH}/sh/commands" -type f -name '*.sh' ); do
+for file in $(find "${TJMDOT}/sh/commands" -type f -name '*.sh' ); do
 	. "$file"
 done
-if [ "$TJM_SHELL" = 'bash' ] || [ "$TJM_SHELL" = 'zsh' ]; then
-	for file in $(find "${TJM_DOTFILES_PATH}/sh/commands" -type f -name '*.bash' ); do
+if [ "$TJMSHELL" = 'bash' ] || [ "$TJMSHELL" = 'zsh' ]; then
+	for file in $(find "${TJMDOT}/sh/commands" -type f -name '*.bash' ); do
 		. "$file"
 	done
 fi
@@ -23,19 +23,19 @@ unset -v file
 #--load interactive settings
 case "$-" in
 	*i*)
-		. "${TJM_DOTFILES_PATH}/sh/interactive.sh"
+		. "${TJMDOT}/sh/interactive.sh"
 	;;
 esac
 
 #==load local files
 #--alias
-if [ -f "${TJM_DOTFILES_PATH}/_local/alias" ]; then
-	. "${TJM_DOTFILES_PATH}/_local/alias"
+if [ -f "${TJMDOT}/_local/alias" ]; then
+	. "${TJMDOT}/_local/alias"
 fi
 
 #--custom
-if [ -f "${TJM_DOTFILES_PATH}/_local/bash" ] && [ "$TJM_SHELL" = 'bash' ]; then
-	. "${TJM_DOTFILES_PATH}/_local/bash"
+if [ -f "${TJMDOT}/_local/bash" ] && [ "$TJMSHELL" = 'bash' ]; then
+	. "${TJMDOT}/_local/bash"
 fi
 
 TJMLOADSH=1

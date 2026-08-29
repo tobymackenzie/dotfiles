@@ -28,10 +28,10 @@ highlight! default link TJMStatusEtc Cursor
 
 "--set colors helper
 "-# pretty much just `:colorscheme` with a `dark` / `light` setting
-if !exists('$TJM_COLORS')
-	let $TJM_COLORS = 'koehlertm'
+if !exists('$TJMCOLORSET')
+	let $TJMCOLORSET = 'koehlertm'
 endif
-fun! SetColors(val = $TJM_COLORS) abort
+fun! SetColors(val = $TJMCOLORSET) abort
 	if a:val == 'dark' || a:val == 'light'
 		execute 'set bg=' .. a:val
 	else
@@ -70,7 +70,7 @@ command! RandomColors call RandomColors()
 "--choose default color scheme
 "-# start with dark to avoid flash of white
 set background=dark
-colorscheme $TJM_COLORS
+colorscheme $TJMCOLORSET
 
 "--toggle dark mode helper
 fun! ToggleDarkMode() abort

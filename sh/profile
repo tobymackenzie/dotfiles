@@ -1,8 +1,8 @@
-if [ -z "$TJM_ENVLOADED" ]; then
-	if [ -n "${TJM_DOTFILES_PATH}" ]; then
-		. "$TJM_DOTFILES_PATH/sh/env.sh"
+if [ -z "$TJMENVLOADED" ]; then
+	if [ -n "${TJMDOT}" ]; then
+		. "$TJMDOT/sh/env.sh"
 	else
 		. "$HOME/.dotfiles/sh/env.sh"
 	fi
 fi
-. "$TJM_DOTFILES_PATH/sh/load.sh"
+. "$TJMDOT/sh/load.sh"

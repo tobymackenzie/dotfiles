@@ -2,7 +2,7 @@
 if [ -n "$_localWM" ]; then
 	echo "$_localWM"
 	return
-elif [ "$TJM_OS" = 'darwin' ]; then
+elif [ "$TJMOS" = 'darwin' ]; then
 	_localWM='darwin'
 elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
 	_localWM="${XDG_CURRENT_DESKTOP}"

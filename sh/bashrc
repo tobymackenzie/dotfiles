@@ -1,9 +1,9 @@
-if test -z "${TJM_DOTFILES_PATH}"; then
-	TJM_DOTFILES_PATH=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]}")))
-	export TJM_DOTFILES_PATH
+if test -z "${TJMDOT}"; then
+	TJMDOT=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]}")))
+	export TJMDOT
 fi
 #--load all conf
-if [ -z "$TJM_ENVLOADED" ]; then
-	. "${TJM_DOTFILES_PATH}/sh/env.sh"
+if [ -z "$TJMENVLOADED" ]; then
+	. "${TJMDOT}/sh/env.sh"
 fi
-. "${TJM_DOTFILES_PATH}/sh/load.sh"
+. "${TJMDOT}/sh/load.sh"

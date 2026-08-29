@@ -1,19 +1,19 @@
 #--paths
-setdefaultenv TJM_DOTFILES_PATH ~/.dotfiles
-setdefaultenv TJM_BIN_PATH ~/bin
-setdefaultenv TJMBIN "$TJM_DOTFILES_PATH/bin"
-setdefaultenv TJM_GH_BU_PATH ~/bu/github
-setdefaultenv TJM_PROJ_PATH ~/projects
-setdefaultenv TJM_CHECKOUTS_PATH "$TJM_PROJ_PATH"
+setdefaultenv TJMDOT ~/.dotfiles
+setdefaultenv TJMLBIN ~/bin
+setdefaultenv TJMBIN "$TJMDOT/bin"
+setdefaultenv TJMGHBUPATH ~/bu/github
+setdefaultenv TJMPROJ ~/projects
+setdefaultenv TJMCHECKOUT "$TJMPROJ"
 
 #--common
 senv BROWSER w3m
 senv EDITOR vi
-senv INPUTRC "$TJM_DOTFILES_PATH/etc/inputrc"
+senv INPUTRC "$TJMDOT/etc/inputrc"
 senv LESS "--ignore-case --incsearch --jump-target=4 --mouse --quiet --status-column"
 senv VISUAL vim
-senv WWW_HOME "$TJM_DOTFILES_PATH/www/index.html"
+senv WWW_HOME "$TJMDOT/www/index.html"
 
 #--config
-setdefaultvar TJM_COLORS 'koehlertm'
-setdefaultvar TJM_GH_USER 'tobymackenzie'
+setdefaultvar TJMCOLORSET 'koehlertm'
+setdefaultvar TJMGHUSER 'tobymackenzie'

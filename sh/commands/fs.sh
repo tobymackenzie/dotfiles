@@ -17,19 +17,19 @@ mkcd(){
 #--specific
 alias ~="cd ~"
 cdbin(){
-	cd "$TJM_BIN_PATH/$*"
+	cd "$TJMLBIN/$*"
 }
 alias bin='cdbin'
 checkouts(){
-	if [ ! -e "$TJM_CHECKOUTS_PATH" ]; then
-		mdkir -p "$TJM_CHECKOUTS_PATH"
+	if [ ! -e "$TJMCHECKOUT" ]; then
+		mdkir -p "$TJMCHECKOUT"
 	fi
-	cd "$TJM_CHECKOUTS_PATH/$*"
+	cd "$TJMCHECKOUT/$*"
 }
 alias co="checkouts"
 
 #==stats
-case "$TJM_OS" in
+case "$TJMOS" in
 	'darwin') alias d="du -hxd 0"; ;;
 	*) alias d="du -hx --max-depth 0"; ;;
 esac

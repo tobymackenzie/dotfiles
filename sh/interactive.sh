@@ -21,7 +21,7 @@ case "$TERM" in
 esac
 
 #--prompt
-if [ "$TJM_SHELL" = 'zsh' ]; then
+if [ "$TJMSHELL" = 'zsh' ]; then
 	autoload -U colors && colors
 	PS1="[%n:%1d]>"
 	#--shell level
@@ -43,14 +43,14 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 	preexec(){
 		echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
 	}
-	TJM_PS_BASE="$PS1 "
-	PS1="$TJM_PS_BASE"
+	TJMPSBASE="$PS1 "
+	PS1="$TJMPSBASE"
 else
-	if [ "$TJM_SH" = '1' ]; then
-		TJM_PSB=" "
+	if [ "$TJMSH" = '1' ]; then
+		TJMPSB=" "
 		PS1="$ "
 	else
-		TJM_PSB="\n"
+		TJMPSB="\n"
 		PS1="[\u:\W]>"
 		#--shell level
 		if (( $SHLVL > 1 )); then
@@ -67,8 +67,8 @@ else
 		fi
 	fi
 	#-# PS0 shows timestamp before command in BASH>=4.4
-	PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB"
-	PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJM_PSB$PS1 "
+	PS0="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJMPSB"
+	PS1="@ \$(date '+%H:%M:%S %Y-%m-%d')$TJMPSB$PS1 "
 fi
 
 #--welcome

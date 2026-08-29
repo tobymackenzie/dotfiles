@@ -1,48 +1,48 @@
 #--determine OS for later decisions
 #-@ http://stackoverflow.com/a/18434831/1139122
 #-@ http://stackoverflow.com/a/2264537/1139122
-TJM_OS=$(uname | tr '[:upper:]' '[:lower:]')
-case "$TJM_OS" in
-	'windowsnt') TJM_OS='windows' ;;
-	'sunos') TJM_OS='solaris' ;;
+TJMOS=$(uname | tr '[:upper:]' '[:lower:]')
+case "$TJMOS" in
+	'windowsnt') TJMOS='windows' ;;
+	'sunos') TJMOS='solaris' ;;
 esac
-export TJM_OS
+export TJMOS
 
 #--determine shell info, store shell name for `reshell`
 if [ ! -z "${ZSH_VERSION+x}" ]; then
-	TJM_SHELL=zsh
-	TJM_SH='0'
+	TJMSHELL=zsh
+	TJMSH='0'
 elif [ ! -z "${BASH_VERSION+x}" ]; then
-	TJM_SHELL=bash
-	TJM_SH='0'
+	TJMSHELL=bash
+	TJMSH='0'
 else
 	if [ -f /proc/$$/cmdline ]; then
-		TJM_SHELL="$(cat /proc/$$/cmdline || echo 'sh')"
+		TJMSHELL="$(cat /proc/$$/cmdline || echo 'sh')"
 	else
-		TJM_SHELL='sh'
+		TJMSHELL='sh'
 	fi
-	TJM_SH='1'
+	TJMSH='1'
 fi
 
 #--set dotfiles path
 #-@http://stackoverflow.com/a/246128
 #-@http://stackoverflow.com/a/14728194
-if test -z "${TJM_DOTFILES_PATH}"; then
-	if [ "$TJM_SH" = '1' ]; then
-		TJM_DOTFILES_PATH="$HOME/.dotfiles"
+if test -z "${TJMDOT}"; then
+	if [ "$TJMSH" = '1' ]; then
+		TJMDOT="$HOME/.dotfiles"
 	else
-		TJM_DOTFILES_PATH="$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")")")"
+		TJMDOT="$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")")")"
 	fi
-	export TJM_DOTFILES_PATH
+	export TJMDOT
 fi
 
 #--build PATH
 if [ -z "$TJMPATHSET" ]; then
-	PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+	PATH="$PATH:${TJMDOT}/bin"
 
 	#--local
-	if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
-		PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+	if [ -f "${TJMDOT}/_local/path" ]; then
+		PATH=$(cat "${TJMDOT}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
 	fi
 	export PATH
 	TJMPATHSET=1
@@ -62,7 +62,7 @@ svar(){
 	eval "$1=\$2"
 }
 #--helper: set env variable if not set
-if [ "$TJM_SHELL" = 'zsh' ]; then
+if [ "$TJMSHELL" = 'zsh' ]; then
 	setdefaultenv(){
 		if [ -z "${(P)1}" ]; then
 			senv "$@"
@@ -73,7 +73,7 @@ if [ "$TJM_SHELL" = 'zsh' ]; then
 			svar "$@"
 		fi
 	}
-elif [ "$TJM_SHELL" = 'bash' ]; then
+elif [ "$TJMSHELL" = 'bash' ]; then
 	setdefaultenv(){
 		if [ -z "${!1}" ]; then
 			senv "$@"
@@ -102,7 +102,7 @@ else
 fi
 
 #--load shared env
-. "${TJM_DOTFILES_PATH}/sh/../shells/env.sh"
+. "${TJMDOT}/sh/../shells/env.sh"
 
 #--load `.env`, if it exists
 if test -r "${HOME}/.env"; then
@@ -111,4 +111,4 @@ if test -r "${HOME}/.env"; then
 	set +o allexport
 fi
 
-TJM_ENVLOADED=1
+TJMENVLOADED=1

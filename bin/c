@@ -88,7 +88,7 @@ else
 	# - answer is shared between shells
 	# - answer never deleted
 	# - performance penalty for writing, accessing file
-	f="$TJM_DOTFILES_PATH/.cache/c"
+	f="$TJMDOT/.cache/c"
 	calc=$(buildCalc "$@")
 	case "$calc" in
 		*ans*)

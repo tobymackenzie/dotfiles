@@ -1,11 +1,11 @@
 #==sh stuff
-source "$TJM_DOTFILES_PATH/sh/load.sh"
+source "$TJMDOT/sh/load.sh"
 
 #==autosuggest
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 #==plugins
-source "$TJM_DOTFILES_PATH/zsh/plugins.zsh"
+source "$TJMDOT/zsh/plugins.zsh"
 
 #==options
 setopt AUTO_CD #-# automatically change directory
@@ -50,12 +50,12 @@ bindkey -v
 zle-keymap-select () {
 	case "$KEYMAP" in
 		vicmd)
-			PS1="%F{2}>%{$reset_color%}$TJM_PS_BASE" #--gray PS marker
+			PS1="%F{2}>%{$reset_color%}$TJMPSBASE" #--gray PS marker
 			echo -ne "\e]12;#00cc00\a" #--green cursor
 			print -n -- '\e[1 q' #--blink cursor
 		;;
 		viins|main)
-			PS1="$TJM_PS_BASE" #--normal PS
+			PS1="$TJMPSBASE" #--normal PS
 			print -n '\e]112\a' #--normal cursor color
 			print -n '\e[0 q' #--normal cursor
 		;;
@@ -82,6 +82,6 @@ bindkey '^e' end-of-line
 bindkey '^k' vi-kill-eol
 
 #==custom
-if [ -f "${TJM_DOTFILES_PATH}/_local/zsh" ]; then
-	source "${TJM_DOTFILES_PATH}/_local/zsh"
+if [ -f "${TJMDOT}/_local/zsh" ]; then
+	source "${TJMDOT}/_local/zsh"
 fi

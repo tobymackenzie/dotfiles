@@ -8,7 +8,7 @@ rodo(){
 }
 
 #--help
-if [ "$TJM_SHELL" = 'zsh' ]; then
+if [ "$TJMSHELL" = 'zsh' ]; then
 	#--use zsh's special help files for some internal internal features
 	autoload -Uz run-help
 	alias help='\run-help'

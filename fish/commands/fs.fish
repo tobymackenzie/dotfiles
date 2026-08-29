@@ -24,19 +24,19 @@ end
 #	cd "/$argv"
 #end
 function cdbin
-	cd "$TJM_BIN_PATH/$argv"
+	cd "$TJMLBIN/$argv"
 end
 alias bin="cdbin"
 function checkouts
-	if [ ! -e "$TJM_CHECKOUTS_PATH" ]
-		mdkir -p "$TJM_CHECKOUTS_PATH"
+	if [ ! -e "$TJMCHECKOUT" ]
+		mdkir -p "$TJMCHECKOUT"
 	end
-	cd "$TJM_CHECKOUTS_PATH/$argv"
+	cd "$TJMCHECKOUT/$argv"
 end
 alias co="checkouts"
 
 #==stats
-switch $TJM_OS
+switch $TJMOS
 	case 'darwin'
 		alias d="du -hxd 0"
 	case *
