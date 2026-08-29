@@ -36,6 +36,20 @@ if test -z "${TJM_DOTFILES_PATH}"; then
 	export TJM_DOTFILES_PATH
 fi
 
+#--build PATH
+if [ -z "$TJMPATHSET" ]; then
+	PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
+
+	#--local
+	if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
+		PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+	fi
+	export PATH
+	TJMPATHSET=1
+	export TJMPATHSET
+fi
+
+
 #--ensure dash loads profile for interactive loads
 ENV="$HOME/.profile"
 export ENV

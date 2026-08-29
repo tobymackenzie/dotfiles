@@ -1,11 +1,6 @@
 #--prevent double load, happens in Vim terminal
 [ -n "$TJMLOADSH" ] && return
 
-#--path
-if [ -z "$TJMPATHSET" ]; then
-	PATH="$PATH:${TJM_DOTFILES_PATH}/bin"
-fi
-
 #==load built-in files
 #--load shared files other than the config and this script next
 . "${TJM_DOTFILES_PATH}/sh/../shells/alias.sh"
@@ -33,16 +28,6 @@ case "$-" in
 esac
 
 #==load local files
-#--path
-if [ -z "$TJMPATHSET" ]; then
-	if [ -f "${TJM_DOTFILES_PATH}/_local/path" ]; then
-		PATH=$(cat "${TJM_DOTFILES_PATH}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
-	fi
-	export PATH
-	TJMPATHSET=1
-	export TJMPATHSET
-fi
-
 #--alias
 if [ -f "${TJM_DOTFILES_PATH}/_local/alias" ]; then
 	. "${TJM_DOTFILES_PATH}/_local/alias"
