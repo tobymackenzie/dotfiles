@@ -43,7 +43,6 @@ if [ -z "$TJMPATHSET" ]; then
 	export TJMPATHSET
 fi
 
-#-!! should probably double quote these paths to prevent nefarious sourcing of multiple files
 #--alias
 if [ -f "${TJM_DOTFILES_PATH}/_local/alias" ]; then
 	. "${TJM_DOTFILES_PATH}/_local/alias"
