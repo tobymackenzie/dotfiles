@@ -139,6 +139,20 @@ case "$cmd" in
 			die "no battery command known"
 		fi
 	;;
+	'copy-command'|'getcopy') #: get copy command
+		wm="$(getwm)"
+		if [ "$wm" = 'tty' ]; then
+			echo ''
+		elif [ "$wm" = 'darwin' ]; then
+			echo 'pbcopy'
+		elif command -v 'wl-copy' > /dev/null; then
+			echo 'wl-copy'
+		elif command -v 'xsel' > /dev/null; then
+			echo 'xsel -i'
+		elif command -v 'xclip' > /dev/null; then
+			echo 'xclip -selection clipboard -i'
+		fi
+	;;
 	'down'|'off'|'poweroff'|'shutdown') #: shut down computer / OS
 		if command -v 'shutdown' > /dev/null; then
 			if [ -z "$*" ]; then
