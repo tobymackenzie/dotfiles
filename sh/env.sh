@@ -30,11 +30,7 @@ fi
 #-@http://stackoverflow.com/a/246128
 #-@http://stackoverflow.com/a/14728194
 if test -z "${TJMDOT}"; then
-	if [ "$TJMSH" = '1' ]; then
-		TJMDOT="$HOME/.dotfiles"
-	else
-		TJMDOT="$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]:-${(%):-%x}}")")")"
-	fi
+	TJMDOT="$HOME/.dotfiles"
 	export TJMDOT
 fi
 
