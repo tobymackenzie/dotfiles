@@ -10,7 +10,7 @@ setdefaultenv TJMCHECKOUT "$TJMPROJ"
 senv BROWSER w3m
 senv EDITOR vi
 senv INPUTRC "$TJMDOT/etc/inputrc"
-senv LESS "--ignore-case --incsearch --jump-target=4 --mouse --quiet --status-column"
+senv LESS "--ignore-case --incsearch --jump-target=4 --mouse --quiet --RAW-CONTROL-CHARS --status-column"
 senv VISUAL vim
 senv WWW_HOME "$TJMDOT/www/index.html"
 
