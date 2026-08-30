@@ -5,10 +5,7 @@ if [ -n "$_localWM" ]; then
 elif [ "$TJMOS" = 'darwin' ]; then
 	_localWM='darwin'
 elif [ -n "$XDG_CURRENT_DESKTOP" ]; then
-	_localWM="${XDG_CURRENT_DESKTOP}"
-	if command -v 'tr' > /dev/null; then
-		_localWM=$(echo "$_localWM" | tr '[:upper:]' '[:lower:]')
-	fi
+	_localWM=$(echo "${XDG_CURRENT_DESKTOP}" | tr '[:upper:]' '[:lower:]' )
 elif command -v 'xprop' > /dev/null && xprop -root > /dev/null 2>&1; then
 	_localWM=$(xprop -id \
 		"$(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" \
