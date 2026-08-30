@@ -2,8 +2,20 @@ if test -z "${TJMDOT}"; then
 	TJMDOT=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]}")))
 	export TJMDOT
 fi
-#--load all conf
 if [ -z "$TJMENVLOADED" ]; then
+	#--helper: set env variable if not set
+	setdefaultenv(){
+		if [ -z "${!1}" ]; then
+			senv "$@"
+		fi
+	}
+	setdefaultvar(){
+		if [ -z "${!1}" ]; then
+			svar "$@"
+		fi
+	}
+	#--load env
 	. "${TJMDOT}/sh/env.sh"
 fi
+#--load all conf
 . "${TJMDOT}/sh/load.sh"

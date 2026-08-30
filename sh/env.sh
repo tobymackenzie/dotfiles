@@ -62,29 +62,7 @@ svar(){
 	eval "$1=\$2"
 }
 #--helper: set env variable if not set
-if [ "$TJMSHELL" = 'zsh' ]; then
-	setdefaultenv(){
-		if [ -z "${(P)1}" ]; then
-			senv "$@"
-		fi
-	}
-	setdefaultvar(){
-		if [ -z "${(P)1}" ]; then
-			svar "$@"
-		fi
-	}
-elif [ "$TJMSHELL" = 'bash' ]; then
-	setdefaultenv(){
-		if [ -z "${!1}" ]; then
-			senv "$@"
-		fi
-	}
-	setdefaultvar(){
-		if [ -z "${!1}" ]; then
-			svar "$@"
-		fi
-	}
-else
+if ! command -v 'setdefaultenv' > /dev/null; then
 	setdefaultenv(){
 		eval "tmp=\$$1"
 		if [ -z "$tmp" ]; then
@@ -92,6 +70,8 @@ else
 		fi
 		unset tmp
 	}
+fi
+if ! command -v 'setdefaultvar' > /dev/null; then
 	setdefaultvar(){
 		eval "tmp=\$$1"
 		if [ -z "$tmp" ]; then

@@ -3,6 +3,18 @@ if test -z "${TJMDOT}"; then
 	export TJMDOT
 fi
 if [ -z "$TJMENVLOADED" ]; then
+	#--helper: set env variable if not set
+	setdefaultenv(){
+		if [ -z "${(P)1}" ]; then
+			senv "$@"
+		fi
+	}
+	setdefaultvar(){
+		if [ -z "${(P)1}" ]; then
+			svar "$@"
+		fi
+	}
+	#--load env
 	. "${TJMDOT:-$HOME/.dotfiles}/sh/env.sh"
 fi
 #--ensure aliases are used properly for Vim's `!` command execuation
