@@ -51,6 +51,48 @@ case $cmd in
 	'l'|'ls'|'list') #: list files in dotfiles repo
 		ls -1AFh --color "${@:2}"
 	;;
+	'lint') #: lint shell scripts
+		#--lint bin commands
+		for file in "${binPath}"/*; do
+			shebang="$(head -1 "$file")"
+			case "$shebang" in
+				'#!'*'bash'*|'#!'*'sh'*)
+					shellcheck --color "$file"
+				;;
+				'#!'*'php'*)
+					php -l "$file" 1> /dev/null
+				;;
+			esac
+		done
+		#--lint sh compatible conf files
+		shellcheck --color -s sh "$TJMDOT/sh/profile"
+		for file in "${TJMDOT}/sh/"*.sh; do
+			shellcheck --color -s sh "$file"
+		done
+		for file in "${TJMDOT}/sh/commands/"*.sh; do
+			shellcheck --color -s sh "$file"
+		done
+		for file in "${TJMDOT}/shells/"*.sh; do
+			shellcheck --color -s sh "$file"
+		done
+		#--lint bash conf files
+		shellcheck --color -s bash "${TJMDOT}/sh/bashrc" "${TJMDOT}/sh/commands/fs.bash" "$TJMDOT/src/init.sh" "$TJMDOT/vim/bashenv"
+		#--lint fish scripts
+		if command -v 'fish' > /dev/null; then
+			for file in "${TJMDOT}/fish/"*.fish; do
+				fish -n "$file"
+			done
+			for file in "${TJMDOT}/fish/"**/*.fish; do
+				fish -n "$file"
+			done
+		fi
+		#--lint zsh conf files
+		if command -v 'zsh' > /dev/null; then
+			zsh -n "$TJMDOT/zsh/plugins.zsh"
+			zsh -n "$TJMDOT/zsh/zshenv"
+			zsh -n "$TJMDOT/zsh/zshrc"
+		fi
+	;;
 	's'|'stat'|'status') #: get git status of dotfiles repo
 		git status -bs "${@:2}"
 	;;
