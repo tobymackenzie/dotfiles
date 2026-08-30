@@ -1,9 +1,11 @@
 alias -- -="cd -"
 if [ -z "$TJMISCRIPT" ]; then
 	function /(){
-		cd /$*
+		# shellcheck disable=SC2164
+		cd "/$*"
 	}
 	function __(){
-		cd "~/__/$*"
+		# shellcheck disable=SC2164
+		cd "$HOME/__/$*"
 	}
 fi

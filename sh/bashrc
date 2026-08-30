@@ -1,5 +1,5 @@
 if test -z "${TJMDOT}"; then
-	TJMDOT=$(dirname $(dirname $(readlink -f "${BASH_SOURCE[0]}")))
+	TJMDOT=$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")
 	export TJMDOT
 fi
 if [ -z "$TJMENVLOADED" ]; then

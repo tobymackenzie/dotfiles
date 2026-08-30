@@ -19,8 +19,10 @@ else
 	if [ -f /proc/$$/cmdline ]; then
 		TJMSHELL="$(cat /proc/$$/cmdline || echo 'sh')"
 	else
+		# shellcheck disable=SC2034
 		TJMSHELL='sh'
 	fi
+	# shellcheck disable=SC2034
 	TJMSH='1'
 fi
 
@@ -42,7 +44,8 @@ if [ -z "$TJMPATHSET" ]; then
 
 	#--local
 	if [ -f "${TJMDOT}/_local/path" ]; then
-		PATH=$(cat "${TJMDOT}/_local/path" | tr '\n' ':' | sed "s!\$PATH!"$(echo \"$PATH)\""!" | sed 's!~/!'$(echo "$HOME")'/!g' | sed 's/:://g' | xargs)
+		# shellcheck disable=SC2016
+		PATH=$(cat "${TJMDOT}/_local/path" | tr '\n' ':' | sed 's!$PATH!'"$PATH"'!' | sed 's!~/!'"$HOME"'/!g' | sed 's/:://g' | xargs)
 	fi
 	export PATH
 	TJMPATHSET=1
@@ -91,4 +94,5 @@ if test -r "${HOME}/.env"; then
 	set +o allexport
 fi
 
+# shellcheck disable=SC2034
 TJMENVLOADED=1

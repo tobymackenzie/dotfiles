@@ -1,22 +1,24 @@
 #==list
 lll(){
-	ll $@ | less -R
+	ll "$@" | less -R
 }
 
 #==path movement
 alias ..="cd .."
 cl(){
-	cd $@ && l
+	cd "$@" && l
 }
 cll(){
-	cd $@ && ll
+	cd "$@" && ll
 }
 mkcd(){
-	mkdir -p $@ && cd $@
+	# shellcheck disable=SC2164
+	mkdir -p "$@" && cd "$@"
 }
 #--specific
 alias ~="cd ~"
 cdbin(){
+	# shellcheck disable=SC2164
 	cd "$TJMLBIN/$*"
 }
 alias bin='cdbin'
@@ -24,6 +26,7 @@ checkouts(){
 	if [ ! -e "$TJMCHECKOUT" ]; then
 		mdkir -p "$TJMCHECKOUT"
 	fi
+	# shellcheck disable=SC2164
 	cd "$TJMCHECKOUT/$*"
 }
 alias co="checkouts"

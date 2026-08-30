@@ -25,7 +25,7 @@ if [ "$TJMSHELL" = 'zsh' ]; then
 	autoload -U colors && colors
 	PS1="[%n:%1d]>"
 	#--shell level
-	if (( $SHLVL > 1 )); then
+	if [ "$SHLVL" -gt 1 ]; then
 		PS1="(${SHLVL}) ${PS1}"
 	fi
 	#--colors
@@ -33,9 +33,11 @@ if [ "$TJMSHELL" = 'zsh' ]; then
 		if [ "$TJMTCOLORS" -gt 8 ]; then
 			PS1="%{$(tput setab 42)$(tput setaf 0)%}${PS1}"
 		else
-			PS1="%{$bg[green]%}%{$fg[black]%}${PS1}"
+			# shellcheck disable=SC2154,SC3054
+			PS1="%{${bg[green]}%}%{${fg[black]}%}${PS1}"
 		fi
-		PS1+="%{$reset_color%}"
+		# shellcheck disable=SC2154
+		PS1="${PS1}%{$reset_color%}"
 	fi
 	precmd(){
 		echo "@ $(date '+%H:%M:%S %Y-%m-%d')"
@@ -53,7 +55,7 @@ else
 		TJMPSB="\n"
 		PS1="[\u:\W]>"
 		#--shell level
-		if (( $SHLVL > 1 )); then
+		if [ -n "$SHLVL" ] && [ "$SHLVL" -gt 1 ]; then
 			PS1="(${SHLVL}) ${PS1}"
 		fi
 		#--colors
@@ -73,4 +75,3 @@ fi
 
 #--welcome
 welcome
-

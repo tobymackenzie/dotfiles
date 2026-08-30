@@ -10,10 +10,11 @@ else
 	cmd="$1"
 fi
 cd "$binPath/.." || exit 1
-case $cmd in
+case "$cmd" in
 	'u'|'up'|'update') #: update dotfiles repository from upstream (ie `git pull`)
 		echo 'updating dotfiles'
-		git pull --autostash "${@:2}"
+		shift
+		git pull --autostash "$@"
 	;;
 	'h'|'help') #: show help for this command
 		echo "Usage: dotfiles <subcommand> [options]"
