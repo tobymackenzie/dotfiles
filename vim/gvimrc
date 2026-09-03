@@ -9,7 +9,7 @@ set bg=dark
 
 "--default window size
 set columns=100
-set lines=35
+set lines=42
 
 "=====
 "==styles
