@@ -28,10 +28,8 @@ fi
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt APPEND_HISTORY #-# enable history?
 setopt hist_expire_dups_first
 setopt hist_ignore_space
-setopt INC_APPEND_HISTORY #-# append history incrementally
 setopt SHARE_HISTORY #-# share history across sessions
 setopt HIST_IGNORE_ALL_DUPS
 
