@@ -17,7 +17,7 @@ main(){
 	app=''
 	if [ "$#" -ge 1 ]; then
 		noFileExists=$([ -e "$first" ]; echo $?)
-		if [ "$noFileExists" = 1 ] || { [ ! -z "$tjmOpenApp" ] && [ "$tjmOpenApp" != "0" ]; }; then
+		if [ "$noFileExists" = 1 ] || { [ -n "$tjmOpenApp" ] && [ "$tjmOpenApp" != "0" ]; }; then
 			shift
 			case "$first" in
 				'con'|'console')

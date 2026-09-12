@@ -9,10 +9,10 @@ esac
 export TJMOS
 
 #--determine shell info, store shell name for `reshell`
-if [ ! -z "${ZSH_VERSION+x}" ]; then
+if [ -n "${ZSH_VERSION+x}" ]; then
 	TJMSHELL=zsh
 	TJMSH='0'
-elif [ ! -z "${BASH_VERSION+x}" ]; then
+elif [ -n "${BASH_VERSION+x}" ]; then
 	TJMSHELL=bash
 	TJMSH='0'
 else
@@ -41,7 +41,7 @@ if [ -z "$TJMPATHSET" ]; then
 	#--local
 	if [ -f "${TJMDOT}/_local/path" ]; then
 		# shellcheck disable=SC2016
-		PATH=$(cat "${TJMDOT}/_local/path" | tr '\n' ':' | sed 's!$PATH!'"$PATH"'!' | sed 's!~/!'"$HOME"'/!g' | sed 's/:://g' | xargs)
+		PATH=$(< "${TJMDOT}/_local/path" tr '\n' ':' | sed 's!$PATH!'"$PATH"'!' | sed 's!~/!'"$HOME"'/!g' | sed 's/:://g' | xargs)
 	fi
 	export PATH
 	TJMPATHSET=1
