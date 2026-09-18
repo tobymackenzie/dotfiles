@@ -110,8 +110,7 @@ runPkg(){
 	fi
 	#---some must run as root
 	if [ "$(id -u)" -ne 0 ] && [ "$cmd" != 'brew' ] && [ "$cmd" != 'pkg' ] && { [ "$sub" = 'add' ] || [ "$sub" = 'delete' ] || [ "$sub" = 'install' ] || [ "$sub" = 'remove' ] || [ "$sub" = '-Syu' ] || [ "$sub" = 'update' ] || [ "$sub" = 'upgrade' ]; }; then
-		set -- "$cmd" "$@"
-		cmd="sudo"
+		cmd="sudo $cmd"
 	fi
 
 	#--run
