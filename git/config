@@ -1,7 +1,7 @@
 [alias]
 	#--list git aliases
 	#-# get config values beginning with 'alias.', remove leading 'alias.', truncate to 80 characters
-	aliases = !git config --get-regexp '^alias\\.' | sed -E 's/^alias\\.([[:alnum:]-]+)/\\1:/g' | awk 'length > 79{ $0=substr($0,0,79)\"…\"}1'
+	aliases = !git config --get-regexp '^alias\\.' | awk 'length > 85{ $0=substr($0,0,85)\"…\"}1' | grep '^alias' | sed -E 's/^alias\\.([[:alnum:]-]+)/\\1:/g'
 	amend = commit --amend
 	ba = !git branchl
 	bl = !git branchl
