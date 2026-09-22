@@ -28,9 +28,9 @@ runPkg(){
 	shift
 
 	#--find installed package manager command
-	# debian mac fedora fedora arch bsd mac fedora
+	# debian mac fedora fedora suse arch bsd mac fedora
 	#-# pkcon last because it seems to not find some packages, other problems
-	for val in pkg apt brew dnf yum pacman port pkcon; do
+	for val in pkg apt brew dnf yum zypper pacman port pkcon; do
 		if hash "$val" 2> /dev/null; then
 			cmd="$val"
 			break
@@ -49,6 +49,9 @@ runPkg(){
 			'brew'|'dnf'|'pkg'|'port'|'yum')
 				sub='upgrade'
 			;;
+			'zypper')
+				sub='dup'
+			;;
 			'pacman')
 				sub='-Syu'
 			;;
@@ -58,7 +61,7 @@ runPkg(){
 		fi
 	elif [ "$sub" = 'delete' ] || [ "$sub" = 'remove' ] || [ "$sub" = 'uninstall' ]; then
 		case "$cmd" in
-			'apt'|'dnf'|'yum')
+			'apt'|'dnf'|'yum'|'zypper')
 				sub='remove'
 			;;
 			'brew')
