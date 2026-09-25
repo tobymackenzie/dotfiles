@@ -41,9 +41,12 @@ Vagrant.configure(2) do |config|
 		demo.vm.provider 'virtualbox' do |vb|
 			vb.gui = true
 		end
-		#-! need to manually set display type to VMSVGA, 
+		#-! need to manually set display type to VMSVGA,
 		#-! must increase zoom in VB to make visible
+		#-! video memory to 32MB+, gets glitchy otherwise
 		#-! cpu cap, cpu sometimes runs for no reason
+		#-! resize VM to reasonable screen size
+		# xrandr -output VGA-1 --mode 1280x800
 	end
 	config.vm.define 'debian', autostart: false do |debian|
 		debian.vm.box = 'debian/bookworm64'
