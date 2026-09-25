@@ -20,7 +20,7 @@ nnoremap <leader>g :tab G<cr>
 nnoremap <leader>G :!git<space>
 "--help
 nnoremap <expr> <leader>h &ft == 'help' ? ':help ' : ':tab help '
-nnoremap <leader>H :tab help<cr>
+nnoremap <expr> <leader>H exists(':HelpToc') && &ft == 'help' ? ':HelpToc<cr>' : ':tab help<cr>'
 "--page up down
 nnoremap <leader>j <c-d>
 nnoremap <leader>k <c-u>

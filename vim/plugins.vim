@@ -29,6 +29,9 @@ else
 endif
 map <Leader>/ \c<space>
 
+"==help
+packadd! helptoc
+
 "==linting
 let g:ale_lint_delay = 4000
 let g:ale_lint_on_enter = 0
