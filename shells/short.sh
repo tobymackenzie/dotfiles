@@ -30,6 +30,7 @@ alias ogit="tjmOpenApp=1 o git"
 alias ot="tjmOpenApp=1 o t"
 alias out="os logout"
 alias p="os pkg"
+alias phpl="php -l"
 alias phpr="php -r"
 alias rmi=" rm -i"
 alias s='findin'
