@@ -299,7 +299,7 @@ case "$cmd" in
 			set -- 'displaysleepnow' "$@"
 			pmset "$@"
 		else
-			die "don't know how to lock"
+			os logout
 		fi
 	;;
 	'logout'|'out') #: log out
