@@ -1,3 +1,29 @@
+#-# safely take paste as simple string rather than special characters
+set enable-bracketed-paste on
+
+#--completions
+set completion-ignore-case on
+#-# hide typed chars for completion menu items
+set completion-prefix-display-length 5
+#-# add trailing slash for completed symlinked directories
+set mark-symlinked-directories on
+#-# list matches if multiple
+set show-all-if-ambiguous on
+#-# smarter handling when cursor not at end of string
+set skip-completed-text on
+#-# ls colors and markers for files in menu
+set colored-stats on
+set visible-stats on
+
+#--history
+#-# take into account entered text with up / down history search
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+#--movement
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+
 #--vi mode
 set editing-mode vi
 #---indicate vim command mode by changing cursor
