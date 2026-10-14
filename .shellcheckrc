@@ -1,3 +1,7 @@
 #--disable following paths, won't be set
 disable=SC1090
 disable=SC1091
+enable=avoid-negated-conditions
+enable=avoid-nullary-conditions
+enable=deprecate-which
+enable=useless-use-of-cat
