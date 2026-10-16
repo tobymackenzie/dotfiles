@@ -1,3 +1,5 @@
+$include /etc/inputrc
+
 #-# safely take paste as simple string rather than special characters
 set enable-bracketed-paste on
 
