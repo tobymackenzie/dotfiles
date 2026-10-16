@@ -2,16 +2,15 @@
 #--setup
 exit=0
 echo "running init.sh test"
-testPath=$(dirname $(realpath ${BASH_SOURCE[0]}))
-cd $testPath
-mkdir -p $testPath/tmp
+testPath="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+cd "$testPath"
+mkdir -p "$testPath/tmp"
 
 #--run
-TJMDOTHOME="${testPath}/tmp" TJMTESTINIT=1 bash ${testPath}/../src/init.sh
+TJMDOTHOME="${testPath}/tmp" TJMTESTINIT=1 bash "${testPath}/../src/init.sh"
 
 #--verify
-expect=$(git diff --no-index $testPath/init.expect <(find tmp -print | sort))
-if [ $? -eq 0 ]; then
+if expect="$(git diff --no-index "$testPath/init.expect" <(find tmp -print | sort))"; then
 	echo "Success initing"
 else
 	>&2 echo "Failures initing, see diff:${expect}"
@@ -19,5 +18,5 @@ else
 fi
 
 #--cleanup
-rm -rf $testPath/tmp
+rm -rf "$testPath/tmp"
 exit $exit
