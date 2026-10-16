@@ -10,7 +10,7 @@ mkdir -p $testPath/tmp
 TJMDOTHOME="${testPath}/tmp" TJMTESTINIT=1 bash ${testPath}/../src/init.sh
 
 #--verify
-expect=$(git diff --no-index $testPath/init.expect <(find tmp -print))
+expect=$(git diff --no-index $testPath/init.expect <(find tmp -print | sort))
 if [ $? -eq 0 ]; then
 	echo "Success initing"
 else
