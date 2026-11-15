@@ -14,14 +14,15 @@ run(){
 		echo "$file not a git repo"
 	fi
 }
-cmd="$1"
-if [ $# -gt 1 ]; then
+#--treat second+ arguments as paths unless second is an option
+if [ $# -gt 1 ] && case "$2" in "-"*) false ;; *) true ;; esac; then
+	cmd="$1"
 	shift
 	for file in "$@"; do
 		run "$file" "$cmd"
 	done
 else
 	for file in ./*; do
-		run "$file" "$cmd"
+		run "$file" "$@"
 	done
 fi
